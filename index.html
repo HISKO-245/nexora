@@ -139,12 +139,26 @@ header{
 }
 
 .cover{
-  height:170px;
-  background:linear-gradient(145deg,#31205e,#20202d);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
+  height: 190px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #211538, #0f0f18);
+  font-size: 48px;
+}
+
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(11,11,18,0.8),
+    transparent 55%
+  );
+  pointer-events: none;
 }
 
 .card-info{
