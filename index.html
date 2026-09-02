@@ -119,34 +119,36 @@ header{
   display:none;
 }
 
-.card{
+.card {
   min-width: 150px;
-  background: #15151f;
-  border-radius: 18px;
+  background: linear-gradient(145deg, #181824, #101018);
+  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid #252538;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(139,92,246,0.18);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(139, 92, 246, 0.22);
 }
 
-.cover{
+.cover {
   height: 190px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #211538, #0f0f18);
-  font-size: 48px;
+  background:
+    radial-gradient(circle at 30% 20%, #8b5cf6 0%, transparent 35%),
+    linear-gradient(135deg, #24143f, #0d0d15);
+  font-size: 55px;
 }
 
 .cover::after {
