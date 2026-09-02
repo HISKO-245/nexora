@@ -397,22 +397,19 @@ nav .active{
 </nav>
 
 <script>
-<script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js");
 }
 
-<script>
 document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.querySelector(".search input");
-  const cards = document.querySelectorAll(".card");
 
   if (!searchInput) return;
 
   searchInput.addEventListener("input", function () {
-    const searchText = searchInput.value.trim().toLowerCase();
+    const searchText = this.value.trim().toLowerCase();
 
-    cards.forEach(function (card) {
+    document.querySelectorAll(".card").forEach(function (card) {
       const title = card.querySelector("h3");
 
       if (!title) return;
@@ -430,5 +427,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
-</html>
-```
