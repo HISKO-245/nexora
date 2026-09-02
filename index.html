@@ -402,27 +402,30 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js");
 }
 
-const searchInput = document.querySelector(".search input");
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.querySelector(".search input");
+  const cards = document.querySelectorAll(".card");
 
-if (searchInput) {
+  if (!searchInput) return;
+
   searchInput.addEventListener("input", function () {
-    const text = this.value.toLowerCase().trim();
+    const searchText = searchInput.value.trim().toLowerCase();
 
-    document.querySelectorAll(".card").forEach(function (card) {
+    cards.forEach(function (card) {
       const title = card.querySelector("h3");
 
       if (!title) return;
 
       const name = title.textContent.toLowerCase();
 
-      if (text === "" || name.includes(text)) {
-        card.style.display = "";
-      } else {
-        card.style.display = "none";
-      }
+      card.style.display =
+        searchText === "" || name.includes(searchText)
+          ? ""
+          : "none";
     });
   });
-}  
+});
 </script>
 
 </body>
