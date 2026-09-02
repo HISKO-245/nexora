@@ -392,5 +392,19 @@ if ("serviceWorker" in navigator) {
 </script>
 
 </body>
+  <script>
+const searchInput = document.querySelector('.search input');
+const cards = document.querySelectorAll('.card');
+
+searchInput.addEventListener('input', function () {
+  const text = this.value.toLowerCase().trim();
+
+  cards.forEach(card => {
+    const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
+
+    card.style.display = name.includes(text) ? '' : 'none';
+  });
+});
+  </script>
 </html>
 ```
