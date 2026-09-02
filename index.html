@@ -1,6 +1,8 @@
 ```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8b5cf6">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +15,11 @@
   padding:0;
   font-family:Arial,sans-serif;
 }
-
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
 body{
   background:#0b0b12;
   color:white;
