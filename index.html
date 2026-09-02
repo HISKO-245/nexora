@@ -425,6 +425,25 @@ if (searchInput) {
     });
   });
 }
+  function filterCategory(category) {
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(function(card) {
+    const title = card.querySelector("h3");
+
+    if (!title) return;
+
+    const name = title.textContent;
+
+    if (category === "الكل") {
+      card.style.display = "";
+    } else if (name.includes(category)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
+  }
 </script>
 
 </body>
