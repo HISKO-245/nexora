@@ -404,19 +404,27 @@ if ("serviceWorker" in navigator) {
 </script>
 
 </body>
-  <script>
+<script>
 const searchInput = document.querySelector('.search input');
-const cards = document.querySelectorAll('.card');
 
-searchInput.addEventListener('input', function () {
-  const text = this.value.toLowerCase().trim();
+if (searchInput) {
+  searchInput.addEventListener('input', function () {
+    const text = this.value.trim().toLowerCase();
 
-  cards.forEach(card => {
-    const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
+    document.querySelectorAll('.card').forEach(card => {
+      const title = card.querySelector('h3');
+      if (!title) return;
 
-    card.style.display = name.includes(text) ? '' : 'none';
+      const name = title.textContent.toLowerCase();
+
+      card.style.display =
+        text === '' || name.includes(text)
+          ? ''
+          : 'none';
+    });
   });
-});
+}
+</script>
 <script>
 const searchInput = document.querySelector('.search input');
 
