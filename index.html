@@ -398,52 +398,35 @@ nav .active{
 </nav>
 
 <script>
+<script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js");
 }
-</script>
 
-</body>
-<script>
-const searchInput = document.querySelector('.search input');
+const searchInput = document.querySelector(".search input");
 
 if (searchInput) {
-  searchInput.addEventListener('input', function () {
-    const text = this.value.trim().toLowerCase();
+  searchInput.addEventListener("input", function () {
+    const text = this.value.toLowerCase().trim();
 
-    document.querySelectorAll('.card').forEach(card => {
-      const title = card.querySelector('h3');
+    document.querySelectorAll(".card").forEach(function (card) {
+      const title = card.querySelector("h3");
+
       if (!title) return;
 
       const name = title.textContent.toLowerCase();
 
-      card.style.display =
-        text === '' || name.includes(text)
-          ? ''
-          : 'none';
+      if (text === "" || name.includes(text)) {
+        card.style.display = "";
+      } else {
+        card.style.display = "none";
+      }
     });
   });
 }
 </script>
-<script>
-const searchInput = document.querySelector('.search input');
 
-searchInput.addEventListener('input', function () {
-  const text = this.value.trim().toLowerCase();
-
-  document.querySelectorAll('.card').forEach(card => {
-    const title = card.querySelector('h3');
-
-    if (!title) return;
-
-    const name = title.textContent.toLowerCase();
-
-    card.style.display =
-      text === '' || name.includes(text)
-        ? ''
-        : 'none';
-  });
-});
-</script>
+</body>
+</html>
 </html>
 ```
