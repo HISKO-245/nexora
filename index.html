@@ -405,6 +405,30 @@ searchInput.addEventListener('input', function () {
     card.style.display = name.includes(text) ? '' : 'none';
   });
 });
+  <script>
+const searchInput = document.querySelector('.search input');
+
+searchInput.addEventListener('input', function () {
+  const text = this.value.toLowerCase().trim();
+
+  document.querySelectorAll('.section').forEach(section => {
+    const cards = section.querySelectorAll('.card');
+    let found = false;
+
+    cards.forEach(card => {
+      const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
+
+      if (text === '' || name.includes(text)) {
+        card.style.display = '';
+        found = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    section.style.display = found || text === '' ? '' : 'none';
+  });
+});
   </script>
 </html>
 ```
