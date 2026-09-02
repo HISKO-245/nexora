@@ -274,13 +274,11 @@ nav .active{
 </section>
 
 <section class="categories">
-  <button onclick="filterCategory('مانغا')">📚 مانغا</button>
-  <button onclick="filterCategory('مانهوا')">📖 مانهوا</button>
-  <button onclick="filterCategory('أنمي')">🎌 أنمي</button>
-  <button onclick="filterCategory('أفلام')">🎬 أفلام</button>
-  <button onclick="filterCategory('الكل')">🏠 الكل</button>
+  <button>📚 مانغا</button>
+  <button>📖 مانهوا</button>
+  <button>🎌 أنمي</button>
+  <button>🎬 أفلام</button>
 </section>
-
 <section class="section">
   <div class="section-title">
     <h2>🔥 الأكثر شعبية</h2>
@@ -424,26 +422,7 @@ if (searchInput) {
       }
     });
   });
-}
-  function filterCategory(category) {
-  const cards = document.querySelectorAll(".card");
-
-  cards.forEach(function(card) {
-    const title = card.querySelector("h3");
-
-    if (!title) return;
-
-    const name = title.textContent;
-
-    if (category === "الكل") {
-      card.style.display = "";
-    } else if (name.includes(category)) {
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
-  });
-  }
+}  
 </script>
 
 </body>
