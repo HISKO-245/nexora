@@ -172,12 +172,18 @@ header{
   text-overflow:ellipsis;
 }
 
-.rating{
-  color:#ffc107;
-  font-size:12px;
-  margin-top:5px;
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: rgba(139, 92, 246, 0.16);
+  color: #c4b5fd;
+  font-size: 12px;
+  font-weight: 700;
 }
-
 nav{
   position:fixed;
   bottom:0;
@@ -279,20 +285,21 @@ nav .active{
     <span>عرض الكل</span>
   </div>
 
-  <div class="cards">
-    <div class="card">
-      <div class="cover">📕</div>
-      <div class="card-info">
-        <h3>قائمة القراءة</h3>
-      </div>
-    </div>
+  <div class="card">
+  <div class="cover">📖</div>
+  <div class="card-info">
+    <h3>مانهوا مميزة</h3>
+    <div class="rating">⭐ 9.4</div>
+  </div>
+</div>
 
-    <div class="card">
-      <div class="cover">🗡️</div>
-      <div class="card-info">
-        <h3>أكشن وفانتازيا</h3>
-      </div>
-    </div>
+<div class="card">
+  <div class="cover">⚔️</div>
+  <div class="card-info">
+    <h3>مانهوا جديدة</h3>
+    <div class="rating">⭐ 9.1</div>
+  </div>
+</div>
 
     <div class="card">
       <div class="cover">❤️</div>
