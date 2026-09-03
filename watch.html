@@ -81,6 +81,13 @@
     <a class="back" href="index.html">← العودة للرئيسية</a>
 
   </div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const title = params.get("title");
 
+if (title) {
+  document.querySelector(".watch-box h1").textContent = title;
+}
+</script>
 </body>
 </html>
