@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora - لوحة التحكم</title>
 
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #0b0b12;
+  color: white;
+  padding-bottom: 30px;
+}
+
+header {
+  padding: 22px 18px;
+  background: #12121b;
+  border-bottom: 1px solid #29253d;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #8b5cf6;
+}
+
+.container {
+  padding: 20px 16px;
+  max-width: 700px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 23px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #888;
+  margin-bottom: 25px;
+}
+
+.form-box {
+  background: #15151f;
+  border: 1px solid rgba(139,92,246,0.25);
+  border-radius: 20px;
+  padding: 18px;
+}
+
+label {
+  display: block;
+  margin: 14px 0 7px;
+  color: #ddd;
+  font-size: 14px;
+}
+
+input,
+select {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #29253d;
+  border-radius: 12px;
+  background: #0f0f17;
+  color: white;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #8b5cf6;
+}
+
+button {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 13px;
+  background: #8b5cf6;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.message {
+  display: none;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(139,92,246,0.15);
+  color: #c4b5fd;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Nexo<span>ra</span></div>
+</header>
+
+<div class="container">
+
+  <h1>⚙️ لوحة التحكم</h1>
+  <p class="subtitle">أضف محتوى جديد إلى Nexora</p>
+
+  <div class="form-box">
+
+    <label>نوع المحتوى</label>
+    <select id="type">
+      <option value="anime">🎌 أنمي</option>
+      <option value="movie">🎬 فيلم</option>
+      <option value="manga">📚 مانغا</option>
+      <option value="manhwa">📖 مانهوا</option>
+    </select>
+
+    <label>اسم المحتوى</label>
+    <input
+      type="text"
+      id="title"
+      placeholder="مثال: Solo Leveling"
+    >
+
+    <label>رابط الغلاف</label>
+    <input
+      type="url"
+      id="image"
+      placeholder="ضع رابط صورة الغلاف"
+    >
+
+    <label>رابط المشاهدة أو القراءة</label>
+    <input
+      type="url"
+      id="link"
+      placeholder="ضع الرابط هنا"
+    >
+
+    <label>التقييم</label>
+    <input
+      type="number"
+      id="rating"
+      min="0"
+      max="10"
+      step="0.1"
+      placeholder="مثال: 9.2"
+    >
+
+    <button onclick="addContent()">
+      ➕ إضافة المحتوى
+    </button>
+
+    <div class="message" id="message">
+      ✅ تمت إضافة المحتوى
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function addContent() {
+
+  const type = document.getElementById("type").value;
+  const title = document.getElementById("title").value.trim();
+  const image = document.getElementById("image").value.trim();
+  const link = document.getElementById("link").value.trim();
+  const rating = document.getElementById("rating").value.trim();
+
+  if (!title) {
+    alert("اكتب اسم المحتوى أولاً");
+    return;
+  }
+
+  const content = {
+    type: type,
+    title: title,
+    image: image,
+    link: link,
+    rating: rating
+  };
+
+  const saved = JSON.parse(
+    localStorage.getItem("nexora_content") || "[]"
+  );
+
+  saved.push(content);
+
+  localStorage.setItem(
+    "nexora_content",
+    JSON.stringify(saved)
+  );
+
+  document.getElementById("message").style.display = "block";
+
+  document.getElementById("title").value = "";
+  document.getElementById("image").value = "";
+  document.getElementById("link").value = "";
+  document.getElementById("rating").value = "";
+}
+</script>
+
+</body>
+</html>
