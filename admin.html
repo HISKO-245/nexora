@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -16,7 +17,7 @@
 body {
   background: #0b0b12;
   color: white;
-  padding-bottom: 30px;
+  padding-bottom: 40px;
 }
 
 header {
@@ -50,11 +51,13 @@ h1 {
   margin-bottom: 25px;
 }
 
-.form-box {
+.form-box,
+.content-box {
   background: #15151f;
   border: 1px solid rgba(139,92,246,0.25);
   border-radius: 20px;
   padding: 18px;
+  margin-bottom: 20px;
 }
 
 label {
@@ -107,7 +110,98 @@ button:active {
   color: #c4b5fd;
   text-align: center;
 }
+
+/* المحتوى المضاف */
+
+.content-title {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.empty {
+  text-align: center;
+  color: #777;
+  padding: 25px 10px;
+}
+
+.content-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #0f0f17;
+  border: 1px solid #29253d;
+  border-radius: 15px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.content-card img {
+  width: 70px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #222;
+  flex-shrink: 0;
+}
+
+.content-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.content-info h3 {
+  font-size: 16px;
+  margin-bottom: 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content-type {
+  display: inline-block;
+  color: #c4b5fd;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.rating {
+  color: #facc15;
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.actions button {
+  height: 38px;
+  margin: 0;
+  font-size: 13px;
+  border-radius: 9px;
+}
+
+.edit-btn {
+  background: #2563eb;
+}
+
+.delete-btn {
+  background: #dc2626;
+}
+
+@media (max-width: 500px) {
+  .content-card {
+    align-items: flex-start;
+  }
+
+  .content-card img {
+    width: 60px;
+    height: 78px;
+  }
+}
 </style>
+
 </head>
 
 <body>
@@ -119,62 +213,86 @@ button:active {
 <div class="container">
 
   <h1>⚙️ لوحة التحكم</h1>
-  <p class="subtitle">أضف محتوى جديد إلى Nexora</p>
+  <p class="subtitle">أضف وإدارة محتوى Nexora</p>
+
+  <!-- نموذج الإضافة -->
 
   <div class="form-box">
 
-    <label>نوع المحتوى</label>
-    <select id="type">
-      <option value="anime">🎌 أنمي</option>
-      <option value="movie">🎬 فيلم</option>
-      <option value="manga">📚 مانغا</option>
-      <option value="manhwa">📖 مانهوا</option>
-    </select>
+```
+<label>نوع المحتوى</label>
+<select id="type">
+  <option value="anime">🎌 أنمي</option>
+  <option value="movie">🎬 فيلم</option>
+  <option value="manga">📚 مانغا</option>
+  <option value="manhwa">📖 مانهوا</option>
+</select>
 
-    <label>اسم المحتوى</label>
-    <input
-      type="text"
-      id="title"
-      placeholder="مثال: Solo Leveling"
-    >
+<label>اسم المحتوى</label>
+<input
+  type="text"
+  id="title"
+  placeholder="مثال: Solo Leveling"
+>
 
-    <label>رابط الغلاف</label>
-    <input
-      type="url"
-      id="image"
-      placeholder="ضع رابط صورة الغلاف"
-    >
+<label>رابط الغلاف</label>
+<input
+  type="url"
+  id="image"
+  placeholder="ضع رابط صورة الغلاف"
+>
 
-    <label>رابط المشاهدة أو القراءة</label>
-    <input
-      type="url"
-      id="link"
-      placeholder="ضع الرابط هنا"
-    >
+<label>رابط المشاهدة أو القراءة</label>
+<input
+  type="url"
+  id="link"
+  placeholder="ضع الرابط هنا"
+>
 
-    <label>التقييم</label>
-    <input
-      type="number"
-      id="rating"
-      min="0"
-      max="10"
-      step="0.1"
-      placeholder="مثال: 9.2"
-    >
+<label>التقييم</label>
+<input
+  type="number"
+  id="rating"
+  min="0"
+  max="10"
+  step="0.1"
+  placeholder="مثال: 9.2"
+>
 
-    <button onclick="addContent()">
-      ➕ إضافة المحتوى
-    </button>
+<button onclick="addContent()">
+  ➕ إضافة المحتوى
+</button>
 
-    <div class="message" id="message">
-      ✅ تمت إضافة المحتوى
-    </div>
+<div class="message" id="message">
+  ✅ تمت إضافة المحتوى
+</div>
+```
+
+  </div>
+
+  <!-- المحتوى المضاف -->
+
+  <div class="content-box">
+
+```
+<div class="content-title">
+  📦 المحتوى المضاف
+</div>
+
+<div id="contentList"></div>
+```
 
   </div>
 
 </div>
 
 <script>
+
+let editIndex = -1;
+
+
+/* إضافة محتوى */
+
 function addContent() {
 
   const type = document.getElementById("type").value;
@@ -200,20 +318,240 @@ function addContent() {
     localStorage.getItem("nexora_content") || "[]"
   );
 
-  saved.push(content);
+  /* تعديل */
+
+  if (editIndex !== -1) {
+
+    saved[editIndex] = content;
+
+    editIndex = -1;
+
+    document.querySelector("button[onclick='addContent()']").innerHTML =
+      "➕ إضافة المحتوى";
+
+  }
+
+  /* إضافة جديد */
+
+  else {
+
+    saved.push(content);
+
+  }
 
   localStorage.setItem(
     "nexora_content",
     JSON.stringify(saved)
   );
 
-  document.getElementById("message").style.display = "block";
+  showMessage(
+    editIndex === -1
+      ? "✅ تمت إضافة المحتوى"
+      : "✅ تم تعديل المحتوى"
+  );
+
+  clearForm();
+
+  loadContent();
+}
+
+
+/* عرض رسالة */
+
+function showMessage(text) {
+
+  const message = document.getElementById("message");
+
+  message.innerText = text;
+  message.style.display = "block";
+
+  setTimeout(() => {
+    message.style.display = "none";
+  }, 2500);
+
+}
+
+
+/* تنظيف النموذج */
+
+function clearForm() {
 
   document.getElementById("title").value = "";
   document.getElementById("image").value = "";
   document.getElementById("link").value = "";
   document.getElementById("rating").value = "";
+
 }
+
+
+/* تحميل المحتوى */
+
+function loadContent() {
+
+  const list = document.getElementById("contentList");
+
+  const saved = JSON.parse(
+    localStorage.getItem("nexora_content") || "[]"
+  );
+
+  if (saved.length === 0) {
+
+    list.innerHTML = `
+      <div class="empty">
+        لا يوجد محتوى مضاف حتى الآن 📭
+      </div>
+    `;
+
+    return;
+  }
+
+  list.innerHTML = "";
+
+  saved.forEach((content, index) => {
+
+    let typeName = "";
+
+    if (content.type === "anime") {
+      typeName = "🎌 أنمي";
+    }
+
+    if (content.type === "movie") {
+      typeName = "🎬 فيلم";
+    }
+
+    if (content.type === "manga") {
+      typeName = "📚 مانغا";
+    }
+
+    if (content.type === "manhwa") {
+      typeName = "📖 مانهوا";
+    }
+
+    const card = document.createElement("div");
+
+    card.className = "content-card";
+
+    card.innerHTML = `
+
+      <img
+        src="${content.image || "https://via.placeholder.com/100x140?text=Nexora"}"
+        onerror="this.src='https://via.placeholder.com/100x140?text=Nexora'"
+      >
+
+      <div class="content-info">
+
+        <span class="content-type">
+          ${typeName}
+        </span>
+
+        <h3>
+          ${escapeHTML(content.title)}
+        </h3>
+
+        <div class="rating">
+          ⭐ ${content.rating || "بدون تقييم"}
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="edit-btn"
+            onclick="editContent(${index})"
+          >
+            ✏️ تعديل
+          </button>
+
+          <button
+            class="delete-btn"
+            onclick="deleteContent(${index})"
+          >
+            🗑️ حذف
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    list.appendChild(card);
+
+  });
+
+}
+
+
+/* تعديل المحتوى */
+
+function editContent(index) {
+
+  const saved = JSON.parse(
+    localStorage.getItem("nexora_content") || "[]"
+  );
+
+  const content = saved[index];
+
+  if (!content) return;
+
+  document.getElementById("type").value = content.type;
+  document.getElementById("title").value = content.title;
+  document.getElementById("image").value = content.image;
+  document.getElementById("link").value = content.link;
+  document.getElementById("rating").value = content.rating;
+
+  editIndex = index;
+
+  document.querySelector("button[onclick='addContent()']").innerHTML =
+    "💾 حفظ التعديل";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* حذف المحتوى */
+
+function deleteContent(index) {
+
+  if (!confirm("هل أنت متأكد أنك تريد حذف هذا المحتوى؟")) {
+    return;
+  }
+
+  const saved = JSON.parse(
+    localStorage.getItem("nexora_content") || "[]"
+  );
+
+  saved.splice(index, 1);
+
+  localStorage.setItem(
+    "nexora_content",
+    JSON.stringify(saved)
+  );
+
+  loadContent();
+
+}
+
+
+/* حماية النص */
+
+function escapeHTML(text) {
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+
+}
+
+
+/* تشغيل القائمة عند فتح الصفحة */
+
+loadContent();
+
 </script>
 
 </body>
