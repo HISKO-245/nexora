@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -15,43 +16,77 @@
   font-family: Arial, sans-serif;
 }
 
-body {
-  background: #0b0b12;
-  color: white;
-  padding-bottom: 80px;
+:root {
+  --bg: #0b0b12;
+  --box: #15151f;
+  --box2: #12121b;
+  --text: #fff;
+  --muted: #888;
+  --border: #29253d;
+  --purple: #8b5cf6;
 }
 
+body.light {
+  --bg: #f5f5fa;
+  --box: #ffffff;
+  --box2: #ffffff;
+  --text: #17141f;
+  --muted: #666;
+  --border: #ddd7ea;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 85px;
+  transition: 0.3s;
+}
+
+/* Header */
+
 header {
-  padding: 22px 18px 12px;
+  padding: 20px 18px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: bold;
 }
 
 .logo span {
-  color: #8b5cf6;
+  color: var(--purple);
 }
 
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.header-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  background: var(--box);
+  color: var(--text);
+  font-size: 19px;
+}
+
+/* Search */
+
 .search {
-  margin: 20px 16px;
+  margin: 12px 16px 20px;
   height: 52px;
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 0 16px;
-  background: #15151f;
-  border: 1px solid rgba(139, 92, 246, 0.25);
+  background: var(--box);
+  border: 1px solid var(--border);
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-
-.search span {
-  font-size: 20px;
 }
 
 .search input {
@@ -59,50 +94,73 @@ header {
   border: none;
   outline: none;
   background: transparent;
-  color: white;
+  color: var(--text);
   font-size: 14px;
-  font-family: inherit;
 }
 
 .search input::placeholder {
-  color: #77778a;
+  color: var(--muted);
 }
 
-.search:focus-within {
-  border-color: #8b5cf6;
-  box-shadow: 0 0 18px rgba(139, 92, 246, 0.2);
-}
+/* Hero */
 
 .hero {
-  margin: 0 16px 25px;
-  height: 190px;
-  border-radius: 20px;
+  margin: 0 16px 24px;
+  min-height: 245px;
+  border-radius: 24px;
   padding: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   background:
-  linear-gradient(
-    to top,
-    rgba(11,11,18,0.9),
-    rgba(11,11,18,0.2)
-  ),
-  url("nexora-bg.png") center/cover no-repeat;
+    linear-gradient(
+      to top,
+      rgba(8,8,15,.98),
+      rgba(8,8,15,.15)
+    ),
+    url("nexora-bg.png") center/cover no-repeat;
+  box-shadow: 0 15px 35px rgba(0,0,0,.3);
 }
+
 .hero h1 {
-  font-size: 25px;
+  font-size: 27px;
   margin-bottom: 8px;
 }
 
 .hero p {
-  color: #d1d1d8;
+  color: #ddd;
   font-size: 14px;
+  margin-bottom: 17px;
+}
+
+.watch-main {
+  display: inline-flex;
+  width: fit-content;
+  text-decoration: none;
+  background: var(--purple);
+  color: white;
+  padding: 14px 25px;
+  border-radius: 13px;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 8px 25px rgba(139,92,246,.35);
+}
+
+/* Categories */
+
+.category-section {
+  padding: 0 16px;
+  margin-bottom: 28px;
+}
+
+.category-title {
+  font-size: 20px;
+  margin-bottom: 13px;
 }
 
 .categories {
   display: flex;
   gap: 10px;
-  padding: 5px 16px 25px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -111,332 +169,820 @@ header {
   display: none;
 }
 
-.categories button {
+.category {
   flex-shrink: 0;
-  padding: 11px 18px;
-  border: 1px solid rgba(139,92,246,0.35);
-  border-radius: 14px;
-  background: #15151f;
-  color: #ddd;
+  padding: 12px 17px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  background: var(--box);
+  color: var(--text);
   font-size: 14px;
-  font-family: inherit;
-  cursor: pointer;
-  transition: 0.2s ease;
 }
 
-.categories button:hover,
-.categories button:active {
-  background: #8b5cf6;
+.category.active {
+  background: var(--purple);
+  border-color: var(--purple);
   color: white;
-  border-color: #8b5cf6;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(139,92,246,0.3);
 }
+
+/* Sections */
 
 .section {
   padding: 0 16px;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .section-title {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 13px;
+  align-items: center;
+  margin-bottom: 14px;
 }
 
 .section-title h2 {
-  font-size: 19px;
+  font-size: 20px;
 }
 
 .section-title span {
-  color: #9b7cff;
+  color: #a78bfa;
   font-size: 13px;
 }
 
-.cards {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-}
+/* Cards */
 
-.cards::-webkit-scrollbar {
-  display: none;
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
 }
 
 .card {
-  min-width: 150px;
-  background: linear-gradient(145deg,#181824,#101018);
-  border-radius: 20px;
+  background: var(--box);
+  border: 1px solid var(--border);
+  border-radius: 17px;
   overflow: hidden;
-  border: 1px solid rgba(139,92,246,0.18);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:active {
-  transform: scale(0.96);
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(139,92,246,0.22);
+  box-shadow: 0 8px 22px rgba(0,0,0,.18);
 }
 
 .cover {
-  height: 190px;
-  position: relative;
-  overflow: hidden;
+  height: 210px;
+  background:
+    linear-gradient(135deg,#24143f,#0d0d15);
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(circle at 30% 20%, #8b5cf6 0%, transparent 35%),
-    linear-gradient(135deg,#24143f,#0d0d15);
-  font-size: 55px;
+  overflow: hidden;
 }
 
-.cover::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(11,11,18,0.8),
-    transparent 55%
-  );
-  pointer-events: none;
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  font-size: 48px;
 }
 
 .card-info {
-  padding: 10px;
+  padding: 11px;
 }
 
 .card-info h3 {
-  font-size: 14px;
+  font-size: 15px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.rating {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.type {
+  color: var(--muted);
+  font-size: 11px;
   margin-top: 5px;
-  padding: 4px 9px;
-  border-radius: 8px;
-  background: rgba(139,92,246,0.16);
-  color: #c4b5fd;
-  font-size: 12px;
-  font-weight: 700;
 }
 
-.no-results {
-  display: none;
-  text-align: center;
-  color: #888;
-  padding: 35px 10px;
-  font-size: 15px;
+.rating {
+  display: inline-block;
+  margin-top: 7px;
+  padding: 4px 8px;
+  border-radius: 7px;
+  background: rgba(139,92,246,.15);
+  color: #c4b5fd;
+  font-size: 12px;
 }
+
+.card-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 9px;
+  padding: 9px;
+  border-radius: 10px;
+  background: var(--purple);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Empty */
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--muted);
+  padding: 35px 10px;
+}
+
+/* Bottom Navigation */
 
 nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 68px;
-  background: #12121b;
-  border-top: 1px solid #272735;
+  height: 70px;
+  background: var(--box2);
+  border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-around;
   align-items: center;
   z-index: 100;
+  backdrop-filter: blur(15px);
 }
 
-nav div {
-  text-align: center;
-  color: #777;
-  font-size: 12px;
+nav button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
 }
 
-nav .active {
-  color: #9b7cff;
+nav button.active {
+  color: #a78bfa;
 }
 
 .icon {
-  font-size: 21px;
   display: block;
+  font-size: 21px;
   margin-bottom: 3px;
 }
+
+/* Modals */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 500;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 600px;
+  background: var(--box);
+  border-radius: 25px 25px 0 0;
+  padding: 22px;
+  animation: up .25s ease;
+}
+
+@keyframes up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.close {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 25px;
+}
+
+.setting {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--box2);
+  color: var(--text);
+  text-align: right;
+  font-size: 15px;
+}
+
+.setting.active {
+  border-color: var(--purple);
+}
+
+.login-input {
+  width: 100%;
+  height: 48px;
+  margin-bottom: 12px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--box2);
+  color: var(--text);
+  outline: none;
+}
+
+.login-btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: var(--purple);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Desktop */
+
+@media (min-width: 700px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .hero {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section,
+  .category-section,
+  .search {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 </style>
+
 </head>
 
 <body>
 
 <header>
   <div class="logo">Nexo<span>ra</span></div>
-  <div>🔔</div>
+
+  <div class="header-buttons">
+    <button class="header-btn" onclick="openLogin()">👤</button>
+    <button class="header-btn" onclick="openSettings()">⚙️</button>
+  </div>
 </header>
+
+<!-- البحث -->
 
 <div class="search">
   <span>🔍</span>
   <input
     type="text"
     id="searchInput"
-    placeholder="ابحث عن مانغا، مانهوا، أنمي أو فيلم..."
+    placeholder="ابحث عن مانهوا، مانغا، أنمي أو فيلم..."
     autocomplete="off"
   >
 </div>
 
+<!-- الرئيسية -->
+
 <section class="hero">
-  <h1>عالمك الترفيهي في مكان واحد</h1>
-  <p>اكتشف أفضل المانغا والمانهوا والأنمي والأفلام.</p>
+  <h1>عالم Nexora 🎬</h1>
+
+  <p>
+    اكتشف المانهوا والمانغا والأنمي والأفلام في مكان واحد.
+  </p>
+
+  <a href="#allContent" class="watch-main">
+    ▶️ شاهد الآن
+  </a>
 </section>
 
-<section class="categories">
-  <button>📚 مانغا</button>
-  <button>📖 مانهوا</button>
-  <button>🎌 أنمي</button>
-  <button>🎬 أفلام</button>
+<!-- التصنيفات -->
+
+<section class="category-section">
+
+  <h2 class="category-title">🏷️ التصنيفات</h2>
+
+  <div class="categories">
+
+```
+<button class="category active" onclick="filterContent('all', this)">
+  ✨ الكل
+</button>
+
+<button class="category" onclick="filterContent('anime', this)">
+  🎌 أنمي
+</button>
+
+<button class="category" onclick="filterContent('movie', this)">
+  🎬 أفلام
+</button>
+
+<button class="category" onclick="filterContent('manga', this)">
+  📚 مانغا
+</button>
+
+<button class="category" onclick="filterContent('manhwa', this)">
+  📖 مانهوا
+</button>
+
+<button class="category" onclick="filterContent('latest', this)">
+  🆕 الأحدث
+</button>
+
+<button class="category" onclick="filterContent('rating', this)">
+  ⭐ الأعلى تقييمًا
+</button>
+```
+
+  </div>
+
 </section>
 
-<section class="section">
+<!-- المحتوى -->
+
+<section class="section" id="allContent">
+
   <div class="section-title">
-    <h2>🎬 أنمي وأفلام</h2>
-    <span>عرض الكل</span>
+    <h2>🔥 اكتشف الآن</h2>
+    <span id="contentCount"></span>
   </div>
 
-  <div class="cards">
+  <div class="cards" id="contentList"></div>
 
-    <div class="card">
-      <div class="cover">🍿</div>
-      <div class="card-info">
-        <h3>أنمي جديد</h3>
-        <div class="rating">⭐ 9.0</div>
-        <a href="watch.html" class="watch-btn">▶️ شاهد الآن</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="cover">🎥</div>
-      <div class="card-info">
-        <h3>أفلام مميزة</h3>
-        <div class="rating">⭐ 8.7</div>
-        <a href="watch.html" class="watch-btn">▶️ شاهد الآن</a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="no-results" id="noResults">
-    🔎 لا توجد نتائج
-  </div>
 </section>
 
-<section class="section">
-  <div class="section-title">
-    <h2>📚 مانغا ومانهوا</h2>
-    <span>عرض الكل</span>
+<!-- نافذة تسجيل الدخول -->
+
+<div class="modal" id="loginModal">
+
+  <div class="modal-box">
+
+```
+<div class="modal-header">
+  <h2>🔐 تسجيل الدخول</h2>
+  <button class="close" onclick="closeModal('loginModal')">×</button>
+</div>
+
+<input
+  class="login-input"
+  type="email"
+  id="email"
+  placeholder="البريد الإلكتروني"
+>
+
+<input
+  class="login-input"
+  type="password"
+  id="password"
+  placeholder="كلمة المرور"
+>
+
+<button class="login-btn" onclick="login()">
+  تسجيل الدخول
+</button>
+
+<p
+  id="loginMessage"
+  style="text-align:center;margin-top:12px;color:#a78bfa;"
+></p>
+```
+
   </div>
 
-  <div class="cards">
+</div>
 
-    <div class="card">
-      <div class="cover">📖</div>
-      <div class="card-info">
-        <h3>مانهوا مميزة</h3>
-        <div class="rating">⭐ 9.4</div>
-        <a href="watch.html?title=مانهوا%20مميزة" class="watch-btn">📖 اقرأ الآن</a>
-      </div>
-    </div>
+<!-- الإعدادات -->
 
-    <div class="card">
-      <div class="cover">⚔️</div>
-      <div class="card-info">
-        <h3>مانهوا جديدة</h3>
-        <div class="rating">⭐ 9.1</div>
-        <a href="watch.html?title=مانهوا%20جديدة" class="watch-btn">📖 اقرأ الآن</a>
-      </div>
-    </div>
+<div class="modal" id="settingsModal">
 
-    <div class="card">
-      <div class="cover">❤️</div>
-      <div class="card-info">
-        <h3>رومانسي</h3>
-        <div class="rating">⭐ 8.8</div>
-        <a href="watch.html?title=رومانسي" class="watch-btn">📖 اقرأ الآن</a>
-      </div>
-    </div>
+  <div class="modal-box">
+
+```
+<div class="modal-header">
+  <h2>⚙️ الإعدادات</h2>
+  <button class="close" onclick="closeModal('settingsModal')">×</button>
+</div>
+
+<button
+  class="setting"
+  id="darkMode"
+  onclick="setTheme('dark')"
+>
+  🌙 الوضع الأسود
+</button>
+
+<button
+  class="setting"
+  id="lightMode"
+  onclick="setTheme('light')"
+>
+  ☀️ الوضع الأبيض
+</button>
+```
 
   </div>
-</section>
 
+</div>
 
-
+<!-- القائمة السفلية -->
 
 <nav>
-  <div class="active">
+
+  <button class="active" onclick="goHome()">
     <span class="icon">🏠</span>
     الرئيسية
-  </div>
+  </button>
 
-  <div>
+  <button onclick="focusSearch()">
     <span class="icon">🔍</span>
     بحث
-  </div>
+  </button>
 
-  <div>
-    <span class="icon">❤️</span>
-    المفضلة
-  </div>
+  <button onclick="openCategories()">
+    <span class="icon">🏷️</span>
+    التصنيفات
+  </button>
 
-  <div>
+  <button onclick="openLogin()">
     <span class="icon">👤</span>
     حسابي
-  </div>
+  </button>
+
 </nav>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
 
-  const searchInput = document.getElementById("searchInput");
-  const cards = document.querySelectorAll(".card");
-  const noResults = document.getElementById("noResults");
+/* البيانات */
 
-  searchInput.addEventListener("input", function () {
+let contents = JSON.parse(
+  localStorage.getItem("nexora_content") || "[]"
+);
 
-    const text = this.value.trim().toLowerCase();
-    let found = false;
+let currentFilter = "all";
 
-    cards.forEach(function (card) {
 
-      const title = card.querySelector("h3");
+/* أسماء الأنواع */
 
-      if (!title) return;
+function typeName(type) {
 
-      const name = title.textContent.toLowerCase();
+  if (type === "anime") return "🎌 أنمي";
+  if (type === "movie") return "🎬 فيلم";
+  if (type === "manga") return "📚 مانغا";
+  if (type === "manhwa") return "📖 مانهوا";
 
-      if (text === "" || name.includes(text)) {
-        card.style.display = "";
-        found = true;
-      } else {
-        card.style.display = "none";
-      }
+  return "Nexora";
+}
 
+
+/* عرض المحتوى */
+
+function renderContent(list = contents) {
+
+  const container = document.getElementById("contentList");
+
+  document.getElementById("contentCount").innerText =
+    list.length + " عمل";
+
+  if (list.length === 0) {
+
+    container.innerHTML = `
+      <div class="empty">
+        📭 لا يوجد محتوى هنا حاليًا
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML = "";
+
+  list.forEach(function(item) {
+
+    const card = document.createElement("div");
+
+    card.className = "card";
+
+    const image = item.image
+      ? `<img src="${escapeHTML(item.image)}"
+          onerror="this.style.display='none'">`
+      : `<div class="placeholder">🎬</div>`;
+
+    card.innerHTML = `
+
+      <div class="cover">
+        ${image}
+      </div>
+
+      <div class="card-info">
+
+        <h3>${escapeHTML(item.title)}</h3>
+
+        <div class="type">
+          ${typeName(item.type)}
+        </div>
+
+        <div class="rating">
+          ⭐ ${item.rating || "بدون تقييم"}
+        </div>
+
+        <a
+          class="card-btn"
+          href="${item.link ? escapeHTML(item.link) : '#'}"
+          target="_blank"
+        >
+          ${item.type === "manga" || item.type === "manhwa"
+            ? "📖 اقرأ الآن"
+            : "▶️ شاهد الآن"}
+        </a>
+
+      </div>
+    `;
+
+    container.appendChild(card);
+
+  });
+
+}
+
+
+/* التصنيفات */
+
+function filterContent(type, button) {
+
+  currentFilter = type;
+
+  document.querySelectorAll(".category").forEach(function(btn) {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  let result = [...contents];
+
+  if (
+    type === "anime" ||
+    type === "movie" ||
+    type === "manga" ||
+    type === "manhwa"
+  ) {
+
+    result = contents.filter(function(item) {
+      return item.type === type;
     });
 
-    noResults.style.display =
-      text !== "" && !found ? "block" : "none";
+  }
+
+  if (type === "latest") {
+    result = [...contents].reverse();
+  }
+
+  if (type === "rating") {
+    result.sort(function(a, b) {
+      return Number(b.rating || 0) - Number(a.rating || 0);
+    });
+  }
+
+  renderContent(result);
+
+}
+
+
+/* البحث */
+
+document.getElementById("searchInput").addEventListener(
+  "input",
+  function() {
+
+    const text = this.value.trim().toLowerCase();
+
+    let result = [...contents];
+
+    if (currentFilter !== "all") {
+
+      if (
+        currentFilter === "anime" ||
+        currentFilter === "movie" ||
+        currentFilter === "manga" ||
+        currentFilter === "manhwa"
+      ) {
+        result = result.filter(item =>
+          item.type === currentFilter
+        );
+      }
+
+    }
+
+    if (text !== "") {
+
+      result = result.filter(item =>
+        item.title.toLowerCase().includes(text)
+      );
+
+    }
+
+    renderContent(result);
+
+  }
+);
+
+
+/* فتح البحث */
+
+function focusSearch() {
+
+  document.getElementById("searchInput").focus();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* التصنيفات */
+
+function openCategories() {
+
+  document.querySelector(".category-section")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+
+}
+
+
+/* الرئيسية */
+
+function goHome() {
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* تسجيل الدخول */
+
+function openLogin() {
+
+  document.getElementById("loginModal")
+    .classList.add("show");
+
+}
+
+function login() {
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  const message = document.getElementById("loginMessage");
+
+  if (!email || !password) {
+
+    message.innerText =
+      "⚠️ اكتب البريد وكلمة المرور";
+
+    return;
+
+  }
+
+  message.innerText =
+    "ℹ️ تسجيل الدخول سيتم ربطه لاحقًا";
+
+}
+
+
+/* الإعدادات */
+
+function openSettings() {
+
+  document.getElementById("settingsModal")
+    .classList.add("show");
+
+}
+
+
+/* إغلاق النوافذ */
+
+function closeModal(id) {
+
+  document.getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* الوضع */
+
+function setTheme(theme) {
+
+  if (theme === "light") {
+
+    document.body.classList.add("light");
+
+    localStorage.setItem(
+      "nexora_theme",
+      "light"
+    );
+
+  } else {
+
+    document.body.classList.remove("light");
+
+    localStorage.setItem(
+      "nexora_theme",
+      "dark"
+    );
+
+  }
+
+}
+
+
+/* تحميل الوضع المحفوظ */
+
+const savedTheme =
+  localStorage.getItem("nexora_theme") || "dark";
+
+setTheme(savedTheme);
+
+
+/* حماية النص */
+
+function escapeHTML(text) {
+
+  const div = document.createElement("div");
+
+  div.textContent = text || "";
+
+  return div.innerHTML;
+
+}
+
+
+/* تحديث المحتوى */
+
+function refreshContent() {
+
+  contents = JSON.parse(
+    localStorage.getItem("nexora_content") || "[]"
+  );
+
+  renderContent(contents);
+
+}
+
+
+/* تشغيل */
+
+refreshContent();
+
+
+/* إغلاق النافذة عند الضغط خارجها */
+
+document.querySelectorAll(".modal").forEach(function(modal) {
+
+  modal.addEventListener("click", function(event) {
+
+    if (event.target === modal) {
+      modal.classList.remove("show");
+    }
 
   });
 
 });
-</script>
 
-<script>
+
+/* Service Worker */
+
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
+
+  navigator.serviceWorker.register("sw.js")
+    .catch(function(error) {
+      console.log("Service Worker:", error);
+    });
+
 }
+
 </script>
 
 </body>
