@@ -77,7 +77,7 @@
 
     <p>اختر ما تريد القيام به:</p>
 <a class="back" href="#">▶️ شاهد الآن</a>
-<a class="back" href="#">📖 اقرأ الآن</a>
+<a class="back" id="readBtn" href="reader.html">📖 اقرأ الآن</a>
     <a class="back" href="index.html">← العودة للرئيسية</a>
 
   </div>
@@ -85,8 +85,11 @@
 const params = new URLSearchParams(window.location.search);
 const title = params.get("title");
 
+const readBtn = document.getElementById("readBtn");
+
 if (title) {
   document.querySelector(".watch-box h1").textContent = title;
+  readBtn.href = "reader.html?title=" + encodeURIComponent(title);
 }
 </script>
 </body>
