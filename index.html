@@ -22,7 +22,6 @@ body {
   padding-bottom: 75px;
 }
 
-/* Top Header */
 header {
   padding: 15px 16px;
   display: flex;
@@ -45,7 +44,7 @@ header {
   color: #8b5cf6;
 }
 
-.admin-trigger {
+.admin-btn {
   background: linear-gradient(135deg, #8b5cf6, #6d28d9);
   border: none;
   color: white;
@@ -57,7 +56,6 @@ header {
   box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
-/* Search Bar */
 .search-container {
   padding: 12px 16px;
 }
@@ -82,7 +80,6 @@ header {
   font-size: 13px;
 }
 
-/* Category Slider */
 .categories {
   display: flex;
   gap: 8px;
@@ -111,7 +108,6 @@ header {
   font-weight: bold;
 }
 
-/* Media Grid Layout (Manga Star Style) */
 .content-section {
   padding: 0 16px;
 }
@@ -173,7 +169,6 @@ header {
   padding: 2px 6px;
   border-radius: 4px;
   font-weight: bold;
-  backdrop-filter: blur(4px);
 }
 
 .badge-rating {
@@ -197,15 +192,8 @@ header {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 4px;
 }
 
-.card-details .sub-info {
-  font-size: 10px;
-  color: #6b7280;
-}
-
-/* Modal / Panel System */
 .full-panel {
   display: none;
   position: fixed;
@@ -268,28 +256,6 @@ header {
   cursor: pointer;
 }
 
-/* Reader & Player Styles */
-.manga-pages img {
-  width: 100%;
-  display: block;
-  margin-bottom: 2px;
-}
-
-.video-container {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.video-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Bottom Navigation */
 nav {
   position: fixed;
   bottom: 0;
@@ -321,21 +287,18 @@ nav {
 
 <body>
 
-<!-- Header -->
 <header>
   <div class="logo">Nexo<span>ra</span></div>
-  <button class="admin-trigger" onclick="openPanel('adminPanel')">⚙️ لوحة التحكم</button>
+  <button class="admin-btn" onclick="openPanel('adminPanel')">⚙️ لوحة التحكم</button>
 </header>
 
-<!-- Search -->
 <div class="search-container">
   <div class="search-box">
     <span>🔍</span>
-    <input type="text" id="searchInput" placeholder="ابحث عن مانجا، أنمي، أو فيلم...">
+    <input type="text" id="searchInput" placeholder="ابحث عن مانجا، أنمي، أفلام...">
   </div>
 </div>
 
-<!-- Categories -->
 <div class="categories">
   <div class="cat-chip active" onclick="filterCategory('all', this)">⚡ الكل</div>
   <div class="cat-chip" onclick="filterCategory('manga', this)">📚 مانجا/مانهوا</div>
@@ -344,29 +307,17 @@ nav {
   <div class="cat-chip" onclick="filterCategory('dev', this)">🧠 تنمية ذاتية</div>
 </div>
 
-<!-- Content Grid -->
 <section class="content-section">
   <div class="section-header">
-    <h2>المحتوى المتاح</h2>
+    <h2>أحدث العروض</h2>
   </div>
-  <div class="media-grid" id="mediaGrid">
-    <!-- Items rendered here via JS -->
-  </div>
+  <div class="media-grid" id="mediaGrid"></div>
 </section>
 
-<!-- Panel: Viewer (Manga Reader / Video Player) -->
-<div class="full-panel" id="viewerPanel">
-  <div class="panel-header">
-    <h3 id="viewerTitle">العنوان</h3>
-    <button class="btn-danger" onclick="closePanel('viewerPanel')">إغلاق ✕</button>
-  </div>
-  <div id="viewerBody"></div>
-</div>
-
-<!-- Panel: Admin Dashboard -->
+<!-- لوحة إضافة محتوى جديد -->
 <div class="full-panel" id="adminPanel">
   <div class="panel-header">
-    <h3>إدارة المحتوى (إضافة عمل)</h3>
+    <h3>إضافة عمل جديد (Admin)</h3>
     <button class="btn-danger" onclick="closePanel('adminPanel')">إغلاق ✕</button>
   </div>
   
@@ -386,8 +337,8 @@ nav {
   </div>
 
   <div class="form-group">
-    <label>رابط صورة الغلاف (Poster URL)</label>
-    <input type="text" id="addPoster" placeholder="https://example.com/poster.jpg">
+    <label>رابط غلاف العمل (Poster URL)</label>
+    <input type="text" id="addPoster" placeholder="https://...">
   </div>
 
   <div class="form-group">
@@ -396,14 +347,13 @@ nav {
   </div>
 
   <div class="form-group">
-    <label>المحتوى (روابط الصور للمانجا تفصل بينها فاصلة `,` | أو رابط فيديو Embed للأنمي/الفيلم)</label>
-    <textarea id="addSource" rows="4" placeholder="للمانجا: url1, url2, url3 &#10;للأنمي/الفيلم: https://www.youtube.com/embed/..."></textarea>
+    <label>المحتوى (روابط صور المانجا تفصل بينها فاصلة `,` | أو رابط فيديو Embed للأنمي/الفيلم)</label>
+    <textarea id="addSource" rows="4" placeholder="للمانجا: url1, url2 &#10;للأنمي/الفيلم: https://www.youtube.com/embed/..."></textarea>
   </div>
 
-  <button class="btn-primary" onclick="saveNewContent()">حفظ وإعادة نشر</button>
+  <button class="btn-primary" onclick="saveNewContent()">حفظ ونشر العمل</button>
 </div>
 
-<!-- Navigation -->
 <nav>
   <div class="nav-link active"><span class="icon">🏠</span>الرئيسية</div>
   <div class="nav-link"><span class="icon">🔥</span>الشائع</div>
@@ -412,7 +362,6 @@ nav {
 </nav>
 
 <script>
-// Initial Data Structure
 const initialData = [
   {
     id: 1,
@@ -447,7 +396,7 @@ function renderGrid() {
     if (matchCat && matchSearch) {
       const card = document.createElement('div');
       card.className = 'star-card';
-      card.onclick = () => openMedia(item.id);
+      card.onclick = () => openMedia(item);
 
       card.innerHTML = `
         <div class="poster-wrapper">
@@ -457,7 +406,6 @@ function renderGrid() {
         </div>
         <div class="card-details">
           <h3>${item.title}</h3>
-          <div class="sub-info">مُتاح الآن</div>
         </div>
       `;
       grid.appendChild(card);
@@ -482,25 +430,13 @@ function filterCategory(cat, el) {
   renderGrid();
 }
 
-function openMedia(id) {
-  const item = appData.find(x => x.id === id);
-  if (!item) return;
-
-  document.getElementById('viewerTitle').innerText = item.title;
-  const body = document.getElementById('viewerBody');
-
+function openMedia(item) {
+  localStorage.setItem('nexora_current_item', JSON.stringify(item));
   if (item.category === 'manga') {
-    const pages = item.source.split(',');
-    body.innerHTML = `<div class="manga-pages">
-      ${pages.map(p => `<img src="${p.trim()}" alt="page">`).join('')}
-    </div>`;
+    window.location.href = `reader.html?id=${item.id}`;
   } else {
-    body.innerHTML = `<div class="video-container">
-      <iframe src="${item.source}" allowfullscreen></iframe>
-    </div>`;
+    window.location.href = `watch.html?id=${item.id}`;
   }
-
-  openPanel('viewerPanel');
 }
 
 function saveNewContent() {
@@ -511,7 +447,7 @@ function saveNewContent() {
   const source = document.getElementById('addSource').value.trim();
 
   if (!title || !source) {
-    alert('يرجى ملء كافة الحقول الأساسية!');
+    alert('يرجى كتابة عنوان العمل والمحتوى');
     return;
   }
 
@@ -520,7 +456,7 @@ function saveNewContent() {
     title,
     category,
     poster: poster || 'https://via.placeholder.com/200x300/1c1c2b/ffffff?text=Cover',
-    rating: rating || '8.0',
+    rating: rating || '8.5',
     source
   };
 
@@ -528,10 +464,6 @@ function saveNewContent() {
   localStorage.setItem('nexora_db', JSON.stringify(appData));
   renderGrid();
   closePanel('adminPanel');
-
-  // Reset Input
-  document.getElementById('addTitle').value = '';
-  document.getElementById('addSource').value = '';
 }
 
 function openPanel(id) { document.getElementById(id).classList.add('active'); }
