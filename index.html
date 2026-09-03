@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- PWA & Theme Meta Tags -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b5cf6">
+<link rel="apple-touch-icon" href="https://via.placeholder.com/192/8b5cf6/ffffff?text=Nexora">
+
 <title>Nexora - الرئيسية</title>
 
 <!-- Firebase SDK -->
@@ -231,7 +235,7 @@ nav {
   background: #11111a;
   border-top: 1px solid #1e1e2d;
   display: flex;
-  justify-content: space-around;
+  justify-style: space-around;
   align-items: center;
   z-index: 100;
 }
@@ -437,6 +441,15 @@ nav {
 </nav>
 
 <script>
+// تسجيل الـ Service Worker لتطبيق الـ PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => console.log('Service Worker Registered!', reg))
+      .catch((err) => console.error('Service Worker Registration Failed!', err));
+  });
+}
+
 // إعداد قاعدة البيانات المجانية من Firebase
 const firebaseConfig = {
   databaseURL: "https://nexora-app-default-rtdb.firebaseio.com/"
@@ -581,4 +594,4 @@ function closePanel(id) { document.getElementById(id).classList.remove('active')
 </script>
 
 </body>
-</html>
+        </html>
