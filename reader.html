@@ -3,82 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora - قارئ المانجا</title>
-
+<title>Nexora - التفاصيل والمشاهدة</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #08080c; color: white; font-family: Arial, sans-serif; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+body { background: #09090e; color: #efefef; padding: 16px; padding-bottom: 40px; }
 
-header {
-  padding: 15px;
-  background: #11111a;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid #222235;
-}
+header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.back-btn { background: #161622; border: 1px solid #222232; color: white; padding: 8px 16px; border-radius: 20px; cursor: pointer; }
 
-.reader-container {
-  max-width: 750px;
-  margin: auto;
-  padding-bottom: 80px;
-}
+.details-card { display: flex; gap: 16px; margin-bottom: 20px; }
+.details-poster { width: 120px; height: 170px; border-radius: 12px; object-fit: cover; }
+.details-info h2 { font-size: 18px; color: #8b5cf6; margin-bottom: 8px; }
+.details-info p { font-size: 12px; color: #a1a1aa; margin-bottom: 4px; }
 
-.reader-container img {
-  width: 100%;
-  display: block;
-  margin-bottom: 2px;
-}
+/* مشغل الفيديو */
+.player-container { margin-bottom: 20px; display: none; }
+.player-container iframe, .player-container video { width: 100%; height: 220px; border-radius: 12px; border: 1px solid #222232; }
 
-.bottom-controls {
-  position: fixed;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #11111a;
-  border: 1px solid #8b5cf6;
-  border-radius: 30px;
-  padding: 8px 25px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.8);
-}
+/* أزرار التشغيل والتفاعل */
+.action-btns { display: flex; gap: 10px; margin-bottom: 20px; }
+.btn-primary { flex: 1; padding: 12px; background: #8b5cf6; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; }
+.btn-secondary { padding: 12px 16px; background: #161622; border: 1px solid #222232; color: white; border-radius: 10px; cursor: pointer; }
 
-.bottom-controls a {
-  color: white;
-  text-decoration: none;
-  font-size: 20px;
-}
+.description { background: #12121c; padding: 12px; border-radius: 12px; font-size: 13px; color: #d4d4d8; margin-bottom: 20px; border: 1px solid #222232; }
+
+/* قائمة الفصول / الحلقات */
+.chapters-list { display: flex; flex-direction: column; gap: 8px; }
+.chapter-item { background: #161622; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222232; cursor: pointer; }
+.chapter-item:hover { border-color: #8b5cf6; }
 </style>
 </head>
-
 <body>
 
 <header>
-  <h2 id="mangaTitle">جاري التحميل...</h2>
+  <button class="back-btn" onclick="goBack()">➔ عودة</button>
+  <h3 style="font-size:14px; color:#a1a1aa;">تفاصيل العمل</h3>
 </header>
 
-<div class="reader-container" id="pagesContainer"></div>
-
-<div class="bottom-controls">
-  <a href="index.html">🏠 الرئيسية</a>
-  <a href="javascript:history.back()">🔙 العودة</a>
+<!-- حاوية مشغل الفيديو -->
+<div class="player-container" id="playerBox">
+  <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
 </div>
 
+<!-- معلومات العمل -->
+<div class="details-card">
+  <img id="itemPoster" class="details-poster" src="" alt="غلاف">
+  <div class="details-info">
+    <h2 id="itemTitle">---</h2>
+    <p id="itemStatus">---</p>
+    <p id="itemRating">★ ---</p>
+  </div>
+</div>
+
+<!-- أزرار التشغيل والتفاعل -->
+<div class="action-btns">
+  <button class="btn-primary" id="playBtn" onclick="startWatching()">▶ مشاهدة / قراءة الآن</button>
+  <button class="btn-secondary" onclick="toggleFavorite()">♡ مفضلة</button>
+</div>
+
+<!-- القصة -->
+<div class="description">
+  <strong style="color:#8b5cf6; display:block; margin-bottom:4px;">القصة:</strong>
+  <p id="itemDesc">جاري التحميل...</p>
+</div>
+
+<!-- قائمة الفصول أو الحلقات -->
+<h4 style="margin-bottom: 10px;">الحلقات / الفصول</h4>
+<div class="chapters-list" id="chaptersList"></div>
+
 <script>
-const currentItem = JSON.parse(localStorage.getItem('nexora_current_item'));
+// جلب بيانات العمل المختار من LocalStorage
+const selectedItem = JSON.parse(localStorage.getItem('selected_manga'));
 
-if (currentItem) {
-  document.getElementById('mangaTitle').innerText = currentItem.title;
-  const container = document.getElementById('pagesContainer');
-  const pages = currentItem.source.split(',');
+function loadDetails() {
+  if (!selectedItem) {
+    alert("لم يتم اختيار أي عمل!");
+    window.location.href = 'index.html';
+    return;
+  }
 
-  container.innerHTML = pages.map(url => `<img src="${url.trim()}" alt="Page">`).join('');
-} else {
-  document.getElementById('pagesContainer').innerHTML = '<p style="text-align:center; padding:50px;">لم يتم العثور على محتوى.</p>';
+  document.getElementById('itemTitle').innerText = selectedItem.title;
+  document.getElementById('itemPoster').src = selectedItem.poster;
+  document.getElementById('itemStatus').innerText = selectedItem.status || 'مستمر';
+  document.getElementById('itemRating').innerText = `★ ${selectedItem.rating || '5.0'}`;
+  document.getElementById('itemDesc').innerText = selectedItem.desc || 'لا يوجد وصف متاح.';
+
+  // عرض الفصول أو الحلقات
+  const chaptersList = document.getElementById('chaptersList');
+  chaptersList.innerHTML = '';
+
+  const chapters = selectedItem.chapters || [{ number: 1, date: "جديد" }];
+  chapters.forEach(ch => {
+    const item = document.createElement('div');
+    item.className = 'chapter-item';
+    item.onclick = () => playMedia(selectedItem.videoUrl);
+    item.innerHTML = `
+      <span>الحلقة / الفصل ${ch.number}</span>
+      <span style="font-size:11px; color:#8b5cf6;">مشاهدة ➔</span>
+    `;
+    chaptersList.appendChild(item);
+  });
 }
+
+// دالة تشغيل الفيديو
+function startWatching() {
+  if (selectedItem && selectedItem.videoUrl) {
+    playMedia(selectedItem.videoUrl);
+  } else {
+    alert("لا يوجد رابط فيديو أو فصل مضاف لهذا العمل بعد!");
+  }
+}
+
+function playMedia(url) {
+  if (!url) {
+    alert("رابط المشاهدة غير متوفر!");
+    return;
+  }
+  const playerBox = document.getElementById('playerBox');
+  const player = document.getElementById('videoPlayer');
+  
+  player.src = url;
+  playerBox.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleFavorite() {
+  alert("تمت الإضافة إلى المفضلة!");
+}
+
+function goBack() {
+  window.location.href = 'index.html';
+}
+
+document.addEventListener('DOMContentLoaded', loadDetails);
 </script>
 
 </body>
