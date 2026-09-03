@@ -115,7 +115,7 @@ header {
   font-size: 13px;
 }
 
-/* Grid Layout & Manga Star Style Cards */
+/* Grid Layout & Cards */
 .content-section { padding: 8px 16px; }
 
 .media-grid {
@@ -288,7 +288,7 @@ header {
   width: 100%; padding: 10px; background: #161622; border: 1px solid #222232; border-radius: 8px; font-size: 13px; color: white; outline: none;
 }
 
-/* Bottom Navigation Bar */
+/* Bottom Nav */
 nav {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -389,23 +389,12 @@ nav {
     <div class="menu-group">
       <div class="menu-group-title">الحساب والتطبيق</div>
       
-      <div class="menu-item" onclick="alert('قسم المفضلة قيد التطوير')">
-        <div class="menu-item-left">
-          <div class="icon-box">♡</div>
-          <div class="menu-text">
-            <h4>مفضلتي</h4>
-            <p>عرض الأعمال المحفوظة</p>
-          </div>
-        </div>
-        <span style="color:#71717a;">‹</span>
-      </div>
-
       <div class="menu-item" onclick="openPanel('adminPanel')">
         <div class="menu-item-left">
           <div class="icon-box">⚙️</div>
           <div class="menu-text">
             <h4>لوحة الإدارة</h4>
-            <p>إضافة أو تعديل الأعمال والفيديوهات</p>
+            <p>إضافة أعمال ونشر البيانات</p>
           </div>
         </div>
         <span style="color:#71717a;">‹</span>
@@ -447,11 +436,17 @@ nav {
     <label>القصة</label>
     <textarea id="addDesc" rows="3" placeholder="وصف العمل..."></textarea>
   </div>
-  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="saveManga()">حفظ</button>
-  <button style="width:100%; padding:12px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
+  
+  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="saveManga()">حفظ في التطبيق</button>
+  
+  <hr style="margin: 15px 0; border: 0; border-top: 1px solid #222232;">
+  
+  <button style="width:100%; padding:11px; background:#10b981; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="exportDataForGithub()">📋 نسخ الكود ونشره للجميع</button>
+  
+  <button style="width:100%; padding:11px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
 </div>
 
-<!-- Bottom Navigation Bar -->
+<!-- Bottom Nav -->
 <nav>
   <div class="nav-link active" onclick="switchTab('tabHome', this)">
     <span class="icon">🏠</span>الرئيسية
@@ -468,13 +463,13 @@ nav {
 </nav>
 
 <script>
+// البيانات الافتراضية
 const demoData = [
   {
     id: 1,
     type: "manhwa",
     title: "Sword God High School",
     status: "مانهوا • مكتملة",
-    author: "غير معروف",
     rating: "4.8",
     poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Sword+God",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
@@ -486,7 +481,6 @@ const demoData = [
     type: "manga",
     title: "One Piece",
     status: "مانجا • مستمرة",
-    author: "Eiichiro Oda",
     rating: "4.9",
     poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=One+Piece",
     videoUrl: "",
@@ -615,7 +609,21 @@ function saveManga() {
   document.getElementById('addDesc').value = '';
 
   renderHome();
-  closePanel('adminPanel');
+  alert("تم الحفظ في جهازك! إذا أردت نشر العمل لجميع الزوار، اضغط على زر '📋 نسخ الكود ونشره للجميع'.");
+}
+
+function exportDataForGithub() {
+  const codeToCopy = `const demoData = ${JSON.stringify(mangaList, null, 2)};`;
+  
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(codeToCopy).then(() => {
+      alert("تم نسخ الكود بنجاح!\n\nالآن افتح GitHub واستبدل السطر الذي يبدأ بـ 'const demoData' بهذا النص ليرى جميع الزوار التحديثات.");
+    }).catch(() => {
+      prompt("انسخ النص التالي واستبدله في GitHub مكان demoData:", codeToCopy);
+    });
+  } else {
+    prompt("انسخ النص التالي واستبدله في GitHub مكان demoData:", codeToCopy);
+  }
 }
 
 function openPanel(id) { document.getElementById(id).classList.add('active'); }
