@@ -1,96 +1,79 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexora - مشاهدة</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora - المشاهدة</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: #0b0b12;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 30px 15px;
-    }
+<style>
+body {
+  margin: 0;
+  background: #09090e;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 20px 15px;
+  text-align: center;
+}
 
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 30px;
-    }
+.watch-box {
+  max-width: 800px;
+  margin: auto;
+  background: #12121c;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #222235;
+}
 
-    .logo span {
-      color: #8b5cf6;
-    }
+.video-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 15px 0;
+}
 
-    .watch-box {
-      background: #151522;
-      border: 1px solid #29253d;
-      border-radius: 20px;
-      padding: 25px;
-      max-width: 600px;
-      margin: auto;
-    }
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
-    .cover {
-      font-size: 80px;
-      margin-bottom: 15px;
-    }
-
-    h1 {
-      margin: 10px 0;
-    }
-
-    .rating {
-      color: #b794ff;
-      margin: 10px;
-    }
-
-.back {
+.back-btn {
   display: inline-block;
-  margin-top: 20px;
-  margin-left: 5px;
-  padding: 12px 22px;
+  margin-top: 15px;
+  padding: 10px 20px;
   background: #8b5cf6;
   color: white;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 10px;
+  font-weight: bold;
 }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <div class="logo">
-    Nexo<span>ra</span>
+<div class="watch-box">
+  <h1 id="videoTitle">عنوان العرض</h1>
+  <div class="rating" id="videoRating">⭐ --</div>
+
+  <div class="video-container">
+    <iframe id="videoPlayer" allowfullscreen></iframe>
   </div>
 
-  <div class="watch-box">
+  <a class="back-btn" href="index.html">← العودة للرئيسية</a>
+</div>
 
-    <div class="cover">⚔️</div>
-
-    <h1>مانهوا جديدة</h1>
-
-    <div class="rating">⭐ 9.1</div>
-
-    <p>اختر ما تريد القيام به:</p>
-<a class="back" href="#">▶️ شاهد الآن</a>
-<a class="back" id="readBtn" href="reader.html">📖 اقرأ الآن</a>
-    <a class="back" href="index.html">← العودة للرئيسية</a>
-
-  </div>
 <script>
-const params = new URLSearchParams(window.location.search);
-const title = params.get("title");
+const currentItem = JSON.parse(localStorage.getItem('nexora_current_item'));
 
-const readBtn = document.getElementById("readBtn");
-
-if (title) {
-  document.querySelector(".watch-box h1").textContent = title;
-  readBtn.href = "reader.html?title=" + encodeURIComponent(title);
+if (currentItem) {
+  document.getElementById('videoTitle').innerText = currentItem.title;
+  document.getElementById('videoRating').innerText = "⭐ " + currentItem.rating;
+  document.getElementById('videoPlayer').src = currentItem.source;
 }
 </script>
+
 </body>
 </html>
