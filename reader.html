@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexora - قارئ</title>
-  {
-  
+
 <style>
 * {
   box-sizing: border-box;
@@ -37,13 +36,48 @@ header {
 .reader {
   max-width: 700px;
   margin: auto;
-  padding: 20px 12px 90px;
+  padding: 20px 12px 100px;
 }
 
 .title {
   text-align: center;
   font-size: 22px;
   margin-bottom: 20px;
+}
+
+.page {
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.page img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 70px;
+  background: #12121b;
+  border: 1px solid #29253d;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 9999;
+}
+
+.bottom-bar a {
+  color: white;
+  text-decoration: none;
+  font-size: 32px;
 }
 </style>
 </head>
@@ -56,6 +90,47 @@ header {
 
 <div class="reader">
 
+  <h1 class="title">📖 قارئ المانهوا</h1>
+
+  <div class="page">
+    <img src="https://placeholdpicsum.dev/photo/id/1/700/1000" alt="صفحة 1">
+  </div>
+
+  <div class="page">
+    <img src="https://placeholdpicsum.dev/photo/id/2/700/1000" alt="صفحة 2">
+  </div>
+
+  <div class="page">
+    <img src="https://placeholdpicsum.dev/photo/id/3/700/1000" alt="صفحة 3">
+  </div>
+
+  <div class="page">
+    <img src="https://placeholdpicsum.dev/photo/id/4/700/1000" alt="صفحة 4">
+  </div>
+
+  <div class="page">
+    <img src="https://placeholdpicsum.dev/photo/id/5/700/1000" alt="صفحة 5">
+  </div>
+
+</div>
+
+<div class="bottom-bar">
+  <a href="#">⬆️</a>
+  <a href="index.html">🏠</a>
+  <a href="javascript:history.back()">🔙</a>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const title = params.get("title");
+
+if (title) {
+  document.querySelector(".title").textContent = "📖 " + title;
+}
+</script>
+
+</body>
+</html>
   <h1 class="title">📖 قارئ المانهوا</h1>
 
 <div class="page">
