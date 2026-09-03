@@ -1,1 +1,24 @@
-
+{
+  "short_name": "Nexora",
+  "name": "Nexora Manga & Anime",
+  "description": "تطبيق تطبيق قراءة المانجا والمانهوا ومتابعة الأنمي",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192/8b5cf6/ffffff?text=Nexora",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://via.placeholder.com/512/8b5cf6/ffffff?text=Nexora",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#09090e",
+  "theme_color": "#8b5cf6",
+  "display": "standalone",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "ar"
+}
