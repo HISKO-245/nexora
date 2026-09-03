@@ -87,6 +87,13 @@ header {
   <a href="index.html" class="back">← العودة للرئيسية</a>
 
 </div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const title = params.get("title");
 
+if (title) {
+  document.querySelector(".title").textContent = "📖 " + title;
+}
+</script>
 </body>
 </html>
