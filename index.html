@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b5cf6">
-<title>Nexora - Star Edition</title>
+<title>Manga Star - Dark Purple Edition</title>
 
 <style>
 * {
@@ -19,11 +19,12 @@
 body {
   background: #09090e;
   color: #efefef;
-  padding-bottom: 75px;
+  padding-bottom: 70px;
 }
 
+/* Header */
 header {
-  padding: 15px 16px;
+  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,44 +32,48 @@ header {
   position: sticky;
   top: 0;
   z-index: 90;
-  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  border-bottom: 1px solid #1e1e2d;
 }
 
 .logo {
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
-.logo span {
+  font-size: 20px;
+  font-weight: 800;
   color: #8b5cf6;
 }
 
 .admin-btn {
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  background: #8b5cf6;
   border: none;
   color: white;
-  padding: 7px 14px;
+  padding: 6px 12px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
+/* Tab Views */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Search Bar */
 .search-container {
   padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  background: #09090e;
 }
 
 .search-box {
-  height: 45px;
+  flex: 1;
+  height: 42px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 14px;
+  gap: 8px;
+  padding: 0 12px;
   background: #161622;
-  border: 1px solid #27273a;
-  border-radius: 12px;
+  border-radius: 20px;
+  border: 1px solid #222232;
 }
 
 .search-box input {
@@ -76,69 +81,38 @@ header {
   border: none;
   outline: none;
   background: transparent;
-  color: white;
+  color: #efefef;
   font-size: 13px;
 }
 
-.categories {
-  display: flex;
-  gap: 8px;
-  padding: 0 16px 15px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.categories::-webkit-scrollbar { display: none; }
-
-.cat-chip {
-  flex-shrink: 0;
-  padding: 8px 16px;
-  border: 1px solid #27273a;
-  border-radius: 20px;
+.icon-btn {
+  width: 42px;
+  height: 42px;
   background: #161622;
-  color: #aaa;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.cat-chip.active {
-  background: #8b5cf6;
-  color: white;
-  border-color: #8b5cf6;
-  font-weight: bold;
-}
-
-.content-section {
-  padding: 0 16px;
-}
-
-.section-header {
+  border: 1px solid #222232;
+  border-radius: 12px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  color: #efefef;
 }
 
-.section-header h2 {
-  font-size: 16px;
-  border-right: 3px solid #8b5cf6;
-  padding-right: 8px;
-}
+/* Grid Layout */
+.content-section { padding: 12px 16px; }
 
 .media-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   gap: 12px;
 }
 
 .star-card {
   background: #12121c;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #222235;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  border: 1px solid #222232;
   cursor: pointer;
 }
 
@@ -147,10 +121,6 @@ header {
   aspect-ratio: 2 / 3;
   background: #1c1c2b;
   position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .poster-wrapper img {
@@ -159,41 +129,109 @@ header {
   object-fit: cover;
 }
 
-.badge-type {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  background: rgba(0, 0, 0, 0.75);
-  color: #8b5cf6;
-  font-size: 9px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
 .badge-rating {
   position: absolute;
   bottom: 6px;
   left: 6px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   color: #facc15;
   font-size: 10px;
-  padding: 2px 5px;
-  border-radius: 4px;
+  padding: 2px 6px;
+  border-radius: 6px;
   font-weight: bold;
 }
 
-.card-details {
-  padding: 8px;
-}
-
+.card-details { padding: 8px; }
 .card-details h3 {
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #efefef;
 }
 
+/* History Page Styling */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #a1a1aa;
+}
+
+.empty-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+/* More Menu Styling */
+.more-container { padding: 16px; }
+
+.user-card {
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.user-info { display: flex; align-items: center; gap: 12px; }
+.avatar {
+  width: 45px;
+  height: 45px;
+  background: rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.menu-group {
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 16px;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+}
+
+.menu-group-title {
+  font-size: 12px;
+  color: #a1a1aa;
+  padding: 8px 0;
+  font-weight: bold;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #1e1e2d;
+  cursor: pointer;
+}
+
+.menu-item:last-child { border-bottom: none; }
+.menu-item-left { display: flex; align-items: center; gap: 12px; }
+
+.icon-box {
+  width: 32px;
+  height: 32px;
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b5cf6;
+  font-size: 14px;
+}
+
+.menu-text h4 { font-size: 13px; font-weight: 600; color: #efefef; }
+.menu-text p { font-size: 10px; color: #71717a; }
+
+/* Admin Modal */
 .full-panel {
   display: none;
   position: fixed;
@@ -203,67 +241,20 @@ header {
   overflow-y: auto;
   padding: 20px 16px;
 }
-
 .full-panel.active { display: block; }
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 12px; margin-bottom: 4px; color: #a1a1aa; }
+.form-group input, .form-group textarea {
+  width: 100%; padding: 10px; background: #161622; border: 1px solid #222232; border-radius: 8px; font-size: 13px; color: white;
 }
 
-.form-group {
-  margin-bottom: 14px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 12px;
-  color: #aaa;
-  margin-bottom: 6px;
-}
-
-.form-group input, .form-group select, .form-group textarea {
-  width: 100%;
-  padding: 10px;
-  background: #161622;
-  border: 1px solid #27273a;
-  border-radius: 8px;
-  color: white;
-  outline: none;
-  font-size: 13px;
-}
-
-.btn-primary {
-  width: 100%;
-  background: #8b5cf6;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.btn-danger {
-  background: #ef4444;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 11px;
-  cursor: pointer;
-}
-
+/* Bottom Navigation Bar */
 nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 60px;
   background: #11111a;
-  border-top: 1px solid #222235;
+  border-top: 1px solid #1e1e2d;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -274,203 +265,258 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #6b7280;
+  color: #71717a;
   font-size: 10px;
   gap: 3px;
   cursor: pointer;
+  width: 25%;
 }
 
 .nav-link.active { color: #8b5cf6; font-weight: bold; }
-.nav-link .icon { font-size: 18px; }
+.nav-link .icon {
+  font-size: 18px;
+  padding: 2px 12px;
+  border-radius: 12px;
+}
+.nav-link.active .icon { background: rgba(139, 92, 246, 0.2); }
 </style>
 </head>
 
 <body>
 
+<!-- Header -->
 <header>
-  <div class="logo">Nexo<span>ra</span></div>
-  <button class="admin-btn" onclick="openPanel('adminPanel')">⚙️ لوحة التحكم</button>
+  <div class="logo">Manga Star</div>
+  <button class="admin-btn" onclick="openPanel('adminPanel')">⚙️ الإدارة</button>
 </header>
 
-<div class="search-container">
-  <div class="search-box">
-    <span>🔍</span>
-    <input type="text" id="searchInput" placeholder="ابحث عن مانجا، أنمي، أفلام...">
+<!-- TAB 1: Main Feed -->
+<div id="tabHome" class="tab-content active">
+  <div class="search-container">
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="بحث بالعنوان، الكاتب، الرسام...">
+    </div>
+    <div class="icon-btn">🔽</div>
+    <div class="icon-btn">☰</div>
+  </div>
+
+  <section class="content-section">
+    <div class="media-grid" id="mediaGrid"></div>
+  </section>
+</div>
+
+<!-- TAB 2: Search -->
+<div id="tabSearch" class="tab-content">
+  <div class="search-container">
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" placeholder="بحث شامل...">
+    </div>
   </div>
 </div>
 
-<div class="categories">
-  <div class="cat-chip active" onclick="filterCategory('all', this)">⚡ الكل</div>
-  <div class="cat-chip" onclick="filterCategory('manga', this)">📚 مانجا/مانهوا</div>
-  <div class="cat-chip" onclick="filterCategory('anime', this)">🎌 أنمي</div>
-  <div class="cat-chip" onclick="filterCategory('movie', this)">🎬 أفلام</div>
-  <div class="cat-chip" onclick="filterCategory('dev', this)">🧠 تنمية ذاتية</div>
+<!-- TAB 3: History -->
+<div id="tabHistory" class="tab-content">
+  <div class="empty-state">
+    <div class="empty-icon">.◦°(≧口≦)°◦.</div>
+    <p>سجل الدخول لاستخدام هذه الميزة</p>
+  </div>
 </div>
 
-<section class="content-section">
-  <div class="section-header">
-    <h2>أحدث العروض</h2>
-  </div>
-  <div class="media-grid" id="mediaGrid"></div>
-</section>
+<!-- TAB 4: More Menu -->
+<div id="tabMore" class="tab-content">
+  <div class="more-container">
+    <div class="user-card">
+      <div class="user-info">
+        <div class="avatar">👤</div>
+        <div>
+          <h4>تسجيل الدخول</h4>
+          <p style="font-size:11px; color:#71717a;">أنشئ حساباً مجانياً أو سجل الدخول</p>
+        </div>
+      </div>
+      <span style="color:#71717a;">‹</span>
+    </div>
 
-<!-- لوحة إضافة محتوى جديد -->
+    <div class="menu-group">
+      <div class="menu-group-title">الحساب والتطبيق</div>
+      
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="icon-box">♡</div>
+          <div class="menu-text">
+            <h4>مفضلتي</h4>
+            <p>عرض الأعمال التي حفظتها</p>
+          </div>
+        </div>
+        <span style="color:#71717a;">‹</span>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="icon-box">⊞</div>
+          <div class="menu-text">
+            <h4>مكتبتي</h4>
+            <p>تصفح مكتبة الأعمال الخاصة بك</p>
+          </div>
+        </div>
+        <span style="color:#71717a;">‹</span>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="icon-box">⇩</div>
+          <div class="menu-text">
+            <h4>التنزيلات</h4>
+            <p>تصفح الفصول التي حملتها</p>
+          </div>
+        </div>
+        <span style="color:#71717a;">‹</span>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="icon-box">✉</div>
+          <div class="menu-text">
+            <h4>طلب مانجا</h4>
+            <p>أرسل اقتراحك لفريق Manga Star</p>
+          </div>
+        </div>
+        <span style="color:#71717a;">‹</span>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="icon-box">💬</div>
+          <div class="menu-text">
+            <h4>تواصل مع الإدارة</h4>
+            <p>أرسل رسالة إلى فريق Manga Star</p>
+          </div>
+        </div>
+        <span style="color:#71717a;">‹</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Panel -->
 <div class="full-panel" id="adminPanel">
-  <div class="panel-header">
-    <h3>إضافة عمل جديد (Admin)</h3>
-    <button class="btn-danger" onclick="closePanel('adminPanel')">إغلاق ✕</button>
-  </div>
-  
+  <h3>إضافة مانجا جديدة</h3>
+  <br>
   <div class="form-group">
-    <label>عنوان العمل</label>
-    <input type="text" id="addTitle" placeholder="مثال: Solo Leveling">
+    <label>العنوان</label>
+    <input type="text" id="addTitle" placeholder="Sword God High School...">
   </div>
-
   <div class="form-group">
-    <label>التصنيف</label>
-    <select id="addCategory">
-      <option value="manga">📚 مانجا / مانهوا</option>
-      <option value="anime">🎌 أنمي</option>
-      <option value="movie">🎬 فيلم / مسلسل</option>
-      <option value="dev">🧠 تنمية ذاتية</option>
-    </select>
+    <label>النوع والكاتب</label>
+    <input type="text" id="addAuthor" placeholder="مانهوا • مكتملة">
   </div>
-
   <div class="form-group">
-    <label>رابط غلاف العمل (Poster URL)</label>
-    <input type="text" id="addPoster" placeholder="https://...">
+    <label>رابط الغلاف</label>
+    <input type="text" id="addPoster">
   </div>
-
   <div class="form-group">
-    <label>التقييم</label>
-    <input type="text" id="addRating" placeholder="9.5">
+    <label>القصة</label>
+    <textarea id="addDesc" rows="3"></textarea>
   </div>
-
-  <div class="form-group">
-    <label>المحتوى (روابط صور المانجا تفصل بينها فاصلة `,` | أو رابط فيديو Embed للأنمي/الفيلم)</label>
-    <textarea id="addSource" rows="4" placeholder="للمانجا: url1, url2 &#10;للأنمي/الفيلم: https://www.youtube.com/embed/..."></textarea>
-  </div>
-
-  <button class="btn-primary" onclick="saveNewContent()">حفظ ونشر العمل</button>
+  <button style="width:100%; padding:10px; background:#8b5cf6; color:white; border:none; border-radius:8px;" onclick="saveManga()">حفظ</button>
+  <button style="width:100%; padding:10px; background:#ef4444; color:white; border:none; border-radius:8px; margin-top:8px;" onclick="closePanel('adminPanel')">إلغاء</button>
 </div>
 
+<!-- Bottom Nav -->
 <nav>
-  <div class="nav-link active"><span class="icon">🏠</span>الرئيسية</div>
-  <div class="nav-link"><span class="icon">🔥</span>الشائع</div>
-  <div class="nav-link"><span class="icon">⭐</span>المفضلة</div>
-  <div class="nav-link"><span class="icon">👤</span>حسابي</div>
+  <div class="nav-link active" onclick="switchTab('tabHome', this)">
+    <span class="icon">🏠</span>الرئيسية
+  </div>
+  <div class="nav-link" onclick="switchTab('tabSearch', this)">
+    <span class="icon">🔍</span>البحث
+  </div>
+  <div class="nav-link" onclick="switchTab('tabHistory', this)">
+    <span class="icon">🕒</span>السجل
+  </div>
+  <div class="nav-link" onclick="switchTab('tabMore', this)">
+    <span class="icon">⋯</span>المزيد
+  </div>
 </nav>
 
 <script>
-const initialData = [
+const demoData = [
   {
     id: 1,
-    title: "Solo Leveling",
-    category: "manga",
-    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Solo+Leveling",
-    rating: "9.8",
-    source: "https://via.placeholder.com/600x900/11111a/ffffff?text=Page+1,https://via.placeholder.com/600x900/1c1c2b/ffffff?text=Page+2"
-  },
-  {
-    id: 2,
-    title: "Demon Slayer",
-    category: "anime",
-    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Demon+Slayer",
-    rating: "9.5",
-    source: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title: "Sword God High School: The Talentless Underachiever Becomes the Strongest",
+    status: "مانهوا • مكتملة",
+    author: "غير معروف",
+    rating: "0.0",
+    views: "8",
+    chaptersCount: 17,
+    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Sword+God",
+    desc: "تنجذب الشياطين إلى الطاقة الشريرة لتبطش بالبشرية، ولا يقدر على التصدي لها سوى فرسان الزاماشي...",
+    chapters: [
+      { number: 17, date: "2026-09-02 18:24:51" },
+      { number: 16, date: "2026-09-02 18:24:51" },
+      { number: 15, date: "2026-09-02 18:24:51" },
+      { number: 14, date: "2026-09-02 18:24:51" }
+    ]
   }
 ];
 
-let appData = JSON.parse(localStorage.getItem('nexora_db')) || initialData;
-let activeCat = 'all';
+let mangaList = JSON.parse(localStorage.getItem('manga_star_db')) || demoData;
 
-function renderGrid() {
+function renderHome() {
   const grid = document.getElementById('mediaGrid');
-  const search = document.getElementById('searchInput').value.toLowerCase();
   grid.innerHTML = '';
-
-  appData.forEach(item => {
-    const matchCat = activeCat === 'all' || item.category === activeCat;
-    const matchSearch = item.title.toLowerCase().includes(search);
-
-    if (matchCat && matchSearch) {
-      const card = document.createElement('div');
-      card.className = 'star-card';
-      card.onclick = () => openMedia(item);
-
-      card.innerHTML = `
-        <div class="poster-wrapper">
-          <img src="${item.poster}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/200x300/1c1c2b/ffffff?text=No+Cover'">
-          <span class="badge-type">${getTypeLabel(item.category)}</span>
-          <span class="badge-rating">★ ${item.rating}</span>
-        </div>
-        <div class="card-details">
-          <h3>${item.title}</h3>
-        </div>
-      `;
-      grid.appendChild(card);
-    }
+  mangaList.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'star-card';
+    card.onclick = () => {
+      localStorage.setItem('selected_manga', JSON.stringify(item));
+      window.location.href = 'details.html';
+    };
+    card.innerHTML = `
+      <div class="poster-wrapper">
+        <img src="${item.poster}" alt="cover">
+        <span class="badge-rating">★ ${item.rating}</span>
+      </div>
+      <div class="card-details">
+        <h3>${item.title}</h3>
+      </div>
+    `;
+    grid.appendChild(card);
   });
 }
 
-function getTypeLabel(cat) {
-  switch(cat) {
-    case 'manga': return 'مانجا';
-    case 'anime': return 'أنمي';
-    case 'movie': return 'فيلم';
-    case 'dev': return 'تنمية';
-    default: return 'عرض';
-  }
-}
-
-function filterCategory(cat, el) {
-  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+function switchTab(tabId, el) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
   el.classList.add('active');
-  activeCat = cat;
-  renderGrid();
 }
 
-function openMedia(item) {
-  localStorage.setItem('nexora_current_item', JSON.stringify(item));
-  if (item.category === 'manga') {
-    window.location.href = `reader.html?id=${item.id}`;
-  } else {
-    window.location.href = `watch.html?id=${item.id}`;
-  }
-}
-
-function saveNewContent() {
-  const title = document.getElementById('addTitle').value.trim();
-  const category = document.getElementById('addCategory').value;
-  const poster = document.getElementById('addPoster').value.trim();
-  const rating = document.getElementById('addRating').value.trim();
-  const source = document.getElementById('addSource').value.trim();
-
-  if (!title || !source) {
-    alert('يرجى كتابة عنوان العمل والمحتوى');
-    return;
-  }
-
+function saveManga() {
+  const title = document.getElementById('addTitle').value;
+  if(!title) return;
   const newItem = {
     id: Date.now(),
     title,
-    category,
-    poster: poster || 'https://via.placeholder.com/200x300/1c1c2b/ffffff?text=Cover',
-    rating: rating || '8.5',
-    source
+    status: document.getElementById('addAuthor').value || "مانهوا",
+    author: "غير معروف",
+    rating: "5.0",
+    views: "1",
+    chaptersCount: 1,
+    poster: document.getElementById('addPoster').value || "https://via.placeholder.com/200x300",
+    desc: document.getElementById('addDesc').value,
+    chapters: [{ number: 1, date: "2026-09-03" }]
   };
-
-  appData.unshift(newItem);
-  localStorage.setItem('nexora_db', JSON.stringify(appData));
-  renderGrid();
+  mangaList.unshift(newItem);
+  localStorage.setItem('manga_star_db', JSON.stringify(mangaList));
+  renderHome();
   closePanel('adminPanel');
 }
 
 function openPanel(id) { document.getElementById(id).classList.add('active'); }
 function closePanel(id) { document.getElementById(id).classList.remove('active'); }
 
-document.getElementById('searchInput').addEventListener('input', renderGrid);
-document.addEventListener('DOMContentLoaded', renderGrid);
+document.addEventListener('DOMContentLoaded', renderHome);
 </script>
 
 </body>
