@@ -3,139 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora - التفاصيل والمشاهدة</title>
+<title>قارئ الفصول - Nexora</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-body { background: #09090e; color: #efefef; padding: 16px; padding-bottom: 40px; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
 
-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.back-btn { background: #161622; border: 1px solid #222232; color: white; padding: 8px 16px; border-radius: 20px; cursor: pointer; }
+body {
+  background: #09090e;
+  color: #efefef;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-.details-card { display: flex; gap: 16px; margin-bottom: 20px; }
-.details-poster { width: 120px; height: 170px; border-radius: 12px; object-fit: cover; }
-.details-info h2 { font-size: 18px; color: #8b5cf6; margin-bottom: 8px; }
-.details-info p { font-size: 12px; color: #a1a1aa; margin-bottom: 4px; }
+/* Header Navbar */
+.reader-header {
+  position: sticky;
+  top: 0;
+  background: rgba(17, 17, 26, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1e1e2d;
+  z-index: 100;
+}
 
-/* مشغل الفيديو */
-.player-container { margin-bottom: 20px; display: none; }
-.player-container iframe, .player-container video { width: 100%; height: 220px; border-radius: 12px; border: 1px solid #222232; }
+.back-btn {
+  background: #161622;
+  border: 1px solid #222232;
+  color: #efefef;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
 
-/* أزرار التشغيل والتفاعل */
-.action-btns { display: flex; gap: 10px; margin-bottom: 20px; }
-.btn-primary { flex: 1; padding: 12px; background: #8b5cf6; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; }
-.btn-secondary { padding: 12px 16px; background: #161622; border: 1px solid #222232; color: white; border-radius: 10px; cursor: pointer; }
+.chapter-info {
+  text-align: center;
+}
 
-.description { background: #12121c; padding: 12px; border-radius: 12px; font-size: 13px; color: #d4d4d8; margin-bottom: 20px; border: 1px solid #222232; }
+.chapter-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+}
 
-/* قائمة الفصول / الحلقات */
-.chapters-list { display: flex; flex-direction: column; gap: 8px; }
-.chapter-item { background: #161622; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222232; cursor: pointer; }
-.chapter-item:hover { border-color: #8b5cf6; }
+.chapter-sub {
+  font-size: 10px;
+  color: #8b5cf6;
+}
+
+/* Content Area */
+.reader-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Video Viewer */
+.video-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: none;
+}
+
+/* Image Viewer (Manga/Manhwa) */
+.manga-pages {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.manga-pages img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fallback / External Webview */
+.iframe-box {
+  width: 100%;
+  height: calc(100vh - 120px);
+  border: none;
+}
+
+/* Bottom Controls */
+.reader-footer {
+  position: sticky;
+  bottom: 0;
+  background: #11111a;
+  border-top: 1px solid #1e1e2d;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-btn {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-btn:disabled {
+  background: #222232;
+  color: #71717a;
+  cursor: not-allowed;
+}
 </style>
 </head>
 <body>
 
-<header>
-  <button class="back-btn" onclick="goBack()">➔ عودة</button>
-  <h3 style="font-size:14px; color:#a1a1aa;">تفاصيل العمل</h3>
-</header>
-
-<!-- حاوية مشغل الفيديو -->
-<div class="player-container" id="playerBox">
-  <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
-</div>
-
-<!-- معلومات العمل -->
-<div class="details-card">
-  <img id="itemPoster" class="details-poster" src="" alt="غلاف">
-  <div class="details-info">
-    <h2 id="itemTitle">---</h2>
-    <p id="itemStatus">---</p>
-    <p id="itemRating">★ ---</p>
+<!-- Reader Header -->
+<div class="reader-header">
+  <button class="back-btn" onclick="window.history.back()">✕</button>
+  <div class="chapter-info">
+    <div class="chapter-title" id="readTitle">عنوان العمل</div>
+    <div class="chapter-sub" id="readChapter">الفصل 1</div>
   </div>
+  <button class="back-btn" onclick="alert('تم حفظ الإشارة المرجعية')">🔖</button>
 </div>
 
-<!-- أزرار التشغيل والتفاعل -->
-<div class="action-btns">
-  <button class="btn-primary" id="playBtn" onclick="startWatching()">▶ مشاهدة / قراءة الآن</button>
-  <button class="btn-secondary" onclick="toggleFavorite()">♡ مفضلة</button>
+<!-- Main Reader Display -->
+<div class="reader-container" id="readerContainer">
+  <div style="padding: 40px; text-align: center; color: #a1a1aa;">جاري تحميل المحتوى...</div>
 </div>
 
-<!-- القصة -->
-<div class="description">
-  <strong style="color:#8b5cf6; display:block; margin-bottom:4px;">القصة:</strong>
-  <p id="itemDesc">جاري التحميل...</p>
+<!-- Footer Navigation -->
+<div class="reader-footer">
+  <button class="nav-btn" onclick="prevChapter()">الفصل السابق</button>
+  <span style="font-size: 12px; color: #a1a1aa;" id="pageIndicator">1 / 1</span>
+  <button class="nav-btn" onclick="nextChapter()">الفصل التالي</button>
 </div>
-
-<!-- قائمة الفصول أو الحلقات -->
-<h4 style="margin-bottom: 10px;">الحلقات / الفصول</h4>
-<div class="chapters-list" id="chaptersList"></div>
 
 <script>
-// جلب بيانات العمل المختار من LocalStorage
-const selectedItem = JSON.parse(localStorage.getItem('selected_manga'));
-
-function loadDetails() {
-  if (!selectedItem) {
-    alert("لم يتم اختيار أي عمل!");
-    window.location.href = 'index.html';
-    return;
-  }
-
-  document.getElementById('itemTitle').innerText = selectedItem.title;
-  document.getElementById('itemPoster').src = selectedItem.poster;
-  document.getElementById('itemStatus').innerText = selectedItem.status || 'مستمر';
-  document.getElementById('itemRating').innerText = `★ ${selectedItem.rating || '5.0'}`;
-  document.getElementById('itemDesc').innerText = selectedItem.desc || 'لا يوجد وصف متاح.';
-
-  // عرض الفصول أو الحلقات
-  const chaptersList = document.getElementById('chaptersList');
-  chaptersList.innerHTML = '';
-
-  const chapters = selectedItem.chapters || [{ number: 1, date: "جديد" }];
-  chapters.forEach(ch => {
-    const item = document.createElement('div');
-    item.className = 'chapter-item';
-    item.onclick = () => playMedia(selectedItem.videoUrl);
-    item.innerHTML = `
-      <span>الحلقة / الفصل ${ch.number}</span>
-      <span style="font-size:11px; color:#8b5cf6;">مشاهدة ➔</span>
-    `;
-    chaptersList.appendChild(item);
-  });
-}
-
-// دالة تشغيل الفيديو
-function startWatching() {
-  if (selectedItem && selectedItem.videoUrl) {
-    playMedia(selectedItem.videoUrl);
-  } else {
-    alert("لا يوجد رابط فيديو أو فصل مضاف لهذا العمل بعد!");
-  }
-}
-
-function playMedia(url) {
-  if (!url) {
-    alert("رابط المشاهدة غير متوفر!");
-    return;
-  }
-  const playerBox = document.getElementById('playerBox');
-  const player = document.getElementById('videoPlayer');
+document.addEventListener('DOMContentLoaded', () => {
+  const data = localStorage.getItem('selected_manga');
+  const container = document.getElementById('readerContainer');
   
-  player.src = url;
-  playerBox.style.display = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (data) {
+    const item = JSON.parse(data);
+    document.getElementById('readTitle').innerText = item.title || "عرض العمل";
+    
+    const url = item.videoUrl || "";
+
+    if (!url) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 40px 20px;">
+          <div style="font-size: 40px; margin-bottom: 10px;">📄</div>
+          <p style="color: #a1a1aa;">لم يتم إضافة رابط القراءة أو المشاهدة لهذا العمل بعد.</p>
+        </div>
+      `;
+      return;
+    }
+
+    // إذا كان الرابط فيديو مباشر أو Embed
+    if (url.includes('youtube') || url.includes('embed') || url.endsWith('.mp4')) {
+      container.innerHTML = `<iframe class="video-box" src="${url}" allowfullscreen></iframe>`;
+    } 
+    // إذا كان الرابط الخارجي موقع قراءة أو رابط فصل
+    else {
+      container.innerHTML = `<iframe class="iframe-box" src="${url}"></iframe>`;
+    }
+  } else {
+    container.innerHTML = `<div style="padding: 40px; color: #ef4444;">لم يتم العثور على بيانات العمل.</div>`;
+  }
+});
+
+function prevChapter() {
+  alert("أنت في الفصل الأول حالياً");
 }
 
-function toggleFavorite() {
-  alert("تمت الإضافة إلى المفضلة!");
+function nextChapter() {
+  alert("هذا هو أحدث فصل متوفر حالياً");
 }
-
-function goBack() {
-  window.location.href = 'index.html';
-}
-
-document.addEventListener('DOMContentLoaded', loadDetails);
 </script>
 
 </body>
