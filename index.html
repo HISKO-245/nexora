@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b5cf6">
-<title>Nexora - Home</title>
+<title>Nexora - الرئيسية</title>
 
 <style>
 * {
@@ -19,7 +19,7 @@
 body {
   background: #09090e;
   color: #efefef;
-  padding-bottom: 70px;
+  padding-bottom: 75px;
 }
 
 /* Header */
@@ -36,16 +36,17 @@ header {
 }
 
 .logo {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   color: #8b5cf6;
+  letter-spacing: 0.5px;
 }
 
 .admin-btn {
   background: #8b5cf6;
   border: none;
   color: white;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 11px;
   font-weight: bold;
@@ -114,21 +115,7 @@ header {
   font-size: 13px;
 }
 
-.icon-btn {
-  width: 42px;
-  height: 42px;
-  background: #161622;
-  border: 1px solid #222232;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  cursor: pointer;
-  color: #efefef;
-}
-
-/* Grid Layout & Cards */
+/* Grid Layout & Manga Star Style Cards */
 .content-section { padding: 8px 16px; }
 
 .media-grid {
@@ -143,7 +130,10 @@ header {
   overflow: hidden;
   border: 1px solid #222232;
   position: relative;
+  transition: transform 0.2s;
 }
+
+.star-card:active { transform: scale(0.97); }
 
 .delete-btn {
   position: absolute;
@@ -155,7 +145,7 @@ header {
   border-radius: 50%;
   width: 24px;
   height: 24px;
-  font-size: 12px;
+  font-size: 11px;
   cursor: pointer;
   z-index: 20;
   font-weight: bold;
@@ -295,7 +285,7 @@ header {
 .form-group { margin-bottom: 12px; }
 .form-group label { display: block; font-size: 12px; margin-bottom: 4px; color: #a1a1aa; }
 .form-group input, .form-group select, .form-group textarea {
-  width: 100%; padding: 10px; background: #161622; border: 1px solid #222232; border-radius: 8px; font-size: 13px; color: white;
+  width: 100%; padding: 10px; background: #161622; border: 1px solid #222232; border-radius: 8px; font-size: 13px; color: white; outline: none;
 }
 
 /* Bottom Navigation Bar */
@@ -353,10 +343,8 @@ nav {
   <div class="search-container">
     <div class="search-box">
       <span>🔍</span>
-      <input type="text" id="searchInput" onkeyup="searchContent()" placeholder="بحث بالعنوان، الكاتب...">
+      <input type="text" id="searchInput" onkeyup="searchContent()" placeholder="بحث بالعنوان...">
     </div>
-    <div class="icon-btn">🔽</div>
-    <div class="icon-btn">☰</div>
   </div>
 
   <section class="content-section">
@@ -366,19 +354,22 @@ nav {
 
 <!-- TAB 2: Search -->
 <div id="tabSearch" class="tab-content">
-  <div class="search-container">
+  <div class="search-container" style="padding-top: 16px;">
     <div class="search-box">
       <span>🔍</span>
-      <input type="text" placeholder="بحث شامل...">
+      <input type="text" id="searchInputTab" onkeyup="searchContentTab()" placeholder="ابحث في كامل المكتبة...">
     </div>
   </div>
+  <section class="content-section">
+    <div class="media-grid" id="searchGrid"></div>
+  </section>
 </div>
 
 <!-- TAB 3: History -->
 <div id="tabHistory" class="tab-content">
   <div style="text-align: center; padding: 60px 20px; color: #a1a1aa;">
     <div style="font-size: 32px; margin-bottom: 12px;">.◦°(≧口≦)°◦.</div>
-    <p>سجل الدخول لاستخدام هذه الميزة</p>
+    <p>سجل المشاهدة فارغ حالياً</p>
   </div>
 </div>
 
@@ -389,66 +380,32 @@ nav {
       <div class="user-info">
         <div class="avatar">👤</div>
         <div>
-          <h4>تسجيل الدخول</h4>
-          <p style="font-size:11px; color:#71717a;">أنشئ حساباً مجانياً أو سجل الدخول</p>
+          <h4>حسابي</h4>
+          <p style="font-size:11px; color:#71717a;">مرحباً بك في تطبيق Nexora</p>
         </div>
       </div>
-      <span style="color:#71717a;">‹</span>
     </div>
 
     <div class="menu-group">
       <div class="menu-group-title">الحساب والتطبيق</div>
       
-      <div class="menu-item">
+      <div class="menu-item" onclick="alert('قسم المفضلة قيد التطوير')">
         <div class="menu-item-left">
           <div class="icon-box">♡</div>
           <div class="menu-text">
             <h4>مفضلتي</h4>
-            <p>عرض الأعمال التي حفظتها</p>
+            <p>عرض الأعمال المحفوظة</p>
           </div>
         </div>
         <span style="color:#71717a;">‹</span>
       </div>
 
-      <div class="menu-item">
+      <div class="menu-item" onclick="openPanel('adminPanel')">
         <div class="menu-item-left">
-          <div class="icon-box">⊞</div>
+          <div class="icon-box">⚙️</div>
           <div class="menu-text">
-            <h4>مكتبتي</h4>
-            <p>تصفح مكتبة الأعمال الخاصة بك</p>
-          </div>
-        </div>
-        <span style="color:#71717a;">‹</span>
-      </div>
-
-      <div class="menu-item">
-        <div class="menu-item-left">
-          <div class="icon-box">⇩</div>
-          <div class="menu-text">
-            <h4>التنزيلات</h4>
-            <p>تصفح الفصول والعمليات المحملة</p>
-          </div>
-        </div>
-        <span style="color:#71717a;">‹</span>
-      </div>
-
-      <div class="menu-item">
-        <div class="menu-item-left">
-          <div class="icon-box">✉</div>
-          <div class="menu-text">
-            <h4>طلب عمل</h4>
-            <p>أرسل اقتراحك لفريق Nexora</p>
-          </div>
-        </div>
-        <span style="color:#71717a;">‹</span>
-      </div>
-
-      <div class="menu-item">
-        <div class="menu-item-left">
-          <div class="icon-box">💬</div>
-          <div class="menu-text">
-            <h4>تواصل مع الإدارة</h4>
-            <p>أرسل رسالة إلى فريق Nexora</p>
+            <h4>لوحة الإدارة</h4>
+            <p>إضافة أو تعديل الأعمال والفيديوهات</p>
           </div>
         </div>
         <span style="color:#71717a;">‹</span>
@@ -457,7 +414,7 @@ nav {
   </div>
 </div>
 
-<!-- Admin Panel -->
+<!-- Admin Panel Modal -->
 <div class="full-panel" id="adminPanel">
   <h3>إضافة عمل جديد</h3>
   <br>
@@ -475,22 +432,26 @@ nav {
     <input type="text" id="addTitle" placeholder="عنوان العمل...">
   </div>
   <div class="form-group">
-    <label>التفاصيل (مثل: مانهوا • مستمرة)</label>
+    <label>التفاصيل (مثل: أنمي • مستمر)</label>
     <input type="text" id="addAuthor" placeholder="التفاصيل...">
   </div>
   <div class="form-group">
-    <label>رابط الغلاف</label>
+    <label>رابط الغلاف (صورة)</label>
     <input type="text" id="addPoster" placeholder="https://...">
   </div>
   <div class="form-group">
-    <label>القصة</label>
-    <textarea id="addDesc" rows="3"></textarea>
+    <label>رابط الفيديو / المشاهدة / الفصل</label>
+    <input type="text" id="addVideo" placeholder="https://...">
   </div>
-  <button style="width:100%; padding:10px; background:#8b5cf6; color:white; border:none; border-radius:8px; cursor:pointer;" onclick="saveManga()">حفظ</button>
-  <button style="width:100%; padding:10px; background:#ef4444; color:white; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
+  <div class="form-group">
+    <label>القصة</label>
+    <textarea id="addDesc" rows="3" placeholder="وصف العمل..."></textarea>
+  </div>
+  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="saveManga()">حفظ</button>
+  <button style="width:100%; padding:12px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
 </div>
 
-<!-- Bottom Nav -->
+<!-- Bottom Navigation Bar -->
 <nav>
   <div class="nav-link active" onclick="switchTab('tabHome', this)">
     <span class="icon">🏠</span>الرئيسية
@@ -515,11 +476,10 @@ const demoData = [
     status: "مانهوا • مكتملة",
     author: "غير معروف",
     rating: "4.8",
-    views: "125",
-    chaptersCount: 17,
     poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Sword+God",
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     desc: "تنجذب الشياطين إلى الطاقة الشريرة لتبطش بالبشرية...",
-    chapters: [{ number: 17, date: "2026-09-02" }]
+    chapters: [{ number: 1, date: "2026-09-03" }]
   },
   {
     id: 2,
@@ -528,47 +488,21 @@ const demoData = [
     status: "مانجا • مستمرة",
     author: "Eiichiro Oda",
     rating: "4.9",
-    views: "3400",
-    chaptersCount: 1110,
     poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=One+Piece",
-    desc: "مغامرات مونكي دي لوفي للوصول إلى الكنز الأسطوري ون بيس...",
+    videoUrl: "",
+    desc: "مغامرات مونكي دي لوفي للوصول إلى الكنز الأسطوري...",
     chapters: [{ number: 1110, date: "2026-09-01" }]
-  },
-  {
-    id: 3,
-    type: "anime",
-    title: "Demon Slayer",
-    status: "أنمي • مستمر",
-    author: "Koyoharu Gotouge",
-    rating: "4.9",
-    views: "980",
-    chaptersCount: 26,
-    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Demon+Slayer",
-    desc: "فتى يتدرب ليصبح قاتل شياطين للانتقام لعائلته...",
-    chapters: [{ number: 1, date: "2026-09-01" }]
-  },
-  {
-    id: 4,
-    type: "movie",
-    title: "Your Name",
-    status: "فيلم • مكتمل",
-    author: "Makoto Shinkai",
-    rating: "5.0",
-    views: "1500",
-    chaptersCount: 1,
-    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Your+Name",
-    desc: "قصة فتى وفتاة يتبادلان الأجساد بشكل غامض...",
-    chapters: [{ number: 1, date: "2026-08-20" }]
   }
 ];
 
 let mangaList = JSON.parse(localStorage.getItem('nexora_db')) || demoData;
 let currentCategory = 'all';
 
-function renderHome(itemsToRender = mangaList) {
-  const grid = document.getElementById('mediaGrid');
+function renderGrid(containerId, itemsToRender) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
   grid.innerHTML = '';
-  
+
   if (itemsToRender.length === 0) {
     grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; color:#71717a;">لا توجد أعمال لعرضها</div>';
     return;
@@ -589,7 +523,7 @@ function renderHome(itemsToRender = mangaList) {
         <div class="poster-wrapper">
           <img src="${item.poster}" alt="cover">
           <span class="type-tag">${typeLabel}</span>
-          <span class="badge-rating">★ ${item.rating}</span>
+          <span class="badge-rating">★ ${item.rating || '5.0'}</span>
         </div>
         <div class="card-details">
           <h3>${item.title}</h3>
@@ -598,6 +532,13 @@ function renderHome(itemsToRender = mangaList) {
     `;
     grid.appendChild(card);
   });
+}
+
+function renderHome() {
+  const filtered = currentCategory === 'all' 
+    ? mangaList 
+    : mangaList.filter(item => item.type === currentCategory);
+  renderGrid('mediaGrid', filtered);
 }
 
 function openDetails(id) {
@@ -613,12 +554,7 @@ function deleteItem(event, id) {
   if (confirm("هل أنت تأكد من رغبتك في مسح هذا العمل؟")) {
     mangaList = mangaList.filter(item => item.id !== id);
     localStorage.setItem('nexora_db', JSON.stringify(mangaList));
-    
-    if (currentCategory === 'all') {
-      renderHome(mangaList);
-    } else {
-      filterCategory(currentCategory, document.querySelector('.filter-chip.active'));
-    }
+    renderHome();
   }
 }
 
@@ -626,13 +562,7 @@ function filterCategory(cat, el) {
   currentCategory = cat;
   document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
   if (el) el.classList.add('active');
-
-  if(cat === 'all') {
-    renderHome(mangaList);
-  } else {
-    const filtered = mangaList.filter(item => item.type === cat);
-    renderHome(filtered);
-  }
+  renderHome();
 }
 
 function searchContent() {
@@ -642,14 +572,21 @@ function searchContent() {
     const matchesQuery = item.title.toLowerCase().includes(query);
     return matchesCat && matchesQuery;
   });
-  renderHome(filtered);
+  renderGrid('mediaGrid', filtered);
+}
+
+function searchContentTab() {
+  const query = document.getElementById('searchInputTab').value.toLowerCase();
+  const filtered = mangaList.filter(item => item.title.toLowerCase().includes(query));
+  renderGrid('searchGrid', filtered);
 }
 
 function switchTab(tabId, el) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
   document.getElementById(tabId).classList.add('active');
-  el.classList.add('active');
+  if (el) el.classList.add('active');
+  if(tabId === 'tabSearch') renderGrid('searchGrid', mangaList);
 }
 
 function saveManga() {
@@ -661,11 +598,9 @@ function saveManga() {
     type: document.getElementById('addCategory').value,
     title: title,
     status: document.getElementById('addAuthor').value || "مستمر",
-    author: "غير معروف",
     rating: "5.0",
-    views: "1",
-    chaptersCount: 1,
     poster: document.getElementById('addPoster').value || "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Cover",
+    videoUrl: document.getElementById('addVideo').value || "",
     desc: document.getElementById('addDesc').value || "لا يوجد وصف متاح.",
     chapters: [{ number: 1, date: "2026-09-03" }]
   };
@@ -676,6 +611,7 @@ function saveManga() {
   document.getElementById('addTitle').value = '';
   document.getElementById('addAuthor').value = '';
   document.getElementById('addPoster').value = '';
+  document.getElementById('addVideo').value = '';
   document.getElementById('addDesc').value = '';
 
   renderHome();
