@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تفاصيل العمل</title>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+body { background: #09090e; color: #efefef; padding-bottom: 30px; }
+
+header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #11111a;
+  border-bottom: 1px solid #1e1e2d;
+}
+
+.icon-btn {
+  width: 32px; height: 32px; background: #161622; border: 1px solid #222232; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; text-decoration: none; color: #efefef;
+}
+
+/* Info Section */
+.details-header {
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+.poster-box {
+  width: 100px;
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #222232;
+}
+
+.poster-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.info-box { flex: 1; }
+.info-box h1 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: #ffffff; }
+.info-box .sub-text { font-size: 11px; color: #a1a1aa; margin-bottom: 4px; }
+
+/* Stats Card */
+.stats-card {
+  margin: 0 16px;
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.stat-item h3 { font-size: 14px; color: #8b5cf6; }
+.stat-item span { font-size: 10px; color: #71717a; }
+
+/* Buttons */
+.action-btn {
+  margin: 12px 16px;
+  background: #8b5cf6;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.secondary-actions {
+  display: flex; gap: 8px; margin: 0 16px 16px;
+}
+
+.sec-btn {
+  flex: 1; padding: 10px; background: #12121c; border: 1px solid #222232;
+  border-radius: 10px; text-align: center; font-size: 11px; color: #8b5cf6;
+}
+
+/* Description */
+.story-section { padding: 0 16px 16px; }
+.story-section h3 { font-size: 13px; margin-bottom: 6px; color: #ffffff; }
+.story-section p { font-size: 11px; color: #a1a1aa; line-height: 1.6; }
+
+.tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.tag { background: #161622; color: #a1a1aa; padding: 4px 10px; border-radius: 6px; font-size: 10px; border: 1px solid #222232; }
+
+/* Chapters List Header */
+.chapters-header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chapters-badge {
+  background: rgba(139, 92, 246, 0.2); color: #8b5cf6;
+  padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold;
+}
+
+/* Chapter Card */
+.chapters-list { padding: 0 16px; }
+
+.chapter-card {
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 16px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chapter-left { display: flex; gap: 10px; align-items: center; }
+.chap-icon {
+  width: 32px; height: 32px; background: #161622; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; font-size: 14px; color: #a1a1aa;
+}
+
+.chapter-info h4 { font-size: 14px; text-align: right; color: #ffffff; }
+.chapter-info span { font-size: 10px; color: #71717a; }
+
+.chapter-num-badge {
+  background: rgba(139, 92, 246, 0.2); color: #8b5cf6; width: 32px; height: 32px;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="icon-btn" href="index.html">›</a>
+  <div style="display:flex; gap:8px;">
+    <span class="icon-btn">⚠️</span>
+    <span class="icon-btn">♡</span>
+  </div>
+</header>
+
+<div class="details-header">
+  <div class="poster-box">
+    <img id="mangaPoster" src="" alt="Poster">
+  </div>
+  <div class="info-box">
+    <h1 id="mangaTitle">--</h1>
+    <div class="sub-text" id="mangaStatus">--</div>
+    <div class="sub-text" id="mangaAuthor">--</div>
+  </div>
+</div>
+
+<div class="stats-card">
+  <div class="stat-item"><h3 id="mangaRating">0.0 ★</h3><span>التقييم</span></div>
+  <div class="stat-item"><h3 id="mangaViews">0</h3><span>المشاهدات</span></div>
+  <div class="stat-item"><h3 id="mangaChapCount">0</h3><span>الفصول</span></div>
+</div>
+
+<div class="action-btn">▶ ابدأ القراءة</div>
+
+<div class="secondary-actions">
+  <div class="sec-btn">💬 التعليقات</div>
+  <div class="sec-btn">⊞ إضافة للقائمة</div>
+</div>
+
+<div class="story-section">
+  <h3>القصة</h3>
+  <p id="mangaDesc">--</p>
+  <div class="tags">
+    <span class="tag">أكشن</span>
+    <span class="tag">إثارة</span>
+    <span class="tag">فنتازيا</span>
+    <span class="tag">قوى خارقة</span>
+  </div>
+</div>
+
+<div class="chapters-header">
+  <div style="display:flex; align-items:center; gap:8px;">
+    <h3>الفصول المتوفرة</h3>
+    <span class="chapters-badge" id="chapBadge">0 فصول</span>
+  </div>
+  <span style="font-size:11px; color:#8b5cf6;">الترتيب: الأحدث</span>
+</div>
+
+<div class="chapters-list" id="chaptersList"></div>
+
+<script>
+const data = JSON.parse(localStorage.getItem('selected_manga'));
+
+if (data) {
+  document.getElementById('mangaTitle').innerText = data.title;
+  document.getElementById('mangaStatus').innerText = data.status;
+  document.getElementById('mangaAuthor').innerText = "الكاتب: " + data.author;
+  document.getElementById('mangaPoster').src = data.poster;
+  document.getElementById('mangaRating').innerText = data.rating + " ★";
+  document.getElementById('mangaViews').innerText = data.views;
+  document.getElementById('mangaChapCount').innerText = data.chaptersCount;
+  document.getElementById('chapBadge').innerText = data.chaptersCount + " فصول";
+  document.getElementById('mangaDesc').innerText = data.desc;
+
+  const list = document.getElementById('chaptersList');
+  list.innerHTML = '';
+  
+  data.chapters.forEach(chap => {
+    const card = document.createElement('div');
+    card.className = 'chapter-card';
+    card.innerHTML = `
+      <div class="chapter-left">
+        <div class="chap-icon">👁</div>
+        <div class="chap-icon">⇩</div>
+        <div class="chap-icon">💬</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="chapter-info">
+          <h4>${chap.number}</h4>
+          <span>${chap.date}</span>
+        </div>
+        <div class="chapter-num-badge">${chap.number}</div>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+</script>
+
+</body>
+</html>
