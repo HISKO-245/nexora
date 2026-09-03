@@ -7,6 +7,10 @@
 <meta name="theme-color" content="#8b5cf6">
 <title>Nexora - الرئيسية</title>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
 <style>
 * {
   box-sizing: border-box;
@@ -202,75 +206,6 @@ header {
   color: #efefef;
 }
 
-/* More Menu Styling */
-.more-container { padding: 16px; }
-
-.user-card {
-  background: #12121c;
-  border: 1px solid #222232;
-  border-radius: 16px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.user-info { display: flex; align-items: center; gap: 12px; }
-.avatar {
-  width: 45px;
-  height: 45px;
-  background: rgba(139, 92, 246, 0.2);
-  color: #8b5cf6;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.menu-group {
-  background: #12121c;
-  border: 1px solid #222232;
-  border-radius: 16px;
-  padding: 8px 16px;
-  margin-bottom: 16px;
-}
-
-.menu-group-title {
-  font-size: 12px;
-  color: #a1a1aa;
-  padding: 8px 0;
-  font-weight: bold;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid #1e1e2d;
-  cursor: pointer;
-}
-
-.menu-item:last-child { border-bottom: none; }
-.menu-item-left { display: flex; align-items: center; gap: 12px; }
-
-.icon-box {
-  width: 32px;
-  height: 32px;
-  background: rgba(139, 92, 246, 0.2);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #8b5cf6;
-  font-size: 14px;
-}
-
-.menu-text h4 { font-size: 13px; font-weight: 600; color: #efefef; }
-.menu-text p { font-size: 10px; color: #71717a; }
-
 /* Admin Modal */
 .full-panel {
   display: none;
@@ -348,7 +283,9 @@ nav {
   </div>
 
   <section class="content-section">
-    <div class="media-grid" id="mediaGrid"></div>
+    <div class="media-grid" id="mediaGrid">
+      <div style="grid-column: 1/-1; text-align:center; padding:40px; color:#a1a1aa;">جاري التحميل...</div>
+    </div>
   </section>
 </div>
 
@@ -375,37 +312,79 @@ nav {
 
 <!-- TAB 4: More Menu -->
 <div id="tabMore" class="tab-content">
-  <div class="more-container">
-    <div class="user-card">
-      <div class="user-info">
-        <div class="avatar">👤</div>
-        <div>
-          <h4>حسابي</h4>
-          <p style="font-size:11px; color:#71717a;">مرحباً بك في تطبيق Nexora</p>
-        </div>
+  <div class="more-container" style="padding: 16px;">
+    
+    <!-- بطاقة تسجيل الدخول -->
+    <div class="user-card" onclick="alert('صفحة تسجيل الدخول قيد التطوير')" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 18px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; cursor: pointer;">
+      <span style="color: #71717a; font-size: 14px;">›</span>
+      <div style="text-align: right;">
+        <h4 style="font-size: 15px; font-weight: bold; color: #ffffff; margin-bottom: 4px;">تسجيل الدخول</h4>
+        <p style="font-size: 11px; color: #a1a1aa;">أنشئ حساباً مجانياً أو سجل الدخول</p>
       </div>
+      <div class="avatar" style="width: 44px; height: 44px; background: rgba(139, 92, 246, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">👤</div>
     </div>
 
-    <div class="menu-group">
-      <div class="menu-group-title">الحساب والتطبيق</div>
+    <!-- مجموعة الحساب والتطبيق -->
+    <div class="menu-group" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 10px 16px; margin-bottom: 16px;">
+      <div class="menu-group-title" style="font-size: 12px; color: #a1a1aa; padding: 8px 0; font-weight: bold; text-align: right;">الحساب والتطبيق</div>
       
-      <div class="menu-item" onclick="openPanel('adminPanel')">
-        <div class="menu-item-left">
-          <div class="icon-box">⚙️</div>
-          <div class="menu-text">
-            <h4>لوحة الإدارة</h4>
-            <p>إضافة أعمال ونشر البيانات</p>
-          </div>
+      <!-- مفضلتي -->
+      <div class="menu-item" onclick="alert('المفضلة فارغة')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
+        <span style="color: #71717a; font-size: 14px;">›</span>
+        <div style="text-align: right; flex: 1; margin-right: 12px;">
+          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">مفضلتي</h4>
+          <p style="font-size: 10px; color: #71717a;">عرض الأعمال التي حفظتها</p>
         </div>
-        <span style="color:#71717a;">‹</span>
+        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">♡</div>
       </div>
+
+      <!-- مكتبتي -->
+      <div class="menu-item" onclick="alert('المكتبة فارغة')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
+        <span style="color: #71717a; font-size: 14px;">›</span>
+        <div style="text-align: right; flex: 1; margin-right: 12px;">
+          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">مكتبتي</h4>
+          <p style="font-size: 10px; color: #71717a;">تصفح مكتبة الأعمال الخاصة بك</p>
+        </div>
+        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">⊞</div>
+      </div>
+
+      <!-- التنزيلات -->
+      <div class="menu-item" onclick="alert('لا توجد تنزيلات')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
+        <span style="color: #71717a; font-size: 14px;">›</span>
+        <div style="text-align: right; flex: 1; margin-right: 12px;">
+          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">التنزيلات</h4>
+          <p style="font-size: 10px; color: #71717a;">تصفح الفصول التي حملتها</p>
+        </div>
+        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">⇩</div>
+      </div>
+
+      <!-- طلب مانجا -->
+      <div class="menu-item" onclick="alert('تواصل مع الإدارة لطلب مانجا')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
+        <span style="color: #71717a; font-size: 14px;">›</span>
+        <div style="text-align: right; flex: 1; margin-right: 12px;">
+          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">طلب مانجا</h4>
+          <p style="font-size: 10px; color: #71717a;">أرسل اقتراحك لفريق Nexora</p>
+        </div>
+        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">✉</div>
+      </div>
+
+      <!-- تواصل مع الإدارة -->
+      <div class="menu-item" onclick="openPanel('adminPanel')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; cursor: pointer;">
+        <span style="color: #71717a; font-size: 14px;">›</span>
+        <div style="text-align: right; flex: 1; margin-right: 12px;">
+          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">تواصل مع الإدارة / لوحة التحكم</h4>
+          <p style="font-size: 10px; color: #71717a;">أرسل رسالة إلى فريق Nexora أو اضف أعمال جديدة</p>
+        </div>
+        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">💬</div>
+      </div>
+
     </div>
   </div>
 </div>
 
 <!-- Admin Panel Modal -->
 <div class="full-panel" id="adminPanel">
-  <h3>إضافة عمل جديد</h3>
+  <h3>إضافة عمل جديد (مباشرة للجميع)</h3>
   <br>
   <div class="form-group">
     <label>نوع العمل</label>
@@ -421,8 +400,8 @@ nav {
     <input type="text" id="addTitle" placeholder="عنوان العمل...">
   </div>
   <div class="form-group">
-    <label>التفاصيل (مثل: أنمي • مستمر)</label>
-    <input type="text" id="addAuthor" placeholder="التفاصيل...">
+    <label>التفاصيل (مثل: مانهوا • مكتملة)</label>
+    <input type="text" id="addAuthor" placeholder="مثال: مانهوا • مكتملة">
   </div>
   <div class="form-group">
     <label>رابط الغلاف (صورة)</label>
@@ -434,16 +413,11 @@ nav {
   </div>
   <div class="form-group">
     <label>القصة</label>
-    <textarea id="addDesc" rows="3" placeholder="وصف العمل..."></textarea>
+    <textarea id="addDesc" rows="3" placeholder="وصف القصة..."></textarea>
   </div>
   
-  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="saveManga()">حفظ في التطبيق</button>
-  
-  <hr style="margin: 15px 0; border: 0; border-top: 1px solid #222232;">
-  
-  <button style="width:100%; padding:11px; background:#10b981; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="exportDataForGithub()">📋 نسخ الكود ونشره للجميع</button>
-  
-  <button style="width:100%; padding:11px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
+  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="saveManga()">🚀 نشر فوراً لجميع الزوار</button>
+  <button style="width:100%; padding:12px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
 </div>
 
 <!-- Bottom Nav -->
@@ -463,34 +437,27 @@ nav {
 </nav>
 
 <script>
-// البيانات الافتراضية
-const demoData = [
-  {
-    id: 1,
-    type: "manhwa",
-    title: "Sword God High School",
-    status: "مانهوا • مكتملة",
-    rating: "4.8",
-    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Sword+God",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    desc: "تنجذب الشياطين إلى الطاقة الشريرة لتبطش بالبشرية...",
-    chapters: [{ number: 1, date: "2026-09-03" }]
-  },
-  {
-    id: 2,
-    type: "manga",
-    title: "One Piece",
-    status: "مانجا • مستمرة",
-    rating: "4.9",
-    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=One+Piece",
-    videoUrl: "",
-    desc: "مغامرات مونكي دي لوفي للوصول إلى الكنز الأسطوري...",
-    chapters: [{ number: 1110, date: "2026-09-01" }]
-  }
-];
+// إعداد قاعدة البيانات المجانية من Firebase
+const firebaseConfig = {
+  databaseURL: "https://nexora-app-default-rtdb.firebaseio.com/"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-let mangaList = JSON.parse(localStorage.getItem('nexora_db')) || demoData;
+let mangaList = [];
 let currentCategory = 'all';
+
+// الاستماع المستمر والتحديث التلقائي لجميع الزوار
+db.ref('media').on('value', (snapshot) => {
+  const data = snapshot.val();
+  mangaList = [];
+  if (data) {
+    Object.keys(data).forEach(key => {
+      mangaList.push({ dbKey: key, ...data[key] });
+    });
+  }
+  renderHome();
+});
 
 function renderGrid(containerId, itemsToRender) {
   const grid = document.getElementById(containerId);
@@ -498,7 +465,7 @@ function renderGrid(containerId, itemsToRender) {
   grid.innerHTML = '';
 
   if (itemsToRender.length === 0) {
-    grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; color:#71717a;">لا توجد أعمال لعرضها</div>';
+    grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; color:#71717a;">لا توجد أعمال حالياً</div>';
     return;
   }
 
@@ -512,8 +479,8 @@ function renderGrid(containerId, itemsToRender) {
     if(item.type === 'movie') typeLabel = "فيلم";
 
     card.innerHTML = `
-      <button class="delete-btn" onclick="deleteItem(event, ${item.id})" title="حذف العمل">✕</button>
-      <div onclick="openDetails(${item.id})">
+      <button class="delete-btn" onclick="deleteItem(event, '${item.dbKey}')" title="حذف العمل">✕</button>
+      <div onclick="openDetails('${item.dbKey}')">
         <div class="poster-wrapper">
           <img src="${item.poster}" alt="cover">
           <span class="type-tag">${typeLabel}</span>
@@ -535,20 +502,18 @@ function renderHome() {
   renderGrid('mediaGrid', filtered);
 }
 
-function openDetails(id) {
-  const item = mangaList.find(i => i.id === id);
+function openDetails(dbKey) {
+  const item = mangaList.find(i => i.dbKey === dbKey);
   if(item) {
     localStorage.setItem('selected_manga', JSON.stringify(item));
     window.location.href = 'details.html';
   }
 }
 
-function deleteItem(event, id) {
+function deleteItem(event, dbKey) {
   event.stopPropagation();
-  if (confirm("هل أنت تأكد من رغبتك في مسح هذا العمل؟")) {
-    mangaList = mangaList.filter(item => item.id !== id);
-    localStorage.setItem('nexora_db', JSON.stringify(mangaList));
-    renderHome();
+  if (confirm("هل أنت تأكد من رغبتك في مسح هذا العمل للجميع؟")) {
+    db.ref('media/' + dbKey).remove();
   }
 }
 
@@ -591,7 +556,7 @@ function saveManga() {
     id: Date.now(),
     type: document.getElementById('addCategory').value,
     title: title,
-    status: document.getElementById('addAuthor').value || "مستمر",
+    status: document.getElementById('addAuthor').value || "مانهوا • مكتملة",
     rating: "5.0",
     poster: document.getElementById('addPoster').value || "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Cover",
     videoUrl: document.getElementById('addVideo').value || "",
@@ -599,37 +564,20 @@ function saveManga() {
     chapters: [{ number: 1, date: "2026-09-03" }]
   };
   
-  mangaList.unshift(newItem);
-  localStorage.setItem('nexora_db', JSON.stringify(mangaList));
-  
-  document.getElementById('addTitle').value = '';
-  document.getElementById('addAuthor').value = '';
-  document.getElementById('addPoster').value = '';
-  document.getElementById('addVideo').value = '';
-  document.getElementById('addDesc').value = '';
-
-  renderHome();
-  alert("تم الحفظ في جهازك! إذا أردت نشر العمل لجميع الزوار، اضغط على زر '📋 نسخ الكود ونشره للجميع'.");
-}
-
-function exportDataForGithub() {
-  const codeToCopy = `const demoData = ${JSON.stringify(mangaList, null, 2)};`;
-  
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(codeToCopy).then(() => {
-      alert("تم نسخ الكود بنجاح!\n\nالآن افتح GitHub واستبدل السطر الذي يبدأ بـ 'const demoData' بهذا النص ليرى جميع الزوار التحديثات.");
-    }).catch(() => {
-      prompt("انسخ النص التالي واستبدله في GitHub مكان demoData:", codeToCopy);
-    });
-  } else {
-    prompt("انسخ النص التالي واستبدله في GitHub مكان demoData:", codeToCopy);
-  }
+  // الحفظ الفوري في السحابة
+  db.ref('media').push(newItem).then(() => {
+    alert("تم نشر العمل بنجاح لجميع زوار موقعك! 🎉");
+    document.getElementById('addTitle').value = '';
+    document.getElementById('addAuthor').value = '';
+    document.getElementById('addPoster').value = '';
+    document.getElementById('addVideo').value = '';
+    document.getElementById('addDesc').value = '';
+    closePanel('adminPanel');
+  });
 }
 
 function openPanel(id) { document.getElementById(id).classList.add('active'); }
 function closePanel(id) { document.getElementById(id).classList.remove('active'); }
-
-document.addEventListener('DOMContentLoaded', () => renderHome());
 </script>
 
 </body>
