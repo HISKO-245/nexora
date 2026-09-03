@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b5cf6">
-<title>Manga Star - Dark Purple Edition</title>
+<title>Nexora - Home</title>
 
 <style>
 * {
@@ -56,9 +56,38 @@ header {
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
+/* Filter Bar */
+.category-filter {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 4px;
+  background: #09090e;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.category-filter::-webkit-scrollbar { display: none; }
+
+.filter-chip {
+  background: #161622;
+  border: 1px solid #222232;
+  color: #a1a1aa;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter-chip.active {
+  background: #8b5cf6;
+  color: white;
+  border-color: #8b5cf6;
+}
+
 /* Search Bar */
 .search-container {
-  padding: 12px 16px;
+  padding: 8px 16px 12px;
   display: flex;
   gap: 8px;
   background: #09090e;
@@ -99,8 +128,8 @@ header {
   color: #efefef;
 }
 
-/* Grid Layout */
-.content-section { padding: 12px 16px; }
+/* Grid Layout & Cards */
+.content-section { padding: 8px 16px; }
 
 .media-grid {
   display: grid;
@@ -113,7 +142,27 @@ header {
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid #222232;
+  position: relative;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
   cursor: pointer;
+  z-index: 20;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .poster-wrapper {
@@ -121,12 +170,25 @@ header {
   aspect-ratio: 2 / 3;
   background: #1c1c2b;
   position: relative;
+  cursor: pointer;
 }
 
 .poster-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.type-tag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #8b5cf6;
+  color: white;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
 .badge-rating {
@@ -141,25 +203,13 @@ header {
   font-weight: bold;
 }
 
-.card-details { padding: 8px; }
+.card-details { padding: 8px; cursor: pointer; }
 .card-details h3 {
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #efefef;
-}
-
-/* History Page Styling */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: #a1a1aa;
-}
-
-.empty-icon {
-  font-size: 32px;
-  margin-bottom: 12px;
 }
 
 /* More Menu Styling */
@@ -244,7 +294,7 @@ header {
 .full-panel.active { display: block; }
 .form-group { margin-bottom: 12px; }
 .form-group label { display: block; font-size: 12px; margin-bottom: 4px; color: #a1a1aa; }
-.form-group input, .form-group textarea {
+.form-group input, .form-group select, .form-group textarea {
   width: 100%; padding: 10px; background: #161622; border: 1px solid #222232; border-radius: 8px; font-size: 13px; color: white;
 }
 
@@ -286,16 +336,24 @@ nav {
 
 <!-- Header -->
 <header>
-  <div class="logo">Manga Star</div>
+  <div class="logo">Nexora</div>
   <button class="admin-btn" onclick="openPanel('adminPanel')">⚙️ الإدارة</button>
 </header>
 
 <!-- TAB 1: Main Feed -->
 <div id="tabHome" class="tab-content active">
+  <div class="category-filter">
+    <div class="filter-chip active" onclick="filterCategory('all', this)">الكل</div>
+    <div class="filter-chip" onclick="filterCategory('manga', this)">مانجا</div>
+    <div class="filter-chip" onclick="filterCategory('manhwa', this)">مانهوا</div>
+    <div class="filter-chip" onclick="filterCategory('anime', this)">أنمي</div>
+    <div class="filter-chip" onclick="filterCategory('movie', this)">أفلام</div>
+  </div>
+
   <div class="search-container">
     <div class="search-box">
       <span>🔍</span>
-      <input type="text" id="searchInput" placeholder="بحث بالعنوان، الكاتب، الرسام...">
+      <input type="text" id="searchInput" onkeyup="searchContent()" placeholder="بحث بالعنوان، الكاتب...">
     </div>
     <div class="icon-btn">🔽</div>
     <div class="icon-btn">☰</div>
@@ -318,8 +376,8 @@ nav {
 
 <!-- TAB 3: History -->
 <div id="tabHistory" class="tab-content">
-  <div class="empty-state">
-    <div class="empty-icon">.◦°(≧口≦)°◦.</div>
+  <div style="text-align: center; padding: 60px 20px; color: #a1a1aa;">
+    <div style="font-size: 32px; margin-bottom: 12px;">.◦°(≧口≦)°◦.</div>
     <p>سجل الدخول لاستخدام هذه الميزة</p>
   </div>
 </div>
@@ -368,7 +426,7 @@ nav {
           <div class="icon-box">⇩</div>
           <div class="menu-text">
             <h4>التنزيلات</h4>
-            <p>تصفح الفصول التي حملتها</p>
+            <p>تصفح الفصول والعمليات المحملة</p>
           </div>
         </div>
         <span style="color:#71717a;">‹</span>
@@ -378,8 +436,8 @@ nav {
         <div class="menu-item-left">
           <div class="icon-box">✉</div>
           <div class="menu-text">
-            <h4>طلب مانجا</h4>
-            <p>أرسل اقتراحك لفريق Manga Star</p>
+            <h4>طلب عمل</h4>
+            <p>أرسل اقتراحك لفريق Nexora</p>
           </div>
         </div>
         <span style="color:#71717a;">‹</span>
@@ -390,7 +448,7 @@ nav {
           <div class="icon-box">💬</div>
           <div class="menu-text">
             <h4>تواصل مع الإدارة</h4>
-            <p>أرسل رسالة إلى فريق Manga Star</p>
+            <p>أرسل رسالة إلى فريق Nexora</p>
           </div>
         </div>
         <span style="color:#71717a;">‹</span>
@@ -401,26 +459,35 @@ nav {
 
 <!-- Admin Panel -->
 <div class="full-panel" id="adminPanel">
-  <h3>إضافة مانجا جديدة</h3>
+  <h3>إضافة عمل جديد</h3>
   <br>
   <div class="form-group">
-    <label>العنوان</label>
-    <input type="text" id="addTitle" placeholder="Sword God High School...">
+    <label>نوع العمل</label>
+    <select id="addCategory">
+      <option value="manga">مانجا</option>
+      <option value="manhwa">مانهوا</option>
+      <option value="anime">أنمي</option>
+      <option value="movie">فيلم</option>
+    </select>
   </div>
   <div class="form-group">
-    <label>النوع والكاتب</label>
-    <input type="text" id="addAuthor" placeholder="مانهوا • مكتملة">
+    <label>العنوان</label>
+    <input type="text" id="addTitle" placeholder="عنوان العمل...">
+  </div>
+  <div class="form-group">
+    <label>التفاصيل (مثل: مانهوا • مستمرة)</label>
+    <input type="text" id="addAuthor" placeholder="التفاصيل...">
   </div>
   <div class="form-group">
     <label>رابط الغلاف</label>
-    <input type="text" id="addPoster">
+    <input type="text" id="addPoster" placeholder="https://...">
   </div>
   <div class="form-group">
     <label>القصة</label>
     <textarea id="addDesc" rows="3"></textarea>
   </div>
-  <button style="width:100%; padding:10px; background:#8b5cf6; color:white; border:none; border-radius:8px;" onclick="saveManga()">حفظ</button>
-  <button style="width:100%; padding:10px; background:#ef4444; color:white; border:none; border-radius:8px; margin-top:8px;" onclick="closePanel('adminPanel')">إلغاء</button>
+  <button style="width:100%; padding:10px; background:#8b5cf6; color:white; border:none; border-radius:8px; cursor:pointer;" onclick="saveManga()">حفظ</button>
+  <button style="width:100%; padding:10px; background:#ef4444; color:white; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
 </div>
 
 <!-- Bottom Nav -->
@@ -443,46 +510,139 @@ nav {
 const demoData = [
   {
     id: 1,
-    title: "Sword God High School: The Talentless Underachiever Becomes the Strongest",
+    type: "manhwa",
+    title: "Sword God High School",
     status: "مانهوا • مكتملة",
     author: "غير معروف",
-    rating: "0.0",
-    views: "8",
+    rating: "4.8",
+    views: "125",
     chaptersCount: 17,
     poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Sword+God",
-    desc: "تنجذب الشياطين إلى الطاقة الشريرة لتبطش بالبشرية، ولا يقدر على التصدي لها سوى فرسان الزاماشي...",
-    chapters: [
-      { number: 17, date: "2026-09-02 18:24:51" },
-      { number: 16, date: "2026-09-02 18:24:51" },
-      { number: 15, date: "2026-09-02 18:24:51" },
-      { number: 14, date: "2026-09-02 18:24:51" }
-    ]
+    desc: "تنجذب الشياطين إلى الطاقة الشريرة لتبطش بالبشرية...",
+    chapters: [{ number: 17, date: "2026-09-02" }]
+  },
+  {
+    id: 2,
+    type: "manga",
+    title: "One Piece",
+    status: "مانجا • مستمرة",
+    author: "Eiichiro Oda",
+    rating: "4.9",
+    views: "3400",
+    chaptersCount: 1110,
+    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=One+Piece",
+    desc: "مغامرات مونكي دي لوفي للوصول إلى الكنز الأسطوري ون بيس...",
+    chapters: [{ number: 1110, date: "2026-09-01" }]
+  },
+  {
+    id: 3,
+    type: "anime",
+    title: "Demon Slayer",
+    status: "أنمي • مستمر",
+    author: "Koyoharu Gotouge",
+    rating: "4.9",
+    views: "980",
+    chaptersCount: 26,
+    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Demon+Slayer",
+    desc: "فتى يتدرب ليصبح قاتل شياطين للانتقام لعائلته...",
+    chapters: [{ number: 1, date: "2026-09-01" }]
+  },
+  {
+    id: 4,
+    type: "movie",
+    title: "Your Name",
+    status: "فيلم • مكتمل",
+    author: "Makoto Shinkai",
+    rating: "5.0",
+    views: "1500",
+    chaptersCount: 1,
+    poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Your+Name",
+    desc: "قصة فتى وفتاة يتبادلان الأجساد بشكل غامض...",
+    chapters: [{ number: 1, date: "2026-08-20" }]
   }
 ];
 
-let mangaList = JSON.parse(localStorage.getItem('manga_star_db')) || demoData;
+let mangaList = JSON.parse(localStorage.getItem('nexora_db')) || demoData;
+let currentCategory = 'all';
 
-function renderHome() {
+function renderHome(itemsToRender = mangaList) {
   const grid = document.getElementById('mediaGrid');
   grid.innerHTML = '';
-  mangaList.forEach(item => {
+  
+  if (itemsToRender.length === 0) {
+    grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; color:#71717a;">لا توجد أعمال لعرضها</div>';
+    return;
+  }
+
+  itemsToRender.forEach(item => {
     const card = document.createElement('div');
     card.className = 'star-card';
-    card.onclick = () => {
-      localStorage.setItem('selected_manga', JSON.stringify(item));
-      window.location.href = 'details.html';
-    };
+
+    let typeLabel = "مانجا";
+    if(item.type === 'manhwa') typeLabel = "مانهوا";
+    if(item.type === 'anime') typeLabel = "أنمي";
+    if(item.type === 'movie') typeLabel = "فيلم";
+
     card.innerHTML = `
-      <div class="poster-wrapper">
-        <img src="${item.poster}" alt="cover">
-        <span class="badge-rating">★ ${item.rating}</span>
-      </div>
-      <div class="card-details">
-        <h3>${item.title}</h3>
+      <button class="delete-btn" onclick="deleteItem(event, ${item.id})" title="حذف العمل">✕</button>
+      <div onclick="openDetails(${item.id})">
+        <div class="poster-wrapper">
+          <img src="${item.poster}" alt="cover">
+          <span class="type-tag">${typeLabel}</span>
+          <span class="badge-rating">★ ${item.rating}</span>
+        </div>
+        <div class="card-details">
+          <h3>${item.title}</h3>
+        </div>
       </div>
     `;
     grid.appendChild(card);
   });
+}
+
+function openDetails(id) {
+  const item = mangaList.find(i => i.id === id);
+  if(item) {
+    localStorage.setItem('selected_manga', JSON.stringify(item));
+    window.location.href = 'details.html';
+  }
+}
+
+function deleteItem(event, id) {
+  event.stopPropagation();
+  if (confirm("هل أنت تأكد من رغبتك في مسح هذا العمل؟")) {
+    mangaList = mangaList.filter(item => item.id !== id);
+    localStorage.setItem('nexora_db', JSON.stringify(mangaList));
+    
+    if (currentCategory === 'all') {
+      renderHome(mangaList);
+    } else {
+      filterCategory(currentCategory, document.querySelector('.filter-chip.active'));
+    }
+  }
+}
+
+function filterCategory(cat, el) {
+  currentCategory = cat;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  if(cat === 'all') {
+    renderHome(mangaList);
+  } else {
+    const filtered = mangaList.filter(item => item.type === cat);
+    renderHome(filtered);
+  }
+}
+
+function searchContent() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = mangaList.filter(item => {
+    const matchesCat = (currentCategory === 'all' || item.type === currentCategory);
+    const matchesQuery = item.title.toLowerCase().includes(query);
+    return matchesCat && matchesQuery;
+  });
+  renderHome(filtered);
 }
 
 function switchTab(tabId, el) {
@@ -494,21 +654,30 @@ function switchTab(tabId, el) {
 
 function saveManga() {
   const title = document.getElementById('addTitle').value;
-  if(!title) return;
+  if(!title) return alert("يرجى إدخال العنوان على الأقل");
+  
   const newItem = {
     id: Date.now(),
-    title,
-    status: document.getElementById('addAuthor').value || "مانهوا",
+    type: document.getElementById('addCategory').value,
+    title: title,
+    status: document.getElementById('addAuthor').value || "مستمر",
     author: "غير معروف",
     rating: "5.0",
     views: "1",
     chaptersCount: 1,
-    poster: document.getElementById('addPoster').value || "https://via.placeholder.com/200x300",
-    desc: document.getElementById('addDesc').value,
+    poster: document.getElementById('addPoster').value || "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Cover",
+    desc: document.getElementById('addDesc').value || "لا يوجد وصف متاح.",
     chapters: [{ number: 1, date: "2026-09-03" }]
   };
+  
   mangaList.unshift(newItem);
-  localStorage.setItem('manga_star_db', JSON.stringify(mangaList));
+  localStorage.setItem('nexora_db', JSON.stringify(mangaList));
+  
+  document.getElementById('addTitle').value = '';
+  document.getElementById('addAuthor').value = '';
+  document.getElementById('addPoster').value = '';
+  document.getElementById('addDesc').value = '';
+
   renderHome();
   closePanel('adminPanel');
 }
@@ -516,7 +685,7 @@ function saveManga() {
 function openPanel(id) { document.getElementById(id).classList.add('active'); }
 function closePanel(id) { document.getElementById(id).classList.remove('active'); }
 
-document.addEventListener('DOMContentLoaded', renderHome);
+document.addEventListener('DOMContentLoaded', () => renderHome());
 </script>
 
 </body>
