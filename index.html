@@ -19,7 +19,7 @@
 body {
   background: #09090e;
   color: #efefef;
-  padding-bottom: 80px;
+  padding-bottom: 90px; /* مساحة كافية لكي لا يغطي الشريط السفلي المحتوى */
 }
 
 /* Header */
@@ -244,7 +244,7 @@ header {
   font-weight: bold;
 }
 
-/* EXACT MATCH VIP GOLDEN BANNER */
+/* VIP GOLDEN BANNER */
 .vip-banner {
   background: linear-gradient(135deg, #221c10 0%, #161410 100%);
   border: 1px solid #523e18;
@@ -391,21 +391,23 @@ header {
   width: 100%; padding: 10px; background: #161622; border: 1px solid #222232; border-radius: 8px; font-size: 13px; color: white; outline: none;
 }
 
-/* Bottom Nav */
+/* BOTTOM NAVIGATION BAR (FIXED & ALWAYS VISIBLE) */
 nav {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 60px;
-  background: #11111a;
+  background: #11111a !important;
   border-top: 1px solid #1e1e2d;
-  display: flex;
+  display: flex !important;
   justify-content: space-around;
   align-items: center;
-  z-index: 100;
+  z-index: 9999 !important;
 }
 
 .nav-link {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   align-items: center;
   color: #71717a;
@@ -413,6 +415,8 @@ nav {
   gap: 3px;
   cursor: pointer;
   width: 25%;
+  background: transparent;
+  border: none;
 }
 .nav-link.active { color: #8b5cf6; font-weight: bold; }
 .nav-link .icon { font-size: 18px; padding: 2px 12px; border-radius: 12px; }
@@ -487,7 +491,7 @@ nav {
       <div class="avatar-circle" id="profileAvatar">H</div>
     </div>
 
-    <!-- EXACT VIP GOLDEN BANNER -->
+    <!-- VIP GOLDEN BANNER -->
     <div class="vip-banner" onclick="alert('أنت تستخدم نسختك الخاصة من Nexora ⭐')">
       <span style="color: #71717a; font-size: 14px;">‹</span>
       <div class="vip-right">
@@ -546,7 +550,7 @@ nav {
       </div>
     </div>
 
-    <!-- Logout / Login Button -->
+    <!-- Logout Button -->
     <button class="logout-btn" onclick="handleAuthClick()">
       <span id="authButtonText">تسجيل الخروج</span> 🚪
     </button>
@@ -609,12 +613,12 @@ nav {
   <button style="width:100%; padding:12px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
 </div>
 
-<!-- Bottom Nav -->
+<!-- BOTTOM NAVIGATION BAR (FIXED) -->
 <nav>
-  <div class="nav-link" onclick="switchTab('tabMore', this)"><span class="icon">⋯</span>المزيد</div>
-  <div class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">🕒</span>السجل</div>
-  <div class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</div>
-  <div class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</div>
+  <button class="nav-link" onclick="switchTab('tabMore', this)"><span class="icon">⋯</span>المزيد</button>
+  <button class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">🕒</span>السجل</button>
+  <button class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
+  <button class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
 </nav>
 
 <script>
@@ -760,8 +764,4 @@ function saveManga() {
   };
   
   mangaList.push(newItem);
-  localStorage.setItem('nexora_media', JSON.stringify(mangaList));
-  alert("تم حفظ العمل بنجاح! 🎉");
-  
-  document.getElementById('addTitle').value = '';
-  document.getElementById('addAuthor').value 
+  l
