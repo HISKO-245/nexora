@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b5cf6">
-<title>Nexora - الإعدادات</title>
+<title>Nexora - الرئيسية</title>
 
 <style>
 * {
@@ -22,119 +22,202 @@ body {
   padding-bottom: 90px;
 }
 
-/* Header */
-.settings-header {
-  padding: 16px;
+/* Top Bar */
+.top-bar {
+  padding: 12px 16px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
   background: #09090e;
   position: sticky;
   top: 0;
   z-index: 90;
-  border-bottom: 1px solid #161622;
 }
 
-.settings-header h2 {
+.top-icons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-btn {
+  background: #161622;
+  border: 1px solid #222232;
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.vip-coin {
+  background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%);
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.page-title {
   font-size: 18px;
   font-weight: bold;
   color: #fff;
-  flex: 1;
-  text-align: right;
 }
 
-.back-arrow {
-  font-size: 20px;
-  color: #efefef;
+/* Hero Slider Banner */
+.hero-slider {
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.hero-slider::-webkit-scrollbar { display: none; }
+
+.hero-card {
+  min-width: 280px;
+  height: 160px;
+  background: #12121c;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #222232;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9,9,14,0.95) 10%, rgba(9,9,14,0.3) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content h3 {
+  font-size: 15px;
+  color: #fff;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.read-now-btn {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 16px 8px;
+}
+
+.section-header h2 {
+  font-size: 15px;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.see-all {
+  font-size: 11px;
+  color: #8b5cf6;
   cursor: pointer;
   background: none;
   border: none;
 }
 
-/* Settings Sections */
-.settings-container {
-  padding: 16px;
+/* Horizontal Cards Grid (New & Completed) */
+.horizontal-scroll {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.horizontal-scroll::-webkit-scrollbar { display: none; }
 
-.section-label {
-  font-size: 12px;
-  color: #71717a;
-  margin: 16px 4px 8px;
-  font-weight: bold;
-  text-align: right;
-}
-
-.section-label:first-child {
-  margin-top: 4px;
-}
-
-/* Setting Card / Group */
-.setting-card {
+.manga-mini-card {
+  min-width: 120px;
+  max-width: 120px;
   background: #12121c;
-  border: 1px solid #1e1e2d;
-  border-radius: 16px;
+  border-radius: 12px;
+  border: 1px solid #222232;
   overflow: hidden;
-  margin-bottom: 8px;
-}
-
-.setting-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px;
-  border-bottom: 1px solid #191926;
+  flex-shrink: 0;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
-.setting-item:last-child {
-  border-bottom: none;
+.mini-poster {
+  width: 100%;
+  aspect-ratio: 2/3;
+  position: relative;
+  background: #1c1c2b;
 }
 
-.setting-item:active {
-  background: #1a1a29;
+.mini-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.setting-info {
-  text-align: right;
-  flex: 1;
+.tag-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #8b5cf6;
+  color: white;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
-.setting-info h4 {
-  font-size: 13px;
-  color: #fff;
-  font-weight: 600;
-  margin-bottom: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
+.mini-details {
+  padding: 8px;
 }
-
-.setting-info p {
+.mini-details h4 {
   font-size: 11px;
-  color: #71717a;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
 }
-
-.setting-icon {
-  font-size: 16px;
+.mini-details p {
+  font-size: 9px;
   color: #a1a1aa;
-}
-
-.setting-arrow {
-  font-size: 12px;
-  color: #52525b;
-  margin-left: 10px;
-}
-
-/* Danger Zone Card */
-.setting-card.danger {
-  background: #12121c;
-  border-color: rgba(239, 68, 68, 0.2);
-}
-
-.setting-item.danger-item h4 {
-  color: #ef4444;
 }
 
 /* Tab Views */
@@ -176,135 +259,137 @@ nav {
 
 <body>
 
-<!-- TAB 1: Main Feed (الرئيسية) -->
+<!-- TAB 1: الرئيسية -->
 <div id="tabHome" class="tab-content active">
-  <div style="padding: 20px; text-align: center; color: #a1a1aa;">
-    <h3>مكتبة Nexora الرئيسية</h3>
-    <p style="margin-top: 10px; font-size: 12px;">انتقل إلى تبويب الإعدادات من الشريط السفلي لرؤية التصميم الجديد.</p>
-  </div>
-</div>
-
-<!-- TAB 2: Search (البحث) -->
-<div id="tabSearch" class="tab-content">
-  <div style="padding: 20px; text-align: center; color: #a1a1aa;">
-    <h3>صفحة البحث</h3>
-  </div>
-</div>
-
-<!-- TAB 3: History (السجل) -->
-<div id="tabHistory" class="tab-content">
-  <div style="padding: 20px; text-align: center; color: #a1a1aa;">
-    <h3>سجل المشاهدة</h3>
-  </div>
-</div>
-
-<!-- TAB 4: Settings / More (الإعدادات المطابقة للصورة) -->
-<div id="tabMore" class="tab-content">
   
-  <div class="settings-header">
-    <button class="back-arrow" onclick="switchTab('tabHome', document.querySelector('.nav-link'))">➔</button>
-    <h2>الإعدادات</h2>
+  <!-- شريط العلوي -->
+  <div class="top-bar">
+    <div class="top-icons">
+      <div class="icon-btn" onclick="alert('لا توجد إشعارات جديدة في Nexora')">🔔</div>
+      <div class="icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-link')[2])">🔍</div>
+      <div class="vip-coin">💎 20%-</div>
+    </div>
+    <div class="page-title">Nexora</div>
   </div>
 
-  <div class="settings-container">
-    
-    <!-- المظهر -->
-    <div class="section-label">المظهر</div>
-    <div class="setting-card">
-      <div class="setting-item" onclick="alert('تعديل تعتيم أغلفة الأعمال')">
-        <span class="setting-arrow">‹</span>
-        <div class="setting-info">
-          <h4>تعتيم أغلفة الأعمال <span class="setting-icon">🌓</span></h4>
-          <p>متوسط</p>
-        </div>
+  <!-- السلايدر البارز في الأعلى -->
+  <div class="hero-slider">
+    <div class="hero-card" style="background-image: url('https://via.placeholder.com/400x200/1c1c2b/8b5cf6?text=Streamer');">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h3>Streamer (مستمر • 9.0 ★)</h3>
+        <button class="read-now-btn" onclick="alert('جاري فتح الفصول في Nexora...')">اقرأ الآن ➔</button>
       </div>
     </div>
-
-    <!-- الإشعارات -->
-    <div class="section-label">الإشعارات</div>
-    <div class="setting-card">
-      <div class="setting-item" onclick="alert('إعدادات الإشعارات مفعلة بالكامل')">
-        <span class="setting-arrow">‹</span>
-        <div class="setting-info">
-          <h4>الإشعارات <span class="setting-icon">🔔</span></h4>
-          <p>كل الإشعارات مفعلة</p>
-        </div>
+    <div class="hero-card" style="background-image: url('https://via.placeholder.com/400x200/1c1c2b/8b5cf6?text=Demonic+Emperor');">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h3>Demonic Emperor (مستمر • 9.6 ★)</h3>
+        <button class="read-now-btn" onclick="alert('جاري فتح الفصول في Nexora...')">اقرأ الآن ➔</button>
       </div>
     </div>
+  </div>
 
-    <!-- الخصوصية -->
-    <div class="section-label">الخصوصية</div>
-    <div class="setting-card">
-      <div class="setting-item" onclick="alert('إعدادات الملف العام')">
-        <span class="setting-arrow">‹</span>
-        <div class="setting-info">
-          <h4>الملف العام وما يظهر فيه <span class="setting-icon">👁️</span></h4>
-          <p>عام • 3 من 6 ظاهرة</p>
-        </div>
-      </div>
-      <div class="setting-item" onclick="alert('تفضيلات الإعلانات')">
-        <span class="setting-arrow">‹</span>
-        <div class="setting-info">
-          <h4>تفضيلات الإعلانات <span class="setting-icon">ℹ️</span></h4>
-        </div>
-      </div>
-    </div>
+  <!-- قسم أعمال جديدة -->
+  <div class="section-header">
+    <button class="see-all" onclick="alert('عرض كل الأعمال الجديدة')">عرض الكل ‹</button>
+    <h2>✨ أعمال جديدة</h2>
+  </div>
+  <div class="horizontal-scroll" id="newReleasesGrid"></div>
 
-    <!-- التخزين -->
-    <div class="section-label">التخزين</div>
-    <div class="setting-card">
-      <div class="setting-item" onclick="alert('إدارة التخزين والتنزيلات')">
-        <span class="setting-arrow">‹</span>
-        <div class="setting-info">
-          <h4>التخزين والتنزيلات <span class="setting-icon">💾</span></h4>
-          <p>مؤقت 185 MB • تنزيلات 0 MB</p>
-        </div>
-      </div>
-    </div>
+  <!-- قسم أعمال مكتملة -->
+  <div class="section-header">
+    <button class="see-all" onclick="alert('عرض كل الأعمال المكتملة')">عرض الكل ‹</button>
+    <h2>✅ أعمال مكتملة</h2>
+  </div>
+  <div class="horizontal-scroll" id="completedGrid"></div>
 
-    <!-- حول ودعم -->
-    <div class="section-label">حول ودعم</div>
-    <div class="setting-card">
-      <div class="setting-item" onclick="alert('شكراً لدعمك أثير تون!')">
-        <div class="setting-info">
-          <h4>قيم أثير تون <span class="setting-icon">⭐</span></h4>
-        </div>
-      </div>
-      <div class="setting-item" onclick="alert('إعادة عرض التعليمات التعليمية')">
-        <div class="setting-info">
-          <h4>إعادة عرض التعليمات <span class="setting-icon">🎓</span></h4>
-        </div>
-      </div>
-    </div>
+  <!-- قسم الأعلى تقييماً -->
+  <div class="section-header">
+    <button class="see-all" onclick="alert('عرض كل القائمة')">عرض الكل ‹</button>
+    <h2>⭐ الأعلى تقييماً</h2>
+  </div>
+  <div class="horizontal-scroll" id="topRatedGrid"></div>
 
-    <!-- إجراء لا يمكن التراجع عنه -->
-    <div class="section-label" style="color: #ef4444;">إجراء لا يمكن التراجع عنه</div>
-    <div class="setting-card danger">
-      <div class="setting-item danger-item" onclick="confirm('هل تريد حقاً حذف كل التنزيلات؟')">
-        <div class="setting-info">
-          <h4>حذف التنزيلات دون اتصال <span class="setting-icon">🗑️</span></h4>
-          <p>يحذف كل الفصول المحملة من هذا الجهاز</p>
-        </div>
-      </div>
-    </div>
+</div>
 
+<!-- TAB 2: البحث -->
+<div id="tabSearch" class="tab-content">
+  <div style="padding: 40px; text-align: center; color: #a1a1aa;">
+    <h3>محرك البحث في Nexora</h3>
+  </div>
+</div>
+
+<!-- TAB 3: التنزيلات -->
+<div id="tabHistory" class="tab-content">
+  <div style="padding: 40px; text-align: center; color: #a1a1aa;">
+    <h3>الفصول المحملة دون اتصال في Nexora</h3>
+  </div>
+</div>
+
+<!-- TAB 4: المجتمع -->
+<div id="tabMore" class="tab-content">
+  <div style="padding: 40px; text-align: center; color: #a1a1aa;">
+    <h3>مجتمع Nexora</h3>
   </div>
 </div>
 
 <!-- BOTTOM NAVIGATION BAR (FIXED) -->
 <nav>
-  <button class="nav-link active" onclick="switchTab('tabMore', this)"><span class="icon">⚙️</span>الإعدادات</button>
-  <button class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">🕒</span>السجل</button>
+  <button class="nav-link" onclick="switchTab('tabMore', this)"><span class="icon">👥</span>المجتمع</button>
+  <button class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">📥</span>التنزيلات</button>
   <button class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
-  <button class="nav-link" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
+  <button class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
 </nav>
 
 <script>
+const mockData = [
+  { id: 1, title: "The Genius Streamer", type: "مستمر", rating: "9.0", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Streamer", category: "new" },
+  { id: 2, title: "Baby Sprout", type: "مستمر", rating: "6.0", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Baby+Sprout", category: "new" },
+  { id: 3, title: "Blinded by Setting Sun", type: "مكتمل", rating: "8.1", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Blinded", category: "completed" },
+  { id: 4, title: "Komi-san", type: "مكتمل", rating: "7.0", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Komi", category: "completed" },
+  { id: 5, title: "Demonic Emperor", type: "مستمر", rating: "9.6", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Demonic", category: "top" },
+  { id: 6, title: "Northern Blade", type: "مكتمل", rating: "9.6", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Blade", category: "top" }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderSections();
+});
+
 function switchTab(tabId, el) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
   document.getElementById(tabId).classList.add('active');
   if (el) el.classList.add('active');
+}
+
+function renderSections() {
+  const newContainer = document.getElementById('newReleasesGrid');
+  const compContainer = document.getElementById('completedGrid');
+  const topContainer = document.getElementById('topRatedGrid');
+
+  newContainer.innerHTML = '';
+  compContainer.innerHTML = '';
+  topContainer.innerHTML = '';
+
+  mockData.forEach(item => {
+    const cardHTML = `
+      <div class="manga-mini-card" onclick="alert('فتح تفاصيل: ${item.title}')">
+        <div class="mini-poster">
+          <img src="${item.poster}" alt="cover">
+          <span class="tag-badge">${item.type}</span>
+        </div>
+        <div class="mini-details">
+          <h4>${item.title}</h4>
+          <p>★ ${item.rating}</p>
+        </div>
+      </div>
+    `;
+
+    if(item.category === 'new') newContainer.innerHTML += cardHTML;
+    if(item.category === 'completed') compContainer.innerHTML += cardHTML;
+    if(item.category === 'top') topContainer.innerHTML += cardHTML;
+  });
 }
 </script>
 
