@@ -141,7 +141,7 @@ main{padding:16px}.view{display:none}.view.active{display:block}.hero{min-height
 <div class="toast" id="toast"></div>
 
 <script>
-const DATA=[
+let DATA=[
 {id:1,title:"Solo Leveling",type:"manhwa",genre:["أكشن","فانتازيا"],status:"completed",rating:9.8,year:2024,progress:65,chapters:179,desc:"صياد ضعيف يحصل على قدرة فريدة تسمح له بالتطور بلا حدود.",cover:"https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=500&q=80"},
 {id:2,title:"Omniscient Reader",type:"manhwa",genre:["أكشن","فانتازيا"],status:"ongoing",rating:9.6,year:2025,progress:32,chapters:220,desc:"قارئ يجد نفسه داخل الرواية التي كان يعرف أحداثها مسبقًا.",cover:"https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=500&q=80"},
 {id:3,title:"One Piece",type:"manga",genre:["مغامرة","أكشن"],status:"ongoing",rating:9.8,year:2026,progress:48,chapters:1170,desc:"رحلة قراصنة تبحث عن الكنز الأسطوري.",cover:"https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=500&q=80"},
@@ -155,97 +155,13 @@ const DATA=[
 ];
 const labels={manhwa:"مانهوا",manga:"مانجا",anime:"أنمي",movie:"فيلم"};
 const state=JSON.parse(localStorage.getItem("nexoraState")||'{"favorites":[],"history":[1,4],"notifications":[{"id":1,"text":"مرحبًا بك في Nexora","date":"الآن","read":false},{"id":2,"text":"يمكنك تخصيص التطبيق من الإعدادات","date":"اليوم","read":false}],"settings":{"dark":true,"notifications":true,"progress":true,"wifi":true}}');
-function save(){localStorage.setItem("nexoraState",JSON.stringify(state))}
-function toast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove("show"),1800)}
-function go(id){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll("[data-nav]").forEach(b=>b.classList.toggle("active",b.dataset.nav===id));window.scrollTo(0,0);if(id==="discover")renderDiscover();if(id==="library")renderLibrary("favorites");if(id==="history")renderHistory();if(id==="notifications")renderNotifications()}
-function card(d){const fav=state.favorites.includes(d.id);return `<article class="card"><div class="cover">${d.cover?`<img src="${d.cover}" alt="">`:""}<button class="favbtn ${fav?"on":""}" onclick="toggleFav(${d.id})" aria-label="مفضلة">${fav?"♥":"♡"}</button><span class="badge">${labels[d.type]}</span></div><div class="info"><div class="title">${d.title}</div><div class="meta">${d.status==="ongoing"?"مستمر":"مكتمل"} · ${d.year}</div><div class="stars">★ ${d.rating}</div>${d.progress?`<div class="progress"><i style="width:${d.progress}%"></i></div>`:""}<div class="cardactions"><button class="smallbtn" onclick="openDetail(${d.id})">التفاصيل</button><button class="smallbtn" onclick="startItem(${d.id})">${d.type==="anime"||d.type==="movie"?"تشغيل":"قراءة"}</button>${customData.some(x=>x.id===d.id)&&adminLogged()?`<button class="smallbtn" style="color:#ff8a8a" onclick="deleteCustom(${d.id})">حذف</button>`:""}</div></div></article>`}
-function render(id,arr){document.getElementById(id).innerHTML=arr.length?arr.map(card).join(""):`<div class="empty" style="grid-column:1/-1"><strong>لا توجد نتائج</strong><span>جرّب تغيير البحث أو الفلاتر.</span></div>`}
-function renderHome(){document.getElementById("homeChips").innerHTML=["الكل","مانهوا","مانجا","أنمي","أفلام"].map((x,i)=>`<button class="chip ${i===0?"active":""}" onclick="filterType('${i===0?"all":Object.keys(labels).find(k=>labels[k]===x)}')">${x}</button>`).join("");render("continueGrid",state.history.map(id=>DATA.find(x=>x.id===id)).filter(Boolean));render("popularGrid",[...DATA].sort((a,b)=>b.rating-a.rating).slice(0,5));render("newGrid",[...DATA].sort((a,b)=>b.year-a.year).slice(0,5))}
-function filterType(t){go("discover");document.getElementById("typeFilter").value=t;renderDiscover()}
-function renderDiscover(){let q=document.getElementById("search").value.trim().toLowerCase(),t=document.getElementById("typeFilter").value,g=document.getElementById("genreFilter").value,s=document.getElementById("statusFilter").value,o=document.getElementById("sortFilter").value;let a=DATA.filter(d=>(!q||d.title.toLowerCase().includes(q))&&(t==="all"||d.type===t)&&(g==="all"||d.genre.includes(g))&&(s==="all"||d.status===s));if(o==="rating")a.sort((x,y)=>y.rating-x.rating);if(o==="new")a.sort((x,y)=>y.year-x.year);if(o==="az")a.sort((x,y)=>x.title.localeCompare(y.title));render("discoverGrid",a)}
-function renderLibrary(mode){document.querySelectorAll("[data-lib]").forEach(x=>x.classList.toggle("active",x.dataset.lib===mode));let ids=mode==="favorites"?state.favorites:state.history;render("libraryGrid",ids.map(id=>DATA.find(x=>x.id===id)).filter(Boolean))}
-function renderHistory(){render("historyGrid",state.history.map(id=>DATA.find(x=>x.id===id)).filter(Boolean))}
-function renderNotifications(){document.getElementById("notificationList").innerHTML=state.notifications.map(n=>`<div class="listitem"><div><b>${n.text}</b><div class="meta">${n.date}${n.read?"":" · جديد"}</div></div></div>`).join("")||`<div class="empty"><strong>لا توجد إشعارات</strong></div>`}
-function toggleFav(id){state.favorites=state.favorites.includes(id)?state.favorites.filter(x=>x!==id):[...state.favorites,id];save();renderHome();if(document.getElementById("library").classList.contains("active"))renderLibrary("favorites");if(document.getElementById("discover").classList.contains("active"))renderDiscover();toast(state.favorites.includes(id)?"تمت الإضافة للمفضلة":"تمت الإزالة من المفضلة")}
-function startItem(id){if(!state.history.includes(id))state.history.unshift(id);state.history=state.history.filter(x=>DATA.some(d=>d.id===x)).slice(0,20);save();renderHome();openDetail(id)}
-function openDetail(id){const d=DATA.find(x=>x.id===id);if(!d)return;document.getElementById("detailContent").innerHTML=`<div class="detailtop"><div class="detailcover"><img src="${d.cover}" alt=""></div><div><h2>${d.title}</h2><div class="meta">${labels[d.type]} · ${d.year} · ${d.status==="ongoing"?"مستمر":"مكتمل"}</div><div class="stars">★ ${d.rating}</div><div class="tags">${d.genre.map(x=>`<span class="tag">${x}</span>`).join("")}</div><p class="desc">${d.desc}</p><div class="actions" style="margin-top:13px"><button class="primary" onclick="startItem(${d.id})">${d.type==="anime"||d.type==="movie"?"تشغيل":"قراءة"}</button><button class="secondary" onclick="toggleFav(${d.id});openDetail(${d.id})">${state.favorites.includes(d.id)?"إزالة من المفضلة":"إضافة للمفضلة"}</button>${customData.some(x=>x.id===d.id)&&adminLogged()?`<button class="danger" onclick="deleteCustom(${d.id});closeModal('detailModal')">حذف المحتوى</button>`:""}</div></div></div><div class="list"><h3>${d.type==="anime"||d.type==="movie"?"المشاهدة":"الفصول"}</h3>${Array.from({length:Math.min(d.chapters,10)},(_,i)=>`<div class="listitem"><span>${d.type==="movie"?"الفيلم":d.type==="anime"?"الحلقة ":"الفصل "}${d.type==="movie"?"1":Math.max(1,d.chapters-i)}</span><button class="smallbtn" style="max-width:100px" onclick="toast('تم تسجيل التقدم')">${d.type==="anime"||d.type==="movie"?"تشغيل":"قراءة"}</button></div>`).join("")}</div>`;document.getElementById("detailModal").classList.add("show")}
-function closeModal(id){document.getElementById(id).classList.remove("show")}
-function clearHistory(){state.history=[];save();renderHistory();renderHome();toast("تم مسح السجل")}
-function markNotifications(){state.notifications.forEach(n=>n.read=true);save();renderNotifications();toast("تم تحديد الإشعارات كمقروءة")}
-function resetFilters(){document.getElementById("typeFilter").value="all";document.getElementById("genreFilter").value="all";document.getElementById("statusFilter").value="all";document.getElementById("sortFilter").value="popular";document.getElementById("search").value="";document.getElementById("clearSearch").classList.add("hidden");renderDiscover()}
-function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="nexora-data.json";a.click();URL.revokeObjectURL(a.href);toast("تم تصدير بياناتك")}
-function importData(){const i=document.createElement("input");i.type="file";i.accept=".json,application/json";i.onchange=()=>{const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);Object.assign(state,x);save();location.reload()}catch{toast("ملف غير صالح")}};r.readAsText(f)};i.click()}
-function factoryReset(){if(confirm("سيتم حذف إعداداتك ومفضلاتك وسجلك. هل تريد المتابعة؟")){localStorage.removeItem("nexoraState");localStorage.removeItem(CUSTOM_KEY);sessionStorage.removeItem(ADMIN_KEY);location.reload()}}
-document.querySelectorAll("[data-nav]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.nav)));
-document.querySelectorAll("[data-lib]").forEach(b=>b.addEventListener("click",()=>renderLibrary(b.dataset.lib)));
-document.querySelectorAll(".switch").forEach(b=>b.addEventListener("click",()=>{const k=b.dataset.setting;state.settings[k]=!state.settings[k];b.classList.toggle("on",state.settings[k]);save();if(k==="dark")document.body.style.filter=state.settings[k]?"":"brightness(1.1)";toast("تم تحديث الإعداد")})); 
-document.getElementById("menuBtn").onclick=()=>document.getElementById("settingsModal").classList.add("show");
-document.getElementById("notifyBtn").onclick=()=>go("notifications");
-document.getElementById("search").addEventListener("input",e=>{document.getElementById("clearSearch").classList.toggle("hidden",!e.target.value);go("discover");renderDiscover()});
-document.getElementById("clearSearch").onclick=()=>{document.getElementById("search").value="";document.getElementById("clearSearch").classList.add("hidden");renderDiscover()};
-["typeFilter","genreFilter","statusFilter","sortFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderDiscover));
-document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal").forEach(m=>m.classList.remove("show"))});
+let customAddedData = JSON.parse(localStorage.getItem("nexoraCustomData")||'[]');
+DATA = [...customAddedData, ...DATA];
 
-const ADMIN_KEY="nexoraAdminSession";
-const ADMIN_USER="owner";
-const ADMIN_PASS="Nexora@2026";
-const CUSTOM_KEY="nexoraCustomContent";
-let customData=JSON.parse(localStorage.getItem(CUSTOM_KEY)||"[]");
-
-function allData(){return [...DATA,...customData]}
-function adminLogged(){return sessionStorage.getItem(ADMIN_KEY)==="1"}
-function openAdmin(){
- if(adminLogged()){renderAdmin();document.getElementById("adminModal").classList.add("show")}
- else document.getElementById("adminLoginModal").classList.add("show")
+function save(){
+  localStorage.setItem("nexoraState",JSON.stringify(state));
 }
-function adminLogin(){
- const u=document.getElementById("adminUser").value.trim();
- const pw=document.getElementById("adminPass").value;
- if(u===ADMIN_USER && pw===ADMIN_PASS){
-  sessionStorage.setItem(ADMIN_KEY,"1");closeModal("adminLoginModal");renderAdmin();document.getElementById("adminModal").classList.add("show");toast("تم فتح لوحة الإدارة")
- }else toast("بيانات الدخول غير صحيحة")
+function saveCustom(){
+  localStorage.setItem("nexoraCustomData", JSON.stringify(customAddedData));
 }
-function adminLogout(){sessionStorage.removeItem(ADMIN_KEY);closeModal("adminModal");toast("تم تسجيل خروج الإدارة")}
-function addContent(){
- if(!adminLogged())return openAdmin();
- const title=document.getElementById("adminTitle").value.trim();
- if(!title)return toast("اكتب اسم المحتوى");
- const item={
-  id:Date.now(),title,
-  type:document.getElementById("adminType").value,
-  genre:document.getElementById("adminGenre").value.split(",").map(x=>x.trim()).filter(Boolean),
-  status:document.getElementById("adminStatus").value,
-  rating:Number(document.getElementById("adminRating").value)||0,
-  year:Number(document.getElementById("adminYear").value)||new Date().getFullYear(),
-  progress:0,
-  chapters:Number(document.getElementById("adminChapters").value)||1,
-  desc:document.getElementById("adminDesc").value.trim()||"لا يوجد وصف.",
-  cover:document.getElementById("adminCover").value.trim()
- };
- customData.unshift(item);localStorage.setItem(CUSTOM_KEY,JSON.stringify(customData));
- ["adminTitle","adminCover","adminYear","adminRating","adminChapters","adminGenre","adminDesc"].forEach(id=>document.getElementById(id).value="");
- renderAdmin();renderHome();renderDiscover();toast("تمت إضافة المحتوى");
-}
-function deleteCustom(id){
- if(!adminLogged())return;
- if(!confirm("حذف هذا المحتوى نهائيًا من Nexora؟"))return;
- customData=customData.filter(x=>x.id!==id);localStorage.setItem(CUSTOM_KEY,JSON.stringify(customData));
- state.favorites=state.favorites.filter(x=>x!==id);state.history=state.history.filter(x=>x!==id);save();
- renderAdmin();renderHome();renderDiscover();toast("تم حذف المحتوى");
-}
-function renderAdmin(){
- const list=document.getElementById("adminList");document.getElementById("adminCount").textContent=customData.length+" عنصر";
- list.innerHTML=customData.length?customData.map(d=>`
- <div class="listitem">
-  <div><b>${d.title}</b><div class="meta">${labels[d.type]} · ${d.year}</div></div>
-  <button class="danger" onclick="deleteCustom(${d.id})">حذف</button>
- </div>`).join(""):`<div class="empty"><strong>لا يوجد محتوى مضاف</strong><span>أضف أول فيلم أو مانهوا أو أنمي من الأعلى.</span></div>`;
-}
-
-// Include admin-added content in all catalog operations.
-const _DATA0=DATA;
-DATA.splice(0,DATA.length,..._DATA0,...customData);
-renderHome();renderDiscover();renderNotifications();
-</script>
-</body>
-</html>
+function toast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.tt);window.
