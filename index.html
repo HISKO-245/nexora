@@ -591,7 +591,40 @@ function saveManga() {
 
 function openPanel(id) { document.getElementById(id).classList.add('active'); }
 function closePanel(id) { document.getElementById(id).classList.remove('active'); }
+function openPanel(id) { document.getElementById(id).classList.add('active'); }
+function closePanel(id) { document.getElementById(id).classList.remove('active'); }
 </script>
+<script type="module">
+  // استيراد الدوال المطلوبة من مكتبات Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+  import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
+  // إعدادات تطبيقك الخاصة
+  const firebaseConfig = {
+    apiKey: "AIzaSyDfSARn8whEYgrJCXtt0TaADe2kOEQBj18",
+    authDomain: "nexora-885db.firebaseapp.com",
+    projectId: "nexora-885db",
+    storageBucket: "nexora-885db.firebasestorage.app",
+    messagingSenderId: "744173065809",
+    appId: "1:744173065809:web:1e3fbb1e802fd4d52dca70",
+    measurementId: "G-VDDG5CBQPK"
+  };
+
+  // تهيئة Firebase وتحليلات الموقع
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+  // تهيئة قاعدة البيانات (Firestore) وجعلها متاحة في الموقع
+  const db = getFirestore(app);
+  window.db = db;
+  window.collection = collection;
+  window.addDoc = addDoc;
+  window.getDocs = getDocs;
+
+  console.log("تم اتصال Firebase بنجاح!");
+</script>
+</body>
+</html>
 </body>
         </html>
