@@ -206,7 +206,7 @@ header {
   color: #efefef;
 }
 
-/* Admin Modal */
+/* Modals & Panels */
 .full-panel {
   display: none;
   position: fixed;
@@ -314,14 +314,14 @@ nav {
 <div id="tabMore" class="tab-content">
   <div class="more-container" style="padding: 16px;">
     
-    <!-- بطاقة تسجيل الدخول -->
-    <div class="user-card" onclick="alert('صفحة تسجيل الدخول قيد التطوير')" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 18px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; cursor: pointer;">
+    <!-- بطاقة تسجيل الدخول (تتغير ديناميكياً عند تسجيل الدخول) -->
+    <div class="user-card" id="userCardProfile" onclick="handleAuthClick()" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 18px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; cursor: pointer;">
       <span style="color: #71717a; font-size: 14px;">›</span>
       <div style="text-align: right;">
-        <h4 style="font-size: 15px; font-weight: bold; color: #ffffff; margin-bottom: 4px;">تسجيل الدخول</h4>
-        <p style="font-size: 11px; color: #a1a1aa;">أنشئ حساباً مجانياً أو سجل الدخول</p>
+        <h4 id="userNameDisplay" style="font-size: 15px; font-weight: bold; color: #ffffff; margin-bottom: 4px;">تسجيل الدخول</h4>
+        <p id="userSubDisplay" style="font-size: 11px; color: #a1a1aa;">أنشئ حساباً مجانياً أو سجل الدخول</p>
       </div>
-      <div class="avatar" style="width: 44px; height: 44px; background: rgba(139, 92, 246, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">👤</div>
+      <div class="avatar" id="userAvatarIcon" style="width: 44px; height: 44px; background: rgba(139, 92, 246, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #8b5cf6;">👤</div>
     </div>
 
     <!-- مجموعة الحساب والتطبيق -->
@@ -382,6 +382,18 @@ nav {
   </div>
 </div>
 
+<!-- Login Modal Panel -->
+<div class="full-panel" id="loginPanel">
+  <h3>تسجيل الدخول إلى Nexora</h3>
+  <br>
+  <div class="form-group">
+    <label>اسم المستخدم أو البريد</label>
+    <input type="text" id="loginUsernameInput" placeholder="اكتب اسمك...">
+  </div>
+  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="performLogin()">✨ دخول</button>
+  <button style="width:100%; padding:12px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('loginPanel')">إلغاء</button>
+</div>
+
 <!-- Admin Panel Modal -->
 <div class="full-panel" id="adminPanel">
   <h3>إضافة عمل جديد محلياً</h3>
@@ -434,6 +446,7 @@ let currentCategory = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
   renderHome();
+  checkUserSession();
 });
 
 function renderGrid(containerId, itemsToRender) {
@@ -527,6 +540,45 @@ function switchTab(tabId, el) {
   if(tabId === 'tabSearch') renderGrid('searchGrid', mangaList);
 }
 
+/* User Auth Functions */
+function checkUserSession() {
+  const savedUser = localStorage.getItem('nexora_logged_user');
+  if (savedUser) {
+    document.getElementById('userNameDisplay').innerText = savedUser;
+    document.getElementById('userSubDisplay').innerText = 'تم تسجيل الدخول بنجاح (انقر لتسجيل الخروج)';
+    document.getElementById('userAvatarIcon').innerText = savedUser.charAt(0).toUpperCase();
+  } else {
+    document.getElementById('userNameDisplay').innerText = 'تسجيل الدخول';
+    document.getElementById('userSubDisplay').innerText = 'أنشئ حساباً مجانياً أو سجل الدخول';
+    document.getElementById('userAvatarIcon').innerText = '👤';
+  }
+}
+
+function handleAuthClick() {
+  const savedUser = localStorage.getItem('nexora_logged_user');
+  if (savedUser) {
+    if (confirm("هل تريد تسجيل الخروج من حسابك (" + savedUser + ")؟")) {
+      localStorage.removeItem('nexora_logged_user');
+      checkUserSession();
+    }
+  } else {
+    openPanel('loginPanel');
+  }
+}
+
+function performLogin() {
+  const nameInput = document.getElementById('loginUsernameInput').value.trim();
+  if (!nameInput) {
+    alert("يرجى كتابة اسم المستخدم أولاً!");
+    return;
+  }
+  localStorage.setItem('nexora_logged_user', nameInput);
+  closePanel('loginPanel');
+  document.getElementById('loginUsernameInput').value = '';
+  checkUserSession();
+  alert("أهلاً بك يا " + nameInput + " في Nexora! 🎉");
+}
+
 function saveManga() {
   const title = document.getElementById('addTitle').value;
   if(!title) return alert("يرجى إدخال العنوان على الأقل");
@@ -544,22 +596,4 @@ function saveManga() {
   };
   
   mangaList.push(newItem);
-  localStorage.setItem('nexora_media', JSON.stringify(mangaList));
-  
-  alert("تم حفظ العمل بنجاح على هاتفك! 🎉");
-  
-  document.getElementById('addTitle').value = '';
-  document.getElementById('addAuthor').value = '';
-  document.getElementById('addPoster').value = '';
-  document.getElementById('addVideo').value = '';
-  document.getElementById('addDesc').value = '';
-  closePanel('adminPanel');
-  
-  renderHome();
-}
-
-function openPanel(id) { document.getElementById(id).classList.add('active'); }
-function closePanel(id) { document.getElementById(id).classList.remove('active'); }
-</script>
-</body>
-</html>
+  localStorage.setItem('nexora_m
