@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora - أنمي، أفلام ومانغا</title>
+<title>Nexora</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
 body { background: #09090e; color: #efefef; padding-bottom: 75px; }
@@ -18,17 +18,15 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* Home Profile Card */
-.home-profile-card { background: #12121c; border: 1px solid #1e1e2d; border-radius: 16px; margin: 12px 16px; padding: 16px; }
-.home-profile-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; cursor: pointer; }
-.home-profile-info { text-align: right; }
-.home-profile-info h3 { font-size: 15px; color: #fff; font-weight: bold; }
-.home-profile-info p { font-size: 10px; color: #71717a; }
-.home-avatar { width: 50px; height: 50px; background: #191926; border: 2px solid #8b5cf6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; color: #fff; }
+/* Main Central Banner (البلاكة في نص الشاشة الرئيسية) */
+.central-hero-banner { background: linear-gradient(135deg, #181824 0%, #12121c 100%); border: 1px solid #2a2a3d; border-radius: 16px; margin: 16px; padding: 24px 16px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+.central-hero-banner h2 { font-size: 18px; color: #fff; font-weight: bold; margin-bottom: 6px; }
+.central-hero-banner p { font-size: 11px; color: #a1a1aa; margin-bottom: 16px; }
+.central-hero-btn { background: #8b5cf6; color: #fff; border: none; padding: 10px 24px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
 
 /* Quick Actions Grid */
-.quick-actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.quick-action-card { background: #151521; border: 1px solid #1e1e2d; border-radius: 12px; padding: 12px; text-align: right; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
+.quick-actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 16px; margin-bottom: 16px; }
+.quick-action-card { background: #12121c; border: 1px solid #1e1e2d; border-radius: 12px; padding: 12px; text-align: right; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
 .quick-action-card .top-row-act { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 .quick-action-card .top-row-act h5 { font-size: 12px; color: #fff; font-weight: bold; }
 .quick-action-card p { font-size: 9px; color: #71717a; }
@@ -45,8 +43,6 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 .media-poster { width: 100%; aspect-ratio: 2/3; background: #191926; position: relative; }
 .media-poster img { width: 100%; height: 100%; object-fit: cover; }
 .status-tag { position: absolute; top: 6px; right: 6px; background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
-.status-tag.movie { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border-color: rgba(59, 130, 246, 0.4); }
-.status-tag.anime { background: rgba(236, 72, 153, 0.2); color: #f472b6; border-color: rgba(236, 72, 153, 0.4); }
 .media-info { padding: 8px; text-align: right; }
 .media-info h5 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
 .media-info p { font-size: 9px; color: #71717a; }
@@ -57,7 +53,7 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 .search-input-field input { background: transparent; border: none; color: #fff; font-size: 13px; width: 100%; outline: none; text-align: right; }
 .search-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-/* Settings & Admin */
+/* Settings & Admin Panels */
 .settings-wrap { padding: 16px; }
 .settings-group-title { font-size: 11px; color: #71717a; margin: 16px 0 8px; font-weight: bold; text-align: right; }
 .settings-card-box { background: #12121c; border: 1px solid #1e1e2d; border-radius: 14px; overflow: hidden; margin-bottom: 10px; }
@@ -69,7 +65,7 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 .settings-row-right p { font-size: 9px; color: #71717a; }
 .settings-row-left { font-size: 11px; color: #71717a; }
 
-/* Profile Tab */
+/* Profile View Detailed */
 .profile-banner-bg { height: 110px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); position: relative; }
 .profile-avatar-box { width: 75px; height: 75px; background: #12121c; border: 3px solid #09090e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #fff; position: absolute; bottom: -35px; right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
 .profile-body-content { padding: 45px 16px 16px; text-align: right; }
@@ -108,80 +104,77 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 <div id="tabHome" class="tab-content active">
   <div class="top-header">
     <div class="top-icons">
-      <div class="header-icon-btn" onclick="showAlert('لا توجد إشعارات جديدة حالياً')">🔔</div>
+      <div class="header-icon-btn" onclick="showAlert('لا توجد إشعارات جديدة')">🔔</div>
       <div class="header-icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">🔍</div>
     </div>
     <div class="app-main-title">Nexora</div>
   </div>
 
-  <!-- Profile Card inside Home -->
-  <div class="home-profile-card">
-    <div class="home-profile-top" onclick="switchTab('tabProfile', null)">
-      <div class="home-profile-info">
-        <h3>HISKO HISKO</h3>
-        <p>hiskohisko45@gmail.com</p>
+  <!-- البلاكة في نص الشاشة الرئيسية -->
+  <div class="central-hero-banner">
+    <h2>مرحباً بك في عالم Nexora</h2>
+    <p>وجهتك الأولى لمشاهدة أحدث الأفلام، الأنمي، والمسلسلات بجودة عالية.</p>
+    <button class="central-hero-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">تصفح المكتبة الآن 🚀</button>
+  </div>
+
+  <!-- Quick Actions Grid -->
+  <div class="quick-actions-grid">
+    <div class="quick-action-card" onclick="switchTab('tabDownloads', document.querySelectorAll('.nav-item-btn')[2])">
+      <div class="top-row-act">
+        <h5>التحميلات</h5>
+        <span style="font-size: 16px;">📥</span>
       </div>
-      <div class="home-avatar">H</div>
+      <p>الأفلام المحفوظة</p>
     </div>
-    
-    <div class="quick-actions-grid">
-      <div class="quick-action-card" onclick="switchTab('tabDownloads', document.querySelectorAll('.nav-item-btn')[2])">
-        <div class="top-row-act">
-          <h5>التحميلات</h5>
-          <span style="font-size: 16px;">📥</span>
-        </div>
-        <p>الأفلام والفصول المحفوظة</p>
+    <div class="quick-action-card" onclick="switchTab('tabProfile', null)">
+      <div class="top-row-act">
+        <h5>الملف الشخصي</h5>
+        <span style="font-size: 16px;">👤</span>
       </div>
-      <div class="quick-action-card" onclick="switchTab('tabProfile', null)">
-        <div class="top-row-act">
-          <h5>الملف الشخصي</h5>
-          <span style="font-size: 16px;">👤</span>
-        </div>
-        <p>لوحتك والإحصاءات</p>
+      <p>لوحتك والإحصاءات</p>
+    </div>
+    <div class="quick-action-card" onclick="switchTab('tabAdmin', document.querySelectorAll('.nav-item-btn')[3])" style="border-color: rgba(139, 92, 246, 0.4);">
+      <div class="top-row-act">
+        <h5>الإدارة</h5>
+        <span style="font-size: 16px;">🛡️</span>
       </div>
-      <div class="quick-action-card" onclick="switchTab('tabAdmin', document.querySelectorAll('.nav-item-btn')[3])" style="border-color: rgba(139, 92, 246, 0.4);">
-        <div class="top-row-act">
-          <h5>الإدارة</h5>
-          <span style="font-size: 16px;">🛡️</span>
-        </div>
-        <p>لوحة تحكم النظام</p>
+      <p>لوحة تحكم النظام</p>
+    </div>
+    <div class="quick-action-card" onclick="switchTab('tabSettings', null)">
+      <div class="top-row-act">
+        <h5>الإعدادات</h5>
+        <span style="font-size: 16px;">⚙️</span>
       </div>
-      <div class="quick-action-card" onclick="switchTab('tabSettings', null)">
-        <div class="top-row-act">
-          <h5>الإعدادات</h5>
-          <span style="font-size: 16px;">⚙️</span>
-        </div>
-        <p>الخصوصية والتخزين</p>
-      </div>
+      <p>الخصوصية والتخزين</p>
     </div>
   </div>
 
   <div class="section-header">
-    <button class="see-all-btn" onclick="showAlert('عرض كل الأفلام والأنمي الجديدة')">عرض الكل ‹</button>
-    <h2>🎬 أفلام وأنمي جديدة</h2>
+    <button class="see-all-btn" onclick="showAlert('عرض الكل')">عرض الكل ‹</button>
+    <h2>🎬 أعمال جديدة</h2>
   </div>
   <div class="horizontal-scroll" id="newWorksGrid"></div>
 
   <div class="section-header">
-    <button class="see-all-btn" onclick="showAlert('عرض كل الأعمال المكتملة')">عرض الكل ‹</button>
-    <h2>✅ أعمال ومسلسلات مكتملة</h2>
+    <button class="see-all-btn" onclick="showAlert('عرض الكل')">عرض الكل ‹</button>
+    <h2>✅ أعمال مكتملة</h2>
   </div>
   <div class="horizontal-scroll" id="completedWorksGrid"></div>
 
   <div class="section-header">
-    <button class="see-all-btn" onclick="showAlert('عرض الأعلى تقييماً')">⭐ الأعلى تقييماً</button>
-    <h2>🌟 الأفلام والأنمي الأسطورية</h2>
+    <button class="see-all-btn" onclick="showAlert('عرض الكل')">عرض الكل ‹</button>
+    <h2>⭐ الأعلى تقييماً</h2>
   </div>
   <div class="horizontal-scroll" id="topRatedGrid"></div>
 </div>
 
 <!-- SEARCH TAB -->
 <div id="tabSearch" class="tab-content">
-  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">البحث الشامل في Nexora</div></div>
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">البحث في Nexora</div></div>
   <div class="search-box-wrap">
     <div class="search-input-field">
       <span>🔍</span>
-      <input type="text" id="searchInput" placeholder="ابحث عن فيلم، أنمي، مسلسل أو مانهوا..." oninput="handleSearch(this.value)">
+      <input type="text" id="searchInput" placeholder="ابحث عن فيلم، أنمي، مسلسل..." oninput="handleSearch(this.value)">
     </div>
     <div class="search-grid" id="searchGridContainer"></div>
   </div>
@@ -189,11 +182,10 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 
 <!-- DOWNLOADS TAB -->
 <div id="tabDownloads" class="tab-content">
-  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">التحميلات دون اتصال</div></div>
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">التحميلات</div></div>
   <div style="padding: 50px 20px; text-align: center; color: #71717a;">
     <div style="font-size: 40px; margin-bottom: 10px;">📥</div>
-    <p>لا توجد أفلام أو حلقات محملة حالياً.</p>
-    <small style="color: #8b5cf6; cursor: pointer;" onclick="switchTab('tabHome', document.querySelectorAll('.nav-item-btn')[0])">تصفح المكتبة للتحميل</small>
+    <p>لا توجد ملفات محملة حالياً.</p>
   </div>
 </div>
 
@@ -201,37 +193,27 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 <div id="tabAdmin" class="tab-content">
   <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">لوحة الإدارة والتحكم</div></div>
   <div class="settings-wrap">
-    <div class="settings-group-title" style="margin-top: 0;">إدارة محتوى النظام (أفلام وأنمي)</div>
+    <div class="settings-group-title" style="margin-top: 0;">إدارة النظام</div>
     <div class="settings-card-box">
-      <div class="settings-row" onclick="showAlert('فتح نافذة إضافة فيلم أو أنمي جديد لمكتبة Nexora')">
+      <div class="settings-row" onclick="showAlert('فتح إضافة عمل جديد')">
         <div class="settings-row-right">
           <span>➕</span>
           <div>
             <h5>إضافة عمل جديد</h5>
-            <p>إرفاق فيلم، أنمي أو مانغا جديدة</p>
+            <p>إرفاق فيلم أو أنمي جديد</p>
           </div>
         </div>
         <div class="settings-row-left">إدارة</div>
       </div>
-      <div class="settings-row" onclick="showAlert('جاري مزامنة سيرفرات البث والأفلام الفورية')">
+      <div class="settings-row" onclick="showAlert('تم تحديث البيانات بنجاح')">
         <div class="settings-row-right">
           <span>🔄</span>
           <div>
-            <h5>تحديث سيرفرات البث</h5>
-            <p>مزامنة الحلقات والأفلام الجديدة</p>
+            <h5>تحديث السيرفرات</h5>
+            <p>مزامنة البيانات الفورية</p>
           </div>
         </div>
         <div class="settings-row-left">تحديث</div>
-      </div>
-      <div class="settings-row" onclick="showAlert('عدد المستخدمين النشطين حالياً: 2,450 مستخدم')">
-        <div class="settings-row-right">
-          <span>📊</span>
-          <div>
-            <h5>إحصائيات النظام</h5>
-            <p>مشاهدات الأفلام، التحميلات، والنشاط العام</p>
-          </div>
-        </div>
-        <div class="settings-row-left">عرض</div>
       </div>
     </div>
   </div>
@@ -242,43 +224,15 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
   <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">الإعدادات</div></div>
   <div class="settings-wrap">
     <div class="settings-card-box">
-      <div class="settings-row" onclick="toggleCoverQuality()">
+      <div class="settings-row" onclick="showAlert('تم تغيير الجودة')">
         <div class="settings-row-right">
           <span>🌓</span>
           <div>
-            <h5>جودة عرض الفيديو والأغلفة</h5>
-            <p id="coverQualityTxt">عالية (HD)</p>
+            <h5>جودة العرض</h5>
+            <p>عالية (HD)</p>
           </div>
         </div>
         <div class="settings-row-left">تغيير</div>
-      </div>
-    </div>
-
-    <div class="settings-group-title">الإشعارات</div>
-    <div class="settings-card-box">
-      <div class="settings-row" onclick="toggleNotifications()">
-        <div class="settings-row-right">
-          <span>🔔</span>
-          <div>
-            <h5>إشعارات الحلقات والأفلام</h5>
-            <p id="notifTxt">كل الإشعارات مفعلة</p>
-          </div>
-        </div>
-        <div class="settings-row-left">تعديل</div>
-      </div>
-    </div>
-
-    <div class="settings-group-title">حول ودعم</div>
-    <div class="settings-card-box">
-      <div class="settings-row" onclick="showAlert('شكراً لتقييمك تطبيق Nexora بخمس نجوم!')">
-        <div class="settings-row-right">
-          <span>⭐</span>
-          <div>
-            <h5>قيم Nexora</h5>
-            <p>ادعمنا بتقييم التطبيق في المتجر</p>
-          </div>
-        </div>
-        <div class="settings-row-left">تقييم</div>
       </div>
     </div>
   </div>
@@ -308,16 +262,13 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
       <div class="profile-action-btn-item" onclick="switchTab('tabDownloads', null)"><span>التحميلات</span> 📥</div>
       <div class="profile-action-btn-item" onclick="editUserBio()"><span>تعديل الملف</span> ✏️</div>
       <div class="profile-action-btn-item" onclick="switchTab('tabAdmin', null)"><span>الإدارة</span> 🛡️</div>
-      <div class="profile-action-btn-item" onclick="showAlert('فتح قوائم المشاهدة الخاصة والعامة')"><span>قوائمي</span> 📂</div>
+      <div class="profile-action-btn-item" onclick="showAlert('قوائمي')"><span>قوائمي</span> 📂</div>
     </div>
 
     <div class="stats-grid-box">
-      <div class="stat-card-item"><div class="num">12</div><div class="lbl">أفلام شاهدتها</div></div>
-      <div class="stat-card-item"><div class="num">48</div><div class="lbl">حلقة أنمي</div></div>
-      <div class="stat-card-item"><div class="num">5</div><div class="lbl">التقييمات</div></div>
-      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التوصيات</div></div>
-      <div class="stat-card-item"><div class="num">3</div><div class="lbl">القوائم</div></div>
-      <div class="stat-card-item"><div class="num">15</div><div class="lbl">الأعمال المتابعة</div></div>
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التعليقات</div></div>
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التقييمات</div></div>
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">الحلقات</div></div>
     </div>
   </div>
 </div>
@@ -327,14 +278,14 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
   <div class="modal-box-inner">
     <div class="modal-img-top">
       <img id="modalPosterImg" src="" alt="poster">
-      <span class="status-tag movie" id="modalTagBadge" style="top: 10px; right: 10px;">فيلم</span>
+      <span class="status-tag" id="modalTagBadge" style="top: 10px; right: 10px;">فيلم</span>
     </div>
     <div class="modal-desc-body">
       <h3 id="modalTitleText">عنوان العمل</h3>
       <p id="modalInfoText">التقييم: 9.5 ★</p>
       <div class="modal-actions-btns">
-        <button class="modal-btn-main" onclick="startWatchingAction()">بدء المشاهدة 🎥</button>
-        <button class="modal-btn-sec" onclick="downloadItemAction()">تحميل 📥</button>
+        <button class="modal-btn-main" onclick="showAlert('بدء المشاهدة')">بدء المشاهدة 🎥</button>
+        <button class="modal-btn-sec" onclick="showAlert('تم التحميل')">تحميل 📥</button>
       </div>
     </div>
   </div>
@@ -350,12 +301,12 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 
 <script>
 const appData = [
-  { id: 1, title: "Suzume no Tojimari", type: "فيلم", rating: "9.2", status: "فيلم", category: "new", poster: "https://via.placeholder.com/200x300/191926/3b82f6?text=Suzume+Movie" },
-  { id: 2, title: "Demon Slayer: Hashira Training", type: "أنمي", rating: "9.4", status: "جديد", category: "new", poster: "https://via.placeholder.com/200x300/191926/ec4899?text=Demon+Slayer" },
-  { id: 3, title: "Your Name (Kimi no Na wa)", type: "فيلم", rating: "9.8", status: "مكتمل", category: "completed", poster: "https://via.placeholder.com/200x300/191926/3b82f6?text=Your+Name" },
-  { id: 4, title: "Attack on Titan The Final Season", type: "أنمي", rating: "9.9", status: "مكتمل", category: "completed", poster: "https://via.placeholder.com/200x300/191926/ec4899?text=Attack+on+Titan" },
-  { id: 5, title: "Spirited Away", type: "فيلم", rating: "9.7", status: "أسطوري", category: "top", poster: "https://via.placeholder.com/200x300/191926/3b82f6?text=Spirited+Away" },
-  { id: 6, title: "Solo Leveling", type: "أنمي", rating: "9.5", status: "مستمر", category: "top", poster: "https://via.placeholder.com/200x300/191926/ec4899?text=Solo+Leveling" }
+  { id: 1, title: "Suzume no Tojimari", type: "فيلم", rating: "9.2", status: "جديد", category: "new", poster: "https://via.placeholder.com/200x300/191926/3b82f6?text=Movie+1" },
+  { id: 2, title: "Demon Slayer", type: "أنمي", rating: "9.4", status: "جديد", category: "new", poster: "https://via.placeholder.com/200x300/191926/ec4899?text=Anime+1" },
+  { id: 3, title: "Your Name", type: "فيلم", rating: "9.8", status: "مكتمل", category: "completed", poster: "https://via.placeholder.com/200x300/191926/3b82f6?text=Movie+2" },
+  { id: 4, title: "Attack on Titan", type: "أنمي", rating: "9.9", status: "مكتمل", category: "completed", poster: "https://via.placeholder.com/200x300/191926/ec4899?text=Anime+2" },
+  { id: 5, title: "Spirited Away", type: "فيلم", rating: "9.7", status: "أسطوري", category: "top", poster: "https://via.placeholder.com/200x300/191926/3b82f6?text=Top+1" },
+  { id: 6, title: "Solo Leveling", type: "أنمي", rating: "9.5", status: "مستمر", category: "top", poster: "https://via.placeholder.com/200x300/191926/ec4899?text=Top+2" }
 ];
 
 let selectedWork = null;
@@ -375,4 +326,76 @@ function switchTab(tabId, btnElement) {
 
 function renderLists(data) {
   const newGrid = document.getElementById('newWorksGrid');
-  const compGrid = document.getElementById('completedW
+  const compGrid = document.getElementById('completedWorksGrid');
+  const topGrid = document.getElementById('topRatedGrid');
+
+  newGrid.innerHTML = '';
+  compGrid.innerHTML = '';
+  topGrid.innerHTML = '';
+
+  data.forEach(item => {
+    const html = `
+      <div class="media-card" onclick="openItemModal(${item.id})">
+        <div class="media-poster">
+          <img src="${item.poster}" alt="cover">
+          <span class="status-tag">${item.status}</span>
+        </div>
+        <div class="media-info">
+          <h5>${item.title}</h5>
+          <p>★ ${item.rating}</p>
+        </div>
+      </div>
+    `;
+    if(item.category === 'new') newGrid.innerHTML += html;
+    if(item.category === 'completed') compGrid.innerHTML += html;
+    if(item.category === 'top') topGrid.innerHTML += html;
+  });
+}
+
+function renderSearchGrid(data) {
+  const grid = document.getElementById('searchGridContainer');
+  grid.innerHTML = '';
+  data.forEach(item => {
+    grid.innerHTML += `
+      <div class="media-card" style="max-width: 100%;" onclick="openItemModal(${item.id})">
+        <div class="media-poster">
+          <img src="${item.poster}" alt="cover">
+          <span class="status-tag">${item.type}</span>
+        </div>
+        <div class="media-info">
+          <h5>${item.title}</h5>
+          <p>★ ${item.rating}</p>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function handleSearch(query) {
+  const res = appData.filter(i => i.title.toLowerCase().includes(query.toLowerCase()) || i.type.includes(query));
+  renderSearchGrid(res);
+}
+
+function openItemModal(id) {
+  selectedWork = appData.find(i => i.id === id);
+  if(!selectedWork) return;
+  document.getElementById('modalTitleText').innerText = selectedWork.title;
+  document.getElementById('modalInfoText').innerText = `النوع: ${selectedWork.type} • التقييم: ★ ${selectedWork.rating}`;
+  document.getElementById('modalPosterImg').src = selectedWork.poster;
+  document.getElementById('itemModal').style.display = 'flex';
+}
+
+function closeModalOnOutside(e) {
+  if(e.target.id === 'itemModal') {
+    document.getElementById('itemModal').style.display = 'none';
+  }
+}
+
+function showAlert(msg) {
+  alert(msg);
+}
+
+function editUserBio() {
+  let newBio = prompt("أدخل الوصف الجديد لملفك الشخصي:", "أضف وصفًا قصيرًا عن نفسك");
+  if(newBio !== null && newBio.trim() !== "") {
+    document.getElementBy
