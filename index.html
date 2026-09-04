@@ -3,86 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atheer Toon - أفلام، أنمي ومانها</title>
+<title>Nexora - أفلام، أنمي ومانها</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
-body { background: #121214; color: #f4f4f5; padding-bottom: 75px; }
+body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 
 /* Top Header */
-.top-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: #18181b; position: sticky; top: 0; z-index: 90; border-bottom: 1px solid #27272a; }
+.top-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: #09090e; position: sticky; top: 0; z-index: 90; border-bottom: 1px solid #161622; }
 .top-icons { display: flex; gap: 10px; }
-.header-icon-btn { background: #27272a; border: none; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; }
-.app-main-title { font-size: 17px; font-weight: bold; color: #ec4899; }
+.header-icon-btn { background: #12121c; border: 1px solid #1e1e2d; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; }
+.app-main-title { font-size: 17px; font-weight: bold; color: #8b5cf6; }
 
 /* Tabs System */
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* Home Banner / Welcome Card */
-.atheer-welcome-banner { background: linear-gradient(135deg, #831843 0%, #18181b 100%); border: 1px solid #27272a; border-radius: 16px; margin: 12px 16px; padding: 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-.atheer-welcome-info h3 { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 4px; }
-.atheer-welcome-info p { font-size: 11px; color: #d4d4d8; }
-.atheer-avatar-box { width: 50px; height: 50px; background: #ec4899; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: #fff; box-shadow: 0 4px 12px rgba(236,72,153,0.3); }
+/* Welcome Banner */
+.welcome-banner { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border: 1px solid #1e1e2d; border-radius: 16px; margin: 12px 16px; padding: 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+.welcome-info h3 { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 4px; }
+.welcome-info p { font-size: 11px; color: #a1a1aa; }
+.avatar-box { width: 50px; height: 50px; background: #191926; border: 2px solid #8b5cf6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: #fff; box-shadow: 0 4px 12px rgba(139,92,246,0.3); }
 
 /* Section Headers */
 .section-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 10px; }
 .section-header h2 { font-size: 15px; color: #fff; font-weight: bold; display: flex; align-items: center; gap: 6px; }
-.see-all-btn { font-size: 12px; color: #ec4899; background: none; border: none; cursor: pointer; font-weight: bold; }
+.see-all-btn { font-size: 12px; color: #8b5cf6; background: none; border: none; cursor: pointer; font-weight: bold; }
 
 /* Horizontal Cards */
 .horizontal-scroll { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
-.media-card { min-width: 125px; max-width: 125px; background: #18181b; border-radius: 12px; border: 1px solid #27272a; overflow: hidden; flex-shrink: 0; cursor: pointer; position: relative; }
-.media-poster { width: 100%; aspect-ratio: 2/3; background: #27272a; position: relative; }
+.media-card { min-width: 125px; max-width: 125px; background: #12121c; border-radius: 12px; border: 1px solid #1e1e2d; overflow: hidden; flex-shrink: 0; cursor: pointer; position: relative; }
+.media-poster { width: 100%; aspect-ratio: 2/3; background: #191926; position: relative; }
 .media-poster img { width: 100%; height: 100%; object-fit: cover; }
-.status-tag { position: absolute; top: 6px; right: 6px; background: rgba(236, 72, 153, 0.25); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.4); font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
+.status-tag { position: absolute; top: 6px; right: 6px; background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.4); font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
 .media-info { padding: 8px; text-align: right; }
 .media-info h5 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
-.media-info p { font-size: 9px; color: #a1a1aa; }
+.media-info p { font-size: 9px; color: #71717a; }
 
 /* Search Tab */
 .search-box-wrap { padding: 16px; }
-.search-input-field { background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.search-input-field { background: #12121c; border: 1px solid #1e1e2d; border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .search-input-field input { background: transparent; border: none; color: #fff; font-size: 13px; width: 100%; outline: none; text-align: right; }
 .search-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+/* Admin & Upload Panel Tab */
+.admin-wrap { padding: 16px; }
+.admin-card { background: #12121c; border: 1px solid #1e1e2d; border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: right; }
+.admin-card h3 { font-size: 14px; color: #fff; margin-bottom: 12px; font-weight: bold; display: flex; align-items: center; gap: 6px; }
+.form-group { margin-bottom: 10px; }
+.form-group label { display: block; font-size: 11px; color: #71717a; margin-bottom: 4px; }
+.form-group input, .form-group select { width: 100%; background: #09090e; border: 1px solid #1e1e2d; border-radius: 8px; padding: 10px; color: #fff; font-size: 12px; text-align: right; outline: none; }
+.admin-submit-btn { width: 100%; background: #8b5cf6; color: white; border: none; padding: 11px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px; margin-top: 6px; }
 
 /* Library / Favorites Tab */
 .library-wrap { padding: 16px; }
 .library-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.library-card-item { background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 10px; display: flex; gap: 10px; align-items: center; cursor: pointer; }
+.library-card-item { background: #12121c; border: 1px solid #1e1e2d; border-radius: 12px; padding: 10px; display: flex; gap: 10px; align-items: center; cursor: pointer; }
 .library-card-item img { width: 50px; height: 65px; border-radius: 8px; object-fit: cover; }
 .library-card-info h5 { font-size: 12px; color: #fff; font-weight: bold; margin-bottom: 2px; }
-.library-card-info p { font-size: 10px; color: #a1a1aa; }
+.library-card-info p { font-size: 10px; color: #71717a; }
 
 /* Profile Tab */
-.profile-banner-bg { height: 120px; background: linear-gradient(135deg, #831843 0%, #27272a 100%); position: relative; }
-.profile-avatar-box { width: 75px; height: 75px; background: #18181b; border: 3px solid #121214; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #ec4899; position: absolute; bottom: -35px; right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+.profile-banner-bg { height: 120px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); position: relative; }
+.profile-avatar-box { width: 75px; height: 75px; background: #12121c; border: 3px solid #09090e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #8b5cf6; position: absolute; bottom: -35px; right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
 .profile-body-content { padding: 45px 16px 16px; text-align: right; }
 .profile-body-content h2 { font-size: 17px; color: #fff; font-weight: bold; margin-bottom: 2px; }
-.profile-body-content p { font-size: 11px; color: #a1a1aa; margin-bottom: 12px; }
-.bio-input-box { background: #18181b; border: 1px solid #27272a; border-radius: 10px; padding: 12px; color: #d4d4d8; font-size: 11px; margin-bottom: 16px; text-align: right; cursor: pointer; }
+.profile-body-content p { font-size: 11px; color: #71717a; margin-bottom: 12px; }
+.bio-input-box { background: #12121c; border: 1px solid #1e1e2d; border-radius: 10px; padding: 12px; color: #a1a1aa; font-size: 11px; margin-bottom: 16px; text-align: right; cursor: pointer; }
 .stats-grid-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
-.stat-card-item { background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 12px 6px; text-align: center; }
-.stat-card-item .num { font-size: 16px; font-weight: bold; color: #ec4899; margin-bottom: 2px; }
-.stat-card-item .lbl { font-size: 9px; color: #a1a1aa; }
+.stat-card-item { background: #12121c; border: 1px solid #1e1e2d; border-radius: 12px; padding: 12px 6px; text-align: center; }
+.stat-card-item .num { font-size: 16px; font-weight: bold; color: #8b5cf6; margin-bottom: 2px; }
+.stat-card-item .lbl { font-size: 9px; color: #71717a; }
 
 /* Modal Popup */
 .custom-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
-.modal-box-inner { background: #18181b; border: 1px solid #27272a; border-radius: 16px; width: 100%; max-width: 340px; overflow: hidden; text-align: right; }
-.modal-img-top { width: 100%; height: 180px; background: #27272a; position: relative; }
+.modal-box-inner { background: #12121c; border: 1px solid #1e1e2d; border-radius: 16px; width: 100%; max-width: 340px; overflow: hidden; text-align: right; }
+.modal-img-top { width: 100%; height: 180px; background: #191926; position: relative; }
 .modal-img-top img { width: 100%; height: 100%; object-fit: cover; }
 .modal-desc-body { padding: 16px; }
 .modal-desc-body h3 { font-size: 16px; color: #fff; margin-bottom: 6px; font-weight: bold; }
-.modal-desc-body p { font-size: 11px; color: #a1a1aa; margin-bottom: 14px; }
+.modal-desc-body p { font-size: 11px; color: #71717a; margin-bottom: 14px; }
 .modal-actions-btns { display: flex; gap: 8px; }
-.modal-btn-main { flex: 1; background: #ec4899; color: white; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
-.modal-btn-sec { flex: 1; background: #27272a; color: #fff; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
+.modal-btn-main { flex: 1; background: #8b5cf6; color: white; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
+.modal-btn-sec { flex: 1; background: #1e1e2d; color: #fff; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
 
 /* Bottom Nav Bar */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: #18181b; border-top: 1px solid #27272a; display: flex; justify-content: space-around; align-items: center; z-index: 999; }
-.nav-item-btn { display: flex; flex-direction: column; align-items: center; color: #71717a; font-size: 10px; gap: 3px; cursor: pointer; background: none; border: none; width: 25%; }
-.nav-item-btn.active { color: #ec4899; font-weight: bold; }
-.nav-item-btn .icon { font-size: 18px; }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: #09090e; border-top: 1px solid #1e1e2d; display: flex; justify-content: space-around; align-items: center; z-index: 999; }
+.nav-item-btn { display: flex; flex-direction: column; align-items: center; color: #71717a; font-size: 10px; gap: 3px; cursor: pointer; background: none; border: none; width: 20%; }
+.nav-item-btn.active { color: #8b5cf6; font-weight: bold; }
+.nav-item-btn .icon { font-size: 16px; }
 </style>
 </head>
 <body>
@@ -91,19 +100,19 @@ body { background: #121214; color: #f4f4f5; padding-bottom: 75px; }
 <div id="tabHome" class="tab-content active">
   <div class="top-header">
     <div class="top-icons">
-      <button class="header-icon-btn" onclick="showAlert('لا توجد إشعارات جديدة')">🔔</button>
+      <button class="header-icon-btn" onclick="showAlert('لا توجد إشعارات')">🔔</button>
       <button class="header-icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">🔍</button>
     </div>
-    <div class="app-main-title">Atheer Toon</div>
+    <div class="app-main-title">Nexora</div>
   </div>
 
-  <!-- Atheer Welcome Banner -->
-  <div class="atheer-welcome-banner" onclick="switchTab('tabProfile', null)">
-    <div class="atheer-welcome-info">
-      <h3>أهلاً بك، قارئنا العزيز</h3>
-      <p>مانها، أفلام، وأنمي في مكان واحد</p>
+  <!-- Welcome Banner -->
+  <div class="welcome-banner" onclick="switchTab('tabProfile', document.querySelectorAll('.nav-item-btn')[4])">
+    <div class="welcome-info">
+      <h3>مرحباً بك في Nexora</h3>
+      <p>أفلام، أنمي ومانها في منصة واحدة</p>
     </div>
-    <div class="atheer-avatar-box">A</div>
+    <div class="avatar-box">N</div>
   </div>
 
   <div class="section-header">
@@ -114,13 +123,13 @@ body { background: #121214; color: #f4f4f5; padding-bottom: 75px; }
 
   <div class="section-header">
     <button class="see-all-btn" onclick="showAlert('عرض الكل')">عرض الكل ‹</button>
-    <h2>🔥 مانهو وويب تون جديدة</h2>
+    <h2>🔥 مانهو وويب تون</h2>
   </div>
   <div class="horizontal-scroll" id="newWorksGrid"></div>
 
   <div class="section-header">
     <button class="see-all-btn" onclick="showAlert('عرض الكل')">عرض الكل ‹</button>
-    <h2>⭐ الأعمال الأعلى تقييماً</h2>
+    <h2>⭐ الأعلى تقييماً</h2>
   </div>
   <div class="horizontal-scroll" id="topRatedGrid"></div>
 </div>
@@ -131,9 +140,53 @@ body { background: #121214; color: #f4f4f5; padding-bottom: 75px; }
   <div class="search-box-wrap">
     <div class="search-input-field">
       <span>🔍</span>
-      <input type="text" id="searchInput" placeholder="ابحث عن فيلم، أنمي، مانهو، مانغا..." oninput="handleSearch(this.value)">
+      <input type="text" id="searchInput" placeholder="ابحث عن فيلم، أنمي، مانهو..." oninput="handleSearch(this.value)">
     </div>
     <div class="search-grid" id="searchGridContainer"></div>
+  </div>
+</div>
+
+<!-- ADMIN / UPLOAD TAB -->
+<div id="tabAdmin" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto; color:#fff;">لوحة الإدارة والنشر</div></div>
+  <div class="admin-wrap">
+    <div class="admin-card">
+      <h3>➕ إضافة عمل جديد (مانها، أنمي، فيلم)</h3>
+      <div class="form-group">
+        <label>عنوان العمل</label>
+        <input type="text" id="inputTitle" placeholder="مثال: Solo Leveling / فيلم جديد">
+      </div>
+      <div class="form-group">
+        <label>نوع العمل</label>
+        <select id="inputType">
+          <option value="مانهوا">مانهوا / مانها</option>
+          <option value="أنمي">أنمي</option>
+          <option value="فيلم">فيلم</option>
+          <option value="ويب تون">ويب تون</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>القسم في الصفحة الرئيسية</label>
+        <select id="inputCategory">
+          <option value="movie_anime">أحدث الأفلام والأنمي</option>
+          <option value="new">مانهو وويب تون جديدة</option>
+          <option value="top">الأعلى تقييماً</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>رابط الغلاف (Poster URL)</label>
+        <input type="text" id="inputPoster" placeholder="ضع رابط الصورة هنا مباشرة">
+      </div>
+      <div class="form-group">
+        <label>التقييم (مثال: 9.9)</label>
+        <input type="text" id="inputRating" placeholder="9.5">
+      </div>
+      <div class="form-group">
+        <label>الحالة (مثال: مستمر / حصري)</label>
+        <input type="text" id="inputStatus" placeholder="مستمر">
+      </div>
+      <button class="admin-submit-btn" onclick="addNewWork()">نشر العمل الآن 🚀</button>
+    </div>
   </div>
 </div>
 
@@ -154,21 +207,21 @@ body { background: #121214; color: #f4f4f5; padding-bottom: 75px; }
   </div>
 
   <div class="profile-banner-bg">
-    <div class="profile-avatar-box">A</div>
+    <div class="profile-avatar-box">N</div>
   </div>
 
   <div class="profile-body-content">
-    <h2>عضو أثير تون</h2>
-    <p>atheer.user@gmail.com</p>
+    <h2>Nexora Admin</h2>
+    <p>admin@nexora.hub</p>
     
     <div class="bio-input-box" id="bioTextDisplay" onclick="editUserBio()">
-      أضف وصفًا قصيرًا عن ذوقك في المشاهدة والقراءة ✏️
+      المسؤول عن منصة Nexora 🛡️ (اضغط للتعديل)
     </div>
 
     <div class="stats-grid-box">
-      <div class="stat-card-item"><div class="num">35</div><div class="lbl">عمل شاهدته</div></div>
-      <div class="stat-card-item"><div class="num">10</div><div class="lbl">في المفضلة</div></div>
-      <div class="stat-card-item"><div class="num">6</div><div class="lbl">التعليقات</div></div>
+      <div class="stat-card-item"><div class="num" id="statTotalWorks">6</div><div class="lbl">أعمال منشورة</div></div>
+      <div class="stat-card-item"><div class="num">15</div><div class="lbl">في المفضلة</div></div>
+      <div class="stat-card-item"><div class="num">100%</div><div class="lbl">تحكم كامل</div></div>
     </div>
   </div>
 </div>
@@ -184,7 +237,7 @@ body { background: #121214; color: #f4f4f5; padding-bottom: 75px; }
       <h3 id="modalTitleText">عنوان العمل</h3>
       <p id="modalInfoText">التقييم: 9.5 ★</p>
       <div class="modal-actions-btns">
-        <button class="modal-btn-main" onclick="showAlert('جاري التشغيل / القراءة...')">مشاهدة / قراءة 🎥</button>
+        <button class="modal-btn-main" onclick="showAlert('جاري التشغيل أو القراءة...')">مشاهدة / قراءة 🎥</button>
         <button class="modal-btn-sec" onclick="showAlert('تمت الإضافة للمفضلة')">المفضلة ❤️</button>
       </div>
     </div>
@@ -194,27 +247,26 @@ body { background: #121214; color: #f4f4f5; padding-bottom: 75px; }
 <!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav">
   <button class="nav-item-btn active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
-  <button class="nav-item-btn" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>استكشف</button>
+  <button class="nav-item-btn" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>ابحث</button>
+  <button class="nav-item-btn" onclick="switchTab('tabAdmin', this)"><span class="icon">🛡️</span>الإدارة</button>
   <button class="nav-item-btn" onclick="switchTab('tabLibrary', this)"><span class="icon">📚</span>المكتبة</button>
   <button class="nav-item-btn" onclick="switchTab('tabProfile', this)"><span class="icon">👤</span>حسابي</button>
 </nav>
 
 <script>
-const appData = [
-  { id: 1, title: "Suzume", type: "فيلم", rating: "9.3", status: "حصري", category: "movie_anime", poster: "https://via.placeholder.com/200x300/27272a/3b82f6?text=Suzume" },
-  { id: 2, title: "Demon Slayer Hashira", type: "أنمي", rating: "9.6", status: "مستمر", category: "movie_anime", poster: "https://via.placeholder.com/200x300/27272a/ec4899?text=DemonSlayer" },
-  { id: 3, title: "Solo Leveling", type: "مانهوا", rating: "9.9", status: "مستمر", category: "new", poster: "https://via.placeholder.com/200x300/27272a/8b5cf6?text=SoloLeveling" },
-  { id: 4, title: "TBATE", type: "مانهوا", rating: "9.8", status: "جديد", category: "new", poster: "https://via.placeholder.com/200x300/27272a/f59e0b?text=TBATE" },
-  { id: 5, title: "Spirited Away", type: "فيلم", rating: "9.9", status: "أسطوري", category: "top", poster: "https://via.placeholder.com/200x300/27272a/10b981?text=SpiritedAway" },
-  { id: 6, title: "Omniscient Reader", type: "ويب تون", rating: "9.7", status: "مستمر", category: "top", poster: "https://via.placeholder.com/200x300/27272a/6366f1?text=ORV" }
+let appData = [
+  { id: 1, title: "Suzume", type: "فيلم", rating: "9.3", status: "حصري", category: "movie_anime", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Suzume" },
+  { id: 2, title: "Demon Slayer", type: "أنمي", rating: "9.6", status: "مستمر", category: "movie_anime", poster: "https://via.placeholder.com/200x300/191926/3b82f6?text=DemonSlayer" },
+  { id: 3, title: "Solo Leveling", type: "مانهوا", rating: "9.9", status: "مستمر", category: "new", poster: "https://via.placeholder.com/200x300/191926/ec4899?text=SoloLeveling" },
+  { id: 4, title: "TBATE", type: "مانهوا", rating: "9.8", status: "جديد", category: "new", poster: "https://via.placeholder.com/200x300/191926/f59e0b?text=TBATE" },
+  { id: 5, title: "Spirited Away", type: "فيلم", rating: "9.9", status: "أسطوري", category: "top", poster: "https://via.placeholder.com/200x300/191926/10b981?text=SpiritedAway" },
+  { id: 6, title: "Omniscient Reader", type: "ويب تون", rating: "9.7", status: "مستمر", category: "top", poster: "https://via.placeholder.com/200x300/191926/6366f1?text=ORV" }
 ];
 
 let selectedWork = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderLists(appData);
-  renderSearchGrid(appData);
-  renderLibraryGrid(appData);
+  refreshAllViews();
 });
 
 function switchTab(tabId, btnElement) {
@@ -223,6 +275,13 @@ function switchTab(tabId, btnElement) {
   document.getElementById(tabId).classList.add('active');
   if(btnElement) btnElement.classList.add('active');
   window.scrollTo(0,0);
+}
+
+function refreshAllViews() {
+  renderLists(appData);
+  renderSearchGrid(appData);
+  renderLibraryGrid(appData);
+  document.getElementById('statTotalWorks').innerText = appData.length;
 }
 
 function renderLists(data) {
@@ -293,6 +352,41 @@ function handleSearch(query) {
   renderSearchGrid(res);
 }
 
+function addNewWork() {
+  const title = document.getElementById('inputTitle').value.trim();
+  const type = document.getElementById('inputType').value;
+  const category = document.getElementById('inputCategory').value;
+  const poster = document.getElementById('inputPoster').value.trim() || "https://via.placeholder.com/200x300/191926/8b5cf6?text=Nexora";
+  const rating = document.getElementById('inputRating').value.trim() || "9.0";
+  const status = document.getElementById('inputStatus').value.trim() || "جديد";
+
+  if(!title) {
+    alert("يرجى إدخال عنوان العمل على الأقل!");
+    return;
+  }
+
+  const newObj = {
+    id: appData.length + 1,
+    title,
+    type,
+    category,
+    poster,
+    rating,
+    status
+  };
+
+  appData.unshift(newObj);
+  refreshAllViews();
+  
+  document.getElementById('inputTitle').value = '';
+  document.getElementById('inputPoster').value = '';
+  document.getElementById('inputRating').value = '';
+  document.getElementById('inputStatus').value = '';
+
+  alert("تم نشر العمل بنجاح في منصة Nexora!");
+  switchTab('tabHome', document.querySelectorAll('.nav-item-btn')[0]);
+}
+
 function openItemModal(id) {
   selectedWork = appData.find(i => i.id === id);
   if(!selectedWork) return;
@@ -313,13 +407,7 @@ function showAlert(msg) {
 }
 
 function editUserBio() {
-  let newBio = prompt("أدخل الوصف الجديد لملفك الشخصي:", "أضف وصفًا قصيرًا عن ذوقك");
+  let newBio = prompt("أدخل الوصف الجديد لحسابك:", "المسؤول عن منصة Nexora");
   if(newBio !== null && newBio.trim() !== "") {
     document.getElementById('bioTextDisplay').innerText = newBio;
-    showAlert("تم التحديث بنجاح!");
-  }
-}
-</script>
-
-</body>
-</html>
+    showAlert("
