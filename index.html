@@ -313,6 +313,8 @@ nav {
 <!-- TAB 4: More Menu -->
 <div id="tabMore" class="tab-content">
   <div class="more-container" style="padding: 16px;">
+    
+    <!-- بطاقة تسجيل الدخول -->
     <div class="user-card" onclick="alert('صفحة تسجيل الدخول قيد التطوير')" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 18px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; cursor: pointer;">
       <span style="color: #71717a; font-size: 14px;">›</span>
       <div style="text-align: right;">
@@ -322,9 +324,11 @@ nav {
       <div class="avatar" style="width: 44px; height: 44px; background: rgba(139, 92, 246, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">👤</div>
     </div>
 
+    <!-- مجموعة الحساب والتطبيق -->
     <div class="menu-group" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 10px 16px; margin-bottom: 16px;">
       <div class="menu-group-title" style="font-size: 12px; color: #a1a1aa; padding: 8px 0; font-weight: bold; text-align: right;">الحساب والتطبيق</div>
       
+      <!-- مفضلتي -->
       <div class="menu-item" onclick="alert('المفضلة فارغة')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
         <span style="color: #71717a; font-size: 14px;">›</span>
         <div style="text-align: right; flex: 1; margin-right: 12px;">
@@ -334,6 +338,37 @@ nav {
         <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">♡</div>
       </div>
 
+      <!-- مكتبتي -->
+      <div class="menu-item" onclick="alert('المكتبة فارغة')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
+        <span style="color: #71717a; font-size: 14px;">›</span>
+        <div style="text-align: right; flex: 1; margin-right: 12px;">
+          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">مكتبتي</h4>
+          <p style="font-size: 10px; color: #71717a;">تصفح مكتبة الأعمال الخاصة بك</p>
+        </div>
+        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">⊞</div>
+      </div>
+
+      <!-- التنزيلات -->
+      <div class="menu-item" onclick="alert('لا توجد تنزيلات')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
+        <span style="color: #71717a; font-size: 14px;">›</span>
+        <div style="text-align: right; flex: 1; margin-right: 12px;">
+          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">التنزيلات</h4>
+          <p style="font-size: 10px; color: #71717a;">تصفح الفصول التي حملتها</p>
+        </div>
+        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">⇩</div>
+      </div>
+
+      <!-- طلب مانجا -->
+      <div class="menu-item" onclick="alert('تواصل مع الإدارة لطلب مانجا')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
+        <span style="color: #71717a; font-size: 14px;">›</span>
+        <div style="text-align: right; flex: 1; margin-right: 12px;">
+          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">طلب مانجا</h4>
+          <p style="font-size: 10px; color: #71717a;">أرسل اقتراحك لفريق Nexora</p>
+        </div>
+        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">✉</div>
+      </div>
+
+      <!-- تواصل مع الإدارة -->
       <div class="menu-item" onclick="openPanel('adminPanel')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; cursor: pointer;">
         <span style="color: #71717a; font-size: 14px;">›</span>
         <div style="text-align: right; flex: 1; margin-right: 12px;">
@@ -342,6 +377,7 @@ nav {
         </div>
         <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">💬</div>
       </div>
+
     </div>
   </div>
 </div>
@@ -396,7 +432,6 @@ nav {
 let mangaList = JSON.parse(localStorage.getItem('nexora_media')) || [];
 let currentCategory = 'all';
 
-// تشغيل العرض عند فتح الصفحة
 document.addEventListener('DOMContentLoaded', () => {
   renderHome();
 });
