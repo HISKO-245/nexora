@@ -115,108 +115,197 @@ body {
 .mini-details h4 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
 .mini-details p { font-size: 9px; color: #a1a1aa; }
 
-/* Profile & Settings */
-.profile-container { padding: 16px; }
-
-.profile-card {
+/* Search Styles */
+.search-container { padding: 16px; }
+.search-input-box {
   background: #12121c;
-  border: 1px solid #1e1e2d;
-  border-radius: 16px;
-  padding: 16px;
+  border: 1px solid #222232;
+  border-radius: 14px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 12px;
-}
-.profile-avatar {
-  width: 55px;
-  height: 55px;
-  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
-  border: 2px solid #222232;
-}
-.profile-info h3 { font-size: 15px; color: #fff; font-weight: bold; margin-bottom: 3px; }
-.profile-info p { font-size: 11px; color: #a1a1aa; }
-
-/* Golden VIP Banner */
-.vip-gold-banner {
-  background: linear-gradient(135deg, #1f1b10 0%, #2d230b 100%);
-  border: 1px solid rgba(234, 179, 8, 0.4);
-  border-radius: 16px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  cursor: pointer;
-}
-.vip-gold-content h4 { font-size: 14px; color: #facc15; font-weight: bold; margin-bottom: 4px; }
-.vip-gold-content p { font-size: 10px; color: #d1d5db; }
-.vip-crown-icon { font-size: 28px; background: rgba(234, 179, 8, 0.15); padding: 10px; border-radius: 12px; }
-
-/* Quick Access Grid */
-.quick-access-title { font-size: 12px; color: #71717a; margin-bottom: 8px; font-weight: bold; text-align: right; }
-.quick-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-bottom: 16px;
 }
-.quick-box {
-  background: #12121c;
-  border: 1px solid #1e1e2d;
-  border-radius: 14px;
-  padding: 14px;
-  cursor: pointer;
+.search-input-box input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
   text-align: right;
 }
-.quick-box .q-icon { font-size: 18px; margin-bottom: 6px; }
-.quick-box h5 { font-size: 13px; color: #fff; font-weight: bold; margin-bottom: 2px; }
-.quick-box p { font-size: 10px; color: #71717a; }
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.search-result-card {
+  background: #12121c;
+  border: 1px solid #1e1e2d;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.search-result-poster {
+  width: 100%;
+  aspect-ratio: 2/3;
+  background: #191926;
+  position: relative;
+}
+.search-result-poster img { width: 100%; height: 100%; object-fit: cover; }
+.search-result-info { padding: 6px; text-align: right; }
+.search-result-info h5 { font-size: 10px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.search-result-info p { font-size: 8px; color: #8b5cf6; }
 
-/* Legal List */
-.legal-card {
+/* Admin Dashboard Styles */
+.admin-container { padding: 16px; }
+.admin-card {
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.admin-card h3 { font-size: 14px; color: #8b5cf6; margin-bottom: 12px; text-align: right; font-weight: bold; }
+.form-group { margin-bottom: 12px; text-align: right; }
+.form-group label { display: block; font-size: 11px; color: #a1a1aa; margin-bottom: 4px; }
+.form-control {
+  width: 100%;
+  background: #191926;
+  border: 1px solid #2a2a3d;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+  font-size: 12px;
+  outline: none;
+  text-align: right;
+}
+.admin-submit-btn {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Settings Screen */
+.settings-container { padding: 16px; }
+.settings-section-title { font-size: 12px; color: #71717a; margin: 16px 0 8px; font-weight: bold; text-align: right; }
+.settings-card {
   background: #12121c;
   border: 1px solid #1e1e2d;
   border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
-.legal-item {
+.settings-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
   border-bottom: 1px solid #191926;
   cursor: pointer;
-  font-size: 13px;
-  color: #fff;
 }
-.legal-item:last-child { border-bottom: none; }
+.settings-item:last-child { border-bottom: none; }
+.settings-item-right { display: flex; align-items: center; gap: 12px; text-align: right; }
+.settings-item-right .s-icon { font-size: 18px; }
+.settings-item-right h5 { font-size: 13px; color: #fff; font-weight: bold; margin-bottom: 2px; }
+.settings-item-right p { font-size: 10px; color: #71717a; }
+.settings-item-left { font-size: 12px; color: #71717a; }
 
-.action-btn {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+.danger-btn {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
   color: #ef4444;
   width: 100%;
-  padding: 12px;
-  border-radius: 14px;
+  padding: 14px;
+  border-radius: 16px;
   font-weight: bold;
   cursor: pointer;
   text-align: center;
   font-size: 13px;
+  margin-bottom: 12px;
 }
-.action-btn.login-mode {
-  background: rgba(139, 92, 246, 0.15);
-  border: 1px solid rgba(139, 92, 246, 0.4);
-  color: #8b5cf6;
+
+/* HISKO Profile Screen */
+.profile-header-bg {
+  height: 120px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.profile-main-avatar {
+  width: 80px;
+  height: 80px;
+  background: #12121c;
+  border: 3px solid #09090e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  bottom: -40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+.profile-body { padding: 50px 16px 16px; text-align: center; }
+.profile-body h2 { font-size: 18px; color: #fff; font-weight: bold; margin-bottom: 6px; }
+.bio-box {
+  background: #12121c;
+  border: 1px solid #1e1e2d;
+  border-radius: 12px;
+  padding: 10px;
+  color: #71717a;
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+.profile-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.p-action-btn {
+  background: #12121c;
+  border: 1px solid #1e1e2d;
+  border-radius: 12px;
+  padding: 10px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.stat-box {
+  background: #12121c;
+  border: 1px solid #1e1e2d;
+  border-radius: 14px;
+  padding: 14px 8px;
+  text-align: center;
+}
+.stat-box .stat-num { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 4px; }
+.stat-box .stat-label { font-size: 10px; color: #71717a; }
 
 /* BOTTOM NAVIGATION BAR (FIXED) */
 nav {
@@ -241,12 +330,12 @@ nav {
   font-size: 10px;
   gap: 3px;
   cursor: pointer;
-  width: 25%;
+  width: 20%;
   background: transparent;
   border: none;
 }
 .nav-link.active { color: #8b5cf6; font-weight: bold; }
-.nav-link .icon { font-size: 18px; padding: 2px 12px; border-radius: 12px; }
+.nav-link .icon { font-size: 18px; padding: 2px 10px; border-radius: 12px; }
 .nav-link.active .icon { background: rgba(139, 92, 246, 0.2); }
 </style>
 </head>
@@ -271,24 +360,17 @@ nav {
         <button class="read-now-btn" onclick="alert('جاري تشغيل العرض...')">شاهد الآن ➔</button>
       </div>
     </div>
-    <div class="hero-card" style="background-image: url('https://via.placeholder.com/400x200/1c1c2b/8b5cf6?text=Manhwa+Manga');">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h3>أبرز المانهوا والمانغا (9.6 ★)</h3>
-        <button class="read-now-btn" onclick="alert('جاري فتح الفصول...')">اقرأ الآن ➔</button>
-      </div>
-    </div>
   </div>
 
   <div class="section-header">
     <button class="see-all" onclick="alert('عرض الكل')">عرض الكل ‹</button>
-    <h2>🎬 أحدث الأنمي والأفلام</h2>
+    <h2>🎬 أحدث الأنمي والأفلام المضافة</h2>
   </div>
   <div class="horizontal-scroll" id="animeMoviesGrid"></div>
 
   <div class="section-header">
     <button class="see-all" onclick="alert('عرض الكل')">عرض الكل ‹</button>
-    <h2>📖 المانهوا والمانغا المكتملة</h2>
+    <h2>📖 المانهوا والمانغا المضافة</h2>
   </div>
   <div class="horizontal-scroll" id="mangaGrid"></div>
 </div>
@@ -296,108 +378,164 @@ nav {
 <!-- TAB 2: البحث -->
 <div id="tabSearch" class="tab-content">
   <div class="top-bar"><div class="page-title" style="margin: 0 auto;">البحث في Nexora</div></div>
-  <div style="padding: 40px; text-align: center; color: #a1a1aa;">ابحث عن أنمي، فيلم، مانهوا أو مانغا المفضلة لديك...</div>
+  <div class="search-container">
+    <div class="search-input-box">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="ابحث عن أنمي، فيلم، مانهوا أو مانغا..." oninput="filterSearch(this.value)">
+    </div>
+    <div class="search-results-grid" id="searchResultsGrid"></div>
+  </div>
 </div>
 
-<!-- TAB 3: التحميلات -->
+<!-- TAB 3: إدارة HISKO (لوحة التحكم الخاصة بك للنشر) -->
+<div id="tabAdmin" class="tab-content">
+  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">لوحة تحكم المشرف (HISKO)</div></div>
+  <div class="admin-container">
+    <div class="admin-card">
+      <h3>➕ نشر عمل جديد (أنمي، فيلم، مانهوا)</h3>
+      <div class="form-group">
+        <label>عنوان العمل</label>
+        <input type="text" id="adminTitle" class="form-control" placeholder="مثال: Solo Leveling S2">
+      </div>
+      <div class="form-group">
+        <label>نوع العمل</label>
+        <select id="adminType" class="form-control">
+          <option value="أنمي">أنمي</option>
+          <option value="فيلم">فيلم</option>
+          <option value="مانهوا">مانهوا</option>
+          <option value="مانغا">مانغا</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>تصنيف القسم في الرئيسية</label>
+        <select id="adminCategory" class="form-control">
+          <option value="video">أنمي وأفلام (فيديو)</option>
+          <option value="manga">مانهوا ومانغا (قراءة)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>رابط صورة الغلاف (Poster URL)</label>
+        <input type="text" id="adminPoster" class="form-control" placeholder="ضع رابط الصورة هنا أو اتركه فارغاً">
+      </div>
+      <div class="form-group">
+        <label>التقييم (مثال: 9.8)</label>
+        <input type="text" id="adminRating" class="form-control" value="9.8">
+      </div>
+      <button class="admin-submit-btn" onclick="addNewContent()">نشر للعامة 🚀</button>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 4: التحميلات -->
 <div id="tabHistory" class="tab-content">
   <div class="top-bar"><div class="page-title" style="margin: 0 auto;">التحميلات دون اتصال</div></div>
   <div style="padding: 40px; text-align: center; color: #a1a1aa;">لا توجد ملفات أو فصول محملة حالياً.</div>
 </div>
 
-<!-- TAB 4: الإعدادات (مع إدارة حساب HISKO ورام تسجيل الدخول) -->
+<!-- TAB 5: الإعدادات -->
 <div id="tabMore" class="tab-content">
-  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">حسابي وإعدادات Nexora</div></div>
-
-  <div class="profile-container">
-    
-    <!-- كارد البروفايل الخاص بـ HISKO -->
-    <div class="profile-card" id="profileCardSection">
-      <div class="profile-avatar" id="avatarLetter">H</div>
-      <div class="profile-info">
-        <h3 id="profileName">HISKO HISKO</h3>
-        <p id="profileEmail">hiskohisko45@gmail.com</p>
+  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">الإعدادات</div></div>
+  <div class="settings-container">
+    <div class="settings-card" onclick="openProfileScreen()">
+      <div class="settings-item">
+        <div class="settings-item-right">
+          <div class="s-icon">👤</div>
+          <div>
+            <h5>الملف الشخصي</h5>
+            <p>لوحتك والإحصاءات</p>
+          </div>
+        </div>
+        <div class="settings-item-left">‹</div>
       </div>
     </div>
 
-    <!-- البطاقة الذهبية VIP -->
-    <div class="vip-gold-banner" onclick="alert('أنت مشترك في باقة VIP الحصرية!')">
-      <div class="vip-gold-content">
-        <h4>ارتق إلى أثير تون VIP <span style="background:#ca8a04; color:#000; padding:1px 6px; border-radius:6px; font-size:9px;">20%-</span></h4>
-        <p>تجربة أنقى ومزايا حصرية متكاملة</p>
-      </div>
-      <div class="vip-crown-icon">👑</div>
-    </div>
-
-    <!-- الوصول السريع -->
-    <div class="quick-access-title">الوصول السريع</div>
-    <div class="quick-grid">
-      <div class="quick-box" onclick="alert('قوائمك الشخصية')">
-        <div class="q-icon">📋</div>
-        <h5>قوائمي</h5>
-        <p>القوائم الخاصة والعامة</p>
-      </div>
-      <div class="quick-box" onclick="alert('لوحة الإحصاءات الشخصية')">
-        <div class="q-icon">👤</div>
-        <h5>الملف الشخصي</h5>
-        <p>لوحتك والإحصاءات</p>
-      </div>
-      <div class="quick-box" onclick="switchTab('tabHistory', document.querySelectorAll('.nav-link')[2])">
-        <div class="q-icon">📥</div>
-        <h5>التحميلات</h5>
-        <p>الفصول المحفوظة</p>
-      </div>
-      <div class="quick-box" onclick="alert('إعدادات التطبيق والتخزين')">
-        <div class="q-icon">⚙️</div>
-        <h5>الإعدادات</h5>
-        <p>الخصوصية والتخزين</p>
+    <div class="settings-card">
+      <div class="settings-item" onclick="switchTab('tabAdmin', document.querySelectorAll('.nav-link')[2])">
+        <div class="settings-item-right">
+          <div class="s-icon">🛠️</div>
+          <div>
+            <h5>لوحة إدارية (HISKO)</h5>
+            <p>إضافة ونشر الأعمال الجديدة</p>
+          </div>
+        </div>
+        <div class="settings-item-left">➔</div>
       </div>
     </div>
 
-    <!-- القوانين والخصوصية -->
-    <div class="quick-access-title">القوانين والخصوصية</div>
-    <div class="legal-card">
-      <div class="legal-item" onclick="alert('سياسة الخصوصية محمية.')">
-        <span>‹</span>
-        <span>سياسة الخصوصية 🛡️</span>
-      </div>
-      <div class="legal-item" onclick="alert('شروط الاستخدام.')">
-        <span>‹</span>
-        <span>شروط الاستخدام 📝</span>
-      </div>
-      <div class="legal-item" onclick="alert('حقوق النشر والإبلاغ.')">
-        <span>‹</span>
-        <span>حقوق النشر والإبلاغ ©</span>
+    <div class="settings-section-title">التخزين</div>
+    <div class="settings-card">
+      <div class="settings-item" onclick="alert('التخزين والتنزيلات')">
+        <div class="settings-item-right">
+          <div class="s-icon">💾</div>
+          <div>
+            <h5>التخزين والتنزيلات</h5>
+            <p>مؤقت 185 MB • تنزيلات 0 B</p>
+          </div>
+        </div>
+        <div class="settings-item-left">‹</div>
       </div>
     </div>
 
-    <!-- زر تسجيل الخروج / تسجيل الدخول الذكي -->
-    <button class="action-btn" id="authActionButton" onclick="handleAuthAction()">
-      تسجيل الخروج ➔
+    <div class="settings-section-title" style="color: #ef4444;">إجراء لا يمكن التراجع عنه</div>
+    <button class="danger-btn" onclick="alert('تم حذف التنزيلات دون اتصال.')">
+      حذف التنزيلات دون اتصال 🗑️
     </button>
-
   </div>
 </div>
 
-<!-- BOTTOM NAVIGATION BAR -->
+<!-- SUB-SCREEN: البروفايل الشخصي -->
+<div id="tabProfileScreen" class="tab-content">
+  <div class="top-bar">
+    <div class="icon-btn" onclick="closeProfileScreen()">➔</div>
+    <div class="page-title">ملف HISKO HISKO</div>
+    <div style="width: 38px;"></div>
+  </div>
+
+  <div class="profile-header-bg">
+    <div class="profile-main-avatar">H</div>
+  </div>
+
+  <div class="profile-body">
+    <h2>HISKO HISKO</h2>
+    <div class="bio-box">أضف وصفًا قصيرًا عن نفسك</div>
+
+    <div class="profile-actions-grid">
+      <button class="p-action-btn" onclick="switchTab('tabAdmin', document.querySelectorAll('.nav-link')[2])">🛠️ لوحة الإدارة</button>
+      <button class="p-action-btn" onclick="alert('تعديل الملف الشخصي')">✏️ تعديل الملف</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num" id="statPublishedCount">0</div><div class="stat-label">الأعمال المنشورة</div></div>
+      <div class="stat-box"><div class="stat-num">0</div><div class="stat-label">التعليقات</div></div>
+      <div class="stat-box"><div class="stat-num">0</div><div class="stat-label">التقييمات</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAVIGATION BAR (مع زر الإدارة المخصص) -->
 <nav>
   <button class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
   <button class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
+  <button class="nav-link" onclick="switchTab('tabAdmin', this)"><span class="icon">🛠️</span>الإدارة</button>
   <button class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">📥</span>التحميلات</button>
   <button class="nav-link" onclick="switchTab('tabMore', this)"><span class="icon">⚙️</span>الإعدادات</button>
 </nav>
 
 <script>
-const contentData = [
-  { id: 1, title: "Demon Slayer (أنمي)", type: "أنمي", rating: "9.7", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Anime", category: "video" },
-  { id: 2, title: "Your Name (فيلم)", type: "فيلم", rating: "9.5", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Movie", category: "video" },
-  { id: 3, title: "Solo Leveling (مانهوا)", type: "مانهوا", rating: "9.9", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Manhwa", category: "manga" },
-  { id: 4, title: "One Piece (مانغا)", type: "مانغا", rating: "9.6", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Manga", category: "manga" }
+let defaultContent = [
+  { id: 1, title: "Demon Slayer", type: "أنمي", rating: "9.7", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Demon+Slayer", category: "video" },
+  { id: 2, title: "Your Name", type: "فيلم", rating: "9.5", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Your+Name", category: "video" },
+  { id: 3, title: "Solo Leveling", type: "مانهوا", rating: "9.9", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Solo+Leveling", category: "manga" }
 ];
 
+// تحميل الأعمال المخزنة محلياً إذا وجدت
+let savedContent = localStorage.getItem('nexora_admin_items');
+let allContent = savedContent ? JSON.parse(savedContent) : defaultContent;
+
 document.addEventListener('DOMContentLoaded', () => {
-  renderContent();
-  checkLoginState();
+  renderContent(allContent);
+  renderSearchGrid(allContent);
+  updatePublishedStats();
 });
 
 function switchTab(tabId, el) {
@@ -407,14 +545,61 @@ function switchTab(tabId, el) {
   if (el) el.classList.add('active');
 }
 
-function renderContent() {
+function openProfileScreen() {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tabProfileScreen').classList.add('active');
+}
+
+function closeProfileScreen() {
+  switchTab('tabMore', document.querySelectorAll('.nav-link')[4]);
+}
+
+function addNewContent() {
+  const title = document.getElementById('adminTitle').value.trim();
+  const type = document.getElementById('adminType').value;
+  const category = document.getElementById('adminCategory').value;
+  let poster = document.getElementById('adminPoster').value.trim();
+  const rating = document.getElementById('adminRating').value.trim();
+
+  if(!title) {
+    alert("الرجاء إدخال عنوان العمل على الأقل!");
+    return;
+  }
+
+  if(!poster) {
+    poster = `https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=${encodeURIComponent(title)}`;
+  }
+
+  const newItem = {
+    id: Date.now(),
+    title: title,
+    type: type,
+    rating: rating || "9.5",
+    poster: poster,
+    category: category
+  };
+
+  allContent.unshift(newItem);
+  localStorage.setItem('nexora_admin_items', JSON.stringify(allContent));
+
+  renderContent(allContent);
+  renderSearchGrid(allContent);
+  updatePublishedStats();
+
+  alert("تم نشر العمل بنجاح! سيراه الآن كل المستخدمين في الواجهة الرئيسية والبحث 🌟");
+  document.getElementById('adminTitle').value = '';
+  document.getElementById('adminPoster').value = '';
+  switchTab('tabHome', document.querySelectorAll('.nav-link')[0]);
+}
+
+function renderContent(data) {
   const videoContainer = document.getElementById('animeMoviesGrid');
   const mangaContainer = document.getElementById('mangaGrid');
   
   videoContainer.innerHTML = '';
   mangaContainer.innerHTML = '';
 
-  contentData.forEach(item => {
+  data.forEach(item => {
     const html = `
       <div class="manga-mini-card" onclick="alert('جاري فتح: ${item.title}')">
         <div class="mini-poster">
@@ -432,58 +617,24 @@ function renderContent() {
   });
 }
 
-/* نظام التحكم بحالة الحساب وتسجيل الدخول والخروج */
-function handleAuthAction() {
-  const isLoggedIn = localStorage.getItem('nexora_logged_in') !== 'false';
-  
-  if (isLoggedIn) {
-    if (confirm("هل تريد بالتأكيد تسجيل الخروج من حساب HISKO HISKO؟")) {
-      localStorage.setItem('nexora_logged_in', 'false');
-      checkLoginState();
-      alert("تم تسجيل الخروج بنجاح. التطبيق جاهز الآن لتسجيل دخول حساب جديد.");
-    }
-  } else {
-    let userInput = prompt("أدخل اسم المستخدم أو الإيميل الجديد لتسجيل الدخول:");
-    if (userInput && userInput.trim() !== "") {
-      localStorage.setItem('nexora_logged_in', 'true');
-      localStorage.setItem('nexora_custom_user', userInput);
-      checkLoginState();
-      alert("مرحباً بك، تم تسجيل الدخول بنجاح باسم: " + userInput);
-    }
-  }
+function renderSearchGrid(data) {
+  const grid = document.getElementById('searchResultsGrid');
+  grid.innerHTML = '';
+  data.forEach(item => {
+    grid.innerHTML += `
+      <div class="search-result-card" onclick="alert('فتح تفاصيل: ${item.title}')">
+        <div class="search-result-poster">
+          <img src="${item.poster}" alt="cover">
+          <span class="tag-badge" style="font-size:7px; padding:1px 4px;">${item.type}</span>
+        </div>
+        <div class="search-result-info">
+          <h5>${item.title}</h5>
+          <p>★ ${item.rating}</p>
+        </div>
+      </div>
+    `;
+  });
 }
 
-function checkLoginState() {
-  const isLoggedIn = localStorage.getItem('nexora_logged_in') !== 'false';
-  const nameEl = document.getElementById('profileName');
-  const emailEl = document.getElementById('profileEmail');
-  const avatarEl = document.getElementById('avatarLetter');
-  const btnEl = document.getElementById('authActionButton');
-  const cardEl = document.getElementById('profileCardSection');
-
-  if (isLoggedIn) {
-    const customUser = localStorage.getItem('nexora_custom_user');
-    if (customUser) {
-      nameEl.innerText = customUser;
-      emailEl.innerText = "user@nexora.com";
-      avatarEl.innerText = customUser.charAt(0).toUpperCase();
-    } else {
-      nameEl.innerText = "HISKO HISKO";
-      emailEl.innerText = "hiskohisko45@gmail.com";
-      avatarEl.innerText = "H";
-    }
-    cardEl.style.display = "flex";
-    btnEl.innerText = "تسجيل الخروج ➔";
-    btnEl.classList.remove('login-mode');
-  } else {
-    nameEl.innerText = "زائر (غير مسجل)";
-    emailEl.innerText = "يرجى تسجيل الدخول للوصول لكافة المزايا";
-    avatarEl.innerText = "?";
-    btnEl.innerText = "تسجيل الدخول إلى حساب جديد ➔";
-    btnEl.classList.add('login-mode');
-  }
-}
-</script>
-
-</body>
-</html>
+function filterSearch(query) {
+  const filtered = allContent.filter(item => item.title.toLowerCase().includes(query.t
