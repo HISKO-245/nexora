@@ -3,350 +3,383 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora - منصة الأنمي والمانها والأفلام</title>
+<title>Nexora - تطبيق الأنمي والمانها</title>
 <style>
 :root {
   --primary: #8b5cf6;
-  --primary-dark: #7c3aed;
-  --bg-main: #09090e;
-  --bg-card: #12121c;
-  --border-color: #1e1e2d;
-  --text-main: #efefef;
-  --text-muted: #71717a;
+  --primary-hover: #7c3aed;
+  --bg-main: #0b0b10;
+  --bg-card: #14141f;
+  --border-color: #232336;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
-body { background: var(--bg-main); color: var(--text-main); padding-bottom: 75px; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
+body { background: var(--bg-main); color: var(--text-main); padding-bottom: 70px; }
 
 /* Top Header */
-.top-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: var(--bg-main); position: sticky; top: 0; z-index: 90; border-bottom: 1px solid var(--border-color); }
-.top-icons { display: flex; gap: 10px; }
-.header-icon-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; transition: 0.2s; }
-.header-icon-btn:active { transform: scale(0.92); }
-.app-main-title { font-size: 18px; font-weight: bold; color: var(--primary); letter-spacing: 0.5px; }
+.app-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(11,11,16,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+.app-logo { font-size: 18px; font-weight: 900; color: var(--primary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+.header-actions { display: flex; gap: 8px; }
+.icon-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; transition: 0.2s; }
+.icon-btn:active { transform: scale(0.9); }
 
-/* Tabs System */
-.tab-content { display: none; }
-.tab-content.active { display: block; }
+/* Tab Container */
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
 
-/* Welcome Banner */
-.welcome-banner { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border: 1px solid var(--border-color); border-radius: 16px; margin: 12px 16px; padding: 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 8px 20px rgba(139,92,246,0.15); }
-.welcome-info h3 { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 4px; }
-.welcome-info p { font-size: 11px; color: #a1a1aa; }
-.avatar-box { width: 50px; height: 50px; background: #191926; border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: #fff; box-shadow: 0 4px 12px rgba(139,92,246,0.3); }
+/* Home Slider Banner */
+.hero-banner { margin: 12px 16px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border-radius: 16px; padding: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; }
+.hero-text h2 { font-size: 16px; font-weight: bold; margin-bottom: 4px; color: #fff; }
+.hero-text p { font-size: 11px; color: #c4b5fd; margin-bottom: 12px; }
+.hero-btn { background: var(--primary); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; }
 
 /* Section Headers */
-.section-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 10px; }
-.section-header h2 { font-size: 15px; color: #fff; font-weight: bold; display: flex; align-items: center; gap: 6px; }
-.see-all-btn { font-size: 12px; color: var(--primary); background: none; border: none; cursor: pointer; font-weight: bold; }
+.section-title-wrap { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 10px; }
+.section-title-wrap h3 { font-size: 14px; font-weight: bold; color: #fff; display: flex; align-items: center; gap: 6px; }
+.view-more { font-size: 11px; color: var(--primary); background: none; border: none; cursor: pointer; font-weight: bold; }
 
-/* Horizontal Cards */
-.horizontal-scroll { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
-.horizontal-scroll::-webkit-scrollbar { display: none; }
-.media-card { min-width: 125px; max-width: 125px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; flex-shrink: 0; cursor: pointer; position: relative; transition: transform 0.2s; }
-.media-card:active { transform: scale(0.96); }
-.media-poster { width: 100%; aspect-ratio: 2/3; background: #191926; position: relative; }
-.media-poster img { width: 100%; height: 100%; object-fit: cover; }
-.status-tag { position: absolute; top: 6px; right: 6px; background: rgba(139, 92, 246, 0.25); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.4); font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: bold; backdrop-filter: blur(4px); }
-.media-info { padding: 8px; text-align: right; }
-.media-info h5 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
-.media-info p { font-size: 9px; color: var(--text-muted); }
+/* Horizontal Cards Carousel */
+.horizontal-slider { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
+.horizontal-slider::-webkit-scrollbar { display: none; }
+.card-item { min-width: 115px; max-width: 115px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; flex-shrink: 0; cursor: pointer; transition: 0.2s; position: relative; }
+.card-item:active { transform: scale(0.95); }
+.card-img { width: 100%; aspect-ratio: 2/3; background: #1a1a2e; position: relative; }
+.card-img img { width: 100%; height: 100%; object-fit: cover; }
+.card-badge { position: absolute; top: 6px; right: 6px; background: rgba(139, 92, 246, 0.3); backdrop-filter: blur(4px); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-size: 8px; padding: 2px 5px; border-radius: 6px; font-weight: bold; }
+.card-details { padding: 8px; }
+.card-details h4 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+.card-details p { font-size: 9px; color: var(--text-muted); }
 
-/* Search Tab */
-.search-box-wrap { padding: 16px; }
-.search-input-field { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-.search-input-field input { background: transparent; border: none; color: #fff; font-size: 13px; width: 100%; outline: none; text-align: right; }
-.search-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+/* Search Page */
+.search-container { padding: 16px; }
+.search-input-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.search-input-box input { background: transparent; border: none; color: #fff; font-size: 12px; width: 100%; outline: none; text-align: right; }
+.search-grid-view { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-/* Admin & Upload Panel Tab */
+/* Admin Panel Page */
 .admin-wrap { padding: 16px; }
-.admin-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: right; }
-.admin-card h3 { font-size: 14px; color: #fff; margin-bottom: 12px; font-weight: bold; display: flex; align-items: center; gap: 6px; }
-.form-group { margin-bottom: 10px; }
-.form-group label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
-.form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: #fff; font-size: 12px; text-align: right; outline: none; }
-.admin-submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 11px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px; margin-top: 6px; transition: 0.2s; }
-.admin-submit-btn:active { background: var(--primary-dark); }
+.admin-card-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: right; }
+.admin-card-box h3 { font-size: 13px; color: #fff; margin-bottom: 12px; font-weight: bold; }
+.form-ctrl { margin-bottom: 10px; }
+.form-ctrl label { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
+.form-ctrl input, .form-ctrl select, .form-ctrl textarea { width: 100%; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 9px; color: #fff; font-size: 11px; text-align: right; outline: none; }
+.admin-submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px; margin-top: 4px; }
 
-/* Library / Favorites Tab */
+/* Library Page */
 .library-wrap { padding: 16px; }
-.library-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.library-card-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px; display: flex; gap: 10px; align-items: center; cursor: pointer; position: relative; }
-.library-card-item img { width: 50px; height: 65px; border-radius: 8px; object-fit: cover; }
-.library-card-info h5 { font-size: 12px; color: #fff; font-weight: bold; margin-bottom: 2px; }
-.library-card-info p { font-size: 10px; color: var(--text-muted); }
+.library-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.lib-item-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px; display: flex; gap: 10px; align-items: center; cursor: pointer; }
+.lib-item-card img { width: 45px; height: 60px; border-radius: 8px; object-fit: cover; }
+.lib-item-info h4 { font-size: 11px; color: #fff; margin-bottom: 2px; }
+.lib-item-info p { font-size: 9px; color: var(--text-muted); }
 
-/* Profile Tab */
-.profile-banner-bg { height: 120px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); position: relative; }
-.profile-avatar-box { width: 75px; height: 75px; background: var(--bg-card); border: 3px solid var(--bg-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: var(--primary); position: absolute; bottom: -35px; right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-.profile-body-content { padding: 45px 16px 16px; text-align: right; }
-.profile-body-content h2 { font-size: 17px; color: #fff; font-weight: bold; margin-bottom: 2px; }
-.profile-body-content p { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
-.bio-input-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; color: #a1a1aa; font-size: 11px; margin-bottom: 16px; text-align: right; cursor: pointer; }
-.stats-grid-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
-.stat-card-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 6px; text-align: center; }
-.stat-card-item .num { font-size: 16px; font-weight: bold; color: var(--primary); margin-bottom: 2px; }
-.stat-card-item .lbl { font-size: 9px; color: var(--text-muted); }
+/* Profile Page */
+.profile-cover { height: 110px; background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%); position: relative; }
+.profile-avatar { width: 70px; height: 70px; background: var(--bg-card); border: 3px solid var(--bg-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: var(--primary); position: absolute; bottom: -30px; right: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+.profile-content { padding: 40px 16px 16px; text-align: right; }
+.profile-content h2 { font-size: 16px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+.profile-content p { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+.profile-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.stat-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; text-align: center; }
+.stat-box .val { font-size: 15px; font-weight: bold; color: var(--primary); }
+.stat-box .lbl { font-size: 9px; color: var(--text-muted); }
 
-/* Modal Popup (Details & Player) */
-.custom-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; backdrop-filter: blur(5px); }
-.modal-box-inner { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 360px; max-height: 90vh; overflow-y: auto; text-align: right; }
-.modal-img-top { width: 100%; height: 200px; background: #191926; position: relative; }
-.modal-img-top img { width: 100%; height: 100%; object-fit: cover; }
-.modal-desc-body { padding: 16px; }
-.modal-desc-body h3 { font-size: 16px; color: #fff; margin-bottom: 6px; font-weight: bold; }
-.modal-desc-body p { font-size: 11px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
-.modal-actions-btns { display: flex; gap: 8px; margin-bottom: 12px; }
-.modal-btn-main { flex: 1; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
-.modal-btn-sec { flex: 1; background: var(--border-color); color: #fff; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
-.modal-btn-del { width: 100%; background: #ef4444; color: white; border: none; padding: 8px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; margin-top: 6px; }
+/* Details & Reader Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; backdrop-filter: blur(5px); }
+.modal-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 350px; max-height: 85vh; overflow-y: auto; text-align: right; }
+.modal-banner { width: 100%; height: 180px; background: #1a1a2e; position: relative; }
+.modal-banner img { width: 100%; height: 100%; object-fit: cover; }
+.modal-body { padding: 14px; }
+.modal-body h3 { font-size: 15px; color: #fff; margin-bottom: 4px; font-weight: bold; }
+.modal-body p { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; }
+.chapters-list { max-height: 120px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 6px; margin-bottom: 12px; background: var(--bg-main); }
+.chapter-row { padding: 6px 8px; font-size: 11px; color: #fff; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; cursor: pointer; }
+.chapter-row:hover { background: rgba(139,92,246,0.1); }
+.modal-btns { display: flex; gap: 8px; }
+.modal-btn-main { flex: 1; background: var(--primary); color: #fff; border: none; padding: 9px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer; }
+.modal-btn-sec { flex: 1; background: var(--border-color); color: #fff; border: none; padding: 9px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer; }
+.modal-btn-del { width: 100%; background: #dc2626; color: #fff; border: none; padding: 7px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer; margin-top: 6px; }
 
-/* Bottom Nav Bar */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-main); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 999; }
-.nav-item-btn { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 10px; gap: 3px; cursor: pointer; background: none; border: none; width: 20%; transition: 0.2s; }
-.nav-item-btn.active { color: var(--primary); font-weight: bold; }
-.nav-item-btn .icon { font-size: 16px; }
+/* Bottom Navigation Bar (Bottom Bar) */
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 56px; background: var(--bg-main); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 999; }
+.nav-btn { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 9px; gap: 2px; background: none; border: none; width: 20%; cursor: pointer; transition: 0.2s; }
+.nav-btn.active { color: var(--primary); font-weight: bold; }
+.nav-btn span.ico { font-size: 15px; }
 
-/* Toast Notification */
-#toastNotification { position: fixed; bottom: 75px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1e1b4b; border: 1px solid var(--primary); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 11px; z-index: 2000; transition: transform 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
-#toastNotification.show { transform: translateX(-50%) translateY(0); }
+/* Toast Alert Message */
+#toastAlert { position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%) translateY(80px); background: #1e1b4b; border: 1px solid var(--primary); color: #fff; padding: 7px 14px; border-radius: 20px; font-size: 10px; z-index: 2000; transition: transform 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+#toastAlert.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
+<!-- TOP HEADER -->
+<header class="app-header">
+  <div class="header-actions">
+    <button class="icon-btn" onclick="showToast('🔔 لا توجد إشعارات جديدة')">🔔</button>
+  </div>
+  <div class="app-logo"><span>⚡</span> Nexora</div>
+</header>
+
 <!-- HOME TAB -->
-<div id="tabHome" class="tab-content active">
-  <div class="top-header">
-    <div class="top-icons">
-      <button class="header-icon-btn" onclick="showToast('🔔 لا توجد إشعارات جديدة حالياً')">🔔</button>
-      <button class="header-icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">🔍</button>
+<div id="tabHome" class="tab-pane active">
+  <div class="hero-banner">
+    <div class="hero-text">
+      <h2>مرحباً بك في Nexora</h2>
+      <p>أفلام، أنمي ومانها بجودة عالية ومترجمة</p>
+      <button class="hero-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-btn')[1])">استكشف الكل</button>
     </div>
-    <div class="app-main-title">Nexora</div>
   </div>
 
-  <!-- Welcome Banner -->
-  <div class="welcome-banner" onclick="switchTab('tabProfile', document.querySelectorAll('.nav-item-btn')[4])">
-    <div class="welcome-info">
-      <h3>مرحباً بك في Nexora</h3>
-      <p>أفلام، أنمي ومانها في منصة واحدة</p>
-    </div>
-    <div class="avatar-box">N</div>
+  <div class="section-title-wrap">
+    <button class="view-more" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-btn')[1])">الكل ‹</button>
+    <h3>🔥 الأنشطة والأفلام الرائجة</h3>
   </div>
+  <div class="horizontal-slider" id="homeMoviesGrid"></div>
 
-  <div class="section-header">
-    <button class="see-all-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">عرض الكل ‹</button>
-    <h2>🎬 أحدث الأفلام والأنمي</h2>
+  <div class="section-title-wrap">
+    <button class="view-more" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-btn')[1])">الكل ‹</button>
+    <h3>📚 أحدث فصول المانهوا</h3>
   </div>
-  <div class="horizontal-scroll" id="moviesAnimeGrid"></div>
-
-  <div class="section-header">
-    <button class="see-all-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">عرض الكل ‹</button>
-    <h2>🔥 مانهو وويب تون</h2>
-  </div>
-  <div class="horizontal-scroll" id="newWorksGrid"></div>
-
-  <div class="section-header">
-    <button class="see-all-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">عرض الكل ‹</button>
-    <h2>⭐ الأعلى تقييماً</h2>
-  </div>
-  <div class="horizontal-scroll" id="topRatedGrid"></div>
+  <div class="horizontal-slider" id="homeMangaGrid"></div>
 </div>
 
 <!-- SEARCH TAB -->
-<div id="tabSearch" class="tab-content">
-  <div class="top-header"><div class="app-main-title" style="margin: 0 auto; color:#fff;">البحث الشامل</div></div>
-  <div class="search-box-wrap">
-    <div class="search-input-field">
+<div id="tabSearch" class="tab-pane">
+  <div class="search-container">
+    <div class="search-input-box">
       <span>🔍</span>
-      <input type="text" id="searchInput" placeholder="ابحث عن فيلم، أنمي، مانهو..." oninput="handleSearch(this.value)">
+      <input type="text" id="searchInput" placeholder="ابحث عن اسم أنمي، فيلم أو مانهو..." oninput="filterSearch(this.value)">
     </div>
-    <div class="search-grid" id="searchGridContainer"></div>
+    <div class="search-grid-view" id="searchGrid"></div>
   </div>
 </div>
 
-<!-- ADMIN / UPLOAD TAB -->
-<div id="tabAdmin" class="tab-content">
-  <div class="top-header"><div class="app-main-title" style="margin: 0 auto; color:#fff;">لوحة الإدارة والنشر</div></div>
+<!-- ADMIN TAB -->
+<div id="tabAdmin" class="tab-pane">
   <div class="admin-wrap">
-    <div class="admin-card">
-      <h3>➕ إضافة عمل جديد (مانها، أنمي، فيلم)</h3>
-      <div class="form-group">
+    <div class="admin-card-box">
+      <h3>🛡️ لوحة تحكم الإدارة (إضافة عمل جديد)</h3>
+      <div class="form-ctrl">
         <label>عنوان العمل</label>
-        <input type="text" id="inputTitle" placeholder="مثال: Solo Leveling">
+        <input type="text" id="admTitle" placeholder="مثال: Solo Leveling">
       </div>
-      <div class="form-group">
+      <div class="form-ctrl">
         <label>نوع العمل</label>
-        <select id="inputType">
+        <select id="admType">
           <option value="مانهوا">مانهوا / مانها</option>
           <option value="أنمي">أنمي</option>
           <option value="فيلم">فيلم</option>
-          <option value="ويب تون">ويب تون</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>القسم في الصفحة الرئيسية</label>
-        <select id="inputCategory">
-          <option value="movie_anime">أحدث الأفلام والأنمي</option>
-          <option value="new">مانهو وويب تون جديدة</option>
-          <option value="top">الأعلى تقييماً</option>
+      <div class="form-ctrl">
+        <label>القسم الرئيسي</label>
+        <select id="admCat">
+          <option value="movie">أفلام وأنمي رائج</option>
+          <option value="manga">مانهوا جديدة</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>رابط الغلاف (Poster URL)</label>
-        <input type="text" id="inputPoster" placeholder="ضع رابط الصورة هنا مباشرة">
+      <div class="form-ctrl">
+        <label>رابط غلاف الصورة (Poster URL)</label>
+        <input type="text" id="admPoster" placeholder="ضع رابط الصورة مباشرة هنا">
       </div>
-      <div class="form-group">
-        <label>التقييم (مثال: 9.9)</label>
-        <input type="text" id="inputRating" placeholder="9.5">
+      <div class="form-ctrl">
+        <label>التقييم (مثال: 9.8)</label>
+        <input type="text" id="admRating" placeholder="9.5">
       </div>
-      <div class="form-group">
-        <label>الحالة (مثال: مستمر / حصري)</label>
-        <input type="text" id="inputStatus" placeholder="مستمر">
+      <div class="form-ctrl">
+        <label>الحالة (مستمر / مكتمل)</label>
+        <input type="text" id="admStatus" placeholder="مستمر">
       </div>
-      <div class="form-group">
-        <label>وصف العمل أو قصة مختصرة</label>
-        <textarea id="inputDesc" rows="3" placeholder="نبذة قصيرة عن القصة..."></textarea>
+      <div class="form-ctrl">
+        <label>عدد الفصول المتاحة</label>
+        <input type="number" id="admChapters" value="10" placeholder="10">
       </div>
-      <button class="admin-submit-btn" onclick="addNewWork()">نشر العمل الآن 🚀</button>
+      <div class="form-ctrl">
+        <label>وصف قصة العمل</label>
+        <textarea id="admDesc" rows="3" placeholder="ملخص سريع للقصة..."></textarea>
+      </div>
+      <button class="admin-submit-btn" onclick="addNewWorkFromAdmin()">نشر العمل فوراً 🚀</button>
     </div>
   </div>
 </div>
 
 <!-- LIBRARY TAB -->
-<div id="tabLibrary" class="tab-content">
-  <div class="top-header"><div class="app-main-title" style="margin: 0 auto; color:#fff;">المكتبة والمفضلة</div></div>
+<div id="tabLibrary" class="tab-pane">
   <div class="library-wrap">
-    <div class="library-grid" id="libraryGridContainer"></div>
+    <h3 style="font-size: 13px; margin-bottom: 12px; color: #fff;">المفضلة والمكتبة ❤️</h3>
+    <div class="library-grid" id="libraryGrid"></div>
   </div>
 </div>
 
 <!-- PROFILE TAB -->
-<div id="tabProfile" class="tab-content">
-  <div class="top-header">
-    <button class="header-icon-btn" onclick="switchTab('tabHome', document.querySelectorAll('.nav-item-btn')[0])">➔</button>
-    <div class="app-main-title" style="color:#fff;">الملف الشخصي</div>
-    <div style="width: 36px;"></div>
+<div id="tabProfile" class="tab-pane">
+  <div class="profile-cover">
+    <div class="profile-avatar">N</div>
   </div>
-
-  <div class="profile-banner-bg">
-    <div class="profile-avatar-box">N</div>
-  </div>
-
-  <div class="profile-body-content">
+  <div class="profile-content">
     <h2>Nexora Admin</h2>
-    <p>admin@nexora.hub</p>
-    
-    <div class="bio-input-box" id="bioTextDisplay" onclick="editUserBio()">
-      المسؤول عن منصة Nexora 🛡️ (اضغط للتعديل)
-    </div>
-
-    <div class="stats-grid-box">
-      <div class="stat-card-item"><div class="num" id="statTotalWorks">0</div><div class="lbl">أعمال منشورة</div></div>
-      <div class="stat-card-item"><div class="num" id="statFavCount">0</div><div class="lbl">في المفضلة</div></div>
-      <div class="stat-card-item"><div class="num">100%</div><div class="lbl">تحكم كامل</div></div>
+    <p>admin@nexora.app</p>
+    <div class="profile-stats">
+      <div class="stat-box"><div class="val" id="statWorksCount">0</div><div class="lbl">الأعمال</div></div>
+      <div class="stat-box"><div class="val" id="statFavsCount">0</div><div class="lbl">المفضلة</div></div>
+      <div class="stat-box"><div class="val">VIP</div><div class="lbl">العضوية</div></div>
     </div>
   </div>
 </div>
 
 <!-- ITEM DETAILS MODAL -->
-<div id="itemModal" class="custom-modal" onclick="closeModalOnOutside(event)">
-  <div class="modal-box-inner">
-    <div class="modal-img-top">
-      <img id="modalPosterImg" src="" alt="poster">
-      <span class="status-tag" id="modalTagBadge" style="top: 10px; right: 10px;">جديد</span>
+<div id="detailsModal" class="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <div class="modal-banner">
+      <img id="mPoster" src="" alt="poster">
+      <span class="card-badge" id="mBadge" style="top: 10px; right: 10px;">حصري</span>
     </div>
-    <div class="modal-desc-body">
-      <h3 id="modalTitleText">عنوان العمل</h3>
-      <p id="modalInfoText">التقييم: 9.5 ★</p>
-      <p id="modalDescText" style="font-size:11px; color:#a1a1aa; margin-bottom:12px;"></p>
-      <div class="modal-actions-btns">
-        <button class="modal-btn-main" id="modalActionBtn" onclick="playOrReadItem()">مشاهدة / قراءة 🎥</button>
-        <button class="modal-btn-sec" id="modalFavBtn" onclick="toggleFavoriteCurrent()">المفضلة ❤️</button>
+    <div class="modal-body">
+      <h3 id="mTitle">العنوان</h3>
+      <p id="mRatingInfo">التقييم: 9.5</p>
+      <p id="mDesc" style="font-size: 10px; color: var(--text-muted); margin-bottom: 10px;"></p>
+      
+      <div style="font-size: 11px; font-weight: bold; margin-bottom: 4px; color: #fff;">قائمة الفصول / الحلقات:</div>
+      <div class="chapters-list" id="mChaptersList"></div>
+
+      <div class="modal-btns">
+        <button class="modal-btn-main" id="mMainActionBtn" onclick="openMediaViewer()">مشاهدة / قراءة 🎬</button>
+        <button class="modal-btn-sec" id="mFavBtn" onclick="toggleFavorite()">المفضلة ❤️</button>
       </div>
-      <button class="modal-btn-del" onclick="deleteCurrentWork()">حذف العمل من المنصة 🗑️</button>
+      <button class="modal-btn-del" onclick="deleteWork()">حذف العمل نهائياً 🗑️</button>
     </div>
   </div>
 </div>
 
-<!-- BOTTOM NAVIGATION -->
+<!-- BOTTOM NAVIGATION BAR -->
 <nav class="bottom-nav">
-  <button class="nav-item-btn active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
-  <button class="nav-item-btn" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>ابحث</button>
-  <button class="nav-item-btn" onclick="switchTab('tabAdmin', this)"><span class="icon">🛡️</span>الإدارة</button>
-  <button class="nav-item-btn" onclick="switchTab('tabLibrary', this)"><span class="icon">📚</span>المكتبة</button>
-  <button class="nav-item-btn" onclick="switchTab('tabProfile', this)"><span class="icon">👤</span>حسابي</button>
+  <button class="nav-btn active" onclick="switchTab('tabHome', this)"><span class="ico">🏠</span>الرئيسية</button>
+  <button class="nav-btn" onclick="switchTab('tabSearch', this)"><span class="ico">🔍</span>ابحث</button>
+  <button class="nav-btn" onclick="switchTab('tabAdmin', this)"><span class="ico">🛡️</span>الإدارة</button>
+  <button class="nav-btn" onclick="switchTab('tabLibrary', this)"><span class="ico">📚</span>المكتبة</button>
+  <button class="nav-btn" onclick="switchTab('tabProfile', this)"><span class="ico">👤</span>حسابي</button>
 </nav>
 
-<!-- Toast Element -->
-<div id="toastNotification">تنبيه</div>
+<!-- TOAST NOTIFICATION -->
+<div id="toastAlert">تم بنجاح</div>
 
 <script>
-// البيانات الافتراضية مع تخزين حقيقي LocalStorage
-let defaultData = [
-  { id: 1, title: "Suzume", type: "فيلم", rating: "9.3", status: "حصري", category: "movie_anime", desc: "رحلة فتاة لإغلاق الأبواب التي تسبب الكوارث عبر اليابان.", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Suzume" },
-  { id: 2, title: "Demon Slayer", type: "أنمي", rating: "9.6", status: "مستمر", category: "movie_anime", desc: "فتى يقاتل الشياطين ليحول أخته البشرية مجدداً.", poster: "https://via.placeholder.com/200x300/191926/3b82f6?text=DemonSlayer" },
-  { id: 3, title: "Solo Leveling", type: "مانهوا", rating: "9.9", status: "مستمر", category: "new", desc: "أضعف صياد يحصل على نظام فريد يتيح له التطور بلا حدود.", poster: "https://via.placeholder.com/200x300/191926/ec4899?text=SoloLeveling" },
-  { id: 4, title: "TBATE", type: "مانهوا", rating: "9.8", status: "جديد", category: "new", desc: "ملك يعيد تجسيده في عالم مليء بالسحر والوحوش.", poster: "https://via.placeholder.com/200x300/191926/f59e0b?text=TBATE" },
-  { id: 5, title: "Spirited Away", type: "فيلم", rating: "9.9", status: "أسطوري", category: "top", desc: "فتاة تدخل عالماً سحرياً وتنقذ والديها.", poster: "https://via.placeholder.com/200x300/191926/10b981?text=SpiritedAway" },
-  { id: 6, title: "Omniscient Reader", type: "ويب تون", rating: "9.7", status: "مستمر", category: "top", desc: "قارئ يجد روايته المفضلة تتحول إلى حقيقة مدمرة.", poster: "https://via.placeholder.com/200x300/191926/6366f1?text=ORV" }
+// قاعدة البيانات الافتراضية مع الحفظ في الذاكرة المحلية
+let defaultWorks = [
+  { id: 1, title: "Solo Leveling", type: "مانهوا", cat: "manga", rating: "9.9", status: "مستمر", chapters: 200, desc: "بوابة غامضة تفتح وصياد ضعيف يتطور بلا حدود.", poster: "https://via.placeholder.com/200x300/14141f/8b5cf6?text=SoloLeveling" },
+  { id: 2, title: "Demon Slayer", type: "أنمي", cat: "movie", rating: "9.7", status: "مستمر", chapters: 26, desc: "رحلة تانجيرو للانتقام لعائلته وإنقاذ أخته.", poster: "https://via.placeholder.com/200x300/14141f/3b82f6?text=DemonSlayer" },
+  { id: 3, title: "Suzume", type: "فيلم", cat: "movie", rating: "9.4", status: "مكتمل", chapters: 1, desc: "فتاة تغلق أبواب الكوارث عبر مدن اليابان.", poster: "https://via.placeholder.com/200x300/14141f/ec4899?text=Suzume" },
+  { id: 4, title: "Omniscient Reader", type: "مانهوا", cat: "manga", rating: "9.8", status: "مستمر", chapters: 150, desc: "الرواية التي يقرأها تتحول إلى حقيقة واقعة مدمرة.", poster: "https://via.placeholder.com/200x300/14141f/10b981?text=ORV" }
 ];
 
-let appData = JSON.parse(localStorage.getItem('nexora_works')) || defaultData;
-let favorites = JSON.parse(localStorage.getItem('nexora_favs')) || [];
-let selectedWork = null;
+let worksData = JSON.parse(localStorage.getItem('nexora_data')) || defaultWorks;
+let favList = JSON.parse(localStorage.getItem('nexora_favs')) || [];
+let activeWork = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-  refreshAllViews();
+  renderEverything();
 });
 
-function saveToLocalStorage() {
-  localStorage.setItem('nexora_works', JSON.stringify(appData));
-  localStorage.setItem('nexora_favs', JSON.stringify(favorites));
+function syncStorage() {
+  localStorage.setItem('nexora_data', JSON.stringify(worksData));
+  localStorage.setItem('nexora_favs', JSON.stringify(favList));
 }
 
-function switchTab(tabId, btnElement) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+function switchTab(tabId, btnEl) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(tabId).classList.add('active');
-  if(btnElement) btnElement.classList.add('active');
-  window.scrollTo(0,0);
+  if(btnEl) btnEl.classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-function refreshAllViews() {
-  renderLists(appData);
-  renderSearchGrid(appData);
-  renderLibraryGrid();
-  document.getElementById('statTotalWorks').innerText = appData.length;
-  document.getElementById('statFavCount').innerText = favorites.length;
-  saveToLocalStorage();
+function renderEverything() {
+  renderHomeSliders(worksData);
+  renderSearchGrid(worksData);
+  renderLibrary();
+  document.getElementById('statWorksCount').innerText = worksData.length;
+  document.getElementById('statFavsCount').innerText = favList.length;
+  syncStorage();
 }
 
-function renderLists(data) {
-  const movAnimeGrid = document.getElementById('moviesAnimeGrid');
-  const newGrid = document.getElementById('newWorksGrid');
-  const topGrid = document.getElementById('topRatedGrid');
-
-  movAnimeGrid.innerHTML = '';
-  newGrid.innerHTML = '';
-  topGrid.innerHTML = '';
+function renderHomeSliders(data) {
+  const mBox = document.getElementById('homeMoviesGrid');
+  const mangaBox = document.getElementById('homeMangaGrid');
+  mBox.innerHTML = '';
+  mangaBox.innerHTML = '';
 
   data.forEach(item => {
-    const html = `
-      <div class="media-card" onclick="openItemModal(${item.id})">
-        <div class="media-poster">
-          <img src="${item.poster}" alt="cover">
-          <span class="status-tag">${item.status}</span>
+    let cardHTML = `
+      <div class="card-item" onclick="openModal(${item.id})">
+        <div class="card-img">
+          <img src="${item.poster}" alt="img">
+          <span class="card-badge">${item.status}</span>
         </div>
-        <div class="media-info">
-          <h5>${item.title}</h5>
+        <div class="card-details">
+          <h4>${item.title}</h4>
           <p>${item.type} • ★ ${item.rating}</p>
         </div>
       </div>
     `;
-    if(item.category === 'movie_anime') movAnimeGrid.innerHTML += html;
-    if(item.category === 'new') newGrid.innerHTML += html;
-    if(item.category === 'top') topGrid.innerHTML += html;
+    if(item.cat === 'movie') mBox.innerHTML += cardHTML;
+    else mangaBox.innerHTML += cardHTML;
   });
 }
 
 function renderSearchGrid(data) {
-  const grid =
+  const grid = document.getElementById('searchGrid');
+  grid.innerHTML = '';
+  data.forEach(item => {
+    grid.innerHTML += `
+      <div class="card-item" style="max-width: 100%;" onclick="openModal(${item.id})">
+        <div class="card-img">
+          <img src="${item.poster}" alt="img">
+          <span class="card-badge">${item.type}</span>
+        </div>
+        <div class="card-details">
+          <h4>${item.title}</h4>
+          <p>★ ${item.rating}</p>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function filterSearch(val) {
+  let filtered = worksData.filter(i => i.title.toLowerCase().includes(val.toLowerCase()) || i.type.includes(val));
+  renderSearchGrid(filtered);
+}
+
+function addNewWorkFromAdmin() {
+  let title = document.getElementById('admTitle').value.trim();
+  let type = document.getElementById('admType').value;
+  let cat = document.getElementById('admCat').value;
+  let poster = document.getElementById('admPoster').value.trim() || "https://via.placeholder.com/200x300/14141f/8b5cf6?text=Nexora";
+  let rating = document.getElementById('admRating').value.trim() || "9.0";
+  let status = document.getElementById('admStatus').value.trim() || "مستمر";
+  let chapters = parseInt(document.getElementById('admChapters').value) || 12;
+  let desc = document.getElementById('admDesc').value.trim() || "لا توجد تفاصيل إضافية.";
+
+  if(!title) {
+    showToast("⚠️ يرجى إدخال عنوان العمل!");
+    return;
+  }
+
+  let newObj = { id: Date.now(), title, type, cat, poster, rating, status, chapters, desc };
+  worksData.unshift(newObj);
+  renderEverything();
+
+  document.getElementById('admTitle').value = '';
+  document.getElementById('admPoster').value = '';
+  document.getElementById('admRating').value = '';
+  document.getElementById('admStatus').value = '';
+  document.getElementById('admDesc').value = '';
+
+  showToast("🚀 تمت إضافة العمل ونشره بنجاح في الواجهة الرئيسية!");
+  switchTab('tabHome', document.querySelectorAll('.nav-btn')[0]);
+}
+
+function openModal(id) {
+  
