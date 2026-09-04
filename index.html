@@ -11,10 +11,6 @@
 
 <title>Nexora - الرئيسية</title>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-
 <style>
 * {
   box-sizing: border-box;
@@ -235,7 +231,7 @@ nav {
   background: #11111a;
   border-top: 1px solid #1e1e2d;
   display: flex;
-  justify-style: space-around;
+  justify-content: space-around;
   align-items: center;
   z-index: 100;
 }
@@ -317,8 +313,6 @@ nav {
 <!-- TAB 4: More Menu -->
 <div id="tabMore" class="tab-content">
   <div class="more-container" style="padding: 16px;">
-    
-    <!-- بطاقة تسجيل الدخول -->
     <div class="user-card" onclick="alert('صفحة تسجيل الدخول قيد التطوير')" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 18px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; cursor: pointer;">
       <span style="color: #71717a; font-size: 14px;">›</span>
       <div style="text-align: right;">
@@ -328,11 +322,9 @@ nav {
       <div class="avatar" style="width: 44px; height: 44px; background: rgba(139, 92, 246, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">👤</div>
     </div>
 
-    <!-- مجموعة الحساب والتطبيق -->
     <div class="menu-group" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 10px 16px; margin-bottom: 16px;">
       <div class="menu-group-title" style="font-size: 12px; color: #a1a1aa; padding: 8px 0; font-weight: bold; text-align: right;">الحساب والتطبيق</div>
       
-      <!-- مفضلتي -->
       <div class="menu-item" onclick="alert('المفضلة فارغة')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
         <span style="color: #71717a; font-size: 14px;">›</span>
         <div style="text-align: right; flex: 1; margin-right: 12px;">
@@ -342,53 +334,21 @@ nav {
         <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">♡</div>
       </div>
 
-      <!-- مكتبتي -->
-      <div class="menu-item" onclick="alert('المكتبة فارغة')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
-        <span style="color: #71717a; font-size: 14px;">›</span>
-        <div style="text-align: right; flex: 1; margin-right: 12px;">
-          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">مكتبتي</h4>
-          <p style="font-size: 10px; color: #71717a;">تصفح مكتبة الأعمال الخاصة بك</p>
-        </div>
-        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">⊞</div>
-      </div>
-
-      <!-- التنزيلات -->
-      <div class="menu-item" onclick="alert('لا توجد تنزيلات')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
-        <span style="color: #71717a; font-size: 14px;">›</span>
-        <div style="text-align: right; flex: 1; margin-right: 12px;">
-          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">التنزيلات</h4>
-          <p style="font-size: 10px; color: #71717a;">تصفح الفصول التي حملتها</p>
-        </div>
-        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">⇩</div>
-      </div>
-
-      <!-- طلب مانجا -->
-      <div class="menu-item" onclick="alert('تواصل مع الإدارة لطلب مانجا')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
-        <span style="color: #71717a; font-size: 14px;">›</span>
-        <div style="text-align: right; flex: 1; margin-right: 12px;">
-          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">طلب مانجا</h4>
-          <p style="font-size: 10px; color: #71717a;">أرسل اقتراحك لفريق Nexora</p>
-        </div>
-        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">✉</div>
-      </div>
-
-      <!-- تواصل مع الإدارة -->
       <div class="menu-item" onclick="openPanel('adminPanel')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; cursor: pointer;">
         <span style="color: #71717a; font-size: 14px;">›</span>
         <div style="text-align: right; flex: 1; margin-right: 12px;">
           <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">تواصل مع الإدارة / لوحة التحكم</h4>
-          <p style="font-size: 10px; color: #71717a;">أرسل رسالة إلى فريق Nexora أو اضف أعمال جديدة</p>
+          <p style="font-size: 10px; color: #71717a;">أضف أعمال جديدة لموقعك</p>
         </div>
         <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">💬</div>
       </div>
-
     </div>
   </div>
 </div>
 
 <!-- Admin Panel Modal -->
 <div class="full-panel" id="adminPanel">
-  <h3>إضافة عمل جديد (مباشرة للجميع)</h3>
+  <h3>إضافة عمل جديد محلياً</h3>
   <br>
   <div class="form-group">
     <label>نوع العمل</label>
@@ -412,7 +372,7 @@ nav {
     <input type="text" id="addPoster" placeholder="https://...">
   </div>
   <div class="form-group">
-    <label>رابط الفيديو / المشاهدة / الفصل</label>
+    <label>رابط الفيديو / المشاهدة</label>
     <input type="text" id="addVideo" placeholder="https://...">
   </div>
   <div class="form-group">
@@ -420,55 +380,24 @@ nav {
     <textarea id="addDesc" rows="3" placeholder="وصف القصة..."></textarea>
   </div>
   
-  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="saveManga()">🚀 نشر فوراً لجميع الزوار</button>
+  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="saveManga()">🚀 حفظ العمل</button>
   <button style="width:100%; padding:12px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('adminPanel')">إلغاء</button>
 </div>
 
 <!-- Bottom Nav -->
 <nav>
-  <div class="nav-link active" onclick="switchTab('tabHome', this)">
-    <span class="icon">🏠</span>الرئيسية
-  </div>
-  <div class="nav-link" onclick="switchTab('tabSearch', this)">
-    <span class="icon">🔍</span>البحث
-  </div>
-  <div class="nav-link" onclick="switchTab('tabHistory', this)">
-    <span class="icon">🕒</span>السجل
-  </div>
-  <div class="nav-link" onclick="switchTab('tabMore', this)">
-    <span class="icon">⋯</span>المزيد
-  </div>
+  <div class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</div>
+  <div class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</div>
+  <div class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">🕒</span>السجل</div>
+  <div class="nav-link" onclick="switchTab('tabMore', this)"><span class="icon">⋯</span>المزيد</div>
 </nav>
 
 <script>
-// تسجيل الـ Service Worker لتطبيق الـ PWA
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then((reg) => console.log('Service Worker Registered!', reg))
-      .catch((err) => console.error('Service Worker Registration Failed!', err));
-  });
-}
-
-// إعداد قاعدة البيانات المجانية من Firebase
-const firebaseConfig = {
-  databaseURL: "https://nexora-app-default-rtdb.firebaseio.com/"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-let mangaList = [];
+let mangaList = JSON.parse(localStorage.getItem('nexora_media')) || [];
 let currentCategory = 'all';
 
-// الاستماع المستمر والتحديث التلقائي لجميع الزوار
-db.ref('media').on('value', (snapshot) => {
-  const data = snapshot.val();
-  mangaList = [];
-  if (data) {
-    Object.keys(data).forEach(key => {
-      mangaList.push({ dbKey: key, ...data[key] });
-    });
-  }
+// تشغيل العرض عند فتح الصفحة
+document.addEventListener('DOMContentLoaded', () => {
   renderHome();
 });
 
@@ -492,8 +421,8 @@ function renderGrid(containerId, itemsToRender) {
     if(item.type === 'movie') typeLabel = "فيلم";
 
     card.innerHTML = `
-      <button class="delete-btn" onclick="deleteItem(event, '${item.dbKey}')" title="حذف العمل">✕</button>
-      <div onclick="openDetails('${item.dbKey}')">
+      <button class="delete-btn" onclick="deleteItem(event, ${item.id})" title="حذف العمل">✕</button>
+      <div onclick="openDetails(${item.id})">
         <div class="poster-wrapper">
           <img src="${item.poster}" alt="cover">
           <span class="type-tag">${typeLabel}</span>
@@ -515,18 +444,20 @@ function renderHome() {
   renderGrid('mediaGrid', filtered);
 }
 
-function openDetails(dbKey) {
-  const item = mangaList.find(i => i.dbKey === dbKey);
+function openDetails(id) {
+  const item = mangaList.find(i => i.id === id);
   if(item) {
     localStorage.setItem('selected_manga', JSON.stringify(item));
     window.location.href = 'details.html';
   }
 }
 
-function deleteItem(event, dbKey) {
+function deleteItem(event, id) {
   event.stopPropagation();
-  if (confirm("هل أنت تأكد من رغبتك في مسح هذا العمل للجميع؟")) {
-    db.ref('media/' + dbKey).remove();
+  if (confirm("هل أنت متأكد من رغبتك في مسح هذا العمل؟")) {
+    mangaList = mangaList.filter(item => item.id !== id);
+    localStorage.setItem('nexora_media', JSON.stringify(mangaList));
+    renderHome();
   }
 }
 
@@ -561,154 +492,6 @@ function switchTab(tabId, el) {
   if(tabId === 'tabSearch') renderGrid('searchGrid', mangaList);
 }
 
-function saveManga() {
-  const title = document.getElementById('addTitle').value;
-  if(!title) return alert("يرجى إدخال العنوان على الأقل");
-  
-  const newItem = {
-    id: Date.now(),
-    type: document.getElementById('addCategory').value,
-    title: title,
-    status: document.getElementById('addAuthor').value || "مانهوا • مكتملة",
-    rating: "5.0",
-    poster: document.getElementById('addPoster').value || "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Cover",
-    videoUrl: document.getElementById('addVideo').value || "",
-    desc: document.getElementById('addDesc').value || "لا يوجد وصف متاح.",
-    chapters: [{ number: 1, date: "2026-09-03" }]
-  };
-  
-  // الحفظ الفوري في السحابة
-  db.ref('media').push(newItem).then(() => {
-    alert("تم نشر العمل بنجاح لجميع زوار موقعك! 🎉");
-    document.getElementById('addTitle').value = '';
-    document.getElementById('addAuthor').value = '';
-    document.getElementById('addPoster').value = '';
-    document.getElementById('addVideo').value = '';
-    document.getElementById('addDesc').value = '';
-    closePanel('adminPanel');
-  });
-}
-
-function openPanel(id) { document.getElementById(id).classList.add('active'); }
-function closePanel(id) { document.getElementById(id).classList.remove('active'); }
-function openPanel(id) { document.getElementById(id).classList.add('active'); }
-function closePanel(id) { document.getElementById(id).classList.remove('active'); }
-</script>
-<script>
-function filterCategory(cat, el) {
-  currentCategory = cat;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  if (el) el.classList.add('active');
-  renderHome();
-}
-
-function searchContent() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
-  const filtered = mangaList.filter(item => {
-    const matchesCat = (currentCategory === 'all' || item.type === currentCategory);
-    const matchesQuery = item.title.toLowerCase().includes(query);
-    return matchesCat && matchesQuery;
-  });
-  renderGrid('mediaGrid', filtered);
-}
-
-function searchContentTab() {
-  const query = document.getElementById('searchInputTab').value.toLowerCase();
-  const filtered = mangaList.filter(item => item.title.toLowerCase().includes(query));
-  renderGrid('searchGrid', filtered);
-}
-
-function switchTab(tabId, el) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  if (el) el.classList.add('active');
-  if(tabId === 'tabSearch') renderGrid('searchGrid', mangaList);
-}
-
-// دالة الحفظ المحدثة وتعمل بنجاح مع Firestore
-async function saveManga() {
-  const title = document.getElementById('addTitle').value;
-  if(!title) return alert("يرجى إدخال العنوان على الأقل");
-  
-  const newItem = {
-    id: Date.now(),
-    type: document.getElementById('addCategory').value,
-    title: title,
-    status: document.getElementById('addAuthor').value || "مانهوا • مكتملة",
-    rating: "5.0",
-    poster: document.getElementById('addPoster').value || "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Cover",
-    videoUrl: document.getElementById('addVideo').value || "",
-    desc: document.getElementById('addDesc').value || "لا يوجد وصف متاح.",
-    chapters: [{ number: 1, date: "2026-09-03" }]
-  };
-  
-  try {
-    // حفظ العمل في مجموعة 'media' عبر Firestore
-    await window.addDoc(window.collection(window.db, "media"), newItem);
-    alert("تم نشر العمل بنجاح لجميع زوار موقعك! 🎉");
-    
-    // تفريغ الحقول بعد الحفظ
-    document.getElementById('addTitle').value = '';
-    document.getElementById('addAuthor').value = '';
-    document.getElementById('addPoster').value = '';
-    document.getElementById('addVideo').value = '';
-    document.getElementById('addDesc').value = '';
-    closePanel('adminPanel');
-  } catch (error) {
-    console.error("خطأ أثناء الحفظ: ", error);
-    alert("حدث خطأ أثناء حفظ العمل، تأكد من إعدادات قاعدة البيانات.");
-  }
-}
-
-function openPanel(id) { document.getElementById(id).classList.add('active'); }
-function closePanel(id) { document.getElementById(id).classList.remove('active'); }
-<script>
-// دوال فتح وإغلاق اللوحات (الإدارة وغيرها)
-function openPanel(id) { 
-  document.getElementById(id).classList.add('active'); 
-}
-
-function closePanel(id) { 
-  document.getElementById(id).classList.remove('active'); 
-}
-
-// دالة تصفية الفئات
-function filterCategory(cat, el) {
-  currentCategory = cat;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  if (el) el.classList.add('active');
-  if(typeof renderHome === 'function') renderHome();
-}
-
-// دالة البحث في الصفحة الرئيسية
-function searchContent() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
-  const filtered = mangaList.filter(item => {
-    const matchesCat = (currentCategory === 'all' || item.type === currentCategory);
-    const matchesQuery = item.title.toLowerCase().includes(query);
-    return matchesCat && matchesQuery;
-  });
-  if(typeof renderGrid === 'function') renderGrid('mediaGrid', filtered);
-}
-
-// دالة البحث في تبويب البحث
-function searchContentTab() {
-  const query = document.getElementById('searchInputTab').value.toLowerCase();
-  const filtered = mangaList.filter(item => item.title.toLowerCase().includes(query));
-  if(typeof renderGrid === 'function') renderGrid('searchGrid', filtered);
-}
-
-// دالة التنقل بين التبويبات
-function switchTab(tabId, el) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  if (el) el.classList.add('active');
-  if(tabId === 'tabSearch' && typeof renderGrid === 'function') renderGrid('searchGrid', mangaList);
-}
-
-// دالة حفظ العمل الجديد محلياً في متصفح الهاتف (LocalStorage)
 function saveManga() {
   const title = document.getElementById('addTitle').value;
   if(!title) return alert("يرجى إدخال العنوان على الأقل");
@@ -725,16 +508,11 @@ function saveManga() {
     chapters: [{ number: 1, date: "2026-09-04" }]
   };
   
-  // جلب الأعمال المخزنة سابقاً أو إنشاء مصفوفة جديدة
-  let savedItems = JSON.parse(localStorage.getItem('nexora_media')) || [];
-  savedItems.push(newItem);
-  
-  // حفظ القائمة المحدثة في ذاكرة المتصفح المحلية
-  localStorage.setItem('nexora_media', JSON.stringify(savedItems));
+  mangaList.push(newItem);
+  localStorage.setItem('nexora_media', JSON.stringify(mangaList));
   
   alert("تم حفظ العمل بنجاح على هاتفك! 🎉");
   
-  // تفريغ الحقول وإغلاق لوحة الإدارة
   document.getElementById('addTitle').value = '';
   document.getElementById('addAuthor').value = '';
   document.getElementById('addPoster').value = '';
@@ -742,9 +520,11 @@ function saveManga() {
   document.getElementById('addDesc').value = '';
   closePanel('adminPanel');
   
-  // تحديث الشاشة الرئيسية إن وجدت الدالة
-  if(typeof renderHome === 'function') renderHome();
+  renderHome();
 }
+
+function openPanel(id) { document.getElementById(id).classList.add('active'); }
+function closePanel(id) { document.getElementById(id).classList.remove('active'); }
 </script>
 </body>
 </html>
