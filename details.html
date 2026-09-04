@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تفاصيل العمل - Nexora</title>
+<title>Nexora - تفاصيل العمل</title>
 <style>
 * {
   box-sizing: border-box;
@@ -14,49 +14,55 @@
 }
 
 body {
-  background: #f8fafc;
-  color: #1e293b;
+  background: #09090e;
+  color: #efefef;
+  padding: 16px;
   padding-bottom: 40px;
 }
 
-/* Top Navigation */
+/* Top Navigation Bar inside details */
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background: #ffffff;
+  margin-bottom: 20px;
 }
 
 .icon-btn {
-  width: 36px;
-  height: 36px;
+  background: #161622;
+  border: 1px solid #222232;
+  color: #efefef;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: #f1f5f9;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
   cursor: pointer;
   font-size: 16px;
-  color: #64748b;
 }
 
-/* Header Info */
-.hero-container {
-  padding: 12px 16px;
+.icon-btn:active { transform: scale(0.95); }
+
+/* Header Info Section */
+.info-section {
   display: flex;
   gap: 16px;
-  background: #ffffff;
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  align-items: center;
 }
 
 .poster-box {
-  width: 100px;
-  height: 140px;
-  border-radius: 12px;
+  width: 105px;
+  aspect-ratio: 2/3;
+  border-radius: 10px;
   overflow: hidden;
+  background: #1c1c2b;
   flex-shrink: 0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .poster-box img {
@@ -65,71 +71,51 @@ body {
   object-fit: cover;
 }
 
-.manga-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: right;
-  flex: 1;
+.details-text h1 {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 6px;
 }
 
-.manga-title {
-  font-size: 16px;
-  font-weight: 800;
-  color: #0f172a;
-  line-height: 1.3;
-  margin-bottom: 8px;
-}
-
-.manga-sub {
+.details-text p {
   font-size: 12px;
-  color: #94a3b8;
+  color: #a1a1aa;
   margin-bottom: 4px;
 }
 
-/* Stats Card */
-.stats-card {
-  margin: 16px;
-  background: #ffffff;
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: #12121c;
+  border: 1px solid #222232;
   border-radius: 16px;
-  padding: 12px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid #e2e8f0;
+  padding: 14px;
   text-align: center;
+  margin-bottom: 16px;
 }
 
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.stat-val {
-  font-size: 14px;
+.stat-item .number {
+  font-size: 15px;
   font-weight: bold;
-  color: #0f172a;
+  color: #fff;
+  margin-bottom: 2px;
 }
 
-.stat-lbl {
+.stat-item .label {
   font-size: 11px;
-  color: #94a3b8;
+  color: #71717a;
 }
 
 /* Action Buttons */
-.action-section {
-  padding: 0 16px;
-  margin-bottom: 12px;
-}
-
-.read-btn {
+.main-read-btn {
   width: 100%;
-  background: #22c55e;
+  background: #8b5cf6;
   color: white;
   border: none;
   padding: 14px;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 15px;
   font-weight: bold;
   display: flex;
@@ -137,25 +123,27 @@ body {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
-.sub-actions {
-  display: flex;
+.main-read-btn:active { transform: scale(0.98); }
+
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
-  padding: 0 16px;
   margin-bottom: 20px;
 }
 
 .sub-btn {
-  flex: 1;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 12px;
+  background: #12121c;
+  border: 1px solid #222232;
+  color: #efefef;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: #10b981;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,243 +151,174 @@ body {
   cursor: pointer;
 }
 
+.sub-btn:active { transform: scale(0.98); }
+
 /* Rating Box */
-.rating-box {
-  background: #ffffff;
-  margin: 0 16px 20px;
-  padding: 16px;
+.section-box {
+  background: #12121c;
+  border: 1px solid #222232;
   border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  text-align: center;
+  padding: 16px;
+  margin-bottom: 16px;
 }
 
-.rating-stars {
+.section-box h3 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.stars-container {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 8px;
   font-size: 22px;
-  color: #e2e8f0;
+  color: #3f3f46;
   cursor: pointer;
 }
 
-/* Story Section */
-.story-section {
-  padding: 0 16px;
-  margin-bottom: 20px;
-}
+.stars-container span.active { color: #facc15; }
 
-.section-title {
-  font-size: 16px;
-  font-weight: bold;
-  color: #0f172a;
-  margin-bottom: 8px;
+/* Story Description */
+.story-desc {
+  font-size: 13px;
+  color: #a1a1aa;
+  line-height: 1.6;
   text-align: right;
 }
 
-.story-text {
-  font-size: 12px;
-  color: #64748b;
-  line-height: 1.8;
-  text-align: right;
-}
-
-.tags-container {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
-.tag {
-  background: #f1f5f9;
-  color: #64748b;
-  font-size: 11px;
-  padding: 4px 12px;
-  border-radius: 6px;
-}
-
-/* Chapters Header */
-.chapters-header {
-  padding: 0 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.chapter-count {
-  background: #dcfce7;
-  color: #15803d;
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-weight: bold;
-}
-
-/* Chapter Card */
+/* Chapters List */
 .chapter-item {
-  margin: 0 16px 8px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #e2e8f0;
+  background: #161622;
+  border: 1px solid #222232;
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-top: 8px;
   cursor: pointer;
 }
 
-.chapter-num {
-  font-size: 15px;
-  font-weight: bold;
-  color: #0f172a;
-}
-
-.chapter-date {
-  font-size: 10px;
-  color: #94a3b8;
-}
-
-.chapter-icons {
-  display: flex;
-  gap: 12px;
-  color: #94a3b8;
-  font-size: 14px;
-}
+.chapter-item:active { background: #1c1c2b; }
+.chapter-info h4 { font-size: 13px; color: #fff; margin-bottom: 2px; }
+.chapter-info span { font-size: 11px; color: #71717a; }
 </style>
 </head>
 <body>
 
-<!-- Top Navigation -->
-<div class="top-bar">
-  <button class="icon-btn" onclick="window.location.href='index.html'">✕</button>
-  <div style="display: flex; gap: 8px;">
-    <button class="icon-btn">♡</button>
-    <button class="icon-btn" style="color: #eab308;">⚠️</button>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="icon-btn" onclick="goBack()" title="رجوع">✕</div>
+    <div style="display: flex; gap: 8px;">
+      <div class="icon-btn" onclick="alert('تمت الإضافة للمفضلة ♡')" title="مفضلة">♡</div>
+      <div class="icon-btn" onclick="alert('تنبيهات العمل مفعلة')" title="تنبيه">🔔</div>
+    </div>
   </div>
-</div>
 
-<!-- Header Info -->
-<div class="hero-container">
-  <div class="poster-box">
-    <img id="mangaPoster" src="" alt="Poster">
+  <!-- Header Info -->
+  <div class="info-section">
+    <div class="poster-box">
+      <img id="itemPoster" src="" alt="Poster">
+    </div>
+    <div class="details-text">
+      <h1 id="itemTitle">جاري التحميل...</h1>
+      <p id="itemStatus">...</p>
+      <p>الكاتب: غير معروف</p>
+    </div>
   </div>
-  <div class="manga-info">
-    <h1 class="manga-title" id="mangaTitle">عنوان العمل</h1>
-    <div class="manga-sub" id="mangaStatus">مانهوا • مكتملة</div>
-    <div class="manga-sub" id="mangaAuthor">الكاتب: غير معروف</div>
-  </div>
-</div>
 
-<!-- Stats Card -->
-<div class="stats-card">
-  <div class="stat-item">
-    <span class="stat-val" style="color:#eab308;" id="mangaRating">0.0 ★</span>
-    <span class="stat-lbl">التقييم</span>
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="number">1</div>
+      <div class="label">الفصول</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">14</div>
+      <div class="label">المشاهدات</div>
+    </div>
+    <div class="stat-item">
+      <div class="number" style="color: #facc15;">★ 5.0</div>
+      <div class="label">التقييم</div>
+    </div>
   </div>
-  <div class="stat-item">
-    <span class="stat-val">8 👁️</span>
-    <span class="stat-lbl">المشاهدات</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-val" style="color:#10b981;" id="mangaChaptersCount">17 📖</span>
-    <span class="stat-lbl">الفصول</span>
-  </div>
-</div>
 
-<!-- Action Button -->
-<div class="action-section">
-  <button class="read-btn" onclick="openReader()">
-    <span>▶</span> ابدأ القراءة
+  <!-- Main Read Button -->
+  <button class="main-read-btn" onclick="openMediaLink()">
+    <span>▶ ابدأ القراءة / المشاهدة</span>
   </button>
-</div>
 
-<!-- Sub Actions -->
-<div class="sub-actions">
-  <button class="sub-btn">💬 التعليقات</button>
-  <button class="sub-btn">➕ إضافة للقائمة</button>
-</div>
-
-<!-- Rating Box -->
-<div class="rating-box">
-  <div style="font-size: 13px; font-weight: bold; color: #0f172a;">قيم هذا العمل</div>
-  <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">اختر من 5 نجوم</div>
-  <div class="rating-stars">
-    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+  <!-- Action Buttons -->
+  <div class="action-row">
+    <button class="sub-btn" onclick="alert('تمت الإضافة لقائمتك الخاصة')">＋ إضافة للقائمة</button>
+    <button class="sub-btn" onclick="alert('لا توجد تعليقات حالياً')">💬 التعليقات</button>
   </div>
-</div>
 
-<!-- Story Section -->
-<div class="story-section">
-  <div class="section-title">القصة</div>
-  <p class="story-text" id="mangaDesc">جاري تحميل القصة...</p>
-  <div class="tags-container">
-    <span class="tag">أكشن</span>
-    <span class="tag">إثارة</span>
-    <span class="tag">فانتازيا</span>
-    <span class="tag">قوى خارقة</span>
+  <!-- Rating Box -->
+  <div class="section-box" style="text-align: center;">
+    <h3>قيم هذا العمل</h3>
+    <p style="font-size: 11px; color: #71717a; margin-bottom: 8px;">اختر من 5 نجوم</p>
+    <div class="stars-container">
+      <span onclick="rate(1)">★</span>
+      <span onclick="rate(2)">★</span>
+      <span onclick="rate(3)">★</span>
+      <span onclick="rate(4)">★</span>
+      <span onclick="rate(5)" class="active">★</span>
+    </div>
   </div>
-</div>
 
-<!-- Chapters Header -->
-<div class="chapters-header">
-  <div class="section-title" style="margin: 0;">الفصول المتوفرة</div>
-  <span class="chapter-count" id="badgeCount">17 فصل</span>
-</div>
+  <!-- Story / Desc -->
+  <div class="section-box">
+    <h3>القصة</h3>
+    <p class="story-desc" id="itemDesc">لا يوجد وصف متاح.</p>
+  </div>
 
-<!-- Chapter List -->
-<div id="chaptersContainer"></div>
+  <!-- Chapters -->
+  <div class="section-box">
+    <h3>الفصول المتوفرة</h3>
+    <div class="chapter-item" onclick="openMediaLink()">
+      <div class="chapter-info">
+        <h4 id="chapTitle">الفصل 1</h4>
+        <span id="chapDate">2026-09-04</span>
+      </div>
+      <span style="color: #8b5cf6; font-size: 12px; font-weight: bold;">قراءة ←</span>
+    </div>
+  </div>
 
 <script>
-let currentData = null;
+let currentData = JSON.parse(localStorage.getItem('selected_manga'));
 
 document.addEventListener('DOMContentLoaded', () => {
-  const data = localStorage.getItem('selected_manga');
-  if (data) {
-    currentData = JSON.parse(data);
-    
-    document.getElementById('mangaTitle').innerText = currentData.title || "عنوان غير معروف";
-    document.getElementById('mangaPoster').src = currentData.poster || "https://via.placeholder.com/100x140";
-    document.getElementById('mangaStatus').innerText = currentData.status || "مانهوا • مكتملة";
-    document.getElementById('mangaRating').innerText = (currentData.rating || "5.0") + " ★";
-    document.getElementById('mangaDesc').innerText = currentData.desc || "لا يوجد وصف متوفر لهذا العمل.";
-    
-    renderChapters();
+  if (currentData) {
+    document.getElementById('itemTitle').innerText = currentData.title || "عنوان العمل";
+    document.getElementById('itemStatus').innerText = currentData.status || "مانهوا • مكتملة";
+    document.getElementById('itemPoster').src = currentData.poster || "https://via.placeholder.com/200x300";
+    document.getElementById('itemDesc').innerText = currentData.desc || "لا يوجد وصف متاح.";
   }
 });
 
-function renderChapters() {
-  const container = document.getElementById('chaptersContainer');
-  container.innerHTML = '';
-  
-  const totalChapters = 17; 
-  document.getElementById('mangaChaptersCount').innerText = totalChapters + " 📖";
-  document.getElementById('badgeCount').innerText = totalChapters + " فصل";
-
-  for (let i = totalChapters; i >= 1; i--) {
-    const item = document.createElement('div');
-    item.className = 'chapter-item';
-    item.onclick = () => openReader();
-    item.innerHTML = `
-      <div class="chapter-icons">
-        <span>👁️</span>
-        <span>📥</span>
-        <span>💬</span>
-      </div>
-      <div style="text-align: left;">
-        <div class="chapter-num">${i}</div>
-        <div class="chapter-date">2026-09-02</div>
-      </div>
-    `;
-    container.appendChild(item);
+function openMediaLink() {
+  if (currentData && currentData.videoUrl) {
+    window.location.href = currentData.videoUrl;
+  } else {
+    alert("عذراً، لم يتم إدراج رابط تشغيل لهذا العمل. يمكنك إضافته من لوحة الإدارة.");
   }
 }
 
-function openReader() {
-  window.location.href = 'reader.html';
+function goBack() {
+  window.location.href = 'index.html';
+}
+
+function rate(stars) {
+  alert("شكراً لك! تم تسجيل تقييمك (" + stars + " نجوم) بنجاح ⭐");
+  const starElements = document.querySelectorAll('.stars-container span');
+  starElements.forEach((el, index) => {
+    if (index < stars) el.classList.add('active');
+    else el.classList.remove('active');
+  });
 }
 </script>
-
 </body>
-    </html>
+</html>
