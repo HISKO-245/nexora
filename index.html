@@ -107,7 +107,8 @@ body {
 .horizontal-scroll { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
 
-.manga-mini-card { min-width: 120px; max-width: 120px; background: #12121c; border-radius: 12px; border: 1px solid #222232; overflow: hidden; flex-shrink: 0; cursor: pointer; }
+.manga-mini-card { min-width: 120px; max-width: 120px; background: #12121c; border-radius: 12px; border: 1px solid #222232; overflow: hidden; flex-shrink: 0; cursor: pointer; transition: transform 0.2s; }
+.manga-mini-card:active { transform: scale(0.95); }
 .mini-poster { width: 100%; aspect-ratio: 2/3; position: relative; background: #1c1c2b; }
 .mini-poster img { width: 100%; height: 100%; object-fit: cover; }
 .tag-badge { position: absolute; top: 6px; right: 6px; background: #8b5cf6; color: white; font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
@@ -307,7 +308,59 @@ body {
 .stat-box .stat-num { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 4px; }
 .stat-box .stat-label { font-size: 10px; color: #71717a; }
 
-/* BOTTOM NAVIGATION BAR (FIXED) */
+/* MODAL DETAILS POPUP (يعالج مشكلة الأزرار التي لا تعمل) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 16px;
+}
+.modal-card {
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 360px;
+  overflow: hidden;
+  text-align: right;
+  animation: popIn 0.2s ease;
+}
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.modal-poster {
+  width: 100%;
+  height: 200px;
+  background: #191926;
+  position: relative;
+}
+.modal-poster img { width: 100%; height: 100%; object-fit: cover; }
+.modal-body { padding: 16px; }
+.modal-body h3 { font-size: 16px; color: #fff; margin-bottom: 6px; font-weight: bold; }
+.modal-body p { font-size: 12px; color: #a1a1aa; margin-bottom: 14px; }
+.modal-actions { display: flex; gap: 8px; }
+.modal-btn {
+  flex: 1;
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
+}
+.modal-btn.secondary {
+  background: #1e1e2d;
+  color: #efefef;
+}
+
+/* BOTTOM NAVIGATION BAR */
 nav {
   position: fixed;
   bottom: 0;
@@ -346,7 +399,7 @@ nav {
 <div id="tabHome" class="tab-content active">
   <div class="top-bar">
     <div class="top-icons">
-      <div class="icon-btn" onclick="alert('لا توجد إشعارات جديدة في Nexora')">🔔</div>
+      <div class="icon-btn" onclick="showNotifications()">🔔</div>
       <div class="icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-link')[1])">🔍</div>
     </div>
     <div class="page-title">Nexora - الرئيسية</div>
@@ -357,19 +410,19 @@ nav {
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <h3>أنمي وأفلام الموسم (9.8 ★)</h3>
-        <button class="read-now-btn" onclick="alert('جاري تشغيل العرض...')">شاهد الآن ➔</button>
+        <button class="read-now-btn" onclick="openSliderItem()">شاهد العرض ➔</button>
       </div>
     </div>
   </div>
 
   <div class="section-header">
-    <button class="see-all" onclick="alert('عرض الكل')">عرض الكل ‹</button>
+    <button class="see-all" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-link')[1])">عرض الكل ‹</button>
     <h2>🎬 أحدث الأنمي والأفلام المضافة</h2>
   </div>
   <div class="horizontal-scroll" id="animeMoviesGrid"></div>
 
   <div class="section-header">
-    <button class="see-all" onclick="alert('عرض الكل')">عرض الكل ‹</button>
+    <button class="see-all" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-link')[1])">عرض الكل ‹</button>
     <h2>📖 المانهوا والمانغا المضافة</h2>
   </div>
   <div class="horizontal-scroll" id="mangaGrid"></div>
@@ -387,7 +440,7 @@ nav {
   </div>
 </div>
 
-<!-- TAB 3: إدارة HISKO (لوحة التحكم الخاصة بك للنشر) -->
+<!-- TAB 3: إدارة HISKO -->
 <div id="tabAdmin" class="tab-content">
   <div class="top-bar"><div class="page-title" style="margin: 0 auto;">لوحة تحكم المشرف (HISKO)</div></div>
   <div class="admin-container">
@@ -415,7 +468,7 @@ nav {
       </div>
       <div class="form-group">
         <label>رابط صورة الغلاف (Poster URL)</label>
-        <input type="text" id="adminPoster" class="form-control" placeholder="ضع رابط الصورة هنا أو اتركه فارغاً">
+        <input type="text" id="adminPoster" class="form-control" placeholder="اتركه فارغاً ليتم توليد صورة تلقائياً">
       </div>
       <div class="form-group">
         <label>التقييم (مثال: 9.8)</label>
@@ -429,7 +482,7 @@ nav {
 <!-- TAB 4: التحميلات -->
 <div id="tabHistory" class="tab-content">
   <div class="top-bar"><div class="page-title" style="margin: 0 auto;">التحميلات دون اتصال</div></div>
-  <div style="padding: 40px; text-align: center; color: #a1a1aa;">لا توجد ملفات أو فصول محملة حالياً.</div>
+  <div style="padding: 40px; text-align: center; color: #a1a1aa;">لا توجد ملفات أو فصول محملة حالياً.<br><small style="color:#8b5cf6; cursor:pointer;" onclick="switchTab('tabHome', document.querySelectorAll('.nav-link')[0])">تصفح الأعمال للتحميل</small></div>
 </div>
 
 <!-- TAB 5: الإعدادات -->
@@ -462,9 +515,33 @@ nav {
       </div>
     </div>
 
+    <div class="settings-section-title">التعقيم والإشعارات</div>
+    <div class="settings-card">
+      <div class="settings-item" onclick="toggleSterilization()">
+        <div class="settings-item-right">
+          <div class="s-icon">🌓</div>
+          <div>
+            <h5>تعقيم أغلفة الأعمال</h5>
+            <p id="sterilStatus">متوسط</p>
+          </div>
+        </div>
+        <div class="settings-item-left">تغيير</div>
+      </div>
+      <div class="settings-item" onclick="toggleNotificationsSetting()">
+        <div class="settings-item-right">
+          <div class="s-icon">🔔</div>
+          <div>
+            <h5>الإشعارات</h5>
+            <p id="notifStatus">كل الإشعارات مفعلة</p>
+          </div>
+        </div>
+        <div class="settings-item-left">تعديل</div>
+      </div>
+    </div>
+
     <div class="settings-section-title">التخزين</div>
     <div class="settings-card">
-      <div class="settings-item" onclick="alert('التخزين والتنزيلات')">
+      <div class="settings-item" onclick="alert('مساحة التخزين المؤقت الحالية: 185 ميجابايت مستخدمة بكفاءة عالية.')">
         <div class="settings-item-right">
           <div class="s-icon">💾</div>
           <div>
@@ -477,7 +554,7 @@ nav {
     </div>
 
     <div class="settings-section-title" style="color: #ef4444;">إجراء لا يمكن التراجع عنه</div>
-    <button class="danger-btn" onclick="alert('تم حذف التنزيلات دون اتصال.')">
+    <button class="danger-btn" onclick="clearAllDownloads()">
       حذف التنزيلات دون اتصال 🗑️
     </button>
   </div>
@@ -497,11 +574,11 @@ nav {
 
   <div class="profile-body">
     <h2>HISKO HISKO</h2>
-    <div class="bio-box">أضف وصفًا قصيرًا عن نفسك</div>
+    <div class="bio-box" id="userBioText" onclick="editBio()" style="cursor: pointer;" title="انقر لتعديل الوصف">أضف وصفًا قصيرًا عن نفسك ✏️</div>
 
     <div class="profile-actions-grid">
       <button class="p-action-btn" onclick="switchTab('tabAdmin', document.querySelectorAll('.nav-link')[2])">🛠️ لوحة الإدارة</button>
-      <button class="p-action-btn" onclick="alert('تعديل الملف الشخصي')">✏️ تعديل الملف</button>
+      <button class="p-action-btn" onclick="editBio()">✏️ تعديل الملف</button>
     </div>
 
     <div class="stats-grid">
@@ -512,7 +589,25 @@ nav {
   </div>
 </div>
 
-<!-- BOTTOM NAVIGATION BAR (مع زر الإدارة المخصص) -->
+<!-- MODAL DETAILS POPUP -->
+<div id="detailsModal" class="modal-overlay" onclick="closeDetailsModal(event)">
+  <div class="modal-card">
+    <div class="modal-poster" id="modalPosterContainer">
+      <img id="modalImg" src="" alt="poster">
+      <span class="tag-badge" id="modalTypeBadge">أنمي</span>
+    </div>
+    <div class="modal-body">
+      <h3 id="modalTitle">عنوان العمل</h3>
+      <p id="modalInfo">التقييم: 9.8 ★</p>
+      <div class="modal-actions">
+        <button class="modal-btn" id="modalPrimaryBtn" onclick="startAction()">مشاهدة / قراءة 🚀</button>
+        <button class="modal-btn secondary" onclick="downloadItem()">تحميل 📥</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAVIGATION BAR -->
 <nav>
   <button class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
   <button class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
@@ -528,113 +623,18 @@ let defaultContent = [
   { id: 3, title: "Solo Leveling", type: "مانهوا", rating: "9.9", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Solo+Leveling", category: "manga" }
 ];
 
-// تحميل الأعمال المخزنة محلياً إذا وجدت
 let savedContent = localStorage.getItem('nexora_admin_items');
 let allContent = savedContent ? JSON.parse(savedContent) : defaultContent;
+let currentSelectedItem = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   renderContent(allContent);
   renderSearchGrid(allContent);
   updatePublishedStats();
+  loadUserSettings();
 });
 
 function switchTab(tabId, el) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  if (el) el.classList.add('active');
-}
-
-function openProfileScreen() {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.getElementById('tabProfileScreen').classList.add('active');
-}
-
-function closeProfileScreen() {
-  switchTab('tabMore', document.querySelectorAll('.nav-link')[4]);
-}
-
-function addNewContent() {
-  const title = document.getElementById('adminTitle').value.trim();
-  const type = document.getElementById('adminType').value;
-  const category = document.getElementById('adminCategory').value;
-  let poster = document.getElementById('adminPoster').value.trim();
-  const rating = document.getElementById('adminRating').value.trim();
-
-  if(!title) {
-    alert("الرجاء إدخال عنوان العمل على الأقل!");
-    return;
-  }
-
-  if(!poster) {
-    poster = `https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=${encodeURIComponent(title)}`;
-  }
-
-  const newItem = {
-    id: Date.now(),
-    title: title,
-    type: type,
-    rating: rating || "9.5",
-    poster: poster,
-    category: category
-  };
-
-  allContent.unshift(newItem);
-  localStorage.setItem('nexora_admin_items', JSON.stringify(allContent));
-
-  renderContent(allContent);
-  renderSearchGrid(allContent);
-  updatePublishedStats();
-
-  alert("تم نشر العمل بنجاح! سيراه الآن كل المستخدمين في الواجهة الرئيسية والبحث 🌟");
-  document.getElementById('adminTitle').value = '';
-  document.getElementById('adminPoster').value = '';
-  switchTab('tabHome', document.querySelectorAll('.nav-link')[0]);
-}
-
-function renderContent(data) {
-  const videoContainer = document.getElementById('animeMoviesGrid');
-  const mangaContainer = document.getElementById('mangaGrid');
-  
-  videoContainer.innerHTML = '';
-  mangaContainer.innerHTML = '';
-
-  data.forEach(item => {
-    const html = `
-      <div class="manga-mini-card" onclick="alert('جاري فتح: ${item.title}')">
-        <div class="mini-poster">
-          <img src="${item.poster}" alt="cover">
-          <span class="tag-badge">${item.type}</span>
-        </div>
-        <div class="mini-details">
-          <h4>${item.title}</h4>
-          <p>★ ${item.rating}</p>
-        </div>
-      </div>
-    `;
-    if(item.category === 'video') videoContainer.innerHTML += html;
-    if(item.category === 'manga') mangaContainer.innerHTML += html;
-  });
-}
-
-function renderSearchGrid(data) {
-  const grid = document.getElementById('searchResultsGrid');
-  grid.innerHTML = '';
-  data.forEach(item => {
-    grid.innerHTML += `
-      <div class="search-result-card" onclick="alert('فتح تفاصيل: ${item.title}')">
-        <div class="search-result-poster">
-          <img src="${item.poster}" alt="cover">
-          <span class="tag-badge" style="font-size:7px; padding:1px 4px;">${item.type}</span>
-        </div>
-        <div class="search-result-info">
-          <h5>${item.title}</h5>
-          <p>★ ${item.rating}</p>
-        </div>
-      </div>
-    `;
-  });
-}
-
-function filterSearch(query) {
-  const filtered = allContent.filter(item => item.title.toLowerCase().includes(query.t
+  document.getElementById
