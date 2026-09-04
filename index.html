@@ -3,343 +3,360 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora - أثير تون الخاص بك</title>
+<title>أثير تون - Nexora App</title>
 <style>
-:root {
-  --primary: #8b5cf6;
-  --primary-glow: rgba(139, 92, 246, 0.3);
-  --bg-main: #0c0c14;
-  --bg-card: #151522;
-  --border-color: #232336;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
-body { background: var(--bg-main); color: var(--text-main); padding-bottom: 75px; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
+body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 
-/* Header Ahteer Toon Style */
-.app-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: rgba(12,12,20,0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
-.app-title-logo { font-size: 19px; font-weight: 900; color: var(--primary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; text-shadow: 0 0 15px var(--primary-glow); }
-.header-actions { display: flex; gap: 8px; }
-.circ-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; transition: 0.2s; }
-.circ-btn:active { transform: scale(0.9); }
+/* Top Header */
+.top-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #09090e; position: sticky; top: 0; z-index: 90; border-bottom: 1px solid #161622; }
+.top-icons { display: flex; gap: 8px; }
+.header-icon-btn { background: #12121c; border: 1px solid #1e1e2d; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; }
+.app-main-title { font-size: 16px; font-weight: bold; color: #fff; }
 
-/* Tabs System */
-.tab-section { display: none; }
-.tab-section.active { display: block; }
+/* Tabs */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
 
-/* Featured Banner */
-.featured-banner { margin: 12px 16px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border-radius: 16px; padding: 20px; border: 1px solid var(--border-color); box-shadow: 0 10px 25px var(--primary-glow); display: flex; justify-content: space-between; align-items: center; }
-.featured-info h2 { font-size: 16px; font-weight: bold; margin-bottom: 4px; color: #fff; }
-.featured-info p { font-size: 11px; color: #c4b5fd; margin-bottom: 12px; }
-.featured-action-btn { background: var(--primary); color: #fff; border: none; padding: 7px 16px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px var(--primary-glow); }
+/* VIP Banner */
+.vip-banner { background: linear-gradient(135deg, #261f0c 0%, #3d2c0b 100%); border: 1px solid #573f0e; border-radius: 16px; margin: 12px 16px; padding: 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+.vip-right { display: flex; align-items: center; gap: 12px; }
+.vip-crown { width: 45px; height: 45px; background: #1c1508; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #6b4f10; }
+.vip-text h4 { font-size: 13px; color: #facc15; font-weight: bold; margin-bottom: 2px; }
+.vip-text p { font-size: 10px; color: #a1a1aa; }
+.vip-badge { background: #ca8a04; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
 
-/* Category Headers */
-.section-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 10px; }
-.section-head h3 { font-size: 14px; font-weight: bold; color: #fff; display: flex; align-items: center; gap: 6px; }
-.view-all-link { font-size: 11px; color: var(--primary); background: none; border: none; cursor: pointer; font-weight: bold; }
+/* Section Headers */
+.section-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 8px; }
+.section-header h2 { font-size: 14px; color: #fff; font-weight: bold; display: flex; align-items: center; gap: 6px; }
+.see-all-btn { font-size: 11px; color: #8b5cf6; background: none; border: none; cursor: pointer; }
 
-/* Horizontal Slider Grid (Ahteer Style) */
-.cards-scroll-container { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
-.cards-scroll-container::-webkit-scrollbar { display: none; }
-.content-card { min-width: 120px; max-width: 120px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; flex-shrink: 0; cursor: pointer; transition: transform 0.2s; position: relative; }
-.content-card:active { transform: scale(0.95); }
-.card-poster { width: 100%; aspect-ratio: 2/3; background: #1a1a2e; position: relative; }
-.card-poster img { width: 100%; height: 100%; object-fit: cover; }
-.card-badge-tag { position: absolute; top: 6px; right: 6px; background: rgba(139, 92, 246, 0.4); backdrop-filter: blur(4px); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.6); font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
-.card-details-text { padding: 8px; }
-.card-details-text h4 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
-.card-details-text p { font-size: 9px; color: var(--text-muted); }
+/* Horizontal Cards */
+.horizontal-scroll { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
+.horizontal-scroll::-webkit-scrollbar { display: none; }
+.manga-card { min-width: 130px; max-width: 130px; background: #12121c; border-radius: 12px; border: 1px solid #1e1e2d; overflow: hidden; flex-shrink: 0; cursor: pointer; position: relative; }
+.manga-poster { width: 100%; aspect-ratio: 2/3; background: #191926; position: relative; }
+.manga-poster img { width: 100%; height: 100%; object-fit: cover; }
+.status-tag { position: absolute; top: 6px; right: 6px; background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
+.status-tag.new { background: rgba(139, 92, 246, 0.2); color: #a78bfa; border-color: rgba(139, 92, 246, 0.4); }
+.manga-info { padding: 8px; text-align: right; }
+.manga-info h5 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+.manga-info p { font-size: 9px; color: #71717a; }
 
-/* Search Screen */
-.search-view-wrap { padding: 16px; }
-.search-input-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-.search-input-box input { background: transparent; border: none; color: #fff; font-size: 12px; width: 100%; outline: none; text-align: right; }
-.search-grid-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+/* Search View */
+.search-box-wrap { padding: 16px; }
+.search-input-field { background: #12121c; border: 1px solid #1e1e2d; border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.search-input-field input { background: transparent; border: none; color: #fff; font-size: 13px; width: 100%; outline: none; text-align: right; }
+.search-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-/* Admin Screen (زر الإدارة الذي طلبته) */
-.admin-view-wrap { padding: 16px; }
-.admin-panel-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: right; }
-.admin-panel-card h3 { font-size: 14px; color: #fff; margin-bottom: 12px; font-weight: bold; }
-.form-group-item { margin-bottom: 10px; }
-.form-group-item label { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
-.form-group-item input, .form-group-item select, .form-group-item textarea { width: 100%; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 9px; color: #fff; font-size: 11px; text-align: right; outline: none; }
-.admin-submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 11px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px; margin-top: 6px; box-shadow: 0 4px 12px var(--primary-glow); }
+/* Settings View */
+.settings-wrap { padding: 16px; }
+.settings-group-title { font-size: 11px; color: #71717a; margin: 16px 0 8px; font-weight: bold; text-align: right; }
+.settings-card-box { background: #12121c; border: 1px solid #1e1e2d; border-radius: 14px; overflow: hidden; margin-bottom: 10px; }
+.settings-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid #191926; cursor: pointer; }
+.settings-row:last-child { border-bottom: none; }
+.settings-row-right { display: flex; align-items: center; gap: 12px; text-align: right; }
+.settings-row-right span { font-size: 16px; }
+.settings-row-right h5 { font-size: 12px; color: #fff; font-weight: bold; margin-bottom: 2px; }
+.settings-row-right p { font-size: 9px; color: #71717a; }
+.settings-row-left { font-size: 11px; color: #71717a; }
 
-/* Library Screen */
-.library-view-wrap { padding: 16px; }
-.library-grid-box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.library-card-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px; display: flex; gap: 10px; align-items: center; cursor: pointer; }
-.library-card-item img { width: 45px; height: 60px; border-radius: 8px; object-fit: cover; }
-.library-card-info h4 { font-size: 11px; color: #fff; margin-bottom: 2px; }
-.library-card-info p { font-size: 9px; color: var(--text-muted); }
+/* Profile View */
+.profile-banner-bg { height: 110px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); position: relative; }
+.profile-avatar-box { width: 75px; height: 75px; background: #12121c; border: 3px solid #09090e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #fff; position: absolute; bottom: -35px; right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+.profile-body-content { padding: 45px 16px 16px; text-align: right; }
+.profile-body-content h2 { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 2px; }
+.profile-body-content p { font-size: 11px; color: #71717a; margin-bottom: 12px; }
+.bio-input-box { background: #12121c; border: 1px solid #1e1e2d; border-radius: 10px; padding: 10px; color: #a1a1aa; font-size: 11px; margin-bottom: 16px; text-align: right; }
+.stats-row-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+.stat-card-item { background: #12121c; border: 1px solid #1e1e2d; border-radius: 12px; padding: 12px 6px; text-align: center; }
+.stat-card-item .num { font-size: 15px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+.stat-card-item .lbl { font-size: 9px; color: #71717a; }
 
-/* Profile Screen */
-.profile-banner-bg { height: 110px; background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%); position: relative; }
-.profile-avatar-circle { width: 70px; height: 70px; background: var(--bg-card); border: 3px solid var(--bg-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: var(--primary); position: absolute; bottom: -30px; right: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-.profile-body-data { padding: 40px 16px 16px; text-align: right; }
-.profile-body-data h2 { font-size: 16px; font-weight: bold; color: #fff; margin-bottom: 2px; }
-.profile-body-data p { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
-.stats-grid-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.stat-box-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; text-align: center; }
-.stat-box-card .num { font-size: 15px; font-weight: bold; color: var(--primary); }
-.stat-box-card .lbl { font-size: 9px; color: var(--text-muted); }
+/* Modal Popup */
+.custom-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
+.modal-box-inner { background: #12121c; border: 1px solid #222232; border-radius: 16px; width: 100%; max-width: 340px; overflow: hidden; text-align: right; }
+.modal-img-top { width: 100%; height: 180px; background: #191926; position: relative; }
+.modal-img-top img { width: 100%; height: 100%; object-fit: cover; }
+.modal-desc-body { padding: 16px; }
+.modal-desc-body h3 { font-size: 15px; color: #fff; margin-bottom: 6px; font-weight: bold; }
+.modal-desc-body p { font-size: 11px; color: #a1a1aa; margin-bottom: 14px; }
+.modal-actions-btns { display: flex; gap: 8px; }
+.modal-btn-main { flex: 1; background: #8b5cf6; color: white; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
+.modal-btn-sec { flex: 1; background: #1e1e2d; color: #fff; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
 
-/* Details & Reader Modal (Ahteer Style) */
-.modal-overlay-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; backdrop-filter: blur(5px); }
-.modal-content-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 350px; max-height: 85vh; overflow-y: auto; text-align: right; }
-.modal-poster-banner { width: 100%; height: 180px; background: #1a1a2e; position: relative; }
-.modal-poster-banner img { width: 100%; height: 100%; object-fit: cover; }
-.modal-text-content { padding: 14px; }
-.modal-text-content h3 { font-size: 15px; color: #fff; margin-bottom: 4px; font-weight: bold; }
-.modal-text-content p { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; }
-.chapters-scroll-box { max-height: 120px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 6px; margin-bottom: 12px; background: var(--bg-main); }
-.chapter-line-item { padding: 6px 8px; font-size: 11px; color: #fff; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; cursor: pointer; }
-.chapter-line-item:hover { background: rgba(139,92,246,0.1); }
-.modal-buttons-row { display: flex; gap: 8px; }
-.m-btn-primary { flex: 1; background: var(--primary); color: #fff; border: none; padding: 9px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer; }
-.m-btn-secondary { flex: 1; background: var(--border-color); color: #fff; border: none; padding: 9px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer; }
-.m-btn-delete { width: 100%; background: #dc2626; color: #fff; border: none; padding: 7px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer; margin-top: 6px; }
-
-/* Bottom Navigation Bar (Ahteer Style) */
-.bottom-nav-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 58px; background: var(--bg-main); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 999; }
-.nav-item-btn { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 9px; gap: 2px; background: none; border: none; width: 20%; cursor: pointer; transition: 0.2s; }
-.nav-item-btn.active { color: var(--primary); font-weight: bold; }
-.nav-item-btn .ico { font-size: 16px; }
-
-/* Toast Notification Alert */
-#toastNotificationAlert { position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%) translateY(80px); background: #1e1b4b; border: 1px solid var(--primary); color: #fff; padding: 7px 14px; border-radius: 20px; font-size: 10px; z-index: 2000; transition: transform 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
-#toastNotificationAlert.show { transform: translateX(-50%) translateY(0); }
+/* Bottom Nav Bar */
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: #0d0d14; border-top: 1px solid #1e1e2d; display: flex; justify-content: space-around; align-items: center; z-index: 999; }
+.nav-item-btn { display: flex; flex-direction: column; align-items: center; color: #71717a; font-size: 10px; gap: 3px; cursor: pointer; background: none; border: none; width: 20%; }
+.nav-item-btn.active { color: #8b5cf6; font-weight: bold; }
+.nav-item-btn .icon { font-size: 18px; }
 </style>
 </head>
 <body>
 
-<!-- TOP HEADER -->
-<header class="app-header">
-  <div class="app-title-logo"><span>⚡</span> Nexora</div>
-  <div class="header-actions">
-    <button class="circ-btn" onclick="showToast('🔔 لا توجد إشعارات جديدة')">🔔</button>
-  </div>
-</header>
-
-<!-- HOME SCREEN -->
-<div id="tabHome" class="tab-section active">
-  <div class="featured-banner">
-    <div class="featured-info">
-      <h2>مرحباً بك في Nexora</h2>
-      <p>منصتك الخاصة للأنمي، المانها والأفلام</p>
-      <button class="featured-action-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">استكشف الآن</button>
+<!-- HOME TAB -->
+<div id="tabHome" class="tab-content active">
+  <div class="top-header">
+    <div class="top-icons">
+      <div class="header-icon-btn" onclick="showAlert('لا توجد إشعارات جديدة حالياً')">🔔</div>
+      <div class="header-icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">🔍</div>
     </div>
+    <div class="app-main-title">الرئيسية</div>
   </div>
 
-  <div class="section-head">
-    <button class="view-all-link" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">الكل ‹</button>
-    <h3>🎬 الأفلام والأنمي الرائج</h3>
+  <div class="vip-banner" onclick="openVipModal()">
+    <div class="vip-right">
+      <div class="vip-crown">👑</div>
+      <div class="vip-text">
+        <h4>ارتق إلى أثير تون VIP <span class="vip-badge">-20%</span></h4>
+        <p>تجربة أنقى ومزايا حصرية متكاملة</p>
+      </div>
+    </div>
+    <div style="color: #ca8a04; font-size: 16px;">‹</div>
   </div>
-  <div class="cards-scroll-container" id="homeMoviesGrid"></div>
 
-  <div class="section-head">
-    <button class="view-all-link" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">الكل ‹</button>
-    <h3>📚 فصول المانها والمانغا</h3>
+  <div class="section-header">
+    <button class="see-all-btn" onclick="showAlert('عرض كل الأعمال الجديدة')">عرض الكل ‹</button>
+    <h2>⚡ أعمال جديدة</h2>
   </div>
-  <div class="cards-scroll-container" id="homeMangaGrid"></div>
+  <div class="horizontal-scroll" id="newWorksGrid"></div>
+
+  <div class="section-header">
+    <button class="see-all-btn" onclick="showAlert('عرض كل الأعمال المكتملة')">عرض الكل ‹</button>
+    <h2>✅ أعمال مكتملة</h2>
+  </div>
+  <div class="horizontal-scroll" id="completedWorksGrid"></div>
+
+  <div class="section-header">
+    <button class="see-all-btn" onclick="showAlert('عرض الأعلى تقييماً')">عرض الكل ‹</button>
+    <h2>⭐ الأعلى تقييماً</h2>
+  </div>
+  <div class="horizontal-scroll" id="topRatedGrid"></div>
 </div>
 
-<!-- SEARCH SCREEN -->
-<div id="tabSearch" class="tab-section">
-  <div class="search-view-wrap">
-    <div class="search-input-box">
+<!-- SEARCH TAB -->
+<div id="tabSearch" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">البحث في أثير تون</div></div>
+  <div class="search-box-wrap">
+    <div class="search-input-field">
       <span>🔍</span>
-      <input type="text" id="searchInput" placeholder="ابحث عن مانها، أنمي، فيلم..." oninput="handleSearchFilter(this.value)">
+      <input type="text" id="searchInput" placeholder="ابحث عن أنمي، فيلم، مانهوا أو مانغا مفضلة لديك..." oninput="handleSearch(this.value)">
     </div>
-    <div class="search-grid-results" id="searchGridContainer"></div>
+    <div class="search-grid" id="searchGridContainer"></div>
   </div>
 </div>
 
-<!-- ADMIN SCREEN (لوحة الإدارة المفعلة) -->
-<div id="tabAdmin" class="tab-section">
-  <div class="admin-view-wrap">
-    <div class="admin-panel-card">
-      <h3>🛡️ لوحة إدارة ونشر الأعمال</h3>
-      <div class="form-group-item">
-        <label>عنوان العمل (مانها، أنمي، فيلم)</label>
-        <input type="text" id="admTitle" placeholder="مثال: Solo Leveling">
+<!-- DOWNLOADS TAB -->
+<div id="tabDownloads" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">التحميلات دون اتصال</div></div>
+  <div style="padding: 50px 20px; text-align: center; color: #71717a;">
+    <div style="font-size: 40px; margin-bottom: 10px;">📥</div>
+    <p>لا توجد فصول أو حلقات محملة حالياً.</p>
+    <small style="color: #8b5cf6; cursor: pointer;" onclick="switchTab('tabHome', document.querySelectorAll('.nav-item-btn')[0])">تصفح الأعمال للتحميل</small>
+  </div>
+</div>
+
+<!-- COMMUNITY TAB -->
+<div id="tabCommunity" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">المجتمع</div></div>
+  <div style="padding: 50px 20px; text-align: center; color: #71717a;">
+    <div style="font-size: 40px; margin-bottom: 10px;">👥</div>
+    <p>أهلاً بك في مجتمع أثير تون! قريباً ستتمكن من مشاركة آرائك هنا.</p>
+  </div>
+</div>
+
+<!-- SETTINGS TAB -->
+<div id="tabSettings" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">الإعدادات</div></div>
+  <div class="settings-wrap">
+    
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="openProfileTabFromSettings()">
+        <div class="settings-row-right">
+          <span>👤</span>
+          <div>
+            <h5>الملف الشخصي</h5>
+            <p>لوحتك والإحصاءات</p>
+          </div>
+        </div>
+        <div class="settings-row-left">‹</div>
       </div>
-      <div class="form-group-item">
-        <label>نوع العمل</label>
-        <select id="admType">
-          <option value="مانهوا">مانهوا / مانها</option>
-          <option value="أنمي">أنمي</option>
-          <option value="فيلم">فيلم</option>
-        </select>
-      </div>
-      <div class="form-group-item">
-        <label>القسم في الصفحة الرئيسية</label>
-        <select id="admCat">
-          <option value="movie">أفلام وأنمي</option>
-          <option value="manga">مانها ومانغا</option>
-        </select>
-      </div>
-      <div class="form-group-item">
-        <label>رابط غلاف الصورة (Poster URL)</label>
-        <input type="text" id="admPoster" placeholder="ضع رابط الصورة المباشر هنا">
-      </div>
-      <div class="form-group-item">
-        <label>التقييم (مثال: 9.8)</label>
-        <input type="text" id="admRating" placeholder="9.5">
-      </div>
-      <div class="form-group-item">
-        <label>الحالة (مثال: مستمر / مكتمل)</label>
-        <input type="text" id="admStatus" placeholder="مستمر">
-      </div>
-      <div class="form-group-item">
-        <label>عدد الفصول / الحلقات</label>
-        <input type="number" id="admChapters" value="15" placeholder="15">
-      </div>
-      <div class="form-group-item">
-        <label>نبذة عن القصة</label>
-        <textarea id="admDesc" rows="3" placeholder="ملخص القصة..."></textarea>
-      </div>
-      <button class="admin-submit-btn" onclick="addNewWorkAction()">نشر العمل الآن في التطبيق 🚀</button>
     </div>
+
+    <div class="settings-group-title">التفضيلات</div>
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="toggleCoverQuality()">
+        <div class="settings-row-right">
+          <span>🌓</span>
+          <div>
+            <h5>تعقيم أغلفة الأعمال</h5>
+            <p id="coverQualityTxt">متوسط</p>
+          </div>
+        </div>
+        <div class="settings-row-left">تغيير</div>
+      </div>
+      <div class="settings-row" onclick="toggleNotifications()">
+        <div class="settings-row-right">
+          <span>🔔</span>
+          <div>
+            <h5>الإشعارات</h5>
+            <p id="notifTxt">كل الإشعارات مفعلة</p>
+          </div>
+        </div>
+        <div class="settings-row-left">تعديل</div>
+      </div>
+    </div>
+
+    <div class="settings-group-title">التخزين</div>
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="showAlert('مساحة التخزين المؤقت الحالية: 185 MB مستخدمة بكفاءة عالية')">
+        <div class="settings-row-right">
+          <span>💾</span>
+          <div>
+            <h5>التخزين والتنزيلات</h5>
+            <p>مؤقت 185 MB • تنزيلات 0 B</p>
+          </div>
+        </div>
+        <div class="settings-row-left">‹</div>
+      </div>
+    </div>
+
+    <div class="settings-group-title" style="color: #ef4444;">إجراء لا يمكن التراجع عنه</div>
+    <button style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; width: 100%; padding: 14px; border-radius: 14px; font-weight: bold; cursor: pointer; font-size: 13px;" onclick="clearDownloadsData()">
+      حذف التنزيلات دون اتصال 🗑️
+    </button>
   </div>
 </div>
 
-<!-- LIBRARY SCREEN -->
-<div id="tabLibrary" class="tab-section">
-  <div class="library-view-wrap">
-    <h3 style="font-size: 14px; margin-bottom: 12px; color: #fff;">المكتبة والمفضلة ❤️</h3>
-    <div class="library-grid-box" id="libraryGridContainer"></div>
+<!-- PROFILE VIEW SUB-SCREEN -->
+<div id="tabProfile" class="tab-content">
+  <div class="top-header">
+    <div class="header-icon-btn" onclick="switchTab('tabSettings', document.querySelectorAll('.nav-item-btn')[4])">➔</div>
+    <div class="app-main-title">الملف الشخصي</div>
+    <div style="width: 36px;"></div>
   </div>
-</div>
 
-<!-- PROFILE SCREEN -->
-<div id="tabProfile" class="tab-section">
   <div class="profile-banner-bg">
-    <div class="profile-avatar-circle">N</div>
+    <div class="profile-avatar-box">H</div>
   </div>
-  <div class="profile-body-data">
-    <h2>Nexora Admin</h2>
-    <p>admin@nexora.app</p>
-    <div class="stats-grid-row">
-      <div class="stat-box-card"><div class="num" id="statWorks">0</div><div class="lbl">الأعمال المنشورة</div></div>
-      <div class="stat-box-card"><div class="num" id="statFavs">0</div><div class="lbl">في المفضلة</div></div>
-      <div class="stat-box-card"><div class="num">VIP</div><div class="lbl">حساب مشرف</div></div>
+
+  <div class="profile-body-content">
+    <h2>HISKO HISKO</h2>
+    <p>hiskohisko45@gmail.com</p>
+    
+    <div class="bio-input-box" id="bioTextDisplay" onclick="editUserBio()" style="cursor: pointer;" title="انقر للتعديل">
+      أضف وصفًا قصيرًا عن نفسك ✏️
+    </div>
+
+    <div class="stats-row-grid">
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التعليقات</div></div>
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التقييمات</div></div>
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">الفصول</div></div>
     </div>
   </div>
 </div>
 
-<!-- DETAILS & READER MODAL -->
-<div id="itemDetailsModal" class="modal-overlay-bg" onclick="closeModalOnOutsideClick(event)">
-  <div class="modal-content-box">
-    <div class="modal-poster-banner">
+<!-- ITEM DETAILS MODAL -->
+<div id="itemModal" class="custom-modal" onclick="closeModalOnOutside(event)">
+  <div class="modal-box-inner">
+    <div class="modal-img-top">
       <img id="modalPosterImg" src="" alt="poster">
-      <span class="card-badge-tag" id="modalBadgeTag" style="top: 10px; right: 10px;">مستمر</span>
+      <span class="status-tag new" id="modalTagBadge" style="top: 10px; right: 10px;">مستمر</span>
     </div>
-    <div class="modal-text-content">
+    <div class="modal-desc-body">
       <h3 id="modalTitleText">عنوان العمل</h3>
-      <p id="modalRatingText">التقييم: 9.5</p>
-      <p id="modalDescText" style="font-size: 10px; color: var(--text-muted); margin-bottom: 10px;"></p>
-      
-      <div style="font-size: 11px; font-weight: bold; margin-bottom: 4px; color: #fff;">قائمة الفصول والحلقات:</div>
-      <div class="chapters-scroll-box" id="modalChaptersBox"></div>
-
-      <div class="modal-buttons-row">
-        <button class="m-btn-primary" onclick="startReadingOrWatching()">قراءة / مشاهدة 🎥</button>
-        <button class="m-btn-secondary" id="modalFavBtn" onclick="toggleFavoriteAction()">المفضلة ❤️</button>
+      <p id="modalInfoText">التقييم: 9.5 ★</p>
+      <div class="modal-actions-btns">
+        <button class="modal-btn-main" onclick="startReadingAction()">ابدأ القراءة 🚀</button>
+        <button class="modal-btn-sec" onclick="downloadItemAction()">تحميل 📥</button>
       </div>
-      <button class="m-btn-delete" onclick="deleteCurrentWorkAction()">حذف العمل نهائياً 🗑️</button>
     </div>
   </div>
 </div>
 
-<!-- BOTTOM NAVIGATION BAR -->
-<nav class="bottom-nav-bar">
-  <button class="nav-item-btn active" onclick="switchTab('tabHome', this)"><span class="ico">🏠</span>الرئيسية</button>
-  <button class="nav-item-btn" onclick="switchTab('tabSearch', this)"><span class="ico">🔍</span>ابحث</button>
-  <button class="nav-item-btn" onclick="switchTab('tabAdmin', this)"><span class="ico">🛡️</span>الإدارة</button>
-  <button class="nav-item-btn" onclick="switchTab('tabLibrary', this)"><span class="ico">📚</span>المكتبة</button>
-  <button class="nav-item-btn" onclick="switchTab('tabProfile', this)"><span class="ico">👤</span>حسابي</button>
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+  <button class="nav-item-btn active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
+  <button class="nav-item-btn" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
+  <button class="nav-item-btn" onclick="switchTab('tabDownloads', this)"><span class="icon">📥</span>التحميلات</button>
+  <button class="nav-item-btn" onclick="switchTab('tabCommunity', this)"><span class="icon">👥</span>المجتمع</button>
+  <button class="nav-item-btn" onclick="switchTab('tabSettings', this)"><span class="icon">⚙️</span>الإعدادات</button>
 </nav>
 
-<!-- TOAST ALERT MESSAGE -->
-<div id="toastNotificationAlert">تم بنجاح</div>
-
 <script>
-// قاعدة البيانات الافتراضية لأثير تون (مانغا، مانها، أنمي، وأفلام)
-let defaultItems = [
-  { id: 1, title: "Solo Leveling", type: "مانهوا", cat: "manga", rating: "9.9", status: "مستمر", chapters: 200, desc: "بوابة غامضة تفتح وصياد ضعيف يتطور بلا حدود.", poster: "https://via.placeholder.com/200x300/151522/8b5cf6?text=SoloLeveling" },
-  { id: 2, title: "Demon Slayer", type: "أنمي", cat: "movie", rating: "9.7", status: "مستمر", chapters: 26, desc: "رحلة تانجيرو للانتقام لعائلته وإنقاذ أخته.", poster: "https://via.placeholder.com/200x300/151522/3b82f6?text=DemonSlayer" },
-  { id: 3, title: "Suzume", type: "فيلم", cat: "movie", rating: "9.4", status: "مكتمل", chapters: 1, desc: "فتاة تغلق أبواب الكوارث عبر مدن اليابان.", poster: "https://via.placeholder.com/200x300/151522/ec4899?text=Suzume" },
-  { id: 4, title: "Omniscient Reader", type: "مانها", cat: "manga", rating: "9.8", status: "مستمر", chapters: 150, desc: "الرواية التي يقرأها تتحول إلى حقيقة واقعة مدمرة.", poster: "https://via.placeholder.com/200x300/151522/10b981?text=ORV" }
+const appData = [
+  { id: 1, title: "The Genius Spirited Streamer", type: "مانهوا", rating: "9.0", status: "مستمر", category: "new", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Streamer" },
+  { id: 2, title: "The Baby Sprout Who Bloomed", type: "مانهوا", rating: "6.0", status: "جديد", category: "new", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Baby+Sprout" },
+  { id: 3, title: "Blinded by the Setting Sun", type: "مانهوا", rating: "8.1", status: "مكتمل", category: "completed", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Setting+Sun" },
+  { id: 4, title: "Komi Can't Communicate", type: "مانغا", rating: "7.0", status: "مكتمل", category: "completed", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Komi+San" },
+  { id: 5, title: "Demonic Emperor", type: "مانهوا", rating: "9.6", status: "مستمر", category: "top", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Demonic+Emperor" },
+  { id: 6, title: "Legend of the Northern Blade", type: "مانهوا", rating: "9.6", status: "مكتمل", category: "top", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Northern+Blade" }
 ];
 
-let itemsData = JSON.parse(localStorage.getItem('nexora_ahteer_data')) || defaultItems;
-let favsList = JSON.parse(localStorage.getItem('nexora_ahteer_favs')) || [];
-let currentSelectedItem = null;
+let selectedWork = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-  refreshAppViews();
+  renderLists(appData);
+  renderSearchGrid(appData);
 });
 
-function syncLocalStorage() {
-  localStorage.setItem('nexora_ahteer_data', JSON.stringify(itemsData));
-  localStorage.setItem('nexora_ahteer_favs', JSON.stringify(favsList));
-}
-
-function switchTab(tabId, btnEl) {
-  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+function switchTab(tabId, btnElement) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(tabId).classList.add('active');
-  if(btnEl) btnEl.classList.add('active');
-  window.scrollTo(0, 0);
+  if(btnElement) btnElement.classList.add('active');
+  window.scrollTo(0,0);
 }
 
-function refreshAppViews() {
-  renderHomeSliders(itemsData);
-  renderSearchGrid(itemsData);
-  renderLibraryGrid();
-  document.getElementById('statWorks').innerText = itemsData.length;
-  document.getElementById('statFavs').innerText = favsList.length;
-  syncLocalStorage();
+function openProfileTabFromSettings() {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tabProfile').classList.add('active');
 }
 
-function renderHomeSliders(data) {
-  const moviesGrid = document.getElementById('homeMoviesGrid');
-  const mangaGrid = document.getElementById('homeMangaGrid');
-  moviesGrid.innerHTML = '';
-  mangaGrid.innerHTML = '';
+function renderLists(data) {
+  const newGrid = document.getElementById('newWorksGrid');
+  const compGrid = document.getElementById('completedWorksGrid');
+  const topGrid = document.getElementById('topRatedGrid');
+
+  newGrid.innerHTML = '';
+  compGrid.innerHTML = '';
+  topGrid.innerHTML = '';
 
   data.forEach(item => {
-    let cardHTML = `
-      <div class="content-card" onclick="openItemDetailsModal(${item.id})">
-        <div class="card-poster">
-          <img src="${item.poster}" alt="poster">
-          <span class="card-badge-tag">${item.status}</span>
+    const html = `
+      <div class="manga-card" onclick="openItemModal(${item.id})">
+        <div class="manga-poster">
+          <img src="${item.poster}" alt="cover">
+          <span class="status-tag ${item.status === 'جديد' ? 'new' : ''}">${item.status}</span>
         </div>
-        <div class="card-details-text">
-          <h4>${item.title}</h4>
-          <p>${item.type} • ★ ${item.rating}</p>
+        <div class="manga-info">
+          <h5>${item.title}</h5>
+          <p>★ ${item.rating}</p>
         </div>
       </div>
     `;
-    if(item.cat === 'movie') moviesGrid.innerHTML += cardHTML;
-    else mangaGrid.innerHTML += cardHTML;
+    if(item.category === 'new') newGrid.innerHTML += html;
+    if(item.category === 'completed') compGrid.innerHTML += html;
+    if(item.category === 'top') topGrid.innerHTML += html;
   });
 }
 
 function renderSearchGrid(data) {
   const grid = document.getElementById('searchGridContainer');
   grid.innerHTML = '';
+  if(data.length === 0) {
+    grid.innerHTML = '<div style="grid-column: span 3; text-align: center; color: #71717a; padding: 20px;">لا توجد نتائج مطابقة</div>';
+    return;
+  }
   data.forEach(item => {
     grid.innerHTML += `
-      <div class="content-card" style="max-width: 100%;" onclick="openItemDetailsModal(${item.id})">
-        <div class="card-poster">
-          <img src="${item.poster}" alt="poster">
-          <span class="card-badge-tag">${item.type}</span>
+      <div class="manga-card" style="max-width: 100%;" onclick="openItemModal(${item.id})">
+        <div class="manga-poster">
+          <img src="${item.poster}" alt="cover">
+          <span class="status-tag">${item.type}</span>
         </div>
-        <div class="card-details-text">
-          <h4>${item.title}</h4>
+        <div class="manga-info">
+          <h5>${item.title}</h5>
           <p>★ ${item.rating}</p>
         </div>
       </div>
@@ -347,13 +364,48 @@ function renderSearchGrid(data) {
   });
 }
 
-function handleSearchFilter(query) {
-  let filtered = itemsData.filter(i => i.title.toLowerCase().includes(query.toLowerCase()) || i.type.includes(query));
-  renderSearchGrid(filtered);
+function handleSearch(query) {
+  const res = appData.filter(i => i.title.toLowerCase().includes(query.toLowerCase()) || i.type.includes(query));
+  renderSearchGrid(res);
 }
 
-function addNewWorkAction() {
-  let title = document.getElementById('admTitle').value.trim();
-  let type = document.getElementById('admType').value;
-  let cat = document.getElementById('admCat').value;
-  let poster = document.getElementById('admPoste
+function openItemModal(id) {
+  selectedWork = appData.find(i => i.id === id);
+  if(!selectedWork) return;
+
+  document.getElementById('modalTitleText').innerText = selectedWork.title;
+  document.getElementById('modalInfoText').innerText = `النوع: ${selectedWork.type} • التقييم: ★ ${selectedWork.rating} • الحالة: ${selectedWork.status}`;
+  document.getElementById('modalPosterImg').src = selectedWork.poster;
+  document.getElementById('modalTagBadge').innerText = selectedWork.status;
+  
+  document.getElementById('itemModal').style.display = 'flex';
+}
+
+function closeModalOnOutside(e) {
+  if(e.target.id === 'itemModal') {
+    document.getElementById('itemModal').style.display = 'none';
+  }
+}
+
+function startReadingAction() {
+  if(!selectedWork) return;
+  document.getElementById('itemModal').style.display = 'none';
+  showAlert(`جاري فتح فصول "${selectedWork.title}" للقراءة والاستمتاع 🚀`);
+}
+
+function downloadItemAction() {
+  if(!selectedWork) return;
+  document.getElementById('itemModal').style.display = 'none';
+  showAlert(`تم إضافة "${selectedWork.title}" إلى التحميلات دون اتصال بنجاح 📥`);
+}
+
+function openVipModal() {
+  showAlert("اشتراك أثير تون VIP يمنحك مزايا حصرية وتجربة خالية من الإعلانات بجودة فائقة!");
+}
+
+function showAlert(msg) {
+  alert(msg);
+}
+
+function editUserBio() {
+  let newBio = prompt("أدخل الوصف ال
