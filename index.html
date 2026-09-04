@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>أثير تون - Nexora App</title>
+<title>Nexora App</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
 body { background: #09090e; color: #efefef; padding-bottom: 75px; }
@@ -53,14 +53,22 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 .settings-row-right p { font-size: 9px; color: #71717a; }
 .settings-row-left { font-size: 11px; color: #71717a; }
 
-/* Profile View */
+/* Profile View (Matching screenshots) */
 .profile-banner-bg { height: 110px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); position: relative; }
 .profile-avatar-box { width: 75px; height: 75px; background: #12121c; border: 3px solid #09090e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #fff; position: absolute; bottom: -35px; right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
-.profile-body-content { padding: 45px 16px 16px; text-align: right; }
+.profile-body-content { padding: 40px 16px 16px; text-align: right; }
 .profile-body-content h2 { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 2px; }
 .profile-body-content p { font-size: 11px; color: #71717a; margin-bottom: 12px; }
 .bio-input-box { background: #12121c; border: 1px solid #1e1e2d; border-radius: 10px; padding: 10px; color: #a1a1aa; font-size: 11px; margin-bottom: 16px; text-align: right; }
-.stats-row-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+
+/* Quick Actions Grid matching screenshots */
+.quick-actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+.quick-action-card { background: #12121c; border: 1px solid #1e1e2d; border-radius: 12px; padding: 14px; text-align: right; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
+.quick-action-card .top-row-act { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.quick-action-card .top-row-act h5 { font-size: 12px; color: #fff; font-weight: bold; }
+.quick-action-card p { font-size: 9px; color: #71717a; }
+
+.stats-row-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
 .stat-card-item { background: #12121c; border: 1px solid #1e1e2d; border-radius: 12px; padding: 12px 6px; text-align: center; }
 .stat-card-item .num { font-size: 15px; font-weight: bold; color: #fff; margin-bottom: 2px; }
 .stat-card-item .lbl { font-size: 9px; color: #71717a; }
@@ -79,7 +87,7 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 
 /* Bottom Nav Bar */
 .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: #0d0d14; border-top: 1px solid #1e1e2d; display: flex; justify-content: space-around; align-items: center; z-index: 999; }
-.nav-item-btn { display: flex; flex-direction: column; align-items: center; color: #71717a; font-size: 10px; gap: 3px; cursor: pointer; background: none; border: none; width: 20%; }
+.nav-item-btn { display: flex; flex-direction: column; align-items: center; color: #71717a; font-size: 10px; gap: 3px; cursor: pointer; background: none; border: none; width: 25%; }
 .nav-item-btn.active { color: #8b5cf6; font-weight: bold; }
 .nav-item-btn .icon { font-size: 18px; }
 </style>
@@ -93,10 +101,52 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
       <div class="header-icon-btn" onclick="showAlert('لا توجد إشعارات جديدة حالياً')">🔔</div>
       <div class="header-icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">🔍</div>
     </div>
-    <div class="app-main-title">الرئيسية</div>
+    <div class="app-main-title">Nexora</div>
   </div>
 
-  <div class="section-header" style="margin-top: 8px;">
+  <!-- Profile Card inside Home matching Screenshot 3 -->
+  <div style="background: #12121c; border: 1px solid #1e1e2d; border-radius: 16px; margin: 12px 16px; padding: 16px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+      <div style="text-align: right;">
+        <h3 style="font-size: 15px; color: #fff; font-weight: bold;">HISKO HISKO</h3>
+        <p style="font-size: 10px; color: #71717a;">hiskohisko45@gmail.com</p>
+      </div>
+      <div style="width: 50px; height: 50px; background: #191926; border: 2px solid #8b5cf6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; color: #fff;">H</div>
+    </div>
+    
+    <div class="quick-actions-grid" style="margin-bottom: 0;">
+      <div class="quick-action-card" onclick="switchTab('tabDownloads', document.querySelectorAll('.nav-item-btn')[2])">
+        <div class="top-row-act">
+          <h5>التحميلات</h5>
+          <span style="font-size: 16px;">📥</span>
+        </div>
+        <p>الفصول المحفوظة</p>
+      </div>
+      <div class="quick-action-card" onclick="editUserBio()">
+        <div class="top-row-act">
+          <h5>تعديل الملف</h5>
+          <span style="font-size: 16px;">✏️</span>
+        </div>
+        <p>تغيير الوصف والبيانات</p>
+      </div>
+      <div class="quick-action-card" onclick="switchTab('tabAdmin', document.querySelectorAll('.nav-item-btn')[3])" style="border-color: rgba(139, 92, 246, 0.4);">
+        <div class="top-row-act">
+          <h5>الإدارة</h5>
+          <span style="font-size: 16px;">🛡️</span>
+        </div>
+        <p>لوحة تحكم النظام</p>
+      </div>
+      <div class="quick-action-card" onclick="showAlert('فتح قوائم المتابعة الخاصة والعامة')">
+        <div class="top-row-act">
+          <h5>قوائمي</h5>
+          <span style="font-size: 16px;">📂</span>
+        </div>
+        <p>القوائم الخاصة والعامة</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
     <button class="see-all-btn" onclick="showAlert('عرض كل الأعمال الجديدة')">عرض الكل ‹</button>
     <h2>⚡ أعمال جديدة</h2>
   </div>
@@ -117,7 +167,7 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 
 <!-- SEARCH TAB -->
 <div id="tabSearch" class="tab-content">
-  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">البحث في أثير تون</div></div>
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">البحث في Nexora</div></div>
   <div class="search-box-wrap">
     <div class="search-input-field">
       <span>🔍</span>
@@ -137,34 +187,51 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
   </div>
 </div>
 
-<!-- COMMUNITY TAB -->
-<div id="tabCommunity" class="tab-content">
-  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">المجتمع</div></div>
-  <div style="padding: 50px 20px; text-align: center; color: #71717a;">
-    <div style="font-size: 40px; margin-bottom: 10px;">👥</div>
-    <p>أهلاً بك في مجتمع أثير تون! قريباً ستتمكن من مشاركة آرائك هنا.</p>
+<!-- ADMINISTRATION TAB (Management Panel) -->
+<div id="tabAdmin" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">لوحة الإدارة والتحكم</div></div>
+  <div class="settings-wrap">
+    <div class="settings-group-title" style="margin-top: 0;">إدارة أعمال النظام</div>
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="showAlert('فتح نافذة إضافة عمل جديد لمكتبة Nexora')">
+        <div class="settings-row-right">
+          <span>➕</span>
+          <div>
+            <h5>إضافة عمل جديد</h5>
+            <p>إرفاق مانغا أو مانهوا جديدة</p>
+          </div>
+        </div>
+        <div class="settings-row-left">إدارة</div>
+      </div>
+      <div class="settings-row" onclick="showAlert('جاري تحديث قاعدة البيانات وسيرفرات النظام')">
+        <div class="settings-row-right">
+          <span>🔄</span>
+          <div>
+            <h5>تحديث قاعدة البيانات</h5>
+            <p>مزامنة السيرفرات والبيانات الفورية</p>
+          </div>
+        </div>
+        <div class="settings-row-left">تحديث</div>
+      </div>
+      <div class="settings-row" onclick="showAlert('عدد المستخدمين النشطين حالياً: 1,240 مستخدم')">
+        <div class="settings-row-right">
+          <span>📊</span>
+          <div>
+            <h5>إحصائيات النظام</h5>
+            <p>المشاهدات، التحميلات، والنشاط العام</p>
+          </div>
+        </div>
+        <div class="settings-row-left">عرض</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- SETTINGS TAB -->
+<!-- SETTINGS TAB (Matching Screenshot 5) -->
 <div id="tabSettings" class="tab-content">
   <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">الإعدادات</div></div>
   <div class="settings-wrap">
     
-    <div class="settings-card-box">
-      <div class="settings-row" onclick="openProfileTabFromSettings()">
-        <div class="settings-row-right">
-          <span>👤</span>
-          <div>
-            <h5>الملف الشخصي</h5>
-            <p>لوحتك والإحصاءات</p>
-          </div>
-        </div>
-        <div class="settings-row-left">‹</div>
-      </div>
-    </div>
-
-    <div class="settings-group-title">التفضيلات</div>
     <div class="settings-card-box">
       <div class="settings-row" onclick="toggleCoverQuality()">
         <div class="settings-row-right">
@@ -176,6 +243,10 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
         </div>
         <div class="settings-row-left">تغيير</div>
       </div>
+    </div>
+
+    <div class="settings-group-title">الإشعارات</div>
+    <div class="settings-card-box">
       <div class="settings-row" onclick="toggleNotifications()">
         <div class="settings-row-right">
           <span>🔔</span>
@@ -185,6 +256,30 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
           </div>
         </div>
         <div class="settings-row-left">تعديل</div>
+      </div>
+    </div>
+
+    <div class="settings-group-title">الخصوصية</div>
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="showAlert('الملف العام: عام - 3 من 6 ظاهرة')">
+        <div class="settings-row-right">
+          <span>👁️</span>
+          <div>
+            <h5>الملف العام وما يظهر فيه</h5>
+            <p>عام • 3 من 6 ظاهرة</p>
+          </div>
+        </div>
+        <div class="settings-row-left">‹</div>
+      </div>
+      <div class="settings-row" onclick="showAlert('تفضيلات الإعلانات آمنة ومضبوطة')">
+        <div class="settings-row-right">
+          <span>🛡️</span>
+          <div>
+            <h5>تفضيلات الإعلانات</h5>
+            <p>إدارة التتبع والخصوصية</p>
+          </div>
+        </div>
+        <div class="settings-row-left">‹</div>
       </div>
     </div>
 
@@ -202,38 +297,34 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
       </div>
     </div>
 
+    <div class="settings-group-title">حول ودعم</div>
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="showAlert('شكراً لتقييمك تطبيق Nexora بخمس نجوم!')">
+        <div class="settings-row-right">
+          <span>⭐</span>
+          <div>
+            <h5>قيم Nexora</h5>
+            <p>ادعمنا بتقييم التطبيق في المتجر</p>
+          </div>
+        </div>
+        <div class="settings-row-left">تقييم</div>
+      </div>
+      <div class="settings-row" onclick="showAlert('إعادة عرض التعليمات التوجيهية للنظام')">
+        <div class="settings-row-right">
+          <span>🎓</span>
+          <div>
+            <h5>إعادة عرض التعليمات</h5>
+            <p>شرح ميزات التطبيق للمستخدمين</p>
+          </div>
+        </div>
+        <div class="settings-row-left">عرض</div>
+      </div>
+    </div>
+
     <div class="settings-group-title" style="color: #ef4444;">إجراء لا يمكن التراجع عنه</div>
-    <button style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; width: 100%; padding: 14px; border-radius: 14px; font-weight: bold; cursor: pointer; font-size: 13px;" onclick="clearDownloadsData()">
+    <button style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; width: 100%; padding: 14px; border-radius: 14px; font-weight: bold; cursor: pointer; font-size: 13px; margin-bottom: 10px;" onclick="clearDownloadsData()">
       حذف التنزيلات دون اتصال 🗑️
     </button>
-  </div>
-</div>
-
-<!-- PROFILE VIEW SUB-SCREEN -->
-<div id="tabProfile" class="tab-content">
-  <div class="top-header">
-    <div class="header-icon-btn" onclick="switchTab('tabSettings', document.querySelectorAll('.nav-item-btn')[4])">➔</div>
-    <div class="app-main-title">الملف الشخصي</div>
-    <div style="width: 36px;"></div>
-  </div>
-
-  <div class="profile-banner-bg">
-    <div class="profile-avatar-box">H</div>
-  </div>
-
-  <div class="profile-body-content">
-    <h2>HISKO HISKO</h2>
-    <p>hiskohisko45@gmail.com</p>
-    
-    <div class="bio-input-box" id="bioTextDisplay" onclick="editUserBio()" style="cursor: pointer;" title="انقر للتعديل">
-      أضف وصفًا قصيرًا عن نفسك ✏️
-    </div>
-
-    <div class="stats-row-grid">
-      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التعليقات</div></div>
-      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التقييمات</div></div>
-      <div class="stat-card-item"><div class="num">0</div><div class="lbl">الفصول</div></div>
-    </div>
   </div>
 </div>
 
@@ -255,13 +346,12 @@ body { background: #09090e; color: #efefef; padding-bottom: 75px; }
   </div>
 </div>
 
-<!-- BOTTOM NAVIGATION -->
+<!-- BOTTOM NAVIGATION (4 buttons: Home, Search, Downloads, Admin) -->
 <nav class="bottom-nav">
   <button class="nav-item-btn active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
   <button class="nav-item-btn" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
   <button class="nav-item-btn" onclick="switchTab('tabDownloads', this)"><span class="icon">📥</span>التحميلات</button>
-  <button class="nav-item-btn" onclick="switchTab('tabCommunity', this)"><span class="icon">👥</span>المجتمع</button>
-  <button class="nav-item-btn" onclick="switchTab('tabSettings', this)"><span class="icon">⚙️</span>الإعدادات</button>
+  <button class="nav-item-btn" onclick="switchTab('tabAdmin', this)"><span class="icon">🛡️</span>الإدارة</button>
 </nav>
 
 <script>
@@ -289,11 +379,6 @@ function switchTab(tabId, btnElement) {
   window.scrollTo(0,0);
 }
 
-function openProfileTabFromSettings() {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.getElementById('tabProfile').classList.add('active');
-}
-
 function renderLists(data) {
   const newGrid = document.getElementById('newWorksGrid');
   const compGrid = document.getElementById('completedWorksGrid');
@@ -308,121 +393,4 @@ function renderLists(data) {
       <div class="manga-card" onclick="openItemModal(${item.id})">
         <div class="manga-poster">
           <img src="${item.poster}" alt="cover">
-          <span class="status-tag ${item.status === 'جديد' ? 'new' : ''}">${item.status}</span>
-        </div>
-        <div class="manga-info">
-          <h5>${item.title}</h5>
-          <p>★ ${item.rating}</p>
-        </div>
-      </div>
-    `;
-    if(item.category === 'new') newGrid.innerHTML += html;
-    if(item.category === 'completed') compGrid.innerHTML += html;
-    if(item.category === 'top') topGrid.innerHTML += html;
-  });
-}
-
-function renderSearchGrid(data) {
-  const grid = document.getElementById('searchGridContainer');
-  grid.innerHTML = '';
-  if(data.length === 0) {
-    grid.innerHTML = '<div style="grid-column: span 3; text-align: center; color: #71717a; padding: 20px;">لا توجد نتائج مطابقة</div>';
-    return;
-  }
-  data.forEach(item => {
-    grid.innerHTML += `
-      <div class="manga-card" style="max-width: 100%;" onclick="openItemModal(${item.id})">
-        <div class="manga-poster">
-          <img src="${item.poster}" alt="cover">
-          <span class="status-tag">${item.type}</span>
-        </div>
-        <div class="manga-info">
-          <h5>${item.title}</h5>
-          <p>★ ${item.rating}</p>
-        </div>
-      </div>
-    `;
-  });
-}
-
-function handleSearch(query) {
-  const res = appData.filter(i => i.title.toLowerCase().includes(query.toLowerCase()) || i.type.includes(query));
-  renderSearchGrid(res);
-}
-
-function openItemModal(id) {
-  selectedWork = appData.find(i => i.id === id);
-  if(!selectedWork) return;
-
-  document.getElementById('modalTitleText').innerText = selectedWork.title;
-  document.getElementById('modalInfoText').innerText = `النوع: ${selectedWork.type} • التقييم: ★ ${selectedWork.rating} • الحالة: ${selectedWork.status}`;
-  document.getElementById('modalPosterImg').src = selectedWork.poster;
-  document.getElementById('modalTagBadge').innerText = selectedWork.status;
-  
-  document.getElementById('itemModal').style.display = 'flex';
-}
-
-function closeModalOnOutside(e) {
-  if(e.target.id === 'itemModal') {
-    document.getElementById('itemModal').style.display = 'none';
-  }
-}
-
-function startReadingAction() {
-  if(!selectedWork) return;
-  document.getElementById('itemModal').style.display = 'none';
-  showAlert(`جاري فتح فصول "${selectedWork.title}" للقراءة والاستمتاع 🚀`);
-}
-
-function downloadItemAction() {
-  if(!selectedWork) return;
-  document.getElementById('itemModal').style.display = 'none';
-  showAlert(`تم إضافة "${selectedWork.title}" إلى التحميلات دون اتصال بنجاح 📥`);
-}
-
-function showAlert(msg) {
-  alert(msg);
-}
-
-function editUserBio() {
-  let newBio = prompt("أدخل الوصف الجديد لملفك الشخصي:", document.getElementById('bioTextDisplay').innerText);
-  if(newBio !== null && newBio.trim() !== "") {
-    document.getElementById('bioTextDisplay').innerText = newBio;
-    showAlert("تم تحديث الوصف بنجاح!");
-  }
-}
-
-function toggleCoverQuality() {
-  let txt = document.getElementById('coverQualityTxt');
-  if(txt.innerText === "متوسط") {
-    txt.innerText = "عالي الحماية";
-    showAlert("تم ضبط تعقيم الأغلفة على مستوى: عالي الحماية");
-  } else if(txt.innerText === "عالي الحماية") {
-    txt.innerText = "منخفض";
-    showAlert("تم ضبط تعقيم الأغلفة على مستوى: منخفض");
-  } else {
-    txt.innerText = "متوسط";
-    showAlert("تم ضبط تعقيم الأغلفة على مستوى: متوسط");
-  }
-}
-
-function toggleNotifications() {
-  let txt = document.getElementById('notifTxt');
-  if(txt.innerText.includes("مفعلة")) {
-    txt.innerText = "الإشعارات معطلة";
-    showAlert("تم تعطيل الإشعارات المؤقتة.");
-  } else {
-    txt.innerText = "كل الإشعارات مفعلة";
-    showAlert("تم تفعيل جميع الإشعارات بنجاح.");
-  }
-}
-
-function clearDownloadsData() {
-  if(confirm("هل أنت متأكد من حذف كل التنزيلات والفصول المحملة من هذا الجهاز؟")) {
-    showAlert("تم تفريغ مساحة التنزيلات بنجاح.");
-  }
-}
-</script>
-
-</body>
-</html>
+          <span class="status-tag ${item.status === 'جديد' ? 'new' : ''}"
