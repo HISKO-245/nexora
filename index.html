@@ -3,383 +3,211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora - تطبيق الأنمي والمانها</title>
+<title>Nexora - تدفق الأفلام والأنمي</title>
 <style>
 :root {
   --primary: #8b5cf6;
-  --primary-hover: #7c3aed;
-  --bg-main: #0b0b10;
-  --bg-card: #14141f;
-  --border-color: #232336;
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
+  --bg-main: #000000;
+  --text-main: #ffffff;
+  --text-muted: #a1a1aa;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
-body { background: var(--bg-main); color: var(--text-main); padding-bottom: 70px; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
+body { background: var(--bg-main); color: var(--text-main); height: 100vh; overflow: hidden; }
 
-/* Top Header */
-.app-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(11,11,16,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
-.app-logo { font-size: 18px; font-weight: 900; color: var(--primary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
-.header-actions { display: flex; gap: 8px; }
-.icon-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; transition: 0.2s; }
-.icon-btn:active { transform: scale(0.9); }
+/* TikTok Style Vertical Feed Container */
+.feed-container { height: calc(100vh - 60px); overflow-y: scroll; scroll-snap-type: y mandatory; scrollbar-width: none; }
+.feed-container::-webkit-scrollbar { display: none; }
 
-/* Tab Container */
-.tab-pane { display: none; }
-.tab-pane.active { display: block; }
+.feed-item { height: calc(100vh - 60px); scroll-snap-align: start; position: relative; background: #111; display: flex; align-items: center; justify-content: center; }
+.feed-item video, .feed-item img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 
-/* Home Slider Banner */
-.hero-banner { margin: 12px 16px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border-radius: 16px; padding: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; }
-.hero-text h2 { font-size: 16px; font-weight: bold; margin-bottom: 4px; color: #fff; }
-.hero-text p { font-size: 11px; color: #c4b5fd; margin-bottom: 12px; }
-.hero-btn { background: var(--primary); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; }
+/* Video Overlay Info */
+.feed-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%, rgba(0,0,0,0.3) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px 70px 20px 20px; text-align: right; pointer-events: none; }
+.feed-overlay * { pointer-events: auto; }
+.feed-title { font-size: 16px; font-weight: bold; margin-bottom: 6px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+.feed-desc { font-size: 12px; color: #e4e4e7; margin-bottom: 10px; line-height: 1.4; }
+.feed-badge { display: inline-block; background: rgba(139, 92, 246, 0.6); backdrop-filter: blur(4px); padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; margin-bottom: 8px; width: max-content; }
 
-/* Section Headers */
-.section-title-wrap { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 10px; }
-.section-title-wrap h3 { font-size: 14px; font-weight: bold; color: #fff; display: flex; align-items: center; gap: 6px; }
-.view-more { font-size: 11px; color: var(--primary); background: none; border: none; cursor: pointer; font-weight: bold; }
+/* Right Action Buttons (TikTok Style) */
+.right-actions { position: absolute; bottom: 80px; left: 12px; display: flex; flex-direction: column; gap: 16px; align-items: center; z-index: 10; }
+.action-btn-item { background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); border: none; color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; transition: 0.2s; }
+.action-btn-item:active { transform: scale(0.9); }
+.action-btn-item span { font-size: 9px; margin-top: 2px; }
+.action-btn-item.liked { color: #ef4444; }
 
-/* Horizontal Cards Carousel */
-.horizontal-slider { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
-.horizontal-slider::-webkit-scrollbar { display: none; }
-.card-item { min-width: 115px; max-width: 115px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; flex-shrink: 0; cursor: pointer; transition: 0.2s; position: relative; }
-.card-item:active { transform: scale(0.95); }
-.card-img { width: 100%; aspect-ratio: 2/3; background: #1a1a2e; position: relative; }
-.card-img img { width: 100%; height: 100%; object-fit: cover; }
-.card-badge { position: absolute; top: 6px; right: 6px; background: rgba(139, 92, 246, 0.3); backdrop-filter: blur(4px); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-size: 8px; padding: 2px 5px; border-radius: 6px; font-weight: bold; }
-.card-details { padding: 8px; }
-.card-details h4 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
-.card-details p { font-size: 9px; color: var(--text-muted); }
+/* Top Header Bar */
+.top-nav-bar { position: fixed; top: 0; left: 0; right: 0; height: 50px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); display: flex; justify-content: center; align-items: center; z-index: 100; font-weight: bold; font-size: 16px; color: var(--primary); letter-spacing: 1px; }
 
-/* Search Page */
-.search-container { padding: 16px; }
-.search-input-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-.search-input-box input { background: transparent; border: none; color: #fff; font-size: 12px; width: 100%; outline: none; text-align: right; }
-.search-grid-view { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+/* Bottom Navigation Bar */
+.bottom-nav-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: #000; border-top: 1px solid #222; display: flex; justify-content: space-around; align-items: center; z-index: 100; }
+.b-nav-btn { background: none; border: none; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; font-size: 10px; gap: 3px; cursor: pointer; width: 25%; }
+.b-nav-btn.active { color: var(--primary); font-weight: bold; }
+.b-nav-btn .ico { font-size: 18px; }
 
-/* Admin Panel Page */
-.admin-wrap { padding: 16px; }
-.admin-card-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: right; }
-.admin-card-box h3 { font-size: 13px; color: #fff; margin-bottom: 12px; font-weight: bold; }
-.form-ctrl { margin-bottom: 10px; }
-.form-ctrl label { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
-.form-ctrl input, .form-ctrl select, .form-ctrl textarea { width: 100%; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 9px; color: #fff; font-size: 11px; text-align: right; outline: none; }
-.admin-submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px; margin-top: 4px; }
-
-/* Library Page */
-.library-wrap { padding: 16px; }
-.library-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.lib-item-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px; display: flex; gap: 10px; align-items: center; cursor: pointer; }
-.lib-item-card img { width: 45px; height: 60px; border-radius: 8px; object-fit: cover; }
-.lib-item-info h4 { font-size: 11px; color: #fff; margin-bottom: 2px; }
-.lib-item-info p { font-size: 9px; color: var(--text-muted); }
-
-/* Profile Page */
-.profile-cover { height: 110px; background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%); position: relative; }
-.profile-avatar { width: 70px; height: 70px; background: var(--bg-card); border: 3px solid var(--bg-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: var(--primary); position: absolute; bottom: -30px; right: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-.profile-content { padding: 40px 16px 16px; text-align: right; }
-.profile-content h2 { font-size: 16px; font-weight: bold; color: #fff; margin-bottom: 2px; }
-.profile-content p { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
-.profile-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
-.stat-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; text-align: center; }
-.stat-box .val { font-size: 15px; font-weight: bold; color: var(--primary); }
-.stat-box .lbl { font-size: 9px; color: var(--text-muted); }
-
-/* Details & Reader Modal */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; backdrop-filter: blur(5px); }
-.modal-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 350px; max-height: 85vh; overflow-y: auto; text-align: right; }
-.modal-banner { width: 100%; height: 180px; background: #1a1a2e; position: relative; }
-.modal-banner img { width: 100%; height: 100%; object-fit: cover; }
-.modal-body { padding: 14px; }
-.modal-body h3 { font-size: 15px; color: #fff; margin-bottom: 4px; font-weight: bold; }
-.modal-body p { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; }
-.chapters-list { max-height: 120px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 6px; margin-bottom: 12px; background: var(--bg-main); }
-.chapter-row { padding: 6px 8px; font-size: 11px; color: #fff; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; cursor: pointer; }
-.chapter-row:hover { background: rgba(139,92,246,0.1); }
-.modal-btns { display: flex; gap: 8px; }
-.modal-btn-main { flex: 1; background: var(--primary); color: #fff; border: none; padding: 9px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer; }
-.modal-btn-sec { flex: 1; background: var(--border-color); color: #fff; border: none; padding: 9px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer; }
-.modal-btn-del { width: 100%; background: #dc2626; color: #fff; border: none; padding: 7px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer; margin-top: 6px; }
-
-/* Bottom Navigation Bar (Bottom Bar) */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 56px; background: var(--bg-main); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 999; }
-.nav-btn { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 9px; gap: 2px; background: none; border: none; width: 20%; cursor: pointer; transition: 0.2s; }
-.nav-btn.active { color: var(--primary); font-weight: bold; }
-.nav-btn span.ico { font-size: 15px; }
+/* Admin & Profile Modal Panels */
+.panel-screen { position: fixed; inset: 0; background: #0b0b10; z-index: 1000; display: none; flex-direction: column; padding: 20px; overflow-y: auto; text-align: right; }
+.panel-screen h2 { font-size: 16px; color: #fff; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+.form-group-box { margin-bottom: 12px; }
+.form-group-box label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.form-group-box input, .form-group-box textarea { width: 100%; background: #181824; border: 1px solid #27273a; border-radius: 8px; padding: 10px; color: #fff; font-size: 12px; text-align: right; outline: none; }
+.submit-admin-btn { width: 100%; background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 13px; cursor: pointer; margin-top: 10px; }
+.close-panel-btn { background: #27273a; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
 
 /* Toast Alert Message */
-#toastAlert { position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%) translateY(80px); background: #1e1b4b; border: 1px solid var(--primary); color: #fff; padding: 7px 14px; border-radius: 20px; font-size: 10px; z-index: 2000; transition: transform 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
-#toastAlert.show { transform: translateX(-50%) translateY(0); }
+#toastAlert { position: fixed; bottom: 75px; left: 50%; transform: translateX(-50%) translateY(50px); background: #1e1b4b; border: 1px solid var(--primary); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 11px; z-index: 2000; opacity: 0; transition: 0.3s; pointer-events: none; }
+#toastAlert.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 </style>
 </head>
 <body>
 
-<!-- TOP HEADER -->
-<header class="app-header">
-  <div class="header-actions">
-    <button class="icon-btn" onclick="showToast('🔔 لا توجد إشعارات جديدة')">🔔</button>
-  </div>
-  <div class="app-logo"><span>⚡</span> Nexora</div>
-</header>
+<div class="top-nav-bar">Nexora • ريلز الأفلام</div>
 
-<!-- HOME TAB -->
-<div id="tabHome" class="tab-pane active">
-  <div class="hero-banner">
-    <div class="hero-text">
-      <h2>مرحباً بك في Nexora</h2>
-      <p>أفلام، أنمي ومانها بجودة عالية ومترجمة</p>
-      <button class="hero-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-btn')[1])">استكشف الكل</button>
-    </div>
-  </div>
+<!-- TIKTOK STYLE VERTICAL FEED -->
+<div class="feed-container" id="videoFeedContainer"></div>
 
-  <div class="section-title-wrap">
-    <button class="view-more" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-btn')[1])">الكل ‹</button>
-    <h3>🔥 الأنشطة والأفلام الرائجة</h3>
+<!-- ADMIN PANEL SCREEN -->
+<div class="panel-screen" id="adminPanel">
+  <h2><span>🛡️ لوحة إدارة الفيديوهات والأفلام</span> <button class="close-panel-btn" onclick="toggleAdminPanel(false)">إغلاق ✕</button></h2>
+  <div class="form-group-box">
+    <label>عنوان العمل أو الفيلم</label>
+    <input type="text" id="admTitle" placeholder="مثال: Suzume Movie Edit">
   </div>
-  <div class="horizontal-slider" id="homeMoviesGrid"></div>
-
-  <div class="section-title-wrap">
-    <button class="view-more" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-btn')[1])">الكل ‹</button>
-    <h3>📚 أحدث فصول المانهوا</h3>
+  <div class="form-group-box">
+    <label>وصف الفيديو</label>
+    <textarea id="admDesc" rows="3" placeholder="اكتب وصف قصير أو قصة اللقطة..."></textarea>
   </div>
-  <div class="horizontal-slider" id="homeMangaGrid"></div>
-</div>
-
-<!-- SEARCH TAB -->
-<div id="tabSearch" class="tab-pane">
-  <div class="search-container">
-    <div class="search-input-box">
-      <span>🔍</span>
-      <input type="text" id="searchInput" placeholder="ابحث عن اسم أنمي، فيلم أو مانهو..." oninput="filterSearch(this.value)">
-    </div>
-    <div class="search-grid-view" id="searchGrid"></div>
+  <div class="form-group-box">
+    <label>رابط الفيديو المباشر (MP4 URL)</label>
+    <input type="text" id="admVideoUrl" placeholder="ضع رابط فيديو مباشر هنا">
   </div>
-</div>
-
-<!-- ADMIN TAB -->
-<div id="tabAdmin" class="tab-pane">
-  <div class="admin-wrap">
-    <div class="admin-card-box">
-      <h3>🛡️ لوحة تحكم الإدارة (إضافة عمل جديد)</h3>
-      <div class="form-ctrl">
-        <label>عنوان العمل</label>
-        <input type="text" id="admTitle" placeholder="مثال: Solo Leveling">
-      </div>
-      <div class="form-ctrl">
-        <label>نوع العمل</label>
-        <select id="admType">
-          <option value="مانهوا">مانهوا / مانها</option>
-          <option value="أنمي">أنمي</option>
-          <option value="فيلم">فيلم</option>
-        </select>
-      </div>
-      <div class="form-ctrl">
-        <label>القسم الرئيسي</label>
-        <select id="admCat">
-          <option value="movie">أفلام وأنمي رائج</option>
-          <option value="manga">مانهوا جديدة</option>
-        </select>
-      </div>
-      <div class="form-ctrl">
-        <label>رابط غلاف الصورة (Poster URL)</label>
-        <input type="text" id="admPoster" placeholder="ضع رابط الصورة مباشرة هنا">
-      </div>
-      <div class="form-ctrl">
-        <label>التقييم (مثال: 9.8)</label>
-        <input type="text" id="admRating" placeholder="9.5">
-      </div>
-      <div class="form-ctrl">
-        <label>الحالة (مستمر / مكتمل)</label>
-        <input type="text" id="admStatus" placeholder="مستمر">
-      </div>
-      <div class="form-ctrl">
-        <label>عدد الفصول المتاحة</label>
-        <input type="number" id="admChapters" value="10" placeholder="10">
-      </div>
-      <div class="form-ctrl">
-        <label>وصف قصة العمل</label>
-        <textarea id="admDesc" rows="3" placeholder="ملخص سريع للقصة..."></textarea>
-      </div>
-      <button class="admin-submit-btn" onclick="addNewWorkFromAdmin()">نشر العمل فوراً 🚀</button>
-    </div>
+  <div class="form-group-box">
+    <label>رابط صورة الغلاف (إذا لم يتوفر فيديو)</label>
+    <input type="text" id="admPosterUrl" placeholder="رابط صورة الغلاف">
   </div>
-</div>
-
-<!-- LIBRARY TAB -->
-<div id="tabLibrary" class="tab-pane">
-  <div class="library-wrap">
-    <h3 style="font-size: 13px; margin-bottom: 12px; color: #fff;">المفضلة والمكتبة ❤️</h3>
-    <div class="library-grid" id="libraryGrid"></div>
-  </div>
-</div>
-
-<!-- PROFILE TAB -->
-<div id="tabProfile" class="tab-pane">
-  <div class="profile-cover">
-    <div class="profile-avatar">N</div>
-  </div>
-  <div class="profile-content">
-    <h2>Nexora Admin</h2>
-    <p>admin@nexora.app</p>
-    <div class="profile-stats">
-      <div class="stat-box"><div class="val" id="statWorksCount">0</div><div class="lbl">الأعمال</div></div>
-      <div class="stat-box"><div class="val" id="statFavsCount">0</div><div class="lbl">المفضلة</div></div>
-      <div class="stat-box"><div class="val">VIP</div><div class="lbl">العضوية</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ITEM DETAILS MODAL -->
-<div id="detailsModal" class="modal-overlay" onclick="closeModalOutside(event)">
-  <div class="modal-box">
-    <div class="modal-banner">
-      <img id="mPoster" src="" alt="poster">
-      <span class="card-badge" id="mBadge" style="top: 10px; right: 10px;">حصري</span>
-    </div>
-    <div class="modal-body">
-      <h3 id="mTitle">العنوان</h3>
-      <p id="mRatingInfo">التقييم: 9.5</p>
-      <p id="mDesc" style="font-size: 10px; color: var(--text-muted); margin-bottom: 10px;"></p>
-      
-      <div style="font-size: 11px; font-weight: bold; margin-bottom: 4px; color: #fff;">قائمة الفصول / الحلقات:</div>
-      <div class="chapters-list" id="mChaptersList"></div>
-
-      <div class="modal-btns">
-        <button class="modal-btn-main" id="mMainActionBtn" onclick="openMediaViewer()">مشاهدة / قراءة 🎬</button>
-        <button class="modal-btn-sec" id="mFavBtn" onclick="toggleFavorite()">المفضلة ❤️</button>
-      </div>
-      <button class="modal-btn-del" onclick="deleteWork()">حذف العمل نهائياً 🗑️</button>
-    </div>
-  </div>
+  <button class="submit-admin-btn" onclick="addNewFeedItem()">نشر العمل الآن في تيار Nexora 🚀</button>
 </div>
 
 <!-- BOTTOM NAVIGATION BAR -->
-<nav class="bottom-nav">
-  <button class="nav-btn active" onclick="switchTab('tabHome', this)"><span class="ico">🏠</span>الرئيسية</button>
-  <button class="nav-btn" onclick="switchTab('tabSearch', this)"><span class="ico">🔍</span>ابحث</button>
-  <button class="nav-btn" onclick="switchTab('tabAdmin', this)"><span class="ico">🛡️</span>الإدارة</button>
-  <button class="nav-btn" onclick="switchTab('tabLibrary', this)"><span class="ico">📚</span>المكتبة</button>
-  <button class="nav-btn" onclick="switchTab('tabProfile', this)"><span class="ico">👤</span>حسابي</button>
+<nav class="bottom-nav-bar">
+  <button class="b-nav-btn active" onclick="switchMainTab('feed', this)"><span class="ico">🏠</span>الرئيسية</button>
+  <button class="b-nav-btn" onclick="showToast('🔍 اسحب لأعلى ولاسفل لاستكشاف المقاطع')"><span class="ico">🔍</span>استكشاف</button>
+  <button class="b-nav-btn" onclick="toggleAdminPanel(true)"><span class="ico">➕</span>نشر عمل</button>
+  <button class="b-nav-btn" onclick="showToast('👤 حساب المسؤول Nexora VIP')"><span class="ico">👤</span>حسابي</button>
 </nav>
 
-<!-- TOAST NOTIFICATION -->
-<div id="toastAlert">تم بنجاح</div>
+<div id="toastAlert">تنبيه</div>
 
 <script>
-// قاعدة البيانات الافتراضية مع الحفظ في الذاكرة المحلية
-let defaultWorks = [
-  { id: 1, title: "Solo Leveling", type: "مانهوا", cat: "manga", rating: "9.9", status: "مستمر", chapters: 200, desc: "بوابة غامضة تفتح وصياد ضعيف يتطور بلا حدود.", poster: "https://via.placeholder.com/200x300/14141f/8b5cf6?text=SoloLeveling" },
-  { id: 2, title: "Demon Slayer", type: "أنمي", cat: "movie", rating: "9.7", status: "مستمر", chapters: 26, desc: "رحلة تانجيرو للانتقام لعائلته وإنقاذ أخته.", poster: "https://via.placeholder.com/200x300/14141f/3b82f6?text=DemonSlayer" },
-  { id: 3, title: "Suzume", type: "فيلم", cat: "movie", rating: "9.4", status: "مكتمل", chapters: 1, desc: "فتاة تغلق أبواب الكوارث عبر مدن اليابان.", poster: "https://via.placeholder.com/200x300/14141f/ec4899?text=Suzume" },
-  { id: 4, title: "Omniscient Reader", type: "مانهوا", cat: "manga", rating: "9.8", status: "مستمر", chapters: 150, desc: "الرواية التي يقرأها تتحول إلى حقيقة واقعة مدمرة.", poster: "https://via.placeholder.com/200x300/14141f/10b981?text=ORV" }
+// البيانات الافتراضية لأفلام وأنمي بستايل تيك توك
+let defaultFeeds = [
+  { id: 1, title: "Suzume - لقطة حصرية", desc: "أجمل مشاهد فيلم الأنمي الجديد مترجم وبجودة عالية ⚡", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", poster: "", likes: 1420 },
+  { id: 2, title: "Demon Slayer - نارية", desc: "حماس المعركة الأسطورية بين الحطاب والشياطين 🔥", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", poster: "", likes: 3890 },
+  { id: 3, title: "Solo Leveling - المانهوا الأسطورية", desc: "لحظة استيقاظ الصياد جين وو وتحوله الكامل 😎", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", poster: "", likes: 5120 }
 ];
 
-let worksData = JSON.parse(localStorage.getItem('nexora_data')) || defaultWorks;
-let favList = JSON.parse(localStorage.getItem('nexora_favs')) || [];
-let activeWork = null;
+let feedData = JSON.parse(localStorage.getItem('nexora_tiktok_feeds')) || defaultFeeds;
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderEverything();
+  renderFeed();
 });
 
-function syncStorage() {
-  localStorage.setItem('nexora_data', JSON.stringify(worksData));
-  localStorage.setItem('nexora_favs', JSON.stringify(favList));
+function saveStorage() {
+  localStorage.setItem('nexora_tiktok_feeds', JSON.stringify(feedData));
 }
 
-function switchTab(tabId, btnEl) {
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  if(btnEl) btnEl.classList.add('active');
-  window.scrollTo(0, 0);
-}
+function renderFeed() {
+  const container = document.getElementById('videoFeedContainer');
+  container.innerHTML = '';
 
-function renderEverything() {
-  renderHomeSliders(worksData);
-  renderSearchGrid(worksData);
-  renderLibrary();
-  document.getElementById('statWorksCount').innerText = worksData.length;
-  document.getElementById('statFavsCount').innerText = favList.length;
-  syncStorage();
-}
-
-function renderHomeSliders(data) {
-  const mBox = document.getElementById('homeMoviesGrid');
-  const mangaBox = document.getElementById('homeMangaGrid');
-  mBox.innerHTML = '';
-  mangaBox.innerHTML = '';
-
-  data.forEach(item => {
-    let cardHTML = `
-      <div class="card-item" onclick="openModal(${item.id})">
-        <div class="card-img">
-          <img src="${item.poster}" alt="img">
-          <span class="card-badge">${item.status}</span>
+  feedData.forEach(item => {
+    container.innerHTML += `
+      <div class="feed-item">
+        <video src="${item.video}" autoplay loop muted playsinline></video>
+        <div class="feed-overlay">
+          <span class="feed-badge">Nexora Exclusive</span>
+          <div class="feed-title">${item.title}</div>
+          <div class="feed-desc">${item.desc}</div>
         </div>
-        <div class="card-details">
-          <h4>${item.title}</h4>
-          <p>${item.type} • ★ ${item.rating}</p>
-        </div>
-      </div>
-    `;
-    if(item.cat === 'movie') mBox.innerHTML += cardHTML;
-    else mangaBox.innerHTML += cardHTML;
-  });
-}
-
-function renderSearchGrid(data) {
-  const grid = document.getElementById('searchGrid');
-  grid.innerHTML = '';
-  data.forEach(item => {
-    grid.innerHTML += `
-      <div class="card-item" style="max-width: 100%;" onclick="openModal(${item.id})">
-        <div class="card-img">
-          <img src="${item.poster}" alt="img">
-          <span class="card-badge">${item.type}</span>
-        </div>
-        <div class="card-details">
-          <h4>${item.title}</h4>
-          <p>★ ${item.rating}</p>
+        <div class="right-actions">
+          <button class="action-btn-item" onclick="toggleLike(this, ${item.id})">❤️<span>${item.likes}</span></button>
+          <button class="action-btn-item" onclick="showToast('💬 تم فتح نافذة التعليقات')">💬<span>تعليق</span></button>
+          <button class="action-btn-item" onclick="shareWork('${item.title}')">🔗<span>مشاركة</span></button>
+          <button class="action-btn-item" onclick="deleteFeedItem(${item.id})" style="background: rgba(239, 68, 68, 0.4);">🗑️<span>حذف</span></button>
         </div>
       </div>
     `;
   });
 }
 
-function filterSearch(val) {
-  let filtered = worksData.filter(i => i.title.toLowerCase().includes(val.toLowerCase()) || i.type.includes(val));
-  renderSearchGrid(filtered);
+function toggleLike(btn, id) {
+  btn.classList.toggle('liked');
+  let item = feedData.find(i => i.id === id);
+  if(item) {
+    if(btn.classList.contains('liked')) item.likes++;
+    else item.likes--;
+    saveStorage();
+    renderFeed();
+  }
 }
 
-function addNewWorkFromAdmin() {
+function toggleAdminPanel(show) {
+  document.getElementById('adminPanel').style.display = show ? 'flex' : 'none';
+}
+
+function addNewFeedItem() {
   let title = document.getElementById('admTitle').value.trim();
-  let type = document.getElementById('admType').value;
-  let cat = document.getElementById('admCat').value;
-  let poster = document.getElementById('admPoster').value.trim() || "https://via.placeholder.com/200x300/14141f/8b5cf6?text=Nexora";
-  let rating = document.getElementById('admRating').value.trim() || "9.0";
-  let status = document.getElementById('admStatus').value.trim() || "مستمر";
-  let chapters = parseInt(document.getElementById('admChapters').value) || 12;
-  let desc = document.getElementById('admDesc').value.trim() || "لا توجد تفاصيل إضافية.";
+  let desc = document.getElementById('admDesc').value.trim();
+  let video = document.getElementById('admVideoUrl').value.trim() || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4";
 
   if(!title) {
     showToast("⚠️ يرجى إدخال عنوان العمل!");
     return;
   }
 
-  let newObj = { id: Date.now(), title, type, cat, poster, rating, status, chapters, desc };
-  worksData.unshift(newObj);
-  renderEverything();
+  let newObj = {
+    id: Date.now(),
+    title,
+    desc: desc || "تم النشر عبر لوحة تحكم Nexora الإدارية.",
+    video,
+    likes: 1
+  };
+
+  feedData.unshift(newObj);
+  saveStorage();
+  renderFeed();
+  toggleAdminPanel(false);
 
   document.getElementById('admTitle').value = '';
-  document.getElementById('admPoster').value = '';
-  document.getElementById('admRating').value = '';
-  document.getElementById('admStatus').value = '';
   document.getElementById('admDesc').value = '';
-
-  showToast("🚀 تمت إضافة العمل ونشره بنجاح في الواجهة الرئيسية!");
-  switchTab('tabHome', document.querySelectorAll('.nav-btn')[0]);
+  document.getElementById('admVideoUrl').value = '';
+  showToast("🚀 تمت إضافة الفيديو بنجاح وظهر في تيار تيك توك!");
 }
 
-function openModal(id) {
-  
+function deleteFeedItem(id) {
+  if(confirm("هل أنت متأكد من حذف هذا الفيديو نهائياً؟")) {
+    feedData = feedData.filter(i => i.id !== id);
+    saveStorage();
+    renderFeed();
+    showToast("🗑️ تم الحذف بنجاح");
+  }
+}
+
+function shareWork(title) {
+  showToast(`🔗 تم نسخ رابط "${title}" بنجاح!`);
+}
+
+function showToast(msg) {
+  let t = document.getElementById('toastAlert');
+  t.innerText = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function switchMainTab(tab, btn) {
+  document.querySelectorAll('.b-nav-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
