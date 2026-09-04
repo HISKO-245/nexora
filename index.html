@@ -3,638 +3,426 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#8b5cf6">
-<title>Nexora - التطبيق الشامل</title>
-
+<title>أثير تون - Nexora App</title>
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  user-select: none;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
+body { background: #09090e; color: #efefef; padding-bottom: 75px; }
 
-body {
-  background: #09090e;
-  color: #efefef;
-  padding-bottom: 80px;
-}
+/* Top Header */
+.top-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #09090e; position: sticky; top: 0; z-index: 90; border-bottom: 1px solid #161622; }
+.top-icons { display: flex; gap: 8px; }
+.header-icon-btn { background: #12121c; border: 1px solid #1e1e2d; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; }
+.app-main-title { font-size: 16px; font-weight: bold; color: #fff; }
 
-/* Top Bar */
-.top-bar {
-  padding: 12px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #09090e;
-  position: sticky;
-  top: 0;
-  z-index: 90;
-  border-bottom: 1px solid #161622;
-}
-
-.top-icons {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.icon-btn {
-  background: #161622;
-  border: 1px solid #222232;
-  color: #fff;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.page-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-}
-
-/* Tab Views */
+/* Tabs */
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* Main Feed Styles */
-.hero-slider {
-  padding: 12px 16px;
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.hero-slider::-webkit-scrollbar { display: none; }
-
-.hero-card {
-  min-width: 280px;
-  height: 160px;
-  background: #12121c;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #222232;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 14px;
-  background-size: cover;
-  background-position: center;
-}
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(9,9,14,0.95) 10%, rgba(9,9,14,0.3) 100%);
-}
-.hero-content { position: relative; z-index: 2; }
-.hero-content h3 { font-size: 15px; color: #fff; margin-bottom: 6px; }
-.read-now-btn { background: #8b5cf6; color: white; border: none; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; }
-
+/* Section Headers */
 .section-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 8px; }
-.section-header h2 { font-size: 15px; color: #fff; font-weight: bold; }
-.see-all { font-size: 11px; color: #8b5cf6; cursor: pointer; background: none; border: none; }
+.section-header h2 { font-size: 14px; color: #fff; font-weight: bold; display: flex; align-items: center; gap: 6px; }
+.see-all-btn { font-size: 11px; color: #8b5cf6; background: none; border: none; cursor: pointer; }
 
+/* Horizontal Cards */
 .horizontal-scroll { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
+.manga-card { min-width: 130px; max-width: 130px; background: #12121c; border-radius: 12px; border: 1px solid #1e1e2d; overflow: hidden; flex-shrink: 0; cursor: pointer; position: relative; }
+.manga-poster { width: 100%; aspect-ratio: 2/3; background: #191926; position: relative; }
+.manga-poster img { width: 100%; height: 100%; object-fit: cover; }
+.status-tag { position: absolute; top: 6px; right: 6px; background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
+.status-tag.new { background: rgba(139, 92, 246, 0.2); color: #a78bfa; border-color: rgba(139, 92, 246, 0.4); }
+.manga-info { padding: 8px; text-align: right; }
+.manga-info h5 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+.manga-info p { font-size: 9px; color: #71717a; }
 
-.manga-mini-card { min-width: 120px; max-width: 120px; background: #12121c; border-radius: 12px; border: 1px solid #222232; overflow: hidden; flex-shrink: 0; cursor: pointer; transition: transform 0.2s; }
-.manga-mini-card:active { transform: scale(0.95); }
-.mini-poster { width: 100%; aspect-ratio: 2/3; position: relative; background: #1c1c2b; }
-.mini-poster img { width: 100%; height: 100%; object-fit: cover; }
-.tag-badge { position: absolute; top: 6px; right: 6px; background: #8b5cf6; color: white; font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-.mini-details { padding: 8px; }
-.mini-details h4 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
-.mini-details p { font-size: 9px; color: #a1a1aa; }
+/* Search View */
+.search-box-wrap { padding: 16px; }
+.search-input-field { background: #12121c; border: 1px solid #1e1e2d; border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.search-input-field input { background: transparent; border: none; color: #fff; font-size: 13px; width: 100%; outline: none; text-align: right; }
+.search-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-/* Search Styles */
-.search-container { padding: 16px; }
-.search-input-box {
-  background: #12121c;
-  border: 1px solid #222232;
-  border-radius: 14px;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.search-input-box input {
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 14px;
-  width: 100%;
-  outline: none;
-  text-align: right;
-}
-.search-results-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-.search-result-card {
-  background: #12121c;
-  border: 1px solid #1e1e2d;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-}
-.search-result-poster {
-  width: 100%;
-  aspect-ratio: 2/3;
-  background: #191926;
-  position: relative;
-}
-.search-result-poster img { width: 100%; height: 100%; object-fit: cover; }
-.search-result-info { padding: 6px; text-align: right; }
-.search-result-info h5 { font-size: 10px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.search-result-info p { font-size: 8px; color: #8b5cf6; }
+/* Settings View */
+.settings-wrap { padding: 16px; }
+.settings-group-title { font-size: 11px; color: #71717a; margin: 16px 0 8px; font-weight: bold; text-align: right; }
+.settings-card-box { background: #12121c; border: 1px solid #1e1e2d; border-radius: 14px; overflow: hidden; margin-bottom: 10px; }
+.settings-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid #191926; cursor: pointer; }
+.settings-row:last-child { border-bottom: none; }
+.settings-row-right { display: flex; align-items: center; gap: 12px; text-align: right; }
+.settings-row-right span { font-size: 16px; }
+.settings-row-right h5 { font-size: 12px; color: #fff; font-weight: bold; margin-bottom: 2px; }
+.settings-row-right p { font-size: 9px; color: #71717a; }
+.settings-row-left { font-size: 11px; color: #71717a; }
 
-/* Admin Dashboard Styles */
-.admin-container { padding: 16px; }
-.admin-card {
-  background: #12121c;
-  border: 1px solid #222232;
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-.admin-card h3 { font-size: 14px; color: #8b5cf6; margin-bottom: 12px; text-align: right; font-weight: bold; }
-.form-group { margin-bottom: 12px; text-align: right; }
-.form-group label { display: block; font-size: 11px; color: #a1a1aa; margin-bottom: 4px; }
-.form-control {
-  width: 100%;
-  background: #191926;
-  border: 1px solid #2a2a3d;
-  border-radius: 10px;
-  padding: 10px;
-  color: #fff;
-  font-size: 12px;
-  outline: none;
-  text-align: right;
-}
-.admin-submit-btn {
-  background: #8b5cf6;
-  color: white;
-  border: none;
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 13px;
-  margin-top: 4px;
-}
+/* Profile View */
+.profile-banner-bg { height: 110px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); position: relative; }
+.profile-avatar-box { width: 75px; height: 75px; background: #12121c; border: 3px solid #09090e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #fff; position: absolute; bottom: -35px; right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+.profile-body-content { padding: 45px 16px 16px; text-align: right; }
+.profile-body-content h2 { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 2px; }
+.profile-body-content p { font-size: 11px; color: #71717a; margin-bottom: 12px; }
+.bio-input-box { background: #12121c; border: 1px solid #1e1e2d; border-radius: 10px; padding: 10px; color: #a1a1aa; font-size: 11px; margin-bottom: 16px; text-align: right; }
+.stats-row-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+.stat-card-item { background: #12121c; border: 1px solid #1e1e2d; border-radius: 12px; padding: 12px 6px; text-align: center; }
+.stat-card-item .num { font-size: 15px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+.stat-card-item .lbl { font-size: 9px; color: #71717a; }
 
-/* Settings Screen */
-.settings-container { padding: 16px; }
-.settings-section-title { font-size: 12px; color: #71717a; margin: 16px 0 8px; font-weight: bold; text-align: right; }
-.settings-card {
-  background: #12121c;
-  border: 1px solid #1e1e2d;
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-.settings-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px;
-  border-bottom: 1px solid #191926;
-  cursor: pointer;
-}
-.settings-item:last-child { border-bottom: none; }
-.settings-item-right { display: flex; align-items: center; gap: 12px; text-align: right; }
-.settings-item-right .s-icon { font-size: 18px; }
-.settings-item-right h5 { font-size: 13px; color: #fff; font-weight: bold; margin-bottom: 2px; }
-.settings-item-right p { font-size: 10px; color: #71717a; }
-.settings-item-left { font-size: 12px; color: #71717a; }
+/* Modal Popup */
+.custom-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
+.modal-box-inner { background: #12121c; border: 1px solid #222232; border-radius: 16px; width: 100%; max-width: 340px; overflow: hidden; text-align: right; }
+.modal-img-top { width: 100%; height: 180px; background: #191926; position: relative; }
+.modal-img-top img { width: 100%; height: 100%; object-fit: cover; }
+.modal-desc-body { padding: 16px; }
+.modal-desc-body h3 { font-size: 15px; color: #fff; margin-bottom: 6px; font-weight: bold; }
+.modal-desc-body p { font-size: 11px; color: #a1a1aa; margin-bottom: 14px; }
+.modal-actions-btns { display: flex; gap: 8px; }
+.modal-btn-main { flex: 1; background: #8b5cf6; color: white; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
+.modal-btn-sec { flex: 1; background: #1e1e2d; color: #fff; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px; }
 
-.danger-btn {
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  color: #ef4444;
-  width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;
-  font-size: 13px;
-  margin-bottom: 12px;
-}
-
-/* HISKO Profile Screen */
-.profile-header-bg {
-  height: 120px;
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.profile-main-avatar {
-  width: 80px;
-  height: 80px;
-  background: #12121c;
-  border: 3px solid #09090e;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  font-weight: bold;
-  color: #fff;
-  position: absolute;
-  bottom: -40px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
-.profile-body { padding: 50px 16px 16px; text-align: center; }
-.profile-body h2 { font-size: 18px; color: #fff; font-weight: bold; margin-bottom: 6px; }
-.bio-box {
-  background: #12121c;
-  border: 1px solid #1e1e2d;
-  border-radius: 12px;
-  padding: 10px;
-  color: #71717a;
-  font-size: 11px;
-  margin-bottom: 16px;
-}
-.profile-actions-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.p-action-btn {
-  background: #12121c;
-  border: 1px solid #1e1e2d;
-  border-radius: 12px;
-  padding: 10px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.stat-box {
-  background: #12121c;
-  border: 1px solid #1e1e2d;
-  border-radius: 14px;
-  padding: 14px 8px;
-  text-align: center;
-}
-.stat-box .stat-num { font-size: 16px; color: #fff; font-weight: bold; margin-bottom: 4px; }
-.stat-box .stat-label { font-size: 10px; color: #71717a; }
-
-/* MODAL DETAILS POPUP (يعالج مشكلة الأزرار التي لا تعمل) */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  padding: 16px;
-}
-.modal-card {
-  background: #12121c;
-  border: 1px solid #222232;
-  border-radius: 18px;
-  width: 100%;
-  max-width: 360px;
-  overflow: hidden;
-  text-align: right;
-  animation: popIn 0.2s ease;
-}
-@keyframes popIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-.modal-poster {
-  width: 100%;
-  height: 200px;
-  background: #191926;
-  position: relative;
-}
-.modal-poster img { width: 100%; height: 100%; object-fit: cover; }
-.modal-body { padding: 16px; }
-.modal-body h3 { font-size: 16px; color: #fff; margin-bottom: 6px; font-weight: bold; }
-.modal-body p { font-size: 12px; color: #a1a1aa; margin-bottom: 14px; }
-.modal-actions { display: flex; gap: 8px; }
-.modal-btn {
-  flex: 1;
-  background: #8b5cf6;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 12px;
-}
-.modal-btn.secondary {
-  background: #1e1e2d;
-  color: #efefef;
-}
-
-/* BOTTOM NAVIGATION BAR */
-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background: #11111a !important;
-  border-top: 1px solid #1e1e2d;
-  display: flex !important;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 9999 !important;
-}
-
-.nav-link {
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  color: #71717a;
-  font-size: 10px;
-  gap: 3px;
-  cursor: pointer;
-  width: 20%;
-  background: transparent;
-  border: none;
-}
-.nav-link.active { color: #8b5cf6; font-weight: bold; }
-.nav-link .icon { font-size: 18px; padding: 2px 10px; border-radius: 12px; }
-.nav-link.active .icon { background: rgba(139, 92, 246, 0.2); }
+/* Bottom Nav Bar */
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: #0d0d14; border-top: 1px solid #1e1e2d; display: flex; justify-content: space-around; align-items: center; z-index: 999; }
+.nav-item-btn { display: flex; flex-direction: column; align-items: center; color: #71717a; font-size: 10px; gap: 3px; cursor: pointer; background: none; border: none; width: 20%; }
+.nav-item-btn.active { color: #8b5cf6; font-weight: bold; }
+.nav-item-btn .icon { font-size: 18px; }
 </style>
 </head>
-
 <body>
 
-<!-- TAB 1: الرئيسية -->
+<!-- HOME TAB -->
 <div id="tabHome" class="tab-content active">
-  <div class="top-bar">
+  <div class="top-header">
     <div class="top-icons">
-      <div class="icon-btn" onclick="showNotifications()">🔔</div>
-      <div class="icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-link')[1])">🔍</div>
+      <div class="header-icon-btn" onclick="showAlert('لا توجد إشعارات جديدة حالياً')">🔔</div>
+      <div class="header-icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-item-btn')[1])">🔍</div>
     </div>
-    <div class="page-title">Nexora - الرئيسية</div>
+    <div class="app-main-title">الرئيسية</div>
   </div>
 
-  <div class="hero-slider">
-    <div class="hero-card" style="background-image: url('https://via.placeholder.com/400x200/1c1c2b/8b5cf6?text=Anime+Movie');">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h3>أنمي وأفلام الموسم (9.8 ★)</h3>
-        <button class="read-now-btn" onclick="openSliderItem()">شاهد العرض ➔</button>
-      </div>
-    </div>
+  <div class="section-header" style="margin-top: 8px;">
+    <button class="see-all-btn" onclick="showAlert('عرض كل الأعمال الجديدة')">عرض الكل ‹</button>
+    <h2>⚡ أعمال جديدة</h2>
   </div>
+  <div class="horizontal-scroll" id="newWorksGrid"></div>
 
   <div class="section-header">
-    <button class="see-all" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-link')[1])">عرض الكل ‹</button>
-    <h2>🎬 أحدث الأنمي والأفلام المضافة</h2>
+    <button class="see-all-btn" onclick="showAlert('عرض كل الأعمال المكتملة')">عرض الكل ‹</button>
+    <h2>✅ أعمال مكتملة</h2>
   </div>
-  <div class="horizontal-scroll" id="animeMoviesGrid"></div>
+  <div class="horizontal-scroll" id="completedWorksGrid"></div>
 
   <div class="section-header">
-    <button class="see-all" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-link')[1])">عرض الكل ‹</button>
-    <h2>📖 المانهوا والمانغا المضافة</h2>
+    <button class="see-all-btn" onclick="showAlert('عرض الأعلى تقييماً')">عرض الكل ‹</button>
+    <h2>⭐ الأعلى تقييماً</h2>
   </div>
-  <div class="horizontal-scroll" id="mangaGrid"></div>
+  <div class="horizontal-scroll" id="topRatedGrid"></div>
 </div>
 
-<!-- TAB 2: البحث -->
+<!-- SEARCH TAB -->
 <div id="tabSearch" class="tab-content">
-  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">البحث في Nexora</div></div>
-  <div class="search-container">
-    <div class="search-input-box">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">البحث في أثير تون</div></div>
+  <div class="search-box-wrap">
+    <div class="search-input-field">
       <span>🔍</span>
-      <input type="text" id="searchInput" placeholder="ابحث عن أنمي، فيلم، مانهوا أو مانغا..." oninput="filterSearch(this.value)">
+      <input type="text" id="searchInput" placeholder="ابحث عن أنمي، فيلم، مانهوا أو مانغا مفضلة لديك..." oninput="handleSearch(this.value)">
     </div>
-    <div class="search-results-grid" id="searchResultsGrid"></div>
+    <div class="search-grid" id="searchGridContainer"></div>
   </div>
 </div>
 
-<!-- TAB 3: إدارة HISKO -->
-<div id="tabAdmin" class="tab-content">
-  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">لوحة تحكم المشرف (HISKO)</div></div>
-  <div class="admin-container">
-    <div class="admin-card">
-      <h3>➕ نشر عمل جديد (أنمي، فيلم، مانهوا)</h3>
-      <div class="form-group">
-        <label>عنوان العمل</label>
-        <input type="text" id="adminTitle" class="form-control" placeholder="مثال: Solo Leveling S2">
-      </div>
-      <div class="form-group">
-        <label>نوع العمل</label>
-        <select id="adminType" class="form-control">
-          <option value="أنمي">أنمي</option>
-          <option value="فيلم">فيلم</option>
-          <option value="مانهوا">مانهوا</option>
-          <option value="مانغا">مانغا</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>تصنيف القسم في الرئيسية</label>
-        <select id="adminCategory" class="form-control">
-          <option value="video">أنمي وأفلام (فيديو)</option>
-          <option value="manga">مانهوا ومانغا (قراءة)</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>رابط صورة الغلاف (Poster URL)</label>
-        <input type="text" id="adminPoster" class="form-control" placeholder="اتركه فارغاً ليتم توليد صورة تلقائياً">
-      </div>
-      <div class="form-group">
-        <label>التقييم (مثال: 9.8)</label>
-        <input type="text" id="adminRating" class="form-control" value="9.8">
-      </div>
-      <button class="admin-submit-btn" onclick="addNewContent()">نشر للعامة 🚀</button>
-    </div>
+<!-- DOWNLOADS TAB -->
+<div id="tabDownloads" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">التحميلات دون اتصال</div></div>
+  <div style="padding: 50px 20px; text-align: center; color: #71717a;">
+    <div style="font-size: 40px; margin-bottom: 10px;">📥</div>
+    <p>لا توجد فصول أو حلقات محملة حالياً.</p>
+    <small style="color: #8b5cf6; cursor: pointer;" onclick="switchTab('tabHome', document.querySelectorAll('.nav-item-btn')[0])">تصفح الأعمال للتحميل</small>
   </div>
 </div>
 
-<!-- TAB 4: التحميلات -->
-<div id="tabHistory" class="tab-content">
-  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">التحميلات دون اتصال</div></div>
-  <div style="padding: 40px; text-align: center; color: #a1a1aa;">لا توجد ملفات أو فصول محملة حالياً.<br><small style="color:#8b5cf6; cursor:pointer;" onclick="switchTab('tabHome', document.querySelectorAll('.nav-link')[0])">تصفح الأعمال للتحميل</small></div>
+<!-- COMMUNITY TAB -->
+<div id="tabCommunity" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">المجتمع</div></div>
+  <div style="padding: 50px 20px; text-align: center; color: #71717a;">
+    <div style="font-size: 40px; margin-bottom: 10px;">👥</div>
+    <p>أهلاً بك في مجتمع أثير تون! قريباً ستتمكن من مشاركة آرائك هنا.</p>
+  </div>
 </div>
 
-<!-- TAB 5: الإعدادات -->
-<div id="tabMore" class="tab-content">
-  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">الإعدادات</div></div>
-  <div class="settings-container">
-    <div class="settings-card" onclick="openProfileScreen()">
-      <div class="settings-item">
-        <div class="settings-item-right">
-          <div class="s-icon">👤</div>
+<!-- SETTINGS TAB -->
+<div id="tabSettings" class="tab-content">
+  <div class="top-header"><div class="app-main-title" style="margin: 0 auto;">الإعدادات</div></div>
+  <div class="settings-wrap">
+    
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="openProfileTabFromSettings()">
+        <div class="settings-row-right">
+          <span>👤</span>
           <div>
             <h5>الملف الشخصي</h5>
             <p>لوحتك والإحصاءات</p>
           </div>
         </div>
-        <div class="settings-item-left">‹</div>
+        <div class="settings-row-left">‹</div>
       </div>
     </div>
 
-    <div class="settings-card">
-      <div class="settings-item" onclick="switchTab('tabAdmin', document.querySelectorAll('.nav-link')[2])">
-        <div class="settings-item-right">
-          <div class="s-icon">🛠️</div>
-          <div>
-            <h5>لوحة إدارية (HISKO)</h5>
-            <p>إضافة ونشر الأعمال الجديدة</p>
-          </div>
-        </div>
-        <div class="settings-item-left">➔</div>
-      </div>
-    </div>
-
-    <div class="settings-section-title">التعقيم والإشعارات</div>
-    <div class="settings-card">
-      <div class="settings-item" onclick="toggleSterilization()">
-        <div class="settings-item-right">
-          <div class="s-icon">🌓</div>
+    <div class="settings-group-title">التفضيلات</div>
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="toggleCoverQuality()">
+        <div class="settings-row-right">
+          <span>🌓</span>
           <div>
             <h5>تعقيم أغلفة الأعمال</h5>
-            <p id="sterilStatus">متوسط</p>
+            <p id="coverQualityTxt">متوسط</p>
           </div>
         </div>
-        <div class="settings-item-left">تغيير</div>
+        <div class="settings-row-left">تغيير</div>
       </div>
-      <div class="settings-item" onclick="toggleNotificationsSetting()">
-        <div class="settings-item-right">
-          <div class="s-icon">🔔</div>
+      <div class="settings-row" onclick="toggleNotifications()">
+        <div class="settings-row-right">
+          <span>🔔</span>
           <div>
             <h5>الإشعارات</h5>
-            <p id="notifStatus">كل الإشعارات مفعلة</p>
+            <p id="notifTxt">كل الإشعارات مفعلة</p>
           </div>
         </div>
-        <div class="settings-item-left">تعديل</div>
+        <div class="settings-row-left">تعديل</div>
       </div>
     </div>
 
-    <div class="settings-section-title">التخزين</div>
-    <div class="settings-card">
-      <div class="settings-item" onclick="alert('مساحة التخزين المؤقت الحالية: 185 ميجابايت مستخدمة بكفاءة عالية.')">
-        <div class="settings-item-right">
-          <div class="s-icon">💾</div>
+    <div class="settings-group-title">التخزين</div>
+    <div class="settings-card-box">
+      <div class="settings-row" onclick="showAlert('مساحة التخزين المؤقت الحالية: 185 MB مستخدمة بكفاءة عالية')">
+        <div class="settings-row-right">
+          <span>💾</span>
           <div>
             <h5>التخزين والتنزيلات</h5>
             <p>مؤقت 185 MB • تنزيلات 0 B</p>
           </div>
         </div>
-        <div class="settings-item-left">‹</div>
+        <div class="settings-row-left">‹</div>
       </div>
     </div>
 
-    <div class="settings-section-title" style="color: #ef4444;">إجراء لا يمكن التراجع عنه</div>
-    <button class="danger-btn" onclick="clearAllDownloads()">
+    <div class="settings-group-title" style="color: #ef4444;">إجراء لا يمكن التراجع عنه</div>
+    <button style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; width: 100%; padding: 14px; border-radius: 14px; font-weight: bold; cursor: pointer; font-size: 13px;" onclick="clearDownloadsData()">
       حذف التنزيلات دون اتصال 🗑️
     </button>
   </div>
 </div>
 
-<!-- SUB-SCREEN: البروفايل الشخصي -->
-<div id="tabProfileScreen" class="tab-content">
-  <div class="top-bar">
-    <div class="icon-btn" onclick="closeProfileScreen()">➔</div>
-    <div class="page-title">ملف HISKO HISKO</div>
-    <div style="width: 38px;"></div>
+<!-- PROFILE VIEW SUB-SCREEN -->
+<div id="tabProfile" class="tab-content">
+  <div class="top-header">
+    <div class="header-icon-btn" onclick="switchTab('tabSettings', document.querySelectorAll('.nav-item-btn')[4])">➔</div>
+    <div class="app-main-title">الملف الشخصي</div>
+    <div style="width: 36px;"></div>
   </div>
 
-  <div class="profile-header-bg">
-    <div class="profile-main-avatar">H</div>
+  <div class="profile-banner-bg">
+    <div class="profile-avatar-box">H</div>
   </div>
 
-  <div class="profile-body">
+  <div class="profile-body-content">
     <h2>HISKO HISKO</h2>
-    <div class="bio-box" id="userBioText" onclick="editBio()" style="cursor: pointer;" title="انقر لتعديل الوصف">أضف وصفًا قصيرًا عن نفسك ✏️</div>
-
-    <div class="profile-actions-grid">
-      <button class="p-action-btn" onclick="switchTab('tabAdmin', document.querySelectorAll('.nav-link')[2])">🛠️ لوحة الإدارة</button>
-      <button class="p-action-btn" onclick="editBio()">✏️ تعديل الملف</button>
+    <p>hiskohisko45@gmail.com</p>
+    
+    <div class="bio-input-box" id="bioTextDisplay" onclick="editUserBio()" style="cursor: pointer;" title="انقر للتعديل">
+      أضف وصفًا قصيرًا عن نفسك ✏️
     </div>
 
-    <div class="stats-grid">
-      <div class="stat-box"><div class="stat-num" id="statPublishedCount">0</div><div class="stat-label">الأعمال المنشورة</div></div>
-      <div class="stat-box"><div class="stat-num">0</div><div class="stat-label">التعليقات</div></div>
-      <div class="stat-box"><div class="stat-num">0</div><div class="stat-label">التقييمات</div></div>
+    <div class="stats-row-grid">
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التعليقات</div></div>
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">التقييمات</div></div>
+      <div class="stat-card-item"><div class="num">0</div><div class="lbl">الفصول</div></div>
     </div>
   </div>
 </div>
 
-<!-- MODAL DETAILS POPUP -->
-<div id="detailsModal" class="modal-overlay" onclick="closeDetailsModal(event)">
-  <div class="modal-card">
-    <div class="modal-poster" id="modalPosterContainer">
-      <img id="modalImg" src="" alt="poster">
-      <span class="tag-badge" id="modalTypeBadge">أنمي</span>
+<!-- ITEM DETAILS MODAL -->
+<div id="itemModal" class="custom-modal" onclick="closeModalOnOutside(event)">
+  <div class="modal-box-inner">
+    <div class="modal-img-top">
+      <img id="modalPosterImg" src="" alt="poster">
+      <span class="status-tag new" id="modalTagBadge" style="top: 10px; right: 10px;">مستمر</span>
     </div>
-    <div class="modal-body">
-      <h3 id="modalTitle">عنوان العمل</h3>
-      <p id="modalInfo">التقييم: 9.8 ★</p>
-      <div class="modal-actions">
-        <button class="modal-btn" id="modalPrimaryBtn" onclick="startAction()">مشاهدة / قراءة 🚀</button>
-        <button class="modal-btn secondary" onclick="downloadItem()">تحميل 📥</button>
+    <div class="modal-desc-body">
+      <h3 id="modalTitleText">عنوان العمل</h3>
+      <p id="modalInfoText">التقييم: 9.5 ★</p>
+      <div class="modal-actions-btns">
+        <button class="modal-btn-main" onclick="startReadingAction()">ابدأ القراءة 🚀</button>
+        <button class="modal-btn-sec" onclick="downloadItemAction()">تحميل 📥</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- BOTTOM NAVIGATION BAR -->
-<nav>
-  <button class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
-  <button class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
-  <button class="nav-link" onclick="switchTab('tabAdmin', this)"><span class="icon">🛠️</span>الإدارة</button>
-  <button class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">📥</span>التحميلات</button>
-  <button class="nav-link" onclick="switchTab('tabMore', this)"><span class="icon">⚙️</span>الإعدادات</button>
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+  <button class="nav-item-btn active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
+  <button class="nav-item-btn" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
+  <button class="nav-item-btn" onclick="switchTab('tabDownloads', this)"><span class="icon">📥</span>التحميلات</button>
+  <button class="nav-item-btn" onclick="switchTab('tabCommunity', this)"><span class="icon">👥</span>المجتمع</button>
+  <button class="nav-item-btn" onclick="switchTab('tabSettings', this)"><span class="icon">⚙️</span>الإعدادات</button>
 </nav>
 
 <script>
-let defaultContent = [
-  { id: 1, title: "Demon Slayer", type: "أنمي", rating: "9.7", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Demon+Slayer", category: "video" },
-  { id: 2, title: "Your Name", type: "فيلم", rating: "9.5", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Your+Name", category: "video" },
-  { id: 3, title: "Solo Leveling", type: "مانهوا", rating: "9.9", poster: "https://via.placeholder.com/200x300/1c1c2b/8b5cf6?text=Solo+Leveling", category: "manga" }
+const appData = [
+  { id: 1, title: "The Genius Spirited Streamer", type: "مانهوا", rating: "9.0", status: "مستمر", category: "new", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Streamer" },
+  { id: 2, title: "The Baby Sprout Who Bloomed", type: "مانهوا", rating: "6.0", status: "جديد", category: "new", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Baby+Sprout" },
+  { id: 3, title: "Blinded by the Setting Sun", type: "مانهوا", rating: "8.1", status: "مكتمل", category: "completed", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Setting+Sun" },
+  { id: 4, title: "Komi Can't Communicate", type: "مانغا", rating: "7.0", status: "مكتمل", category: "completed", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Komi+San" },
+  { id: 5, title: "Demonic Emperor", type: "مانهوا", rating: "9.6", status: "مستمر", category: "top", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Demonic+Emperor" },
+  { id: 6, title: "Legend of the Northern Blade", type: "مانهوا", rating: "9.6", status: "مكتمل", category: "top", poster: "https://via.placeholder.com/200x300/191926/8b5cf6?text=Northern+Blade" }
 ];
 
-let savedContent = localStorage.getItem('nexora_admin_items');
-let allContent = savedContent ? JSON.parse(savedContent) : defaultContent;
-let currentSelectedItem = null;
+let selectedWork = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderContent(allContent);
-  renderSearchGrid(allContent);
-  updatePublishedStats();
-  loadUserSettings();
+  renderLists(appData);
+  renderSearchGrid(appData);
 });
 
-function switchTab(tabId, el) {
+function switchTab(tabId, btnElement) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-  document.getElementById
+  document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  if(btnElement) btnElement.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function openProfileTabFromSettings() {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tabProfile').classList.add('active');
+}
+
+function renderLists(data) {
+  const newGrid = document.getElementById('newWorksGrid');
+  const compGrid = document.getElementById('completedWorksGrid');
+  const topGrid = document.getElementById('topRatedGrid');
+
+  newGrid.innerHTML = '';
+  compGrid.innerHTML = '';
+  topGrid.innerHTML = '';
+
+  data.forEach(item => {
+    const html = `
+      <div class="manga-card" onclick="openItemModal(${item.id})">
+        <div class="manga-poster">
+          <img src="${item.poster}" alt="cover">
+          <span class="status-tag ${item.status === 'جديد' ? 'new' : ''}">${item.status}</span>
+        </div>
+        <div class="manga-info">
+          <h5>${item.title}</h5>
+          <p>★ ${item.rating}</p>
+        </div>
+      </div>
+    `;
+    if(item.category === 'new') newGrid.innerHTML += html;
+    if(item.category === 'completed') compGrid.innerHTML += html;
+    if(item.category === 'top') topGrid.innerHTML += html;
+  });
+}
+
+function renderSearchGrid(data) {
+  const grid = document.getElementById('searchGridContainer');
+  grid.innerHTML = '';
+  if(data.length === 0) {
+    grid.innerHTML = '<div style="grid-column: span 3; text-align: center; color: #71717a; padding: 20px;">لا توجد نتائج مطابقة</div>';
+    return;
+  }
+  data.forEach(item => {
+    grid.innerHTML += `
+      <div class="manga-card" style="max-width: 100%;" onclick="openItemModal(${item.id})">
+        <div class="manga-poster">
+          <img src="${item.poster}" alt="cover">
+          <span class="status-tag">${item.type}</span>
+        </div>
+        <div class="manga-info">
+          <h5>${item.title}</h5>
+          <p>★ ${item.rating}</p>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function handleSearch(query) {
+  const res = appData.filter(i => i.title.toLowerCase().includes(query.toLowerCase()) || i.type.includes(query));
+  renderSearchGrid(res);
+}
+
+function openItemModal(id) {
+  selectedWork = appData.find(i => i.id === id);
+  if(!selectedWork) return;
+
+  document.getElementById('modalTitleText').innerText = selectedWork.title;
+  document.getElementById('modalInfoText').innerText = `النوع: ${selectedWork.type} • التقييم: ★ ${selectedWork.rating} • الحالة: ${selectedWork.status}`;
+  document.getElementById('modalPosterImg').src = selectedWork.poster;
+  document.getElementById('modalTagBadge').innerText = selectedWork.status;
+  
+  document.getElementById('itemModal').style.display = 'flex';
+}
+
+function closeModalOnOutside(e) {
+  if(e.target.id === 'itemModal') {
+    document.getElementById('itemModal').style.display = 'none';
+  }
+}
+
+function startReadingAction() {
+  if(!selectedWork) return;
+  document.getElementById('itemModal').style.display = 'none';
+  showAlert(`جاري فتح فصول "${selectedWork.title}" للقراءة والاستمتاع 🚀`);
+}
+
+function downloadItemAction() {
+  if(!selectedWork) return;
+  document.getElementById('itemModal').style.display = 'none';
+  showAlert(`تم إضافة "${selectedWork.title}" إلى التحميلات دون اتصال بنجاح 📥`);
+}
+
+function showAlert(msg) {
+  alert(msg);
+}
+
+function editUserBio() {
+  let newBio = prompt("أدخل الوصف الجديد لملفك الشخصي:", document.getElementById('bioTextDisplay').innerText);
+  if(newBio !== null && newBio.trim() !== "") {
+    document.getElementById('bioTextDisplay').innerText = newBio;
+    showAlert("تم تحديث الوصف بنجاح!");
+  }
+}
+
+function toggleCoverQuality() {
+  let txt = document.getElementById('coverQualityTxt');
+  if(txt.innerText === "متوسط") {
+    txt.innerText = "عالي الحماية";
+    showAlert("تم ضبط تعقيم الأغلفة على مستوى: عالي الحماية");
+  } else if(txt.innerText === "عالي الحماية") {
+    txt.innerText = "منخفض";
+    showAlert("تم ضبط تعقيم الأغلفة على مستوى: منخفض");
+  } else {
+    txt.innerText = "متوسط";
+    showAlert("تم ضبط تعقيم الأغلفة على مستوى: متوسط");
+  }
+}
+
+function toggleNotifications() {
+  let txt = document.getElementById('notifTxt');
+  if(txt.innerText.includes("مفعلة")) {
+    txt.innerText = "الإشعارات معطلة";
+    showAlert("تم تعطيل الإشعارات المؤقتة.");
+  } else {
+    txt.innerText = "كل الإشعارات مفعلة";
+    showAlert("تم تفعيل جميع الإشعارات بنجاح.");
+  }
+}
+
+function clearDownloadsData() {
+  if(confirm("هل أنت متأكد من حذف كل التنزيلات والفصول المحملة من هذا الجهاز؟")) {
+    showAlert("تم تفريغ مساحة التنزيلات بنجاح.");
+  }
+}
+</script>
+
+</body>
+</html>
