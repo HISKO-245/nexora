@@ -55,25 +55,17 @@ body {
   cursor: pointer;
 }
 
-.vip-coin {
-  background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%);
-  color: #000;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
 .page-title {
   font-size: 18px;
   font-weight: bold;
   color: #fff;
 }
 
-/* Hero Slider Banner */
+/* Tab Views */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Main Feed Styles */
 .hero-slider {
   padding: 12px 16px;
   display: flex;
@@ -99,160 +91,132 @@ body {
   background-size: cover;
   background-position: center;
 }
-
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(9,9,14,0.95) 10%, rgba(9,9,14,0.3) 100%);
 }
+.hero-content { position: relative; z-index: 2; }
+.hero-content h3 { font-size: 15px; color: #fff; margin-bottom: 6px; }
+.read-now-btn { background: #8b5cf6; color: white; border: none; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
+.section-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 8px; }
+.section-header h2 { font-size: 15px; color: #fff; font-weight: bold; }
+.see-all { font-size: 11px; color: #8b5cf6; cursor: pointer; background: none; border: none; }
 
-.hero-content h3 {
-  font-size: 15px;
-  color: #fff;
-  margin-bottom: 6px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.read-now-btn {
-  background: #8b5cf6;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: bold;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Section Headers */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 16px 8px;
-}
-
-.section-header h2 {
-  font-size: 15px;
-  color: #fff;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.see-all {
-  font-size: 11px;
-  color: #8b5cf6;
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
-/* Horizontal Cards Grid */
-.horizontal-scroll {
-  display: flex;
-  gap: 12px;
-  padding: 0 16px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
+.horizontal-scroll { display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
 
-.manga-mini-card {
-  min-width: 120px;
-  max-width: 120px;
+.manga-mini-card { min-width: 120px; max-width: 120px; background: #12121c; border-radius: 12px; border: 1px solid #222232; overflow: hidden; flex-shrink: 0; cursor: pointer; }
+.mini-poster { width: 100%; aspect-ratio: 2/3; position: relative; background: #1c1c2b; }
+.mini-poster img { width: 100%; height: 100%; object-fit: cover; }
+.tag-badge { position: absolute; top: 6px; right: 6px; background: #8b5cf6; color: white; font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+.mini-details { padding: 8px; }
+.mini-details h4 { font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+.mini-details p { font-size: 9px; color: #a1a1aa; }
+
+/* Profile & Settings */
+.profile-container { padding: 16px; }
+
+.profile-card {
   background: #12121c;
-  border-radius: 12px;
-  border: 1px solid #222232;
-  overflow: hidden;
-  flex-shrink: 0;
+  border: 1px solid #1e1e2d;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.profile-avatar {
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  border: 2px solid #222232;
+}
+.profile-info h3 { font-size: 15px; color: #fff; font-weight: bold; margin-bottom: 3px; }
+.profile-info p { font-size: 11px; color: #a1a1aa; }
+
+/* Golden VIP Banner */
+.vip-gold-banner {
+  background: linear-gradient(135deg, #1f1b10 0%, #2d230b 100%);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
   cursor: pointer;
 }
+.vip-gold-content h4 { font-size: 14px; color: #facc15; font-weight: bold; margin-bottom: 4px; }
+.vip-gold-content p { font-size: 10px; color: #d1d5db; }
+.vip-crown-icon { font-size: 28px; background: rgba(234, 179, 8, 0.15); padding: 10px; border-radius: 12px; }
 
-.mini-poster {
-  width: 100%;
-  aspect-ratio: 2/3;
-  position: relative;
-  background: #1c1c2b;
+/* Quick Access Grid */
+.quick-access-title { font-size: 12px; color: #71717a; margin-bottom: 8px; font-weight: bold; text-align: right; }
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
 }
+.quick-box {
+  background: #12121c;
+  border: 1px solid #1e1e2d;
+  border-radius: 14px;
+  padding: 14px;
+  cursor: pointer;
+  text-align: right;
+}
+.quick-box .q-icon { font-size: 18px; margin-bottom: 6px; }
+.quick-box h5 { font-size: 13px; color: #fff; font-weight: bold; margin-bottom: 2px; }
+.quick-box p { font-size: 10px; color: #71717a; }
 
-.mini-poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.tag-badge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  background: #8b5cf6;
-  color: white;
-  font-size: 9px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.mini-details {
-  padding: 8px;
-}
-.mini-details h4 {
-  font-size: 11px;
-  color: #fff;
-  white-space: nowrap;
+/* Legal List */
+.legal-card {
+  background: #12121c;
+  border: 1px solid #1e1e2d;
+  border-radius: 16px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 2px;
+  margin-bottom: 16px;
 }
-.mini-details p {
-  font-size: 9px;
-  color: #a1a1aa;
+.legal-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #191926;
+  cursor: pointer;
+  font-size: 13px;
+  color: #fff;
 }
+.legal-item:last-child { border-bottom: none; }
 
-/* Tab Views */
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-
-/* Settings Page Styles */
-.settings-container { padding: 16px; }
-.section-label { font-size: 12px; color: #71717a; margin: 16px 4px 8px; font-weight: bold; text-align: right; }
-.setting-card { background: #12121c; border: 1px solid #1e1e2d; border-radius: 16px; overflow: hidden; margin-bottom: 8px; }
-.setting-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid #191926; cursor: pointer; }
-.setting-item:last-child { border-bottom: none; }
-.setting-info { text-align: right; flex: 1; }
-.setting-info h4 { font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 2px; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-.setting-info p { font-size: 11px; color: #71717a; }
-.setting-arrow { font-size: 12px; color: #52525b; margin-left: 10px; }
-.setting-card.danger { border-color: rgba(239, 68, 68, 0.2); }
-.setting-item.danger-item h4 { color: #ef4444; }
-
-/* Toggle Switch */
-.switch { position: relative; display: inline-block; width: 44px; height: 24px; }
-.switch input { opacity: 0; width: 0; height: 0; }
-.slider { position: absolute; cursor: pointer; inset: 0; background-color: #272738; transition: .3s; border-radius: 24px; }
-.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
-input:checked + .slider { background-color: #8b5cf6; }
-input:checked + .slider:before { transform: translateX(20px); }
-
-/* Modal Panels */
-.full-panel { display: none; position: fixed; inset: 0; background: #09090e; z-index: 1000; overflow-y: auto; padding: 20px 16px; }
-.full-panel.active { display: block; }
-.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-.modal-header h3 { font-size: 16px; color: #fff; }
-.close-modal { background: none; border: none; color: #efefef; font-size: 18px; cursor: pointer; }
-.modal-option { background: #12121c; border: 1px solid #1e1e2d; padding: 14px; border-radius: 12px; margin-bottom: 8px; text-align: right; cursor: pointer; font-size: 13px; }
+.action-btn {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+}
+.action-btn.login-mode {
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #8b5cf6;
+}
 
 /* BOTTOM NAVIGATION BAR (FIXED) */
 nav {
@@ -289,13 +253,12 @@ nav {
 
 <body>
 
-<!-- TAB 1: الرئيسية (أنيقة وتضم الأنمي، الأفلام، المانهوا، والمانغا) -->
+<!-- TAB 1: الرئيسية -->
 <div id="tabHome" class="tab-content active">
   <div class="top-bar">
     <div class="top-icons">
       <div class="icon-btn" onclick="alert('لا توجد إشعارات جديدة في Nexora')">🔔</div>
       <div class="icon-btn" onclick="switchTab('tabSearch', document.querySelectorAll('.nav-link')[1])">🔍</div>
-      <div class="vip-coin">💎 VIP</div>
     </div>
     <div class="page-title">Nexora - الرئيسية</div>
   </div>
@@ -342,81 +305,81 @@ nav {
   <div style="padding: 40px; text-align: center; color: #a1a1aa;">لا توجد ملفات أو فصول محملة حالياً.</div>
 </div>
 
-<!-- TAB 4: الإعدادات (في مكان زر المجتمع تماماً) -->
+<!-- TAB 4: الإعدادات (مع إدارة حساب HISKO ورام تسجيل الدخول) -->
 <div id="tabMore" class="tab-content">
-  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">إعدادات Nexora</div></div>
+  <div class="top-bar"><div class="page-title" style="margin: 0 auto;">حسابي وإعدادات Nexora</div></div>
 
-  <div class="settings-container">
-    <div class="section-label">المظهر</div>
-    <div class="setting-card">
-      <div class="setting-item" onclick="openOpacityModal()">
-        <span class="setting-arrow">‹</span>
-        <div class="setting-info">
-          <h4>تعتيم أغلفة الأعمال <span class="setting-icon">🌓</span></h4>
-          <p id="opacityDesc">متوسط</p>
-        </div>
+  <div class="profile-container">
+    
+    <!-- كارد البروفايل الخاص بـ HISKO -->
+    <div class="profile-card" id="profileCardSection">
+      <div class="profile-avatar" id="avatarLetter">H</div>
+      <div class="profile-info">
+        <h3 id="profileName">HISKO HISKO</h3>
+        <p id="profileEmail">hiskohisko45@gmail.com</p>
       </div>
     </div>
 
-    <div class="section-label">الإشعارات</div>
-    <div class="setting-card">
-      <div class="setting-item">
-        <label class="switch">
-          <input type="checkbox" id="notifToggle" onchange="toggleNotifications(this)">
-          <span class="slider"></span>
-        </label>
-        <div class="setting-info" style="cursor: pointer;" onclick="document.getElementById('notifToggle').click()">
-          <h4>الإشعارات التفاعلية <span class="setting-icon">🔔</span></h4>
-          <p id="notifStatusText">كل الإشعارات مفعلة</p>
-        </div>
+    <!-- البطاقة الذهبية VIP -->
+    <div class="vip-gold-banner" onclick="alert('أنت مشترك في باقة VIP الحصرية!')">
+      <div class="vip-gold-content">
+        <h4>ارتق إلى أثير تون VIP <span style="background:#ca8a04; color:#000; padding:1px 6px; border-radius:6px; font-size:9px;">20%-</span></h4>
+        <p>تجربة أنقى ومزايا حصرية متكاملة</p>
+      </div>
+      <div class="vip-crown-icon">👑</div>
+    </div>
+
+    <!-- الوصول السريع -->
+    <div class="quick-access-title">الوصول السريع</div>
+    <div class="quick-grid">
+      <div class="quick-box" onclick="alert('قوائمك الشخصية')">
+        <div class="q-icon">📋</div>
+        <h5>قوائمي</h5>
+        <p>القوائم الخاصة والعامة</p>
+      </div>
+      <div class="quick-box" onclick="alert('لوحة الإحصاءات الشخصية')">
+        <div class="q-icon">👤</div>
+        <h5>الملف الشخصي</h5>
+        <p>لوحتك والإحصاءات</p>
+      </div>
+      <div class="quick-box" onclick="switchTab('tabHistory', document.querySelectorAll('.nav-link')[2])">
+        <div class="q-icon">📥</div>
+        <h5>التحميلات</h5>
+        <p>الفصول المحفوظة</p>
+      </div>
+      <div class="quick-box" onclick="alert('إعدادات التطبيق والتخزين')">
+        <div class="q-icon">⚙️</div>
+        <h5>الإعدادات</h5>
+        <p>الخصوصية والتخزين</p>
       </div>
     </div>
 
-    <div class="section-label">التخزين</div>
-    <div class="setting-card">
-      <div class="setting-item" onclick="clearCacheStorage()">
-        <span class="setting-arrow">‹</span>
-        <div class="setting-info">
-          <h4>التخزين المؤقت والتنزيلات <span class="setting-icon">💾</span></h4>
-          <p id="storageText">مؤقت 185 MB • تنزيلات 0 MB</p>
-        </div>
+    <!-- القوانين والخصوصية -->
+    <div class="quick-access-title">القوانين والخصوصية</div>
+    <div class="legal-card">
+      <div class="legal-item" onclick="alert('سياسة الخصوصية محمية.')">
+        <span>‹</span>
+        <span>سياسة الخصوصية 🛡️</span>
+      </div>
+      <div class="legal-item" onclick="alert('شروط الاستخدام.')">
+        <span>‹</span>
+        <span>شروط الاستخدام 📝</span>
+      </div>
+      <div class="legal-item" onclick="alert('حقوق النشر والإبلاغ.')">
+        <span>‹</span>
+        <span>حقوق النشر والإبلاغ ©</span>
       </div>
     </div>
 
-    <div class="section-label">حول التطبيق</div>
-    <div class="setting-card">
-      <div class="setting-item" onclick="resetTutorial()">
-        <div class="setting-info">
-          <h4>إعادة عرض التعليمات <span class="setting-icon">🎓</span></h4>
-          <p>عرض دليل الاستخدام من جديد</p>
-        </div>
-      </div>
-    </div>
+    <!-- زر تسجيل الخروج / تسجيل الدخول الذكي -->
+    <button class="action-btn" id="authActionButton" onclick="handleAuthAction()">
+      تسجيل الخروج ➔
+    </button>
 
-    <div class="section-label" style="color: #ef4444;">إجراءات الخطر</div>
-    <div class="setting-card danger">
-      <div class="setting-item danger-item" onclick="deleteAllDownloads()">
-        <div class="setting-info">
-          <h4>حذف كافة التحميلات المحفوظة <span class="setting-icon">🗑️</span></h4>
-          <p>يحذف كل الفصول والحلقات المخزنة محلياً</p>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- Modal تعتيم الأغلفة -->
-<div class="full-panel" id="opacityModal">
-  <div class="modal-header">
-    <h3>اختر درجة التعتيم</h3>
-    <button class="close-modal" onclick="closeOpacityModal()">✕</button>
-  </div>
-  <div class="modal-option" onclick="setOpacity('light', 'فاتح')">فاتح (بدون تعتيم)</div>
-  <div class="modal-option" onclick="setOpacity('medium', 'متوسط')">متوسط (افتراضي)</div>
-  <div class="modal-option" onclick="setOpacity('dark', 'داكن جداً')">داكن جداً</div>
-</div>
-
-<!-- BOTTOM NAVIGATION BAR: مرتبة من اليمين لليسار (الرئيسية، البحث، التحميلات، الإعدادات) -->
+<!-- BOTTOM NAVIGATION BAR -->
 <nav>
   <button class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</button>
   <button class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</button>
@@ -434,7 +397,7 @@ const contentData = [
 
 document.addEventListener('DOMContentLoaded', () => {
   renderContent();
-  loadSettings();
+  checkLoginState();
 });
 
 function switchTab(tabId, el) {
@@ -454,8 +417,8 @@ function renderContent() {
   contentData.forEach(item => {
     const html = `
       <div class="manga-mini-card" onclick="alert('جاري فتح: ${item.title}')">
-        <div class="mini-poster" id="poster_${item.id}">
-          <img src="${item.poster}" alt="cover" id="img_${item.id}">
+        <div class="mini-poster">
+          <img src="${item.poster}" alt="cover">
           <span class="tag-badge">${item.type}</span>
         </div>
         <div class="mini-details">
@@ -467,82 +430,60 @@ function renderContent() {
     if(item.category === 'video') videoContainer.innerHTML += html;
     if(item.category === 'manga') mangaContainer.innerHTML += html;
   });
-  applyOpacitySettings();
 }
 
-/* إعدادات التعتيم الحقيقية */
-function openOpacityModal() { document.getElementById('opacityModal').classList.add('active'); }
-function closeOpacityModal() { document.getElementById('opacityModal').classList.remove('active'); }
-function setOpacity(mode, label) {
-  localStorage.setItem('nexora_opacity_mode', mode);
-  localStorage.setItem('nexora_opacity_label', label);
-  applyOpacitySettings();
-  closeOpacityModal();
-  alert("تم تطبيق التعتيم بنجاح: " + label);
-}
-function applyOpacitySettings() {
-  const mode = localStorage.getItem('nexora_opacity_mode') || 'medium';
-  const label = localStorage.getItem('nexora_opacity_label') || 'متوسط';
-  const desc = document.getElementById('opacityDesc');
-  if(desc) desc.innerText = label;
-
-  document.querySelectorAll('.mini-poster img').forEach(img => {
-    if(mode === 'light') img.style.filter = 'brightness(1)';
-    if(mode === 'medium') img.style.filter = 'brightness(0.8)';
-    if(mode === 'dark') img.style.filter = 'brightness(0.5)';
-  });
-}
-
-/* الإشعارات وحفظ الحالة */
-function toggleNotifications(checkbox) {
-  const statusText = document.getElementById('notifStatusText');
-  if(checkbox.checked) {
-    localStorage.setItem('nexora_notifications', 'enabled');
-    statusText.innerText = 'كل الإشعارات مفعلة';
-    alert("تم تفعيل الإشعارات بنجاح!");
+/* نظام التحكم بحالة الحساب وتسجيل الدخول والخروج */
+function handleAuthAction() {
+  const isLoggedIn = localStorage.getItem('nexora_logged_in') !== 'false';
+  
+  if (isLoggedIn) {
+    if (confirm("هل تريد بالتأكيد تسجيل الخروج من حساب HISKO HISKO؟")) {
+      localStorage.setItem('nexora_logged_in', 'false');
+      checkLoginState();
+      alert("تم تسجيل الخروج بنجاح. التطبيق جاهز الآن لتسجيل دخول حساب جديد.");
+    }
   } else {
-    localStorage.setItem('nexora_notifications', 'disabled');
-    statusText.innerText = 'الإشعارات معطلة';
-    alert("تم تعطيل الإشعارات.");
+    let userInput = prompt("أدخل اسم المستخدم أو الإيميل الجديد لتسجيل الدخول:");
+    if (userInput && userInput.trim() !== "") {
+      localStorage.setItem('nexora_logged_in', 'true');
+      localStorage.setItem('nexora_custom_user', userInput);
+      checkLoginState();
+      alert("مرحباً بك، تم تسجيل الدخول بنجاح باسم: " + userInput);
+    }
   }
 }
 
-/* مسح التخزين المؤقت */
-function clearCacheStorage() {
-  if(confirm("هل تريد تفريغ الذاكرة المؤقتة (Cache)؟")) {
-    localStorage.removeItem('nexora_cache');
-    document.getElementById('storageText').innerText = "مؤقت 0 MB • تنزيلات 0 MB";
-    alert("تم تنظيف التخزين المؤقت وتحرير المساحة بنجاح!");
-  }
-}
+function checkLoginState() {
+  const isLoggedIn = localStorage.getItem('nexora_logged_in') !== 'false';
+  const nameEl = document.getElementById('profileName');
+  const emailEl = document.getElementById('profileEmail');
+  const avatarEl = document.getElementById('avatarLetter');
+  const btnEl = document.getElementById('authActionButton');
+  const cardEl = document.getElementById('profileCardSection');
 
-/* حذف التحميلات */
-function deleteAllDownloads() {
-  if(confirm("تحذير: سيتم حذف جميع الفصول والحلقات المخزنة محلياً!")) {
-    localStorage.removeItem('nexora_downloads');
-    alert("تمت إزالة كافة التحميلات بنجاح.");
-  }
-}
-
-/* التعليمات */
-function resetTutorial() {
-  alert("🎓 أهلاً بك في Nexora!\n- شاهد الأنمي والأفلام، واقرأ المانهوا والمانغا بكل سهولة.\n- جميع إعداداتك ومفضلاتك محمية.");
-}
-
-function loadSettings() {
-  applyOpacitySettings();
-  const notifState = localStorage.getItem('nexora_notifications');
-  const toggle = document.getElementById('notifToggle');
-  const statusText = document.getElementById('notifStatusText');
-  if(notifState === 'disabled') {
-    toggle.checked = false;
-    statusText.innerText = 'الإشعارات معطلة';
+  if (isLoggedIn) {
+    const customUser = localStorage.getItem('nexora_custom_user');
+    if (customUser) {
+      nameEl.innerText = customUser;
+      emailEl.innerText = "user@nexora.com";
+      avatarEl.innerText = customUser.charAt(0).toUpperCase();
+    } else {
+      nameEl.innerText = "HISKO HISKO";
+      emailEl.innerText = "hiskohisko45@gmail.com";
+      avatarEl.innerText = "H";
+    }
+    cardEl.style.display = "flex";
+    btnEl.innerText = "تسجيل الخروج ➔";
+    btnEl.classList.remove('login-mode');
   } else {
-    toggle.checked = true;
-    statusText.innerText = 'كل الإشعارات مفعلة';
+    nameEl.innerText = "زائر (غير مسجل)";
+    emailEl.innerText = "يرجى تسجيل الدخول للوصول لكافة المزايا";
+    avatarEl.innerText = "?";
+    btnEl.innerText = "تسجيل الدخول إلى حساب جديد ➔";
+    btnEl.classList.add('login-mode');
   }
 }
 </script>
 
 </body>
-  </html>
+</html>
