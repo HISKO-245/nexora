@@ -3,12 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- PWA & Theme Meta Tags -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b5cf6">
-<link rel="apple-touch-icon" href="https://via.placeholder.com/192/8b5cf6/ffffff?text=Nexora">
-
 <title>Nexora - الرئيسية</title>
 
 <style>
@@ -23,7 +19,7 @@
 body {
   background: #09090e;
   color: #efefef;
-  padding-bottom: 75px;
+  padding-bottom: 80px;
 }
 
 /* Header */
@@ -70,7 +66,6 @@ header {
   overflow-x: auto;
   scrollbar-width: none;
 }
-
 .category-filter::-webkit-scrollbar { display: none; }
 
 .filter-chip {
@@ -83,7 +78,6 @@ header {
   cursor: pointer;
   white-space: nowrap;
 }
-
 .filter-chip.active {
   background: #8b5cf6;
   color: white;
@@ -119,7 +113,7 @@ header {
   font-size: 13px;
 }
 
-/* Grid Layout & Cards */
+/* Grid & Cards */
 .content-section { padding: 8px 16px; }
 
 .media-grid {
@@ -134,10 +128,7 @@ header {
   overflow: hidden;
   border: 1px solid #222232;
   position: relative;
-  transition: transform 0.2s;
 }
-
-.star-card:active { transform: scale(0.97); }
 
 .delete-btn {
   position: absolute;
@@ -156,7 +147,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .poster-wrapper {
@@ -206,7 +196,185 @@ header {
   color: #efefef;
 }
 
-/* Modals & Panels */
+/* MORE TAB STYLING */
+.more-body {
+  padding: 16px;
+}
+
+.profile-card {
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.profile-info {
+  text-align: right;
+  flex: 1;
+  margin-right: 12px;
+}
+
+.profile-info h3 {
+  font-size: 15px;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.profile-info p {
+  font-size: 11px;
+  color: #a1a1aa;
+}
+
+.avatar-circle {
+  width: 50px;
+  height: 50px;
+  background: #161622;
+  border: 2px solid #8b5cf6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b5cf6;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* EXACT MATCH VIP GOLDEN BANNER */
+.vip-banner {
+  background: linear-gradient(135deg, #221c10 0%, #161410 100%);
+  border: 1px solid #523e18;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.vip-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: right;
+}
+
+.vip-icon-box {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.2);
+}
+
+.vip-text h4 {
+  font-size: 14px;
+  color: #fef08a;
+  font-weight: bold;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vip-badge-mini {
+  background: #facc15;
+  color: #000;
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+.vip-text p {
+  font-size: 11px;
+  color: #d1d5db;
+}
+
+.section-title-mini {
+  font-size: 12px;
+  color: #71717a;
+  margin-bottom: 8px;
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Quick Access Grid */
+.quick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quick-box {
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: right;
+  cursor: pointer;
+}
+
+.quick-box .q-icon {
+  font-size: 18px;
+  color: #8b5cf6;
+  margin-bottom: 8px;
+}
+
+.quick-box h5 { font-size: 13px; color: #fff; margin-bottom: 2px; }
+.quick-box p { font-size: 10px; color: #71717a; }
+
+/* Links List */
+.links-list {
+  background: #12121c;
+  border: 1px solid #222232;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.link-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #1e1e2d;
+  cursor: pointer;
+  font-size: 13px;
+  color: #efefef;
+}
+.link-row:last-child { border-bottom: none; }
+.link-row span { color: #71717a; font-size: 12px; }
+
+/* Logout Button */
+.logout-btn {
+  width: 100%;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  padding: 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* Panels */
 .full-panel {
   display: none;
   position: fixed;
@@ -246,13 +414,8 @@ nav {
   cursor: pointer;
   width: 25%;
 }
-
 .nav-link.active { color: #8b5cf6; font-weight: bold; }
-.nav-link .icon {
-  font-size: 18px;
-  padding: 2px 12px;
-  border-radius: 12px;
-}
+.nav-link .icon { font-size: 18px; padding: 2px 12px; border-radius: 12px; }
 .nav-link.active .icon { background: rgba(139, 92, 246, 0.2); }
 </style>
 </head>
@@ -312,73 +475,83 @@ nav {
 
 <!-- TAB 4: More Menu -->
 <div id="tabMore" class="tab-content">
-  <div class="more-container" style="padding: 16px;">
+  <div class="more-body">
     
-    <!-- بطاقة تسجيل الدخول (تتغير ديناميكياً عند تسجيل الدخول) -->
-    <div class="user-card" id="userCardProfile" onclick="handleAuthClick()" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 18px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; cursor: pointer;">
+    <!-- Profile Header Card -->
+    <div class="profile-card" onclick="handleAuthClick()">
       <span style="color: #71717a; font-size: 14px;">›</span>
-      <div style="text-align: right;">
-        <h4 id="userNameDisplay" style="font-size: 15px; font-weight: bold; color: #ffffff; margin-bottom: 4px;">تسجيل الدخول</h4>
-        <p id="userSubDisplay" style="font-size: 11px; color: #a1a1aa;">أنشئ حساباً مجانياً أو سجل الدخول</p>
+      <div class="profile-info">
+        <h3 id="profileName">HISKO HISKO</h3>
+        <p id="profileEmail">hiskohisko45@gmail.com</p>
       </div>
-      <div class="avatar" id="userAvatarIcon" style="width: 44px; height: 44px; background: rgba(139, 92, 246, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #8b5cf6;">👤</div>
+      <div class="avatar-circle" id="profileAvatar">H</div>
     </div>
 
-    <!-- مجموعة الحساب والتطبيق -->
-    <div class="menu-group" style="background: #12121c; border: 1px solid #222232; border-radius: 16px; padding: 10px 16px; margin-bottom: 16px;">
-      <div class="menu-group-title" style="font-size: 12px; color: #a1a1aa; padding: 8px 0; font-weight: bold; text-align: right;">الحساب والتطبيق</div>
-      
-      <!-- مفضلتي -->
-      <div class="menu-item" onclick="alert('المفضلة فارغة')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
-        <span style="color: #71717a; font-size: 14px;">›</span>
-        <div style="text-align: right; flex: 1; margin-right: 12px;">
-          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">مفضلتي</h4>
-          <p style="font-size: 10px; color: #71717a;">عرض الأعمال التي حفظتها</p>
+    <!-- EXACT VIP GOLDEN BANNER -->
+    <div class="vip-banner" onclick="alert('أنت تستخدم نسختك الخاصة من Nexora ⭐')">
+      <span style="color: #71717a; font-size: 14px;">‹</span>
+      <div class="vip-right">
+        <div class="vip-text">
+          <h4>
+            <span class="vip-badge-mini">20%-</span>
+            ارتقِ إلى أثير تون VIP
+          </h4>
+          <p>تجربة أنقى ومزايا حصرية</p>
         </div>
-        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">♡</div>
+        <div class="vip-icon-box">👑</div>
       </div>
-
-      <!-- مكتبتي -->
-      <div class="menu-item" onclick="alert('المكتبة فارغة')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
-        <span style="color: #71717a; font-size: 14px;">›</span>
-        <div style="text-align: right; flex: 1; margin-right: 12px;">
-          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">مكتبتي</h4>
-          <p style="font-size: 10px; color: #71717a;">تصفح مكتبة الأعمال الخاصة بك</p>
-        </div>
-        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">⊞</div>
-      </div>
-
-      <!-- التنزيلات -->
-      <div class="menu-item" onclick="alert('لا توجد تنزيلات')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
-        <span style="color: #71717a; font-size: 14px;">›</span>
-        <div style="text-align: right; flex: 1; margin-right: 12px;">
-          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">التنزيلات</h4>
-          <p style="font-size: 10px; color: #71717a;">تصفح الفصول التي حملتها</p>
-        </div>
-        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">⇩</div>
-      </div>
-
-      <!-- طلب مانجا -->
-      <div class="menu-item" onclick="alert('تواصل مع الإدارة لطلب مانجا')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e1e2d; cursor: pointer;">
-        <span style="color: #71717a; font-size: 14px;">›</span>
-        <div style="text-align: right; flex: 1; margin-right: 12px;">
-          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">طلب مانجا</h4>
-          <p style="font-size: 10px; color: #71717a;">أرسل اقتراحك لفريق Nexora</p>
-        </div>
-        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">✉</div>
-      </div>
-
-      <!-- تواصل مع الإدارة -->
-      <div class="menu-item" onclick="openPanel('adminPanel')" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; cursor: pointer;">
-        <span style="color: #71717a; font-size: 14px;">›</span>
-        <div style="text-align: right; flex: 1; margin-right: 12px;">
-          <h4 style="font-size: 14px; font-weight: bold; color: #efefef;">تواصل مع الإدارة / لوحة التحكم</h4>
-          <p style="font-size: 10px; color: #71717a;">أضف أعمال جديدة لموقعك</p>
-        </div>
-        <div class="icon-box" style="width: 38px; height: 38px; background: rgba(139, 92, 246, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #8b5cf6; font-size: 16px;">💬</div>
-      </div>
-
     </div>
+
+    <div class="section-title-mini">الوصول السريع</div>
+
+    <!-- Quick Access Grid -->
+    <div class="quick-grid">
+      <div class="quick-box" onclick="alert('قوائمك فارغة حالياً')">
+        <div class="q-icon">📋</div>
+        <h5>قوائمي</h5>
+        <p>القوائم الخاصة والعامة</p>
+      </div>
+      <div class="quick-box" onclick="alert('الملف الشخصي مفعل')">
+        <div class="q-icon">👤</div>
+        <h5>الملف الشخصي</h5>
+        <p>لوحتك والإحصاءات</p>
+      </div>
+      <div class="quick-box" onclick="alert('لا توجد تنزيلات محفوظة')">
+        <div class="q-icon">📥</div>
+        <h5>التنزيلات</h5>
+        <p>الفصول المحفوظة</p>
+      </div>
+      <div class="quick-box" onclick="openPanel('adminPanel')">
+        <div class="q-icon">⚙️</div>
+        <h5>الإعدادات</h5>
+        <p>الخصوصية والتخزين والإدارة</p>
+      </div>
+    </div>
+
+    <div class="section-title-mini">القوانين والخصوصية</div>
+
+    <!-- Links List -->
+    <div class="links-list">
+      <div class="link-row" onclick="alert('سياسة الخصوصية: بياناتك محفوظة محلياً على جهازك بأمان تام.')">
+        <span>›</span>
+        <p>سياسة الخصوصية</p>
+      </div>
+      <div class="link-row" onclick="alert('شروط الاستخدام: هذا التطبيق مخصص لإدارة مكتبتك الترفيهية الشخصية.')">
+        <span>›</span>
+        <p>شروط الاستخدام</p>
+      </div>
+      <div class="link-row" onclick="alert('حقوق النشر: يمكنك إضافة وإدارة الأعمال بكل حرية.')">
+        <span>›</span>
+        <p>حقوق النشر والإبلاغ</p>
+      </div>
+    </div>
+
+    <!-- Logout / Login Button -->
+    <button class="logout-btn" onclick="handleAuthClick()">
+      <span id="authButtonText">تسجيل الخروج</span> 🚪
+    </button>
+    
+    <div style="text-align: center; font-size: 11px; color: #52525b; margin-top: 12px;">1.0.5</div>
   </div>
 </div>
 
@@ -387,10 +560,14 @@ nav {
   <h3>تسجيل الدخول إلى Nexora</h3>
   <br>
   <div class="form-group">
-    <label>اسم المستخدم أو البريد</label>
-    <input type="text" id="loginUsernameInput" placeholder="اكتب اسمك...">
+    <label>اسم المستخدم</label>
+    <input type="text" id="loginNameInput" placeholder="مثال: HISKO HISKO">
   </div>
-  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="performLogin()">✨ دخول</button>
+  <div class="form-group">
+    <label>البريد الإلكتروني</label>
+    <input type="email" id="loginEmailInput" placeholder="example@gmail.com">
+  </div>
+  <button style="width:100%; padding:12px; background:#8b5cf6; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="saveUserSession()">✨ حفظ وحفظ الدخول</button>
   <button style="width:100%; padding:12px; background:#ef4444; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;" onclick="closePanel('loginPanel')">إلغاء</button>
 </div>
 
@@ -434,10 +611,10 @@ nav {
 
 <!-- Bottom Nav -->
 <nav>
-  <div class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</div>
-  <div class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</div>
-  <div class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">🕒</span>السجل</div>
   <div class="nav-link" onclick="switchTab('tabMore', this)"><span class="icon">⋯</span>المزيد</div>
+  <div class="nav-link" onclick="switchTab('tabHistory', this)"><span class="icon">🕒</span>السجل</div>
+  <div class="nav-link" onclick="switchTab('tabSearch', this)"><span class="icon">🔍</span>البحث</div>
+  <div class="nav-link active" onclick="switchTab('tabHome', this)"><span class="icon">🏠</span>الرئيسية</div>
 </nav>
 
 <script>
@@ -446,7 +623,7 @@ let currentCategory = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
   renderHome();
-  checkUserSession();
+  loadUserData();
 });
 
 function renderGrid(containerId, itemsToRender) {
@@ -469,7 +646,7 @@ function renderGrid(containerId, itemsToRender) {
     if(item.type === 'movie') typeLabel = "فيلم";
 
     card.innerHTML = `
-      <button class="delete-btn" onclick="deleteItem(event, ${item.id})" title="حذف العمل">✕</button>
+      <button class="delete-btn" onclick="deleteItem(event, ${item.id})" title="حذف">✕</button>
       <div onclick="openDetails(${item.id})">
         <div class="poster-wrapper">
           <img src="${item.poster}" alt="cover">
@@ -502,7 +679,7 @@ function openDetails(id) {
 
 function deleteItem(event, id) {
   event.stopPropagation();
-  if (confirm("هل أنت متأكد من رغبتك في مسح هذا العمل؟")) {
+  if (confirm("هل تريد مسح هذا العمل؟")) {
     mangaList = mangaList.filter(item => item.id !== id);
     localStorage.setItem('nexora_media', JSON.stringify(mangaList));
     renderHome();
@@ -540,43 +717,30 @@ function switchTab(tabId, el) {
   if(tabId === 'tabSearch') renderGrid('searchGrid', mangaList);
 }
 
-/* User Auth Functions */
-function checkUserSession() {
-  const savedUser = localStorage.getItem('nexora_logged_user');
-  if (savedUser) {
-    document.getElementById('userNameDisplay').innerText = savedUser;
-    document.getElementById('userSubDisplay').innerText = 'تم تسجيل الدخول بنجاح (انقر لتسجيل الخروج)';
-    document.getElementById('userAvatarIcon').innerText = savedUser.charAt(0).toUpperCase();
-  } else {
-    document.getElementById('userNameDisplay').innerText = 'تسجيل الدخول';
-    document.getElementById('userSubDisplay').innerText = 'أنشئ حساباً مجانياً أو سجل الدخول';
-    document.getElementById('userAvatarIcon').innerText = '👤';
-  }
+/* User Profile & Login System */
+function loadUserData() {
+  const name = localStorage.getItem('nexora_username') || 'HISKO HISKO';
+  const email = localStorage.getItem('nexora_email') || 'hiskohisko45@gmail.com';
+  
+  document.getElementById('profileName').innerText = name;
+  document.getElementById('profileEmail').innerText = email;
+  document.getElementById('profileAvatar').innerText = name.charAt(0).toUpperCase();
 }
 
 function handleAuthClick() {
-  const savedUser = localStorage.getItem('nexora_logged_user');
-  if (savedUser) {
-    if (confirm("هل تريد تسجيل الخروج من حسابك (" + savedUser + ")؟")) {
-      localStorage.removeItem('nexora_logged_user');
-      checkUserSession();
-    }
-  } else {
-    openPanel('loginPanel');
-  }
+  openPanel('loginPanel');
 }
 
-function performLogin() {
-  const nameInput = document.getElementById('loginUsernameInput').value.trim();
-  if (!nameInput) {
-    alert("يرجى كتابة اسم المستخدم أولاً!");
-    return;
-  }
-  localStorage.setItem('nexora_logged_user', nameInput);
+function saveUserSession() {
+  const name = document.getElementById('loginNameInput').value.trim();
+  const email = document.getElementById('loginEmailInput').value.trim();
+  
+  if (name) localStorage.setItem('nexora_username', name);
+  if (email) localStorage.setItem('nexora_email', email);
+  
   closePanel('loginPanel');
-  document.getElementById('loginUsernameInput').value = '';
-  checkUserSession();
-  alert("أهلاً بك يا " + nameInput + " في Nexora! 🎉");
+  loadUserData();
+  alert("تم تحديث بيانات الحساب بنجاح! ✨");
 }
 
 function saveManga() {
@@ -596,4 +760,8 @@ function saveManga() {
   };
   
   mangaList.push(newItem);
-  localStorage.setItem('nexora_m
+  localStorage.setItem('nexora_media', JSON.stringify(mangaList));
+  alert("تم حفظ العمل بنجاح! 🎉");
+  
+  document.getElementById('addTitle').value = '';
+  document.getElementById('addAuthor').value 
